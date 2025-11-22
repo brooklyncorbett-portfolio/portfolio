@@ -16,7 +16,7 @@
     padding: 5rem 3rem;
     text-align: center;
     margin: 0rem -2rem 3rem -2rem;
-    border-radius: 0 0 20px 20px;
+    border-radius: 20px;
 }
 
 .myth-hero h1 {
@@ -53,13 +53,13 @@
 
 .study-badge {
     display: inline-block;
-    background: rgba(146, 164, 210, 0.2);
+    background: var(--soft-blue);
     border: 2px solid var(--soft-blue);
     padding: 0.75rem 1.5rem;
     border-radius: 25px;
     margin-top: 2rem;
     font-weight: 600;
-    color: var(--soft-blue);
+    color: white;;
 }
 
 /* Content Sections */
