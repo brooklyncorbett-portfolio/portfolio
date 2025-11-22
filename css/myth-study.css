@@ -1,0 +1,460 @@
+/* ============================================
+   MYTH STUDY SECTION STYLES
+   Add these to your sections.css file
+   ============================================ */
+
+/* Myth Study Container */
+.myth-study-section {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Hero Section */
+.myth-hero {
+    background: linear-gradient(135deg, var(--dark-burgundy) 0%, var(--rust) 100%);
+    color: white;
+    padding: 5rem 3rem;
+    text-align: center;
+    margin: -5rem -2rem 3rem -2rem;
+    border-radius: 0 0 20px 20px;
+}
+
+.myth-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: white;
+}
+
+.myth-hero h1::after {
+    display: none;
+}
+
+.vs-text {
+    color: var(--soft-blue);
+    font-weight: 900;
+}
+
+.myth-subtitle {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.myth-intro {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+.study-badge {
+    display: inline-block;
+    background: rgba(146, 164, 210, 0.2);
+    border: 2px solid var(--soft-blue);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    margin-top: 2rem;
+    font-weight: 600;
+    color: var(--soft-blue);
+}
+
+/* Content Sections */
+.myth-content-section {
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.myth-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark-burgundy);
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    border-left: 5px solid var(--soft-blue);
+}
+
+.myth-section-title::after {
+    display: none;
+}
+
+.emphasis-text {
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+    color: var(--rust);
+}
+
+.subheading-text {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--dark-burgundy);
+    font-weight: 600;
+}
+
+/* Myths List */
+.myths-list {
+    background: linear-gradient(135deg, rgba(146, 164, 210, 0.1), rgba(241, 221, 196, 0.3));
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.myth-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    border-left: 4px solid var(--soft-blue);
+    transition: transform 0.2s ease;
+}
+
+.myth-item:hover {
+    transform: translateX(5px);
+}
+
+.myth-item:last-child {
+    margin-bottom: 0;
+}
+
+.myth-bullet {
+    color: var(--rust);
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.myth-item .myth-text {
+    color: var(--dark-burgundy);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Experiment Grid */
+.experiment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.condition-card {
+    background: white;
+    border: 3px solid var(--soft-blue);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.condition-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(146, 164, 210, 0.3);
+}
+
+.condition-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.condition-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--dark-burgundy);
+    margin-bottom: 1rem;
+}
+
+.condition-card p {
+    color: var(--rust);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.sample-size {
+    background: var(--soft-blue);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+/* Accordion for Conversation */
+.accordion-header {
+    background: linear-gradient(135deg, var(--rust), var(--dark-burgundy));
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    margin-bottom: 0;
+}
+
+.accordion-header:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(117, 53, 45, 0.3);
+}
+
+.accordion-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    margin: 0;
+    color: white;
+}
+
+.accordion-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.accordion-header.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.accordion-content.active {
+    max-height: 3000px;
+}
+
+.conversation-container {
+    background: linear-gradient(135deg, rgba(117, 53, 45, 0.05), rgba(146, 164, 210, 0.05));
+    border-radius: 0 0 15px 15px;
+    padding: 2rem;
+    margin-top: 0;
+}
+
+.message {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    position: relative;
+}
+
+.message.participant {
+    background: rgba(146, 164, 210, 0.15);
+    border-left: 5px solid var(--soft-blue);
+    margin-left: 2rem;
+}
+
+.message.ai {
+    background: rgba(117, 53, 45, 0.1);
+    border-left: 5px solid var(--rust);
+    margin-right: 2rem;
+}
+
+.message-header {
+    font-weight: 700;
+    color: var(--dark-burgundy);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.message-icon {
+    font-size: 1.2rem;
+}
+
+.message-text {
+    color: var(--dark-burgundy);
+    line-height: 1.7;
+}
+
+/* Chart Section */
+.chart-wrapper {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 3rem 0;
+    border: 2px solid var(--soft-blue);
+}
+
+.chart-container {
+    position: relative;
+    height: 450px;
+    margin: 2rem 0;
+}
+
+.chart-annotations {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.annotation-box {
+    background: var(--rust);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.annotation-box h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--soft-blue);
+}
+
+.annotation-box p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Engagement Section */
+.engagement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    margin: 3rem 0;
+}
+
+.gauge-card {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(146, 164, 210, 0.1), rgba(241, 221, 196, 0.2));
+    border-radius: 15px;
+}
+
+.gauge-value {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--rust);
+    margin: 1rem 0;
+}
+
+.gauge-label {
+    font-size: 1.3rem;
+    color: var(--dark-burgundy);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.gauge-description {
+    color: var(--rust);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Takeaway Box */
+.takeaway-box {
+    background: linear-gradient(135deg, var(--rust), var(--dark-burgundy));
+    color: white;
+    padding: 3rem;
+    border-radius: 15px;
+    margin: 3rem 0;
+}
+
+.takeaway-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+}
+
+.takeaway-box p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+
+.takeaway-box strong {
+    color: var(--soft-blue);
+}
+
+/* Paper Section */
+.paper-section {
+    background: linear-gradient(135deg, rgba(146, 164, 210, 0.2), rgba(117, 53, 45, 0.1));
+    padding: 3rem;
+    text-align: center;
+    border-radius: 15px;
+    margin: 3rem 0;
+}
+
+.paper-section h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--dark-burgundy);
+    margin-bottom: 1.5rem;
+}
+
+.paper-citation {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    border-left: 5px solid var(--soft-blue);
+    text-align: left;
+}
+
+.paper-link {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--rust), var(--dark-burgundy));
+    color: white;
+    padding: 1.25rem 3rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paper-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(117, 53, 45, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .myth-hero {
+        padding: 3rem 2rem;
+        margin: -3rem -1.5rem 3rem -1.5rem;
+    }
+
+    .myth-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .myth-subtitle {
+        font-size: 1.4rem;
+    }
+
+    .myth-content-section {
+        padding: 2rem 0;
+    }
+
+    .myth-section-title {
+        font-size: 2rem;
+    }
+
+    .chart-annotations {
+        grid-template-columns: 1fr;
+    }
+
+    .message.participant,
+    .message.ai {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .experiment-grid,
+    .engagement-grid {
+        grid-template-columns: 1fr;
+    }
+}

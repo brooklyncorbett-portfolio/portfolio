@@ -38,7 +38,7 @@ async function loadSection(sectionId) {
 
 // Load all sections on page load
 async function loadAllSections() {
-    const sections = ['home', 'about', 'research', 'ai-education', 'data-viz', 'rigour'];
+    const sections = ['home', 'about', 'research', 'ai-education', 'data-viz', 'rigour', 'myth-study'];
     await Promise.all(sections.map(section => loadSection(section)));
 }
 
