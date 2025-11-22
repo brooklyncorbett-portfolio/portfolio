@@ -1,14 +1,98 @@
 // Myth Study Interactive Features
-// This file handles the Chart.js visualization and accordion functionality
+// This file handles the Chart.js visualization, accordion functionality, and animations
 
-// Initialize Chart when section is loaded
+// ============================================
+// SCROLL-TRIGGERED FADE-IN ANIMATIONS
+// ============================================
+function initScrollAnimations() {
+    const fadeInSections = document.querySelectorAll('.fade-in-section');
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+    
+    fadeInSections.forEach(section => {
+        observer.observe(section);
+    });
+}
+
+// ============================================
+// ANIMATED GAUGE COUNTERS
+// ============================================
+function animateGauge(gaugeElement, targetValue) {
+    const duration = 2000; // 2 seconds
+    const startValue = 0;
+    const startTime = performance.now();
+    
+    function updateGauge(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function (ease-out cubic)
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentValue = Math.round(startValue + (targetValue - startValue) * easeOut);
+        
+        gaugeElement.textContent = currentValue + '%';
+        
+        if (progress < 1) {
+            requestAnimationFrame(updateGauge);
+        }
+    }
+    
+    requestAnimationFrame(updateGauge);
+}
+
+function initGaugeAnimations() {
+    const gaugeCards = document.querySelectorAll('.gauge-card');
+    
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.dataset.animated) {
+                const gaugeValue = entry.target.querySelector('.gauge-value');
+                const targetValue = parseInt(gaugeValue.dataset.target);
+                
+                animateGauge(gaugeValue, targetValue);
+                entry.target.dataset.animated = 'true';
+            }
+        });
+    }, observerOptions);
+    
+    gaugeCards.forEach(card => {
+        observer.observe(card);
+    });
+}
+
+// ============================================
+// CHART INITIALIZATION AND ANIMATION
+// ============================================
+let chartInstance = null;
+
 function initMythStudyChart() {
     const canvas = document.getElementById('mythResultsChart');
-    if (!canvas) return; // Exit if canvas doesn't exist yet
+    if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
     
-    new Chart(ctx, {
+    // Destroy existing chart if it exists
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+    
+    chartInstance = new Chart(ctx, {
         type: 'line',
         data: {
             labels: ['Pre-Test', 'Immediate Post-Test', '10 Days Later', '2 Months Later'],
@@ -57,6 +141,17 @@ function initMythStudyChart() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart',
+                delay: (context) => {
+                    let delay = 0;
+                    if (context.type === 'data' && context.mode === 'default') {
+                        delay = context.dataIndex * 200 + context.datasetIndex * 100;
+                    }
+                    return delay;
+                }
+            },
             plugins: {
                 legend: {
                     display: true,
@@ -138,12 +233,38 @@ function initMythStudyChart() {
     });
 }
 
-// Initialize Accordion functionality
+// Trigger chart animation when scrolled into view
+function initChartAnimation() {
+    const chartContainer = document.querySelector('.chart-container');
+    if (!chartContainer) return;
+    
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.dataset.animated) {
+                if (typeof Chart !== 'undefined') {
+                    initMythStudyChart();
+                    entry.target.dataset.animated = 'true';
+                }
+            }
+        });
+    }, observerOptions);
+    
+    observer.observe(chartContainer);
+}
+
+// ============================================
+// ACCORDION FUNCTIONALITY
+// ============================================
 function initMythStudyAccordion() {
     const accordionHeader = document.getElementById('mythAccordionHeader');
     const accordionContent = document.getElementById('mythAccordionContent');
 
-    if (!accordionHeader || !accordionContent) return; // Exit if elements don't exist
+    if (!accordionHeader || !accordionContent) return;
 
     accordionHeader.addEventListener('click', () => {
         accordionHeader.classList.toggle('active');
@@ -151,22 +272,25 @@ function initMythStudyAccordion() {
     });
 }
 
-// Initialize everything when the myth-study section becomes active
+// ============================================
+// INITIALIZE ALL FEATURES
+// ============================================
 function initializeMythStudySection() {
-    // Check if we're on the myth-study section
     const mythStudySection = document.getElementById('myth-study');
     if (mythStudySection && mythStudySection.classList.contains('active')) {
-        // Small delay to ensure Chart.js library is loaded
+        // Small delay to ensure DOM is ready
         setTimeout(() => {
-            if (typeof Chart !== 'undefined') {
-                initMythStudyChart();
-            }
+            initScrollAnimations();
+            initGaugeAnimations();
+            initChartAnimation();
             initMythStudyAccordion();
         }, 100);
     }
 }
 
-// Listen for when sections become active
+// ============================================
+// EVENT LISTENERS
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize if already on myth-study page
     initializeMythStudySection();
@@ -186,4 +310,12 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => {
         observer.observe(section, { attributes: true, attributeFilter: ['class'] });
     });
+});
+
+// Re-initialize scroll animations when window is resized
+window.addEventListener('resize', () => {
+    const mythStudySection = document.getElementById('myth-study');
+    if (mythStudySection && mythStudySection.classList.contains('active')) {
+        initScrollAnimations();
+    }
 });

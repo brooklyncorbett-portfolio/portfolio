@@ -1,6 +1,5 @@
 /* ============================================
    MYTH STUDY SECTION STYLES
-   Add these to your sections.css file
    ============================================ */
 
 /* Myth Study Container */
@@ -59,7 +58,35 @@
     border-radius: 25px;
     margin-top: 2rem;
     font-weight: 600;
-    color: white;;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.study-badge:hover {
+    background: white;
+    color: var(--soft-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(146, 164, 210, 0.3);
+}
+
+/* Section Dividers */
+.section-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--soft-blue), transparent);
+    margin: 4rem 0;
+    opacity: 0.3;
+}
+
+/* Fade-in Animation */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Content Sections */
@@ -95,44 +122,76 @@
     font-weight: 600;
 }
 
-/* Myths List */
-.myths-list {
-    background: linear-gradient(135deg, rgba(146, 164, 210, 0.1), rgba(241, 221, 196, 0.3));
-    border-radius: 15px;
-    padding: 2rem;
+/* Collapsible Myth Cards */
+.myths-accordion {
+    display: grid;
+    gap: 1rem;
     margin: 2rem 0;
 }
 
-.myth-item {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
+.myth-card {
     background: white;
-    border-radius: 8px;
-    border-left: 4px solid var(--soft-blue);
-    transition: transform 0.2s ease;
+    border: 2px solid var(--soft-blue);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-.myth-item:hover {
+.myth-card:hover {
+    border-color: var(--rust);
+    box-shadow: 0 4px 12px rgba(117, 53, 45, 0.15);
     transform: translateX(5px);
 }
 
-.myth-item:last-child {
-    margin-bottom: 0;
+.myth-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, rgba(146, 164, 210, 0.05), rgba(241, 221, 196, 0.1));
+    transition: background 0.3s ease;
 }
 
-.myth-bullet {
-    color: var(--rust);
-    font-size: 1.5rem;
-    font-weight: 700;
+.myth-card:hover .myth-card-header {
+    background: linear-gradient(135deg, rgba(146, 164, 210, 0.1), rgba(241, 221, 196, 0.2));
+}
+
+.myth-number {
     flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--soft-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
 }
 
-.myth-item .myth-text {
-    color: var(--dark-burgundy);
+.myth-title {
+    flex: 1;
     font-size: 1.05rem;
-    line-height: 1.6;
+    color: var(--dark-burgundy);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.myth-toggle {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    background: var(--rust);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Experiment Grid */
@@ -150,6 +209,7 @@
     padding: 2rem;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
 .condition-card:hover {
@@ -185,6 +245,57 @@
     display: inline-block;
 }
 
+/* Example Link Arrow */
+.example-link {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px dashed var(--soft-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.arrow-icon {
+    width: 2rem;
+    height: 2rem;
+    color: var(--rust);
+}
+
+.example-text {
+    color: var(--rust);
+    font-weight: 600;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Conversation Example Wrapper */
+.conversation-example-wrapper {
+    margin-top: 4rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(146, 164, 210, 0.05), rgba(241, 221, 196, 0.05));
+    border-radius: 15px;
+    border: 2px solid var(--soft-blue);
+}
+
+.conversation-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--dark-burgundy);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
 /* Accordion for Conversation */
 .accordion-header {
     background: linear-gradient(135deg, var(--rust), var(--dark-burgundy));
@@ -204,11 +315,12 @@
     box-shadow: 0 5px 20px rgba(117, 53, 45, 0.3);
 }
 
-.accordion-header h3 {
+.accordion-header h4 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin: 0;
     color: white;
+    font-weight: 600;
 }
 
 .accordion-icon {
@@ -242,6 +354,18 @@
     padding: 1.5rem;
     border-radius: 12px;
     position: relative;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .message.participant {
@@ -316,18 +440,56 @@
 }
 
 /* Engagement Section */
+.engagement-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin: 3rem 0;
+}
+
+.metric-category {
+    background: linear-gradient(135deg, rgba(146, 164, 210, 0.05), rgba(241, 221, 196, 0.05));
+    padding: 2.5rem;
+    border-radius: 15px;
+    border: 2px solid var(--soft-blue);
+}
+
+.metric-category-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--dark-burgundy);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--soft-blue);
+}
+
 .engagement-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.engagement-grid-two {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
-    margin: 3rem 0;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .gauge-card {
     text-align: center;
     padding: 2rem;
-    background: linear-gradient(135deg, rgba(146, 164, 210, 0.1), rgba(241, 221, 196, 0.2));
+    background: white;
     border-radius: 15px;
+    border: 2px solid var(--soft-blue);
+    transition: all 0.3s ease;
+}
+
+.gauge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(146, 164, 210, 0.3);
 }
 
 .gauge-value {
@@ -335,10 +497,11 @@
     font-weight: 700;
     color: var(--rust);
     margin: 1rem 0;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .gauge-label {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: var(--dark-burgundy);
     font-weight: 600;
     margin-bottom: 1rem;
@@ -346,7 +509,7 @@
 
 .gauge-description {
     color: var(--rust);
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.6;
 }
 
@@ -454,7 +617,50 @@
     }
 
     .experiment-grid,
-    .engagement-grid {
+    .engagement-grid,
+    .engagement-grid-two {
         grid-template-columns: 1fr;
+    }
+
+    .myth-card-header {
+        padding: 1rem;
+    }
+
+    .myth-title {
+        font-size: 0.95rem;
+    }
+
+    .myth-number {
+        width: 2rem;
+        height: 2rem;
+        font-size: 0.9rem;
+    }
+
+    .conversation-example-wrapper {
+        padding: 1.5rem;
+    }
+
+    .conversation-heading {
+        font-size: 1.5rem;
+    }
+
+    .accordion-header h4 {
+        font-size: 1.1rem;
+    }
+
+    .metric-category {
+        padding: 1.5rem;
+    }
+
+    .metric-category-title {
+        font-size: 1.6rem;
+    }
+
+    .gauge-value {
+        font-size: 3rem;
+    }
+
+    .section-divider {
+        margin: 2.5rem 0;
     }
 }
