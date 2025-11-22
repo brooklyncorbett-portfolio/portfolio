@@ -2,86 +2,568 @@
    MYTH STUDY SECTION STYLES
    ============================================ */
 
-/* Myth Study Container */
-.myth-study-section {
+   .myth-study-section {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
 }
 
-/* Hero Section */
+/* ---------------- HERO ---------------- */
+
 .myth-hero {
     background: var(--dark-burgundy);
-    color: white;
-    padding: 5rem 3rem;
-    text-align: center;
-    margin: 0rem -2rem 3rem -2rem;
-    border-radius: 20px;
+    color: #fff;
+    padding: 4rem 3rem;
+    border-radius: 1.5rem;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.myth-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(241, 221, 196, 0.3), transparent 55%);
+    opacity: 0.9;
+    pointer-events: none;
 }
 
 .myth-hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-    color: white;
+    position: relative;
+    font-size: 2.4rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
 }
 
-.myth-hero h1::after {
-    display: none;
-}
-
-.vs-text {
-    color: var(--soft-blue);
-    font-weight: 900;
+.myth-hero .vs-text {
+    color: var(--cream);
 }
 
 .myth-subtitle {
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-    font-weight: 300;
+    position: relative;
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 .myth-intro {
-    font-size: 1.2rem;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.8;
-    opacity: 0.95;
+    position: relative;
+    font-size: 1.05rem;
+    max-width: 58rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
 }
 
-.study-badge {
-    display: inline-block;
-    background: var(--soft-blue);
-    border: 2px solid var(--soft-blue);
-    padding: 0.75rem 1.5rem;
-    border-radius: 25px;
-    margin-top: 2rem;
-    font-weight: 600;
-    color: white;
-    transition: all 0.3s ease;
+.myth-hero-metrics {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
 }
 
-.study-badge:hover {
-    background: white;
-    color: var(--soft-blue);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(146, 164, 210, 0.3);
+.hero-metric {
+    padding: 0.9rem 1.1rem;
+    border-radius: 0.9rem;
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(241, 221, 196, 0.3);
+    backdrop-filter: blur(3px);
 }
 
-/* Section Dividers */
+.metric-label {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.8;
+    margin-bottom: 0.2rem;
+}
+
+.metric-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.hero-paper-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(241, 221, 196, 0.75);
+    color: var(--cream);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.15s ease;
+}
+
+.hero-paper-link:hover {
+    background: var(--cream);
+    color: var(--dark-burgundy);
+    transform: translateY(-1px);
+}
+
 .section-divider {
+    margin: 2.75rem 0;
     height: 1px;
-    background: linear-gradient(to right, transparent, var(--soft-blue), transparent);
-    margin: 4rem 0;
-    opacity: 0.3;
+    background: linear-gradient(to right, transparent, rgba(58, 18, 19, 0.3), transparent);
 }
 
-/* Fade-in Animation */
+/* ---------------- SECTIONS ---------------- */
+
+.myth-section {
+    padding: 2rem 1.25rem;
+    border-radius: 1.25rem;
+    background: #fff;
+}
+
+.myth-section-alt {
+    background: #f7eadc; /* soft cream tint */
+}
+
+.myth-section-accent {
+    border-left: 4px solid var(--rust);
+}
+
+.myth-section-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.3fr) minmax(0, 0.7fr);
+    gap: 2.5rem;
+    align-items: flex-start;
+}
+
+.myth-split-reverse .myth-section-inner {
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 0.3fr);
+}
+
+.myth-split-reverse .myth-split-label {
+    order: 2;
+}
+
+.myth-split-reverse .myth-split-body {
+    order: 1;
+}
+
+.myth-split-label {
+    position: relative;
+    padding-top: 0.25rem;
+}
+
+.myth-section-title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+}
+
+.section-kicker {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.myth-split-body p {
+    margin-bottom: 0.9rem;
+    line-height: 1.7;
+}
+
+.emphasis-text {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* ---------------- EXPERIMENT CARDS ---------------- */
+
+.experiment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+}
+
+.experiment-card {
+    background: #fff;
+    border-radius: 1rem;
+    border: 1px solid rgba(58, 18, 19, 0.08);
+    padding: 1.3rem 1.3rem 1.2rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.myth-section-alt .experiment-card {
+    background: #fefaf4;
+}
+
+.experiment-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.experiment-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+.experiment-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+}
+
+.experiment-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    margin-bottom: 0.35rem;
+}
+
+.experiment-list li::before {
+    content: "•";
+    color: var(--rust);
+    margin-top: 0.05rem;
+}
+
+.primary-experiment {
+    border-color: var(--rust);
+    box-shadow: 0 10px 22px rgba(117, 53, 45, 0.22);
+    position: relative;
+}
+
+.primary-experiment::before {
+    content: "Primary intervention";
+    position: absolute;
+    top: 0.85rem;
+    right: 1rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--rust);
+    background: rgba(241, 221, 196, 0.9);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+}
+
+.experiment-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+    border-color: rgba(117, 53, 45, 0.35);
+}
+
+/* link-style button */
+.link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    color: var(--rust);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+.link-button:hover {
+    color: var(--text-primary);
+}
+
+/* ---------------- RESULTS ---------------- */
+
+.belief-chart-wrapper {
+    margin: 1.2rem 0 1.5rem;
+    background: #fff;
+    border-radius: 1.1rem;
+    border: 1px solid rgba(58, 18, 19, 0.08);
+    padding: 1rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
+}
+
+.results-highlights {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.results-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    font-size: 0.95rem;
+}
+
+.results-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    margin-top: 0.4rem;
+    background: var(--rust);
+}
+
+/* ---------------- ENGAGEMENT / CONFIDENCE ---------------- */
+
+.engagement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 0.7rem;
+}
+
+.metric-card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.25rem 1.3rem;
+    border: 1px solid rgba(58, 18, 19, 0.08);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
+}
+
+.metric-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+/* ---------------- MYTHS ---------------- */
+
+.myths-preview {
+    margin: 0.8rem 0 1rem;
+}
+
+.myths-preview ul {
+    padding-left: 1.1rem;
+    font-size: 0.95rem;
+}
+
+.secondary-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.4rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--rust);
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.secondary-button:hover {
+    background: var(--rust);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.myths-panel {
+    margin-top: 1.1rem;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.myths-panel.collapsed {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.myths-panel.expanded {
+    max-height: 1200px; /* generous; adjust if needed */
+    opacity: 1;
+}
+
+.myths-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1rem;
+}
+
+.myth-card {
+    background: #fff;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(58, 18, 19, 0.12);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.myth-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 0.9rem;
+    cursor: pointer;
+}
+
+.myth-number {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--rust);
+}
+
+.myth-title {
+    font-size: 0.92rem;
+    flex: 1;
+}
+
+.myth-toggle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.myth-card-body {
+    padding: 0 0.9rem 0.8rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    display: none;
+}
+
+.myth-card.open {
+    border-color: var(--rust);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+}
+
+.myth-card.open .myth-card-body {
+    display: block;
+}
+
+.myth-card.open .myth-toggle {
+    transform: rotate(45deg);
+}
+
+/* ---------------- RIGOUR & PAPER ---------------- */
+
+.rigour-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.4rem;
+}
+
+.rigour-card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid rgba(58, 18, 19, 0.1);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
+}
+
+.rigour-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.paper-section {
+    background: #fefaf4;
+    border-radius: 1rem;
+    padding: 1.25rem 1.3rem;
+    border: 1px solid rgba(117, 53, 45, 0.25);
+}
+
+.paper-section h3 {
+    margin-bottom: 0.5rem;
+}
+
+.paper-citation {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+}
+
+.paper-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+    color: var(--rust);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+/* ---------------- CONVERSATION MODAL ---------------- */
+
+.conversation-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 999;
+}
+
+.conversation-modal.active {
+    display: block;
+}
+
+.conversation-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+}
+
+.conversation-dialog {
+    position: relative;
+    max-width: 640px;
+    margin: 5vh auto;
+    background: #fff;
+    border-radius: 1.2rem;
+    padding: 1.5rem 1.5rem 1.3rem;
+    z-index: 1;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.conversation-close {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.9rem;
+    border: none;
+    background: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.conversation-context {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.conversation-bubbles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.bubble {
+    padding: 0.55rem 0.75rem;
+    border-radius: 0.9rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 80%;
+}
+
+.user-bubble {
+    align-self: flex-end;
+    background: var(--soft-blue);
+    color: #111;
+}
+
+.ai-bubble {
+    align-self: flex-start;
+    background: #f5eee7;
+    border: 1px solid rgba(58, 18, 19, 0.1);
+}
+
+/* ---------------- ANIMATIONS ---------------- */
+
 .fade-in-section {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(18px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .fade-in-section.visible {
@@ -89,578 +571,56 @@
     transform: translateY(0);
 }
 
-/* Content Sections */
-.myth-content-section {
-    padding: 3rem 0;
-    margin-bottom: 2rem;
-}
-
-.myth-section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--dark-burgundy);
-    margin-bottom: 2rem;
-    padding-left: 1rem;
-    border-left: 5px solid var(--soft-blue);
-}
-
-.myth-section-title::after {
-    display: none;
-}
-
-.emphasis-text {
-    font-size: 1.15rem;
-    margin-bottom: 2rem;
-    color: var(--rust);
-}
-
-.subheading-text {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    color: var(--dark-burgundy);
-    font-weight: 600;
-}
-
-/* Collapsible Myth Cards */
-.myths-accordion {
-    display: grid;
-    gap: 1rem;
-    margin: 2rem 0;
-}
-
-.myth-card {
-    background: white;
-    border: 2px solid var(--soft-blue);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.myth-card:hover {
-    border-color: var(--rust);
-    box-shadow: 0 4px 12px rgba(117, 53, 45, 0.15);
-    transform: translateX(5px);
-}
-
-.myth-card-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem 1.5rem;
-    background: linear-gradient(135deg, rgba(146, 164, 210, 0.05), rgba(241, 221, 196, 0.1));
-    transition: background 0.3s ease;
-}
-
-.myth-card:hover .myth-card-header {
-    background: linear-gradient(135deg, rgba(146, 164, 210, 0.1), rgba(241, 221, 196, 0.2));
-}
-
-.myth-number {
-    flex-shrink: 0;
-    width: 2.5rem;
-    height: 2.5rem;
-    background: var(--soft-blue);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.1rem;
-}
-
-.myth-title {
-    flex: 1;
-    font-size: 1.05rem;
-    color: var(--dark-burgundy);
-    font-weight: 600;
-    line-height: 1.4;
-}
-
-.myth-toggle {
-    flex-shrink: 0;
-    width: 2rem;
-    height: 2rem;
-    background: var(--rust);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    font-weight: 300;
+.stagger-children > * {
     opacity: 0;
-    pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
-/* Experiment Grid */
-.experiment-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin: 3rem 0;
+.fade-in-section.visible .stagger-children > * {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.condition-card {
-    background: white;
-    border: 3px solid var(--soft-blue);
-    border-radius: 15px;
-    padding: 2rem;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-}
+.fade-in-section.visible .stagger-children > *:nth-child(1) { transition-delay: 0.05s; }
+.fade-in-section.visible .stagger-children > *:nth-child(2) { transition-delay: 0.12s; }
+.fade-in-section.visible .stagger-children > *:nth-child(3) { transition-delay: 0.19s; }
+.fade-in-section.visible .stagger-children > *:nth-child(4) { transition-delay: 0.26s; }
 
-.condition-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(146, 164, 210, 0.3);
-}
+/* ---------------- RESPONSIVE ---------------- */
 
-.condition-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-}
-
-.condition-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    color: var(--dark-burgundy);
-    margin-bottom: 1rem;
-}
-
-.condition-card p {
-    color: var(--rust);
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
-
-.sample-size {
-    background: var(--soft-blue);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: 600;
-    margin-top: 1rem;
-    display: inline-block;
-}
-
-/* Example Link Arrow */
-.example-link {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 2px dashed var(--soft-blue);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-.arrow-icon {
-    width: 2rem;
-    height: 2rem;
-    color: var(--rust);
-}
-
-.example-text {
-    color: var(--rust);
-    font-weight: 600;
-    font-size: 0.9rem;
-    font-style: italic;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
+@media (max-width: 900px) {
+    .myth-section-inner {
+        grid-template-columns: minmax(0, 1fr);
     }
-    50% {
-        opacity: 0.6;
+
+    .myth-split-reverse .myth-section-inner {
+        grid-template-columns: minmax(0, 1fr);
     }
-}
 
-/* Conversation Example Wrapper */
-.conversation-example-wrapper {
-    margin-top: 4rem;
-    padding: 2rem;
-    background: linear-gradient(135deg, rgba(146, 164, 210, 0.05), rgba(241, 221, 196, 0.05));
-    border-radius: 15px;
-    border: 2px solid var(--soft-blue);
-}
-
-.conversation-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    color: var(--dark-burgundy);
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-/* Accordion for Conversation */
-.accordion-header {
-    background: linear-gradient(135deg, var(--rust), var(--dark-burgundy));
-    color: white;
-    padding: 1.5rem 2rem;
-    border-radius: 12px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s ease;
-    margin-bottom: 0;
-}
-
-.accordion-header:hover {
-    transform: translateX(5px);
-    box-shadow: 0 5px 20px rgba(117, 53, 45, 0.3);
-}
-
-.accordion-header h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    margin: 0;
-    color: white;
-    font-weight: 600;
-}
-
-.accordion-icon {
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
-}
-
-.accordion-header.active .accordion-icon {
-    transform: rotate(180deg);
-}
-
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease;
-}
-
-.accordion-content.active {
-    max-height: 3000px;
-}
-
-.conversation-container {
-    background: linear-gradient(135deg, rgba(117, 53, 45, 0.05), rgba(146, 164, 210, 0.05));
-    border-radius: 0 0 15px 15px;
-    padding: 2rem;
-    margin-top: 0;
-}
-
-.message {
-    margin-bottom: 1.5rem;
-    padding: 1.5rem;
-    border-radius: 12px;
-    position: relative;
-    animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+    .myth-split-label {
+        order: 0 !important;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    .myth-split-body {
+        order: 1 !important;
     }
-}
 
-.message.participant {
-    background: rgba(146, 164, 210, 0.15);
-    border-left: 5px solid var(--soft-blue);
-    margin-left: 2rem;
-}
-
-.message.ai {
-    background: rgba(117, 53, 45, 0.1);
-    border-left: 5px solid var(--rust);
-    margin-right: 2rem;
-}
-
-.message-header {
-    font-weight: 700;
-    color: var(--dark-burgundy);
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.message-icon {
-    font-size: 1.2rem;
-}
-
-.message-text {
-    color: var(--dark-burgundy);
-    line-height: 1.7;
-}
-
-/* Chart Section */
-.chart-wrapper {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    margin: 3rem 0;
-    border: 2px solid var(--soft-blue);
-}
-
-.chart-container {
-    position: relative;
-    height: 450px;
-    margin: 2rem 0;
-}
-
-.chart-annotations {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.annotation-box {
-    background: var(--rust);
-    color: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.annotation-box h4 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    color: var(--soft-blue);
-}
-
-.annotation-box p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
-
-/* Engagement Section */
-.engagement-metrics {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    margin: 3rem 0;
-}
-
-.metric-category {
-    background: linear-gradient(135deg, rgba(146, 164, 210, 0.05), rgba(241, 221, 196, 0.05));
-    padding: 2.5rem;
-    border-radius: 15px;
-    border: 2px solid var(--soft-blue);
-}
-
-.metric-category-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    color: var(--dark-burgundy);
-    text-align: center;
-    margin-bottom: 2.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--soft-blue);
-}
-
-.engagement-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.engagement-grid-two {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.gauge-card {
-    text-align: center;
-    padding: 2rem;
-    background: white;
-    border-radius: 15px;
-    border: 2px solid var(--soft-blue);
-    transition: all 0.3s ease;
-}
-
-.gauge-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(146, 164, 210, 0.3);
-}
-
-.gauge-value {
-    font-size: 4rem;
-    font-weight: 700;
-    color: var(--rust);
-    margin: 1rem 0;
-    font-family: 'Cormorant Garamond', serif;
-}
-
-.gauge-label {
-    font-size: 1.2rem;
-    color: var(--dark-burgundy);
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.gauge-description {
-    color: var(--rust);
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-
-/* Takeaway Box */
-.takeaway-box {
-    background: linear-gradient(135deg, var(--rust), var(--dark-burgundy));
-    color: white;
-    padding: 3rem;
-    border-radius: 15px;
-    margin: 3rem 0;
-}
-
-.takeaway-box h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    color: white;
-}
-
-.takeaway-box p {
-    font-size: 1.15rem;
-    line-height: 1.8;
-}
-
-.takeaway-box strong {
-    color: var(--soft-blue);
-}
-
-/* Paper Section */
-.paper-section {
-    background: linear-gradient(135deg, rgba(146, 164, 210, 0.2), rgba(117, 53, 45, 0.1));
-    padding: 3rem;
-    text-align: center;
-    border-radius: 15px;
-    margin: 3rem 0;
-}
-
-.paper-section h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    color: var(--dark-burgundy);
-    margin-bottom: 1.5rem;
-}
-
-.paper-citation {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    margin-bottom: 2rem;
-    border-left: 5px solid var(--soft-blue);
-    text-align: left;
-}
-
-.paper-link {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--rust), var(--dark-burgundy));
-    color: white;
-    padding: 1.25rem 3rem;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.paper-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(117, 53, 45, 0.4);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
     .myth-hero {
-        padding: 3rem 2rem;
-        margin: -3rem -1.5rem 3rem -1.5rem;
+        padding: 3rem 1.6rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .myth-study-section {
+        padding: 2.4rem 1.2rem 3rem;
     }
 
     .myth-hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .myth-subtitle {
-        font-size: 1.4rem;
-    }
-
-    .myth-content-section {
-        padding: 2rem 0;
-    }
-
-    .myth-section-title {
         font-size: 2rem;
     }
 
-    .chart-annotations {
-        grid-template-columns: 1fr;
-    }
-
-    .message.participant,
-    .message.ai {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .experiment-grid,
-    .engagement-grid,
-    .engagement-grid-two {
-        grid-template-columns: 1fr;
-    }
-
-    .myth-card-header {
-        padding: 1rem;
-    }
-
-    .myth-title {
-        font-size: 0.95rem;
-    }
-
-    .myth-number {
-        width: 2rem;
-        height: 2rem;
-        font-size: 0.9rem;
-    }
-
-    .conversation-example-wrapper {
-        padding: 1.5rem;
-    }
-
-    .conversation-heading {
-        font-size: 1.5rem;
-    }
-
-    .accordion-header h4 {
-        font-size: 1.1rem;
-    }
-
-    .metric-category {
-        padding: 1.5rem;
-    }
-
-    .metric-category-title {
-        font-size: 1.6rem;
-    }
-
-    .gauge-value {
-        font-size: 3rem;
-    }
-
-    .section-divider {
-        margin: 2.5rem 0;
+    .myth-subtitle {
+        font-size: 1.05rem;
     }
 }
