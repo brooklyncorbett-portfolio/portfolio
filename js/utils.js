@@ -30,6 +30,17 @@ async function loadSection(sectionId) {
                 });
             });
         }
+        
+        // Attach event listener for myth-study link if this is the research section
+        if (sectionId === 'research') {
+            const mythStudyLink = sectionContainer.querySelector('.myth-study-link');
+            if (mythStudyLink) {
+                mythStudyLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchTab('myth-study');
+                });
+            }
+        }
     } catch (error) {
         console.error(`Error loading section ${sectionId}:`, error);
         sectionContainer.innerHTML = `<p>Error loading content. Please refresh the page.</p>`;
