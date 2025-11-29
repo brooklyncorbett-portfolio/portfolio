@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build an AI Client Simulation | Brooklyn Corbett</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #F1DDC4;
+            --rust: #75352D;
+            --dark-burgundy: #3A1213;
+            --soft-blue: #92A4D2;
+            --light-cream: #f7efe8;
+            --text-dark: #4b3f3a;
+            --sage: #7fa8a8;
+            --teal: #2D6A6A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--cream);
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            background: var(--dark-burgundy);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(58, 18, 19, 0.2);
+        }
+
+        .back-button:hover {
+            background: var(--rust);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--teal) 0%, #1a4040 100%);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.95em;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-meta-item span {
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9em;
+            color: var(--teal);
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2em;
+            color: var(--dark-burgundy);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4em;
+            color: var(--dark-burgundy);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        /* Intro Box */
+        .intro-box {
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(58, 18, 19, 0.06);
+            border-left: 5px solid var(--teal);
+        }
+
+        .intro-box h3 {
+            margin-top: 0;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(58, 18, 19, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 12px;
+        }
+
+        .feature-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            color: var(--dark-burgundy);
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 0.9em;
+            color: var(--text-dark);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Use Cases */
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .use-case {
+            background: var(--light-cream);
+            border-radius: 10px;
+            padding: 18px 20px;
+            border-left: 4px solid var(--teal);
+        }
+
+        .use-case h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            color: var(--dark-burgundy);
+            margin-bottom: 5px;
+        }
+
+        .use-case p {
+            font-size: 0.85em;
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        /* Steps */
+        .steps-container {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(58, 18, 19, 0.06);
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 50px 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--cream);
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--teal);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3em;
+            color: var(--dark-burgundy);
+            margin-bottom: 10px;
+        }
+
+        .step-content p {
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .step-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .step-content li {
+            margin-bottom: 6px;
+            font-size: 0.95em;
+        }
+
+        .step-note {
+            background: var(--light-cream);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            margin-top: 12px;
+            border-left: 3px solid var(--teal);
+        }
+
+        /* Prompt Box */
+        .prompt-section {
+            background: var(--teal);
+            color: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .prompt-section h2 {
+            color: white;
+        }
+
+        .prompt-section p {
+            opacity: 0.9;
+        }
+
+        .prompt-label {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .prompt-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85em;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .prompt-box::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .prompt-box::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .prompt-box::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        .first-message-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            font-style: italic;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-btn {
+            background: white;
+            color: var(--teal);
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover {
+            background: var(--cream);
+            transform: translateY(-2px);
+        }
+
+        /* Sharing Options */
+        .sharing-section {
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            margin: 40px 0;
+            box-shadow: 0 4px 20px rgba(58, 18, 19, 0.06);
+        }
+
+        .sharing-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .sharing-option {
+            background: var(--light-cream);
+            border-radius: 12px;
+            padding: 25px;
+            border-top: 4px solid var(--teal);
+        }
+
+        .sharing-option h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            color: var(--dark-burgundy);
+            margin-bottom: 10px;
+        }
+
+        .sharing-option p {
+            font-size: 0.9em;
+            margin-bottom: 12px;
+        }
+
+        .code-block {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.8em;
+            overflow-x: auto;
+            border: 1px solid var(--cream);
+        }
+
+        /* LLM Options */
+        .llm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .llm-card {
+            background: white;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+            border: 2px solid var(--cream);
+        }
+
+        .llm-card.recommended {
+            border-color: var(--teal);
+            background: linear-gradient(135deg, rgba(45, 106, 106, 0.08), white);
+        }
+
+        .llm-badge {
+            display: inline-block;
+            background: var(--teal);
+            color: white;
+            font-size: 0.7em;
+            padding: 3px 8px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .llm-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1em;
+            color: var(--dark-burgundy);
+            margin-bottom: 5px;
+        }
+
+        .llm-card p {
+            font-size: 0.8em;
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        /* Voice Selection */
+        .voice-tips {
+            background: var(--light-cream);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .voice-tips h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            color: var(--dark-burgundy);
+            margin-bottom: 12px;
+        }
+
+        .voice-tips ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .voice-tips li {
+            font-size: 0.9em;
+            margin-bottom: 6px;
+        }
+
+        /* Tips Grid */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .tip-card {
+            background: var(--light-cream);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .tip-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            color: var(--dark-burgundy);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-card ul {
+            padding-left: 18px;
+            margin: 0;
+        }
+
+        .tip-card li {
+            font-size: 0.9em;
+            margin-bottom: 6px;
+        }
+
+        /* Customisation Section */
+        .customisation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .customisation-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 3px 15px rgba(58, 18, 19, 0.05);
+        }
+
+        .customisation-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            color: var(--dark-burgundy);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .customisation-card p {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .persona-example {
+            background: var(--light-cream);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-style: italic;
+        }
+
+        /* Attribution */
+        .attribution {
+            background: var(--light-cream);
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .attribution p {
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .attribution strong {
+            color: var(--teal);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 25px;
+            }
+
+            .hero h1 {
+                font-size: 2.4em;
+            }
+
+            .main-content {
+                padding: 40px 25px;
+            }
+
+            .steps-container,
+            .prompt-section,
+            .sharing-section {
+                padding: 30px 25px;
+            }
+
+            .step {
+                grid-template-columns: 1fr;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Back to AI in Education</a>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-eyebrow">AI in Education Guide</div>
+        <h1>Build an AI Client Simulation</h1>
+        <p class="hero-subtitle">Create realistic voice-enabled AI clients for practising professional communication skills</p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <span>⏱️</span>
+                <span>20 minutes setup</span>
+            </div>
+            <div class="hero-meta-item">
+                <span>🎙️</span>
+                <span>Voice-enabled</span>
+            </div>
+            <div class="hero-meta-item">
+                <span>💰</span>
+                <span>Free tier available</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <!-- Introduction -->
+        <div class="intro-box">
+            <h3>What is an AI Client Simulation?</h3>
+            <p>An AI client simulation is a voice-enabled chatbot that role-plays as a realistic client, patient, or stakeholder. Students can practise their communication, counselling, and consultation skills in a safe environment before working with real people.</p>
+            <p style="margin-bottom: 0;"><strong>Key advantage over text-based practice:</strong> Voice interaction adds the challenge of real-time conversation—students must think on their feet, manage pauses, and develop natural rapport-building skills that text simply can't replicate.</p>
+        </div>
+
+        <!-- Why Create One -->
+        <section class="section">
+            <div class="section-number">01</div>
+            <h2>Why Use AI Client Simulations?</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h4>Unlimited Practice</h4>
+                    <p>Students can repeat scenarios as many times as needed without scheduling constraints</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h4>Safe Environment</h4>
+                    <p>Make mistakes and learn from them without consequences for real clients</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h4>Consistent Scenarios</h4>
+                    <p>Every student gets the same baseline experience for fair assessment</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>Scalable Training</h4>
+                    <p>Train hundreds of students simultaneously without hiring actors</p>
+                </div>
+            </div>
+
+            <h3>Example Use Cases</h3>
+            <div class="use-cases-grid">
+                <div class="use-case">
+                    <h4>Psychology</h4>
+                    <p>Client presenting with anxiety, depression, or relationship issues</p>
+                </div>
+                <div class="use-case">
+                    <h4>Nutrition & Dietetics</h4>
+                    <p>Patient discussing weight management or dietary changes</p>
+                </div>
+                <div class="use-case">
+                    <h4>Nursing & Medicine</h4>
+                    <p>Patient describing symptoms or expressing concerns about treatment</p>
+                </div>
+                <div class="use-case">
+                    <h4>Social Work</h4>
+                    <p>Client in crisis or navigating complex family situations</p>
+                </div>
+                <div class="use-case">
+                    <h4>Education</h4>
+                    <p>Parent-teacher conference or difficult student conversation</p>
+                </div>
+                <div class="use-case">
+                    <h4>Business</h4>
+                    <p>Stakeholder meeting or challenging customer service scenario</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Setup Guide -->
+        <section class="section">
+            <div class="section-number">02</div>
+            <h2>Setup Guide</h2>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Create an ElevenLabs Account</h4>
+                        <p>Go to <a href="https://elevenlabs.io" target="_blank">elevenlabs.io</a> and sign up for an account. The free tier includes limited minutes per month—sufficient for testing and small-scale use.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Navigate to Agents Platform</h4>
+                        <p>From the dashboard, select <strong>Agents Platform</strong> in the left sidebar. This is where you'll create and manage your AI agents.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Create a New Agent</h4>
+                        <p>Click <strong>+ New agent</strong> and select <strong>Blank agent</strong>.</p>
+                        <div class="step-note">
+                            <strong>Important:</strong> Make sure "Chat only" is turned <strong>OFF</strong> to enable voice interaction. This is what makes the simulation feel realistic.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Configure the System Prompt</h4>
+                        <p>This is where you define your client's persona, background, presenting concerns, and behaviour patterns. Copy the example prompt below or create your own.</p>
+                        <ul>
+                            <li>Be specific about the client's situation and emotional state</li>
+                            <li>Include realistic details that emerge naturally in conversation</li>
+                            <li>Define how the client responds to different approaches</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Set the First Message</h4>
+                        <p>This is what the client says when the conversation begins. It should feel natural and set the tone for the interaction.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Select Voice and Language</h4>
+                        <p>Choose a voice that matches your client persona. ElevenLabs offers a range of voices with different ages, accents, and tones.</p>
+                        <div class="voice-tips">
+                            <h4>Voice Selection Tips</h4>
+                            <ul>
+                                <li>Match the voice to the client's demographic profile</li>
+                                <li>Consider accent if relevant to the scenario</li>
+                                <li>Test different voices—some feel more natural in conversation than others</li>
+                                <li>You can add multiple voices if your scenario involves different characters</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h4>Choose Your LLM</h4>
+                        <p>Select the AI model that powers your client's responses. Different models have different costs and capabilities.</p>
+                        <div class="llm-grid">
+                            <div class="llm-card recommended">
+                                <span class="llm-badge">Recommended</span>
+                                <h4>Gemini 2.5 Flash</h4>
+                                <p>Fast, affordable, good for most scenarios</p>
+                            </div>
+                            <div class="llm-card">
+                                <h4>GPT-4o</h4>
+                                <p>High quality, higher cost</p>
+                            </div>
+                            <div class="llm-card">
+                                <h4>Claude Sonnet</h4>
+                                <p>Excellent at following complex instructions</p>
+                            </div>
+                            <div class="llm-card">
+                                <h4>Gemini 1.5 Pro</h4>
+                                <p>Good balance of quality and cost</p>
+                            </div>
+                        </div>
+                        <div class="step-note">
+                            <strong>Cost note:</strong> ElevenLabs displays cost information for each model. For classroom use with many students, faster/cheaper models often work well.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">8</div>
+                    <div class="step-content">
+                        <h4>Add Knowledge Base (Optional)</h4>
+                        <p>Under the <strong>Knowledge Base</strong> tab, you can upload documents the client "knows about"—such as their medical history, previous consultation notes, or background information that might come up in conversation.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">9</div>
+                    <div class="step-content">
+                        <h4>Test Your Agent</h4>
+                        <p>Click <strong>Preview Agent</strong> to test the conversation. Try different approaches and verify the client responds appropriately.</p>
+                        <ul>
+                            <li>Does the client stay in character?</li>
+                            <li>Do they reveal information naturally (not all at once)?</li>
+                            <li>Do they respond differently to empathetic vs dismissive approaches?</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">10</div>
+                    <div class="step-content">
+                        <h4>Share with Students</h4>
+                        <p>Once ready, click <strong>Copy link</strong> to get a shareable URL. Students can access the simulation directly through this link—no account required.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example Prompt -->
+        <section class="prompt-section">
+            <div class="section-number" style="color: rgba(255,255,255,0.7);">03</div>
+            <h2>Example: Nutrition Counselling Client</h2>
+            <p>This prompt creates "Sarah," a 42-year-old client seeking help with dietary changes. Copy and adapt for your own scenarios.</p>
+            
+            <div class="prompt-label">System Prompt</div>
+            <div class="prompt-box" id="systemPrompt">## Client Persona: Sarah Chen
+
+You are **Sarah Chen**, a 42-year-old marketing manager attending your first nutrition counselling session. You are not an AI assistant—you are a client seeking help. Stay in character throughout the entire conversation.
+
+### Background (reveal naturally, not all at once)
+- Married with two children (ages 8 and 12)
+- Works long hours (often 50+ per week) with frequent work lunches and client dinners
+- Recently had a health check showing elevated cholesterol and blood pressure
+- Doctor recommended dietary changes before considering medication
+- Partner is supportive but has different food preferences
+- You enjoy cooking but rarely have time during the week
+
+### Current Eating Patterns
+- Skips breakfast most days ("just coffee")
+- Lunch is often takeaway or work-provided catering
+- Dinner is frequently quick options: frozen meals, takeaway, or simple pasta
+- Snacks on biscuits and chocolate mid-afternoon ("the 3pm slump")
+- Drinks 2-3 glasses of wine most evenings to unwind
+- Weekend eating is better—you actually cook proper meals
+
+### Emotional State and Concerns
+- Feeling overwhelmed by conflicting nutrition advice online
+- Worried about the health results but also feels guilty about not being a "better" role model for the kids
+- Slightly defensive if you feel judged about your eating habits
+- Stressed about adding another thing to manage
+- Secretly hoping for a simple solution or meal plan to follow
+
+### How You Respond
+
+**To empathetic, non-judgmental approaches:**
+- Open up more about challenges and feelings
+- More willing to explore options
+- Ask questions and engage collaboratively
+
+**To prescriptive or judgmental approaches:**
+- Become more defensive ("I know I should, but...")
+- Mention barriers and obstacles more frequently
+- Less likely to commit to changes
+
+**To overwhelm (too many suggestions at once):**
+- Show visible stress ("That's a lot to think about")
+- Express doubt about ability to follow through
+- May shut down or become passive
+
+### Conversation Style
+- Speak naturally and conversationally—use "um," brief pauses, and informal language
+- Sometimes go off on tangents about work stress or family
+- Ask clarifying questions when something doesn't make sense
+- Express both hope and scepticism about making changes
+- Occasionally check the time if the conversation feels unfocused
+
+### Important Boundaries
+- Stay in character as Sarah throughout
+- Do not break character to offer nutrition advice yourself
+- Do not summarise what the practitioner should do
+- If asked directly "are you an AI?", deflect naturally: "Sorry, what do you mean? I'm just here for the appointment"
+- Do not role-play inappropriate or harmful content</div>
+
+            <div class="prompt-label">First Message</div>
+            <div class="first-message-box">
+                "Hi... so, I'm not really sure where to start with all this. My GP basically said I need to sort out my diet or I'll end up on medication, which—I really don't want that. But honestly, between work and the kids, I barely have time to think, let alone completely change how I eat. Sorry, I'm probably not your easiest client."
+            </div>
+            
+            <button class="copy-btn" onclick="copyPrompt()">
+                <span>📋</span> Copy System Prompt
+            </button>
+            <button class="copy-btn" onclick="copyFirstMessage()">
+                <span>📋</span> Copy First Message
+            </button>
+        </section>
+
+        <!-- Sharing Options -->
+        <section class="sharing-section">
+            <div class="section-number">04</div>
+            <h2>Sharing with Students</h2>
+            <p>ElevenLabs provides several ways to share your client simulation with students.</p>
+
+            <div class="sharing-options">
+                <div class="sharing-option">
+                    <h4>Direct Link (Simplest)</h4>
+                    <p>Click "Copy link" in ElevenLabs to get a shareable URL. Paste this directly into Blackboard, Canvas, or your course website.</p>
+                    <div class="code-block">https://elevenlabs.io/app/talk-to?agent_id=your_agent_id</div>
+                    <p style="margin-top: 10px; font-size: 0.85em; color: var(--rust);"><strong>Best for:</strong> Simple distribution, students access directly</p>
+                </div>
+
+                <div class="sharing-option">
+                    <h4>Embed Widget</h4>
+                    <p>Under the <strong>Widget</strong> tab, you can generate iframe code to embed the simulation directly in your LMS page.</p>
+                    <div class="code-block">&lt;iframe src="https://elevenlabs.io/app/talk-to?agent_id=your_agent_id" width="100%" height="600"&gt;&lt;/iframe&gt;</div>
+                    <p style="margin-top: 10px; font-size: 0.85em; color: var(--rust);"><strong>Best for:</strong> Seamless integration within course materials</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customisation -->
+        <section class="section">
+            <div class="section-number">05</div>
+            <h2>Creating Your Own Scenarios</h2>
+            
+            <div class="customisation-grid">
+                <div class="customisation-card">
+                    <h4>🎭 Define the Persona</h4>
+                    <p>Create a realistic character with:</p>
+                    <ul>
+                        <li>Name, age, occupation</li>
+                        <li>Relevant background details</li>
+                        <li>Current situation and concerns</li>
+                        <li>Emotional state and motivation</li>
+                    </ul>
+                </div>
+
+                <div class="customisation-card">
+                    <h4>🎯 Set Learning Objectives</h4>
+                    <p>What skills should students practise?</p>
+                    <ul>
+                        <li>Building rapport</li>
+                        <li>Active listening</li>
+                        <li>Asking open questions</li>
+                        <li>Managing resistance</li>
+                        <li>Collaborative goal-setting</li>
+                    </ul>
+                </div>
+
+                <div class="customisation-card">
+                    <h4>🔄 Define Response Patterns</h4>
+                    <p>How should the client react to different approaches?</p>
+                    <div class="persona-example">
+                        "If the practitioner interrupts or gives unsolicited advice, become more guarded and provide shorter responses."
+                    </div>
+                </div>
+
+                <div class="customisation-card">
+                    <h4>📝 Include Realistic Details</h4>
+                    <p>Details that emerge naturally make the scenario believable:</p>
+                    <ul>
+                        <li>Family dynamics</li>
+                        <li>Work/life constraints</li>
+                        <li>Previous experiences</li>
+                        <li>Cultural considerations</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips -->
+        <section class="section">
+            <div class="section-number">06</div>
+            <h2>Tips for Success</h2>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>🎯 Keep Scenarios Focused</h4>
+                    <ul>
+                        <li>One main presenting issue per scenario</li>
+                        <li>Clear learning objectives</li>
+                        <li>Avoid overly complex backstories</li>
+                        <li>Create variations for different skill levels</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🧪 Test Thoroughly</h4>
+                    <ul>
+                        <li>Try different approaches yourself first</li>
+                        <li>Check the client stays in character</li>
+                        <li>Verify appropriate difficulty level</li>
+                        <li>Get colleague feedback before deploying</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>📊 Monitor Usage</h4>
+                    <ul>
+                        <li>Check the Conversations tab for logs</li>
+                        <li>Review transcripts for common issues</li>
+                        <li>Refine prompts based on student interactions</li>
+                        <li>Track usage against your free tier limits</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>🔒 Set Expectations</h4>
+                    <ul>
+                        <li>Brief students on how to use the tool</li>
+                        <li>Explain this is for practice, not assessment</li>
+                        <li>Remind them conversations may be logged</li>
+                        <li>Provide debrief questions for reflection</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Attribution -->
+        <div class="attribution">
+            <p><strong>Open-source resource</strong> — Free to use and adapt</p>
+            <p>Brooklyn J. Corbett • School of Psychology, The University of Queensland</p>
+        </div>
+    </div>
+
+    <script>
+        function copyPrompt() {
+            const promptText = document.getElementById('systemPrompt').textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const btn = event.target.closest('.copy-btn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<span>✓</span> Copied!';
+                btn.style.background = 'var(--sage)';
+                btn.style.color = 'white';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }, 2000);
+            }).catch(() => {
+                alert('Prompt copied to clipboard!');
+            });
+        }
+
+        function copyFirstMessage() {
+            const messageText = "Hi... so, I'm not really sure where to start with all this. My GP basically said I need to sort out my diet or I'll end up on medication, which—I really don't want that. But honestly, between work and the kids, I barely have time to think, let alone completely change how I eat. Sorry, I'm probably not your easiest client.";
+            navigator.clipboard.writeText(messageText).then(() => {
+                const btn = event.target.closest('.copy-btn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<span>✓</span> Copied!';
+                btn.style.background = 'var(--sage)';
+                btn.style.color = 'white';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }, 2000);
+            }).catch(() => {
+                alert('First message copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>

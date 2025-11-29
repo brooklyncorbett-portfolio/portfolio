@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Demos - Web-based educational tools for LMS integration">
+    <title>Building Interactive Demos | Brooklyn Corbett</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/ai-education.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Brooklyn Corbett</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../about.html">About</a></li>
+                <li><a href="../../research/index.html">Research Projects</a></li>
+                <li><a href="../index.html" class="active">AI in Education</a></li>
+                <li><a href="../../data-viz.html">Data Visualisation</a></li>
+                <li><a href="../../rigour.html">Open Science</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="interactive-demos-section">
+
+            <!-- Page Header -->
+            <header class="page-header fade-in-section">
+                <p class="header-eyebrow">Interactive learning tools</p>
+                <h1 class="page-title">Building Interactive Demos</h1>
+                <p class="page-subtitle">
+                    I design web-based educational tools that work seamlessly across platforms —
+                    from standalone sites to learning management systems such as Blackboard.
+                    Here are a few examples currently used with students.
+                </p>
+            </header>
+
+            <!-- Back Button -->
+            <div class="back-button-wrapper">
+                <a href="../index.html" class="back-button">← Back to AI in Education</a>
+            </div>
+
+            <!-- Demo Cards -->
+            <div class="demos-grid fade-in-section">
+                <!-- Demo 1: Memory Lab -->
+                <article class="demo-card">
+                    <div class="demo-card-image-wrapper">
+                        <img src="/assets/images/memory_demo_image.jpg" alt="Memory Lab Demo" class="demo-card-image">
+                    </div>
+                    <div class="demo-card-content">
+                        <h3>Memory Interactive Experiments</h3>
+                        <p>
+                            Psychology experiments that let students experience cognitive phenomena 
+                            first-hand and see their own results visualised.
+                        </p>
+                        <a href="memory-lab.html" class="demo-primary-button">Open demo →</a>
+                    </div>
+                </article>
+
+                <!-- Demo 2: Central Limit Theorem -->
+                <article class="demo-card">
+                    <div class="demo-card-image-wrapper">
+                        <img src="/assets/images/CLT_image.jpg" alt="Central Limit Theorem Explorer" class="demo-card-image">
+                    </div>
+                    <div class="demo-card-content">
+                        <h3>Central Limit Theorem Explorer</h3>
+                        <p>
+                            An interactive statistics tool where students manipulate sample sizes 
+                            and watch distributions shift in real time.
+                        </p>
+                        <a href="clt-demo.html" class="demo-primary-button">Open demo →</a>
+                    </div>
+                </article>
+
+                <!-- Demo 3: Brain Development Timeline -->
+                <article class="demo-card">
+                    <div class="demo-card-image-wrapper">
+                        <img src="/assets/images/brain_demo_image.jpeg" alt="Developing Brain Timeline" class="demo-card-image">
+                    </div>
+                    <div class="demo-card-content">
+                        <h3>Developing Brain Timeline</h3>
+                        <p>
+                            A slider-based timeline walking through brain development from birth to 
+                            age eight, with stage-appropriate teaching approaches.
+                        </p>
+                        <a href="brain-timeline.html" class="demo-primary-button">Open demo →</a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Blue Background Section -->
+            <div class="blue-section-wrapper" id="blueSectionWrapper">
+                <!-- Your Turn Section -->
+                <section class="your-turn-section">
+
+                    <h2 class="your-turn-title">Your Turn: Create Your Own!</h2>
+
+                    <p class="your-turn-intro">
+                        These demos were all created with AI assistance. You can use the same approach to
+                        build a small, self-contained interactive page for your own topic — a quick
+                        simulation, visual, or explainer tailored to the content you teach.
+                    </p>
+
+                    <!-- Prompt Box -->
+                    <div class="prompt-box">
+                        <div class="prompt-header">
+                            <span class="prompt-icon">✨</span>
+                            <strong>Try this prompt</strong>
+                            <button class="copy-prompt-btn" onclick="copyPrompt()">Copy</button>
+                        </div>
+                        <div class="prompt-text">
+                            <p>Copy–paste this into an LLM and customise the topic and age group:</p>
+                        </div>
+
+                        <textarea class="prompt-code" id="prompt-textarea" readonly>Create an interactive HTML page that teaches [YOUR TOPIC]. Include:
+- A brief explanation of the concept
+- An interactive element (slider, buttons, or input fields)
+- Visual feedback that responds to student interactions
+- Clear on-page instructions
+- Clean, simple styling with accessible colours
+
+Make it self-contained in a single HTML file with embedded CSS and JavaScript.
+Target it for [AGE GROUP] students.
+
+At the end, briefly explain how I can:
+1) adjust the wording,
+2) change the parameters, and
+3) embed this in Blackboard or another LMS.</textarea>
+                    </div>
+
+                    <!-- Steps Card -->
+                    <div class="steps-card">
+                        <h3>Getting it into Blackboard</h3>
+
+                        <div class="steps-grid">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <strong>Generate</strong>
+                                    <p>Use the prompt in an LLM.</p>
+                                </div>
+                            </div>
+
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <strong>Copy HTML</strong>
+                                    <p>Copy the full HTML file.</p>
+                                </div>
+                            </div>
+
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <strong>Create item</strong>
+                                    <p>Add a new item in Blackboard.</p>
+                                </div>
+                            </div>
+
+                            <div class="step-item">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <strong>Paste code</strong>
+                                    <p>Switch to HTML view and paste.</p>
+                                </div>
+                            </div>
+
+                            <div class="step-item">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    <strong>Save & test</strong>
+                                    <p>Test as a student would.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tips -->
+                    <div class="pro-tips">
+                        <strong class="pro-tips-title">Tips for success</strong>
+                        <ul>
+                            <li>Start simple — one clean interaction is better than a complex demo that breaks.</li>
+                            <li>Ask the LLM to explain the code so you can customise it later.</li>
+                            <li>Test locally by saving the HTML file and opening it in your browser.</li>
+                            <li>If something doesn't work, paste the error back into the LLM and iterate.</li>
+                            <li>Self-contained files (HTML + CSS + JS together) embed most reliably in Blackboard.</li>
+                        </ul>
+                    </div>
+
+                </section>
+            </div>
+            <!-- End Blue Background Section -->
+
+        </div>
+    </main>
+
+    <!-- No footer inside blue section - moved outside -->
+    <footer>
+        <p>&copy; 2025 Brooklyn Corbett</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../js/global.js"></script>
+    
+    <!-- Parallax Effect for Blue Section -->
+    <script>
+        // Parallax effect - white card moves down at 15% of scroll speed, max 80px
+        function initParallaxEffect() {
+            const blueSection = document.getElementById('blueSectionWrapper');
+            const whiteCard = document.querySelector('.your-turn-section');
+            
+            if (!blueSection || !whiteCard) return;
+            
+            function handleScroll() {
+                const rect = blueSection.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // Only apply effect when section is in view
+                if (rect.top < windowHeight && rect.bottom > 0) {
+                    const sectionTop = blueSection.offsetTop;
+                    const scrolled = window.pageYOffset;
+                    const relativeScroll = scrolled - sectionTop + windowHeight;
+                    
+                    if (relativeScroll > 0) {
+                        const parallaxOffset = Math.min(relativeScroll * 0.15, 80);
+                        whiteCard.style.transform = `translateY(${parallaxOffset}px)`;
+                    }
+                }
+            }
+            
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            handleScroll();
+        }
+        
+        document.addEventListener('DOMContentLoaded', initParallaxEffect);
+    </script>
+</body>
+</html>

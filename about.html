@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About Brooklyn Corbett - Researcher in AI-enhanced education, learning analytics, and cognitive science">
+    <title>About | Brooklyn Corbett</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">Brooklyn Corbett</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="research/index.html">Research Projects</a></li>
+                <li><a href="ai-education/index.html">AI in Education</a></li>
+                <li><a href="data-viz.html">Data Visualisation</a></li>
+                <li><a href="rigour.html">Open Science</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="about-main">
+        <!-- Hero Section -->
+        <div class="about-hero-contained">
+            <div class="about-photo-contained">
+                <img src="assets/images/about-img.jpg" alt="Brooklyn Corbett" class="about-img">
+            </div>
+            <div class="about-intro-contained">
+                <p class="about-eyebrow">About Me</p>
+                <h1 class="about-name">Brooklyn Corbett</h1>
+                <div class="about-divider"></div>
+                <p class="about-role">Senior Project Officer & Researcher · The University of Queensland</p>
+                <p class="about-summary">
+                   I'm a researcher and project officer with a PhD in psychology, working at the intersection of cognitive science, educational psychology, and AI-enhanced learning. My work spans higher education and workplace learning, where I design and manage rigorous research, analyse complex datasets, and support evidence-informed decisions about teaching, learning, and student experience.
+I've had the opportunity to work across a range of methods—from large-scale randomised controlled trials and experimental studies through to qualitative interviews and focus groups. What ties it all together is a commitment to rigour, openness, and the science of learning.
+What I enjoy most is the space between research and practice: translating findings into something useful, whether that's a data visualisation, a training design, or a conversation that helps shape a decision. I'm drawn to collaborative problem-solving and the kind of work where good methodology meets real-world questions.
+                </p>
+                <div class="about-tags">
+                    <span class="tag">Educational Psychology</span>
+                    <span class="tag">Cognitive Science</span>
+                    <span class="tag">AI in Education</span>
+                    <span class="tag">Science of Learning</span>
+                     <span class="tag">Generative AI</span>
+                    <span class="tag">Expertise Development</span>
+                    <span class="tag">Judgement & Decision Making</span>
+                    <span class="tag">Data Visualisation</span>
+                    <span class="tag">Open Science</span>
+                    <span class="tag">Metascience</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explore My Work -->
+        <div class="explore-container">
+            <div class="explore-content-inner">
+                <div class="about-content">
+                    <section class="about-section">
+                        <h2>Explore My Work</h2>
+                        <div class="explore-grid">
+                            <a href="research/index.html" class="explore-card">
+                                <img src="assets/images/research_icon.jpg" alt="Research" class="explore-icon">
+                                <h3>Research Projects</h3>
+                                <p>Rigorous studies in learning, expertise, and decision-making</p>
+                                <span class="explore-btn">View Projects →</span>
+                            </a>
+                            <a href="ai-education/index.html" class="explore-card">
+                                <img src="assets/images/ai_icon.jpg" alt="AI in Education" class="explore-icon">
+                                <h3>AI in Education</h3>
+                                <p>Evidence-based AI tools for teaching and learning</p>
+                                <span class="explore-btn">View Tools →</span>
+                            </a>
+                            <a href="data-viz.html" class="explore-card">
+                                <img src="assets/images/dataviz_icon.jpg" alt="Data Visualisation" class="explore-icon">
+                                <h3>Data Visualisation</h3>
+                                <p>Turning complex data into clear insights</p>
+                                <span class="explore-btn">View Visualisations →</span>
+                            </a>
+                            <a href="rigour.html" class="explore-card">
+                                <img src="assets/images/data_icon.jpg" alt="Open Science" class="explore-icon">
+                                <h3>Open Science</h3>
+                                <p>Open science and reproducible practices</p>
+                                <span class="explore-btn">Learn More →</span>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Brooklyn Corbett</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/global.js"></script>
+    <script>
+        // Parallax effect for explore container
+        const exploreContainer = document.querySelector('.explore-container');
+        const exploreContent = document.querySelector('.explore-content-inner');
+        
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const containerTop = exploreContainer.offsetTop;
+            const relativeScroll = scrolled - containerTop + window.innerHeight;
+            
+            if (relativeScroll > 0) {
+                // Move content down slower than scroll, creating expanding gap effect
+                const parallaxOffset = Math.min(relativeScroll * 0.15, 80);
+                exploreContent.style.transform = `translateY(${parallaxOffset}px)`;
+            }
+        });
+        
+        // Reveal animation for cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.explore-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

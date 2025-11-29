@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Experiences with AI-Powered Learning Tools - Mixed-methods research on how students engage with AI in higher education">
+    <title>Student Experiences with AI Learning Tools | Brooklyn Corbett</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/ai-tools-study.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">Brooklyn Corbett</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="index.html" class="active">Research Projects</a></li>
+                <li><a href="../ai-education/index.html">AI in Education</a></li>
+                <li><a href="../data-viz.html">Data Visualisation</a></li>
+                <li><a href="../rigour.html">Open Science</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="study-hero">
+            <a href="index.html" class="back-link">← Research Projects</a>
+            
+            <div class="hero-content">
+                <div class="hero-text">
+                    <p class="hero-eyebrow">AI in Higher Education</p>
+                    <h1>Student Experiences with <span class="highlight">AI Learning Tools</span></h1>
+                    <p class="hero-subtitle">What works, what doesn't, and what students actually want</p>
+                </div>
+                
+                <div class="hero-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Participants</span>
+                        <span class="meta-value">N = 21</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Methods</span>
+                        <span class="meta-value">Surveys + Focus Groups</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">AI Tools Tested</span>
+                        <span class="meta-value">8 Different Tools</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator">
+                <span>Scroll to explore</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Context -->
+        <section class="content-section bg-cream">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <span class="section-number">01</span>
+                    <h2>The Context</h2>
+                </div>
+                
+                <div class="two-column reveal">
+                    <div class="column-text">
+                        <p class="lead-text">
+                            AI tools are flooding into higher education, but we know surprisingly little 
+                            about how students actually experience them.
+                        </p>
+                        <p>
+                            92% of UK undergraduates now use AI tools—up from 66% just one year prior. 
+                            Yet universities struggle to provide clear guidance, and educators often choose 
+                            AI tools with limited insight into what students find genuinely helpful.
+                        </p>
+                        <p>
+                            We designed a study to find out: across different AI formats and subject areas, 
+                            what do students actually value?
+                        </p>
+                    </div>
+                    <div class="column-aside">
+                        <div class="stat-stack">
+                            <div class="stat-callout">
+                                <span class="stat-number">92%</span>
+                                <span class="stat-label">of students using AI in 2025</span>
+                            </div>
+                            <div class="stat-callout secondary">
+                                <span class="stat-number">5%</span>
+                                <span class="stat-label">of educators pay for premium AI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Study Design -->
+        <section class="content-section bg-white">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <span class="section-number">02</span>
+                    <h2>The Study</h2>
+                </div>
+
+                <p class="section-intro reveal">
+                    21 university students completed three one-week modules—cognitive psychology, 
+                    nutrition science, and computer programming—each featuring a suite of AI-powered 
+                    learning tools.
+                </p>
+
+                <!-- Tools Grid -->
+                <div class="tools-showcase reveal">
+                    <h3>The AI tools we tested</h3>
+                    <div class="tools-grid">
+                        <div class="tool-item interactive">
+                            <span class="tool-type">Interactive</span>
+                            <h4>QuizBot</h4>
+                            <p>Retrieval practice with AI-generated questions</p>
+                        </div>
+                        <div class="tool-item interactive">
+                            <span class="tool-type">Interactive</span>
+                            <h4>Coggie</h4>
+                            <p>Socratic dialogue tutor</p>
+                        </div>
+                        <div class="tool-item interactive">
+                            <span class="tool-type">Interactive</span>
+                            <h4>Interactive Activities</h4>
+                            <p>Hands-on exercises and visual demos</p>
+                        </div>
+                        <div class="tool-item interactive">
+                            <span class="tool-type">Interactive</span>
+                            <h4>Client Simulation</h4>
+                            <p>Voice-based counselling practice</p>
+                        </div>
+                        <div class="tool-item interactive">
+                            <span class="tool-type">Interactive</span>
+                            <h4>ExampleBot</h4>
+                            <p>Real-world application generator</p>
+                        </div>
+                        <div class="tool-item interactive">
+                            <span class="tool-type">Interactive</span>
+                            <h4>Reading Assistant</h4>
+                            <p>On-demand concept clarification</p>
+                        </div>
+                        <div class="tool-item passive">
+                            <span class="tool-type">Passive</span>
+                            <h4>AI Lectures</h4>
+                            <p>Avatar-delivered video content</p>
+                        </div>
+                        <div class="tool-item passive">
+                            <span class="tool-type">Passive</span>
+                            <h4>AI Podcasts</h4>
+                            <p>Conversational audio summaries</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Method Cards -->
+                <div class="method-cards reveal">
+                    <div class="method-card">
+                        <div class="method-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 11l3 3L22 4"/>
+                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                            </svg>
+                        </div>
+                        <h4>Surveys</h4>
+                        <p>Ratings on effectiveness, engagement, motivation, satisfaction, and future use after each module</p>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                            </svg>
+                        </div>
+                        <h4>Focus Groups</h4>
+                        <p>Semi-structured discussions exploring experiences, preferences, and broader attitudes toward AI</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Finding: Interactive vs Passive -->
+        <section class="content-section bg-dark">
+            <div class="section-inner">
+                <div class="section-header light reveal">
+                    <span class="section-number">03</span>
+                    <h2>The Clear Winner</h2>
+                </div>
+
+                <div class="finding-highlight reveal">
+                    <p class="big-finding">Interactive tools that required <em>active participation</em> consistently outperformed passive formats.</p>
+                </div>
+
+                <div class="ratings-chart reveal">
+                    <div class="chart-container">
+                        <canvas id="toolRatingsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="quote-cards reveal">
+                    <div class="quote-card">
+                        <blockquote>"With the tools where you would have to respond... I was actually doing something... like active learning. But if it was something like the lecture or the podcast, I would find myself zoning out."</blockquote>
+                        <cite>— Study participant</cite>
+                    </div>
+                    <div class="quote-card">
+                        <blockquote>"The AI lecture was robotic and monotonous... there's an uncanny valley effect. In person lectures can be funny, boring, sometimes even start singing—there's unexpected elements."</blockquote>
+                        <cite>— Study participant</cite>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Themes -->
+        <section class="content-section bg-cream">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <span class="section-number">04</span>
+                    <h2>What Students Told Us</h2>
+                </div>
+
+                <p class="section-intro reveal">
+                    Focus group discussions revealed nine themes about how students experience AI in education:
+                </p>
+
+                <div class="themes-grid reveal">
+                    <div class="theme-card">
+                        <div class="theme-number">1</div>
+                        <h4>Passive formats lack connection</h4>
+                        <p>AI lectures triggered "uncanny valley" effects. Missing spontaneity and human warmth made them hard to engage with.</p>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-number">2</div>
+                        <h4>Interactive tools foster reflection</h4>
+                        <p>Tools requiring responses changed behaviour—students felt accountable and brought "a different level of awareness."</p>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-number">3</div>
+                        <h4>Immediate, judgement-free feedback</h4>
+                        <p>24/7 availability and non-judgemental responses reduced anxiety. "With AI, there's no stupid question."</p>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-number">4</div>
+                        <h4>AI as supplement, not replacement</h4>
+                        <p>Students positioned AI as an "assistant" while valuing human educators for depth, stories, and social connection.</p>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-number">5</div>
+                        <h4>Conditional trust</h4>
+                        <p>Trust depended on perceived accuracy, institutional vetting, and professional presentation. Many cross-referenced outputs.</p>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-number">6</div>
+                        <h4>The accessibility-laziness paradox</h4>
+                        <p>AI removes barriers but creates temptation for shortcuts. Students recognised needing conscious effort to avoid over-reliance.</p>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-number">7</div>
+                        <h4>Academic integrity concerns</h4>
+                        <p>Students worried about cheating, unclear sourcing, and the inability to distinguish AI-generated work.</p>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-number">8</div>
+                        <h4>Inconsistent institutional support</h4>
+                        <p>Mixed messages, stigma, and lack of training left students teaching themselves. "I learned all of this by myself."</p>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-number">9</div>
+                        <h4>Career preparation gaps</h4>
+                        <p>Students see AI as essential for future careers but feel their education doesn't prepare them for it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Tension -->
+        <section class="content-section bg-white">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <span class="section-number">05</span>
+                    <h2>The Core Tension</h2>
+                </div>
+
+                <div class="tension-visual reveal">
+                    <div class="tension-side students">
+                        <h3>Students</h3>
+                        <ul>
+                            <li>Eager to use AI tools</li>
+                            <li>See career relevance</li>
+                            <li>Developing critical approaches</li>
+                            <li>Want guidance and training</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tension-vs">
+                        <span>vs.</span>
+                    </div>
+                    
+                    <div class="tension-side institutions">
+                        <h3>Institutions</h3>
+                        <ul>
+                            <li>Often resistant or hesitant</li>
+                            <li>Inconsistent policies</li>
+                            <li>Limited faculty training</li>
+                            <li>Creating stigma around use</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tension-quote reveal">
+                    <blockquote>"University is like 100% against AI... They instil a fear of AI, unfortunately. If I'm sitting in my research lab and I have to use ChatGPT... I wouldn't want my professor to see that, because it's just so stigmatised."</blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Takeaway -->
+        <section class="content-section bg-burgundy">
+            <div class="section-inner">
+                <div class="takeaway-block reveal">
+                    <span class="takeaway-label">Key Takeaway</span>
+                    <p class="takeaway-text">
+                        Students are already adapting to AI—experimenting, evaluating, and developing 
+                        strategic approaches. They prefer <em>interactive, feedback-rich tools</em> over 
+                        passive formats, and they want AI as a <strong>supplement to human teaching</strong>, 
+                        not a replacement. The question is whether institutions will provide guidance or 
+                        leave students to navigate this transition alone.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implications -->
+        <section class="content-section bg-cream">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <span class="section-number">06</span>
+                    <h2>Implications for Practice</h2>
+                </div>
+
+                <div class="implications-grid reveal">
+                    <div class="implication-card">
+                        <h4>Design for interaction</h4>
+                        <p>The most effective tools engaged students through retrieval practice, Socratic dialogue, and hands-on manipulation—not passive content delivery.</p>
+                    </div>
+                    <div class="implication-card">
+                        <h4>Provide immediate feedback</h4>
+                        <p>Tools that helped students identify knowledge gaps in real-time were consistently valued over those that simply delivered content.</p>
+                    </div>
+                    <div class="implication-card">
+                        <h4>Develop clear institutional guidance</h4>
+                        <p>The gap between student readiness and institutional support creates confusion and pushes AI use underground.</p>
+                    </div>
+                    <div class="implication-card">
+                        <h4>Integrate AI literacy into curriculum</h4>
+                        <p>Students anticipate working alongside AI but feel unprepared. This needn't require new courses—AI skills can be woven into existing subjects.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paper Link -->
+        <section class="content-section bg-white paper-section">
+            <div class="section-inner">
+                <div class="paper-block reveal">
+                    <span class="paper-status">Working Paper</span>
+                    <h3>Access the full study</h3>
+                    <div class="citation">
+                        <p><strong>Corbett, B. J., & Tangen, J. M. (2025).</strong> Student experiences with AI-powered learning tools in higher education. <em>Manuscript in preparation.</em></p>
+                    </div>
+                    <div class="paper-links">
+                        <a href="https://osf.io/6emau/?view_only=8f525a8e8f824cf2bc5131a2100389b1" target="_blank" class="paper-button">
+                            View on OSF →
+                        </a>
+                    </div>
+                </div>
+            </div>
+       </section>
+
+        <!-- Footer -->
+        <footer class="study-footer">
+            <a href="index.html" class="footer-back-link">← Back to Research Projects</a>
+        </footer>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="../js/global.js"></script>
+    <script>
+        // Scroll reveal animations
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Tool Ratings Chart
+        const ctx = document.getElementById('toolRatingsChart');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['QuizBot', 'Interactive\nActivities', 'Coggie', 'Reading\nAssistant', 'Client\nSimulation', 'ExampleBot', 'AI Lecture', 'AI Podcast'],
+                    datasets: [
+                        {
+                            label: 'Effectiveness',
+                            data: [3.81, 3.65, 3.73, 3.56, 3.33, 3.41, 3.20, 2.78],
+                            backgroundColor: 'rgba(146, 164, 210, 0.85)',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Engagement',
+                            data: [3.62, 3.79, 3.62, 3.39, 3.48, 3.32, 2.90, 3.06],
+                            backgroundColor: 'rgba(117, 53, 45, 0.75)',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { family: 'Inter', size: 12 },
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#3A1213',
+                            titleFont: { family: 'Inter', size: 13 },
+                            bodyFont: { family: 'Inter', size: 12 },
+                            padding: 12,
+                            cornerRadius: 8
+                        }
+                    },
+                    scales: {
+                        x: {
+                            min: 0,
+                            max: 5,
+                            title: {
+                                display: true,
+                                text: 'Rating (1-5 scale)',
+                                font: { family: 'Inter', size: 11 },
+                                color: 'rgba(255,255,255,0.6)'
+                            },
+                            grid: { color: 'rgba(255,255,255,0.1)' },
+                            ticks: { 
+                                font: { family: 'Inter', size: 11 },
+                                color: 'rgba(255,255,255,0.6)'
+                            }
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: { 
+                                font: { family: 'Inter', size: 12 },
+                                color: 'rgba(255,255,255,0.9)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

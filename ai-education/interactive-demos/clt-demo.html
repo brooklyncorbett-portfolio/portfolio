@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Limit Theorem Explorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #F1DDC4;
+            --rust: #75352D;
+            --dark-burgundy: #3A1213;
+            --soft-blue: #92A4D2;
+            --light-cream: #f7efe8;
+            --text-dark: #4b3f3a;
+            --sage: #7fa8a8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--cream);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: var(--dark-burgundy);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(58, 18, 19, 0.2);
+        }
+
+        .back-button:hover {
+            background: var(--rust);
+            transform: translateY(-2px);
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(58, 18, 19, 0.08);
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--cream);
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5em;
+            color: var(--dark-burgundy);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: var(--rust);
+            font-style: italic;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, rgba(146, 164, 210, 0.15), rgba(146, 164, 210, 0.08));
+            padding: 18px 22px;
+            border-radius: 12px;
+            border-left: 4px solid var(--soft-blue);
+            margin-bottom: 25px;
+            font-size: 0.95em;
+        }
+
+        .intro strong {
+            color: var(--dark-burgundy);
+        }
+
+        /* Main Layout: Controls Left, Charts Right */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Left Panel - Controls */
+        .controls-panel {
+            position: sticky;
+            top: 20px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3em;
+            color: var(--dark-burgundy);
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--rust);
+            border-radius: 2px;
+        }
+
+        .controls {
+            background: var(--light-cream);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .control-group {
+            margin-bottom: 18px;
+        }
+
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .control-label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark-burgundy);
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .distribution-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .dist-btn {
+            background: white;
+            border: 2px solid var(--cream);
+            padding: 10px 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85em;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .dist-btn:hover {
+            border-color: var(--soft-blue);
+            background: rgba(146, 164, 210, 0.1);
+        }
+
+        .dist-btn.active {
+            background: var(--soft-blue);
+            color: white;
+            border-color: var(--soft-blue);
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .slider-container input[type="range"] {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--cream);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--rust);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(117, 53, 45, 0.3);
+        }
+
+        .slider-container input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--rust);
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-value {
+            background: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            color: var(--rust);
+            font-size: 0.85em;
+            border: 2px solid var(--cream);
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .btn {
+            background: var(--rust);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: all 0.25s ease;
+        }
+
+        .btn:hover {
+            background: var(--dark-burgundy);
+            transform: translateY(-1px);
+        }
+
+        .btn.secondary {
+            background: white;
+            color: var(--rust);
+            border: 2px solid var(--rust);
+        }
+
+        .btn.secondary:hover {
+            background: var(--light-cream);
+        }
+
+        /* Stats in controls panel */
+        .stats-mini {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid var(--cream);
+        }
+
+        .stat-mini {
+            text-align: center;
+        }
+
+        .stat-mini-label {
+            font-size: 0.7em;
+            color: var(--rust);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .stat-mini-value {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Right Panel - Charts */
+        .charts-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .progress-text {
+            text-align: center;
+            padding: 12px 16px;
+            background: var(--cream);
+            border-radius: 8px;
+            font-weight: 500;
+            color: var(--dark-burgundy);
+            font-size: 0.9em;
+        }
+
+        .chart-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--cream);
+            position: relative;
+        }
+
+        .chart-label {
+            font-weight: 600;
+            color: var(--dark-burgundy);
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chart-label .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .chart-label .dot.population {
+            background: var(--soft-blue);
+        }
+
+        .chart-label .dot.samples {
+            background: var(--rust);
+        }
+
+        .chart-canvas-container {
+            height: 200px;
+            position: relative;
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, rgba(146, 164, 210, 0.15), rgba(146, 164, 210, 0.08));
+            border-left: 4px solid var(--soft-blue);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            display: none;
+        }
+
+        .insight-box.show {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .insight-box h4 {
+            color: var(--dark-burgundy);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .insight-box p {
+            color: var(--text-dark);
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        /* Teaching Note */
+        .teaching-note {
+            background: var(--light-cream);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+            border-top: 4px solid var(--rust);
+        }
+
+        .teaching-note h4 {
+            color: var(--dark-burgundy);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .teaching-note h4::before {
+            content: '💡';
+        }
+
+        .teaching-note p {
+            font-size: 0.9em;
+            line-height: 1.7;
+            color: var(--text-dark);
+        }
+
+        .teaching-note strong {
+            color: var(--rust);
+        }
+
+        /* Embed Section */
+        .embed-section {
+            background: linear-gradient(135deg, var(--cream) 0%, #f8ece0 100%);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 2px solid var(--rust);
+        }
+
+        .embed-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6em;
+            color: var(--dark-burgundy);
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .embed-section > p {
+            text-align: center;
+            margin-bottom: 18px;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .embed-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .embed-btn {
+            background: var(--rust);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .embed-btn:hover {
+            background: var(--dark-burgundy);
+            transform: translateY(-2px);
+        }
+
+        .embed-btn.secondary {
+            background: white;
+            color: var(--rust);
+            border: 2px solid var(--rust);
+        }
+
+        .embed-btn.secondary:hover {
+            background: var(--light-cream);
+        }
+
+        .embed-note {
+            margin-top: 18px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .embed-note strong {
+            color: var(--rust);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .controls-panel {
+                position: static;
+            }
+
+            .chart-canvas-container {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .demo-container {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .distribution-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">← Back to Interactive Demos</a>
+
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>Central Limit Theorem Explorer</h1>
+            <div class="subtitle">Watch sample means converge to a normal distribution</div>
+        </div>
+
+        <div class="intro">
+            <p><strong>The Central Limit Theorem</strong> states that regardless of a population's distribution shape, the distribution of sample means approaches a normal distribution as sample size increases. Adjust the controls and watch the magic happen in real time.</p>
+        </div>
+
+        <div class="main-layout">
+            <!-- Left: Controls -->
+            <div class="controls-panel">
+                <div class="section-title">Controls</div>
+                <div class="controls">
+                    <div class="control-group">
+                        <label class="control-label">1. Population Distribution</label>
+                        <div class="distribution-grid">
+                            <button class="dist-btn active" onclick="setDistribution('uniform', this)">Uniform</button>
+                            <button class="dist-btn" onclick="setDistribution('normal', this)">Normal</button>
+                            <button class="dist-btn" onclick="setDistribution('skewed', this)">Skewed</button>
+                            <button class="dist-btn" onclick="setDistribution('bimodal', this)">Bimodal</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">2. Sample Size (n)</label>
+                        <div class="slider-container">
+                            <input type="range" id="sampleSlider" min="2" max="50" value="5" oninput="updateSampleSize(this.value)">
+                            <span class="slider-value" id="sampleValue">n = 5</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">3. Draw Samples</label>
+                        <div class="button-group">
+                            <button class="btn" onclick="takeSample()">Draw 1</button>
+                            <button class="btn" onclick="takeMultiple(10)">Draw 10</button>
+                            <button class="btn" onclick="takeMultiple(100)">Draw 100</button>
+                            <button class="btn secondary" onclick="reset()">Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="stats-mini">
+                        <div class="stat-mini">
+                            <div class="stat-mini-label">Samples</div>
+                            <div class="stat-mini-value" id="count">0</div>
+                        </div>
+                        <div class="stat-mini">
+                            <div class="stat-mini-label">Mean</div>
+                            <div class="stat-mini-value" id="mean">—</div>
+                        </div>
+                        <div class="stat-mini">
+                            <div class="stat-mini-label">SE</div>
+                            <div class="stat-mini-value" id="stderr">—</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Charts -->
+            <div class="charts-panel">
+                <div class="progress-text" id="progress">
+                    No samples drawn yet. Click a button to begin!
+                </div>
+
+                <div class="chart-box">
+                    <div class="chart-label">
+                        <span class="dot population"></span>
+                        Population Distribution
+                    </div>
+                    <div class="chart-canvas-container">
+                        <canvas id="popChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-box">
+                    <div class="chart-label">
+                        <span class="dot samples"></span>
+                        Distribution of Sample Means
+                    </div>
+                    <div class="chart-canvas-container">
+                        <canvas id="sampChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="insight-box" id="insight">
+                    <h4>What You're Seeing</h4>
+                    <p id="insightText"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="teaching-note">
+            <h4>Why This Matters</h4>
+            <p>The Central Limit Theorem explains why we can use normal distribution tools (z-tests, t-tests) even when our population data isn't normally distributed. <strong>Try this:</strong> Start with the bimodal distribution, set n = 30, and draw 100 samples. Watch two peaks transform into one bell curve!</p>
+        </div>
+
+        <!-- Embed Section -->
+        <div class="embed-section">
+            <h3>Use This Demo in Your Teaching</h3>
+            <p>This demo is self-contained and can be embedded in Blackboard, Canvas, Moodle, or any website.</p>
+            
+            <div class="embed-buttons">
+                <button class="embed-btn" onclick="copyDemoCode()">Copy HTML Code</button>
+                <button class="embed-btn secondary" onclick="downloadDemo()">Download HTML File</button>
+            </div>
+            
+            <div class="embed-note">
+                <strong>How to use:</strong> Copy the code and paste it into your LMS's HTML editor, or download the file and upload it directly. The demo works completely offline with no external dependencies (except Chart.js CDN).
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script>
+        let distribution = 'uniform';
+        let sampleSize = 5;
+        let sampleMeans = [];
+        let population = [];
+        let popChart, sampChart;
+
+        const colors = {
+            softBlue: 'rgba(146, 164, 210, 0.7)',
+            softBlueBorder: '#92A4D2',
+            rust: 'rgba(117, 53, 45, 0.7)',
+            rustBorder: '#75352D'
+        };
+
+        function initializeDemo() {
+            if (typeof Chart === 'undefined') {
+                setTimeout(initializeDemo, 100);
+                return;
+            }
+            generatePopulation();
+            createCharts();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeDemo);
+        } else {
+            initializeDemo();
+        }
+
+        function setDistribution(type, btn) {
+            document.querySelectorAll('.dist-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            distribution = type;
+            reset();
+        }
+
+        function updateSampleSize(val) {
+            sampleSize = parseInt(val);
+            document.getElementById('sampleValue').textContent = `n = ${sampleSize}`;
+        }
+
+        function generatePopulation() {
+            population = [];
+            const size = 10000;
+
+            for (let i = 0; i < size; i++) {
+                if (distribution === 'uniform') {
+                    population.push(Math.random() * 100);
+                } else if (distribution === 'normal') {
+                    population.push(boxMuller(50, 15));
+                } else if (distribution === 'skewed') {
+                    population.push(Math.pow(Math.random(), 2) * 100);
+                } else if (distribution === 'bimodal') {
+                    population.push(Math.random() < 0.5 ? boxMuller(30, 8) : boxMuller(70, 8));
+                }
+            }
+
+            if (popChart) updatePopChart();
+        }
+
+        function boxMuller(mean, std) {
+            let u1 = Math.random();
+            let u2 = Math.random();
+            let z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+            return z * std + mean;
+        }
+
+        function takeSample() {
+            let sample = [];
+            for (let i = 0; i < sampleSize; i++) {
+                sample.push(population[Math.floor(Math.random() * population.length)]);
+            }
+            const mean = sample.reduce((a, b) => a + b, 0) / sample.length;
+            sampleMeans.push(mean);
+            updateDisplay();
+        }
+
+        function takeMultiple(n) {
+            for (let i = 0; i < n; i++) {
+                takeSample();
+            }
+        }
+
+        function updateDisplay() {
+            const count = sampleMeans.length;
+            document.getElementById('count').textContent = count;
+
+            if (count > 0) {
+                const meanOfMeans = sampleMeans.reduce((a, b) => a + b, 0) / count;
+                document.getElementById('mean').textContent = meanOfMeans.toFixed(1);
+
+                const variance = sampleMeans.reduce((sum, m) => sum + Math.pow(m - meanOfMeans, 2), 0) / count;
+                document.getElementById('stderr').textContent = Math.sqrt(variance).toFixed(1);
+
+                let progress = '';
+                if (count < 10) progress = `${count} sample${count > 1 ? 's' : ''} drawn. Keep going to see the pattern!`;
+                else if (count < 30) progress = `${count} samples. The pattern is emerging...`;
+                else if (count < 100) progress = `${count} samples. The bell curve is taking shape!`;
+                else progress = `${count} samples. Beautiful CLT demonstration!`;
+                document.getElementById('progress').textContent = progress;
+
+                if (count >= 30) {
+                    const insight = document.getElementById('insight');
+                    insight.classList.add('show');
+                    
+                    const distNames = {
+                        'uniform': 'flat (uniform)',
+                        'normal': 'already normal',
+                        'skewed': 'heavily skewed',
+                        'bimodal': 'bimodal (two peaks)'
+                    };
+                    
+                    let text = `With ${count} samples of n = ${sampleSize}, you're seeing the CLT in action! `;
+                    text += `Even though your population is ${distNames[distribution]}, the sample means form a bell curve. `;
+                    
+                    if (sampleSize >= 30) {
+                        text += `With n ≥ 30, the effect is strong—this is why 30 is the common rule of thumb.`;
+                    } else {
+                        text += `Try n ≥ 30 for an even stronger effect.`;
+                    }
+                    document.getElementById('insightText').textContent = text;
+                }
+            }
+
+            if (sampChart) updateSampChart();
+        }
+
+        function reset() {
+            sampleMeans = [];
+            generatePopulation();
+            document.getElementById('count').textContent = '0';
+            document.getElementById('mean').textContent = '—';
+            document.getElementById('stderr').textContent = '—';
+            document.getElementById('progress').textContent = 'No samples drawn yet. Click a button to begin!';
+            document.getElementById('insight').classList.remove('show');
+            if (sampChart) updateSampChart();
+        }
+
+        function createCharts() {
+            const popCtx = document.getElementById('popChart').getContext('2d');
+            const sampCtx = document.getElementById('sampChart').getContext('2d');
+
+            popChart = new Chart(popCtx, {
+                type: 'bar',
+                data: { 
+                    labels: [], 
+                    datasets: [{ 
+                        data: [], 
+                        backgroundColor: colors.softBlue, 
+                        borderColor: colors.softBlueBorder, 
+                        borderWidth: 1,
+                        borderRadius: 2
+                    }] 
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { 
+                        y: { 
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            ticks: { display: false }
+                        },
+                        x: { 
+                            display: true,
+                            grid: { display: false },
+                            ticks: { 
+                                maxTicksLimit: 6,
+                                font: { size: 10 }
+                            }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            sampChart = new Chart(sampCtx, {
+                type: 'bar',
+                data: { 
+                    labels: [], 
+                    datasets: [{ 
+                        data: [], 
+                        backgroundColor: colors.rust, 
+                        borderColor: colors.rustBorder, 
+                        borderWidth: 1,
+                        borderRadius: 2
+                    }] 
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { 
+                        y: { 
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            ticks: { display: false }
+                        },
+                        x: { 
+                            display: true,
+                            grid: { display: false },
+                            ticks: { 
+                                maxTicksLimit: 6,
+                                font: { size: 10 }
+                            }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            updatePopChart();
+        }
+
+        function updatePopChart() {
+            const bins = 25;
+            const min = 0;
+            const max = 100;
+            const width = (max - min) / bins;
+            const hist = new Array(bins).fill(0);
+            const labels = [];
+
+            for (let i = 0; i < bins; i++) {
+                labels.push((min + i * width + width/2).toFixed(0));
+            }
+
+            population.forEach(val => {
+                const clampedVal = Math.max(min, Math.min(val, max - 0.001));
+                const idx = Math.floor((clampedVal - min) / width);
+                if (idx >= 0 && idx < bins) hist[idx]++;
+            });
+
+            popChart.data.labels = labels;
+            popChart.data.datasets[0].data = hist;
+            popChart.update('none');
+        }
+
+        function updateSampChart() {
+            if (sampleMeans.length === 0) {
+                sampChart.data.labels = [];
+                sampChart.data.datasets[0].data = [];
+                sampChart.update('none');
+                return;
+            }
+
+            const bins = 25;
+            // Use fixed range centered around expected mean (50)
+            const min = 0;
+            const max = 100;
+            const width = (max - min) / bins;
+            const hist = new Array(bins).fill(0);
+            const labels = [];
+
+            for (let i = 0; i < bins; i++) {
+                labels.push((min + i * width + width/2).toFixed(0));
+            }
+
+            sampleMeans.forEach(val => {
+                const clampedVal = Math.max(min, Math.min(val, max - 0.001));
+                const idx = Math.floor((clampedVal - min) / width);
+                if (idx >= 0 && idx < bins) hist[idx]++;
+            });
+
+            sampChart.data.labels = labels;
+            sampChart.data.datasets[0].data = hist;
+            sampChart.update('none');
+        }
+
+        // Embed functions
+        function copyDemoCode() {
+            let code = document.documentElement.outerHTML;
+            code = code.replace(/<a[^>]*class="back-button"[^>]*>.*?<\/a>/gs, '');
+            code = code.replace(/<div[^>]*class="embed-section"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*(?=<script>)/g, '</div>');
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.style.background = 'var(--sage)';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            }).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = code;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('Code copied to clipboard!');
+            });
+        }
+
+        function downloadDemo() {
+            let code = document.documentElement.outerHTML;
+            code = code.replace(/<a[^>]*class="back-button"[^>]*>.*?<\/a>/gs, '');
+            code = code.replace(/<div[^>]*class="embed-section"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*(?=<script>)/g, '</div>');
+            
+            const blob = new Blob([code], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'clt-explorer.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

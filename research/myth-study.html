@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Tutors vs. Tenacious Myths - Research on using AI dialogue to correct psychology misconceptions">
+    <title>AI Tutors vs. Tenacious Myths | Brooklyn Corbett</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/myth-study-v2.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">Brooklyn Corbett</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="index.html" class="active">Research Projects</a></li>
+                <li><a href="../ai-education/index.html">AI in Education</a></li>
+                <li><a href="../data-viz.html">Data Visualisation</a></li>
+                <li><a href="../rigour.html">Open Science</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section - Full viewport, dramatic -->
+        <section class="study-hero">
+            <a href="index.html" class="back-link">← Research Projects</a>
+            
+            <div class="hero-content">
+                <div class="hero-text">
+                    <p class="hero-eyebrow">AI Interventions</p>
+                    <h1>AI Tutors <span class="vs">vs.</span> Stubborn Myths</h1>
+                    <p class="hero-subtitle">Can a conversation change your mind?</p>
+                </div>
+                
+                <div class="hero-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Journal</span>
+                        <span class="meta-value">Computers in Human Behavior</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Sample</span>
+                        <span class="meta-value">N = 375</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Design</span>
+                        <span class="meta-value">Randomised Controlled Trial</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator">
+                <span>Scroll to explore</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- The Problem -->
+        <section class="content-section bg-cream">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <span class="section-number">01</span>
+                    <h2>The Problem</h2>
+                </div>
+                
+                <div class="two-column reveal">
+                    <div class="column-text">
+                        <p class="lead-text">
+                            Psychology misconceptions persist despite decades of contradictory evidence. 
+                            They feel intuitively correct, align with everyday experience, and resist 
+                            traditional correction methods.
+                        </p>
+                        <p>
+                            From "learning styles" to "we only use 10% of our brain," these myths 
+                            spread through classrooms, workplaces, and popular culture—shaping how 
+                            people think about learning, memory, and the mind.
+                        </p>
+                    </div>
+                    <div class="column-aside">
+                        <div class="stat-callout">
+                            <span class="stat-number">16</span>
+                            <span class="stat-label">psychology myths tested</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Myths Grid -->
+                <div class="myths-showcase reveal">
+                    <h3>The myths we tested</h3>
+                    <div class="myths-grid">
+                        <div class="myth-item">Learning styles improve outcomes</div>
+                        <div class="myth-item">Subliminal ads control behaviour</div>
+                        <div class="myth-item">Body language reveals liars</div>
+                        <div class="myth-item">Left-brain vs right-brain thinking</div>
+                        <div class="myth-item">Hypnosis unlocks memories</div>
+                        <div class="myth-item">Mozart makes babies smarter</div>
+                        <div class="myth-item">10,000 hours creates expertise</div>
+                        <div class="myth-item">We only use 10% of our brain</div>
+                        <div class="myth-item">Dreams reveal hidden truths</div>
+                        <div class="myth-item">Polygraphs detect lies</div>
+                        <div class="myth-item">Brain cells can't regenerate</div>
+                        <div class="myth-item">Handwriting reveals personality</div>
+                        <div class="myth-item">Inkblots diagnose disorders</div>
+                        <div class="myth-item">Memory works like a video</div>
+                        <div class="myth-item">Full moon affects behaviour</div>
+                        <div class="myth-item">Astrology predicts personality</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Experiment -->
+        <section class="content-section bg-white">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <span class="section-number">02</span>
+                    <h2>The Experiment</h2>
+                </div>
+
+                <p class="section-intro reveal">
+                    We recruited participants who strongly believed in specific psychology myths, 
+                    then randomly assigned them to one of three conditions:
+                </p>
+
+                <div class="conditions-grid reveal">
+                    <div class="condition-card featured">
+                        <div class="condition-number">1</div>
+                        <h3>AI Dialogue</h3>
+                        <p>Three-round personalised conversation with Claude, targeting the participant's specific beliefs and reasoning.</p>
+                        <span class="condition-n">n = 125</span>
+                    </div>
+                    
+                    <div class="condition-card">
+                        <div class="condition-number">2</div>
+                        <h3>Textbook Refutation</h3>
+                        <p>Evidence-based passage addressing the misconception. Standard corrective information in textbook format.</p>
+                        <span class="condition-n">n = 125</span>
+                    </div>
+                    
+                    <div class="condition-card">
+                        <div class="condition-number">3</div>
+                        <h3>Control Chat</h3>
+                        <p>Interactive AI conversation on unrelated topics. Same format as Condition 1, different content.</p>
+                        <span class="condition-n">n = 125</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Conversation -->
+        <section class="content-section bg-dark">
+            <div class="section-inner">
+                <div class="section-header light reveal">
+                    <span class="section-number">03</span>
+                    <h2>Inside the Dialogue</h2>
+                </div>
+
+                <p class="section-intro light reveal">
+                    Here's a real exchange from the study. A teacher with strong beliefs about 
+                    learning styles engages with the AI tutor:
+                </p>
+
+                <div class="conversation-showcase reveal">
+                    <div class="conversation-window">
+                        <div class="window-header">
+                            <span class="window-dot"></span>
+                            <span class="window-dot"></span>
+                            <span class="window-dot"></span>
+                            <span class="window-title">AI Dialogue Session</span>
+                        </div>
+                        
+                        <div class="messages">
+                            <div class="message user">
+                                <div class="message-meta">
+                                    <span class="message-author">Participant</span>
+                                    <span class="belief-badge">Belief: 100/100</span>
+                                </div>
+                                <p>I think this is true as I have a background in teaching and have recognised the different ways students learn. There seems to be a variance of ways that knowledge can be kept with them versus the knowledge they forgot. I have worked alongside all ages and it is dependent on how the information is presented in different ways.</p>
+                            </div>
+                            
+                            <div class="message ai">
+                                <div class="message-meta">
+                                    <span class="message-author">Claude</span>
+                                </div>
+                                <p>Your observations about students' different reactions to various presentation methods are certainly valid. While people do have preferences for how information is presented, research has challenged the idea that matching teaching to preferred styles significantly improves outcomes.</p>
+                                <p>A comprehensive review by Pashler et al. (2008) found no strong evidence that presenting information in a person's preferred style leads to better learning. The most effective methods often depend more on the content being taught and prior knowledge than individual style preferences.</p>
+                            </div>
+                            
+                            <div class="message user">
+                                <div class="message-meta">
+                                    <span class="message-author">Participant</span>
+                                </div>
+                                <p>I would be inclined to say that unless the same study is conducted on the same people over a specific period of time on a topic they have zero initial knowledge on, we cannot yet determine whether they are learning because of their preferred method or because of what is being taught.</p>
+                            </div>
+                            
+                            <div class="message ai">
+                                <div class="message-meta">
+                                    <span class="message-author">Claude</span>
+                                </div>
+                                <p>You raise excellent points—your critical approach to evaluating research is commendable. Numerous studies have attempted to address these variables. Kratzig and Arbuthnott (2006) tested students across multiple learning domains and found little correlation between learning style preferences and actual learning performance.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="conversation-note">
+                        <p>After this exchange, the participant's belief dropped from <strong>100</strong> to <strong>45</strong> out of 100.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results -->
+        <section class="content-section bg-cream">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <span class="section-number">04</span>
+                    <h2>The Results</h2>
+                </div>
+
+                <div class="results-layout reveal">
+                    <div class="chart-container">
+                        <canvas id="resultsChart"></canvas>
+                    </div>
+                    
+                    <div class="results-insights">
+                        <div class="insight-card">
+                            <h4>Immediate Impact</h4>
+                            <p>AI dialogue produced the largest immediate reduction in belief—<strong>39 points</strong> vs 31 for textbook—with both significantly outperforming control.</p>
+                        </div>
+                        <div class="insight-card">
+                            <h4>Long-term Pattern</h4>
+                            <p>By 2 months, AI and textbook conditions converged. The AI advantage fades without reinforcement, suggesting the need for <strong>spaced follow-up</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Engagement Stats -->
+                <div class="engagement-section reveal">
+                    <h3>Beyond belief change</h3>
+                    <p>AI dialogue generated significantly higher engagement and confidence:</p>
+                    
+                    <div class="engagement-bars">
+                        <div class="bar-group">
+                            <span class="bar-label">Engagement</span>
+                            <div class="bar-track">
+                                <div class="bar ai-bar" data-value="85">
+                                    <span class="bar-value">85%</span>
+                                    <span class="bar-name">AI</span>
+                                </div>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar text-bar" data-value="75">
+                                    <span class="bar-value">75%</span>
+                                    <span class="bar-name">Text</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bar-group">
+                            <span class="bar-label">Confidence in new belief</span>
+                            <div class="bar-track">
+                                <div class="bar ai-bar" data-value="76">
+                                    <span class="bar-value">76%</span>
+                                    <span class="bar-name">AI</span>
+                                </div>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar text-bar" data-value="63">
+                                    <span class="bar-value">63%</span>
+                                    <span class="bar-name">Text</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Takeaway -->
+        <section class="content-section bg-burgundy">
+            <div class="section-inner">
+                <div class="takeaway-block reveal">
+                    <span class="takeaway-label">Key Takeaway</span>
+                    <p class="takeaway-text">
+                        Personalised AI dialogue is a powerful <em>accelerator</em> for breaking down 
+                        stubborn myths—it forces active reasoning and creates cognitive conflict that's 
+                        hard to dismiss. But it's not a one-and-done solution. <strong>Lasting change 
+                        requires spaced reinforcement</strong> to sustain the initial breakthrough.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paper Link -->
+        <section class="content-section bg-white paper-section">
+            <div class="section-inner">
+                <div class="paper-block reveal">
+                    <h3>Read the full study</h3>
+                    <div class="citation">
+                        <p><strong>Corbett, B. J., & Tangen, J. M. (2026).</strong> AI tutors vs. tenacious myths: Evidence from personalised dialogue interventions in education. <em>Computers in Human Behavior, 175</em>, 108828.</p>
+                    </div>
+                    <a href="https://doi.org/10.1016/j.chb.2025.108828" target="_blank" class="paper-button">
+                        Access Paper →
+                    </a>
+                </div>
+            </div>
+        </section>
+  <footer class="study-footer">
+            <a href="index.html" class="footer-back-link">← Back to Research Projects</a>
+        </footer>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="../js/global.js"></script>
+    <script>
+        // Scroll reveal animations
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Animate bars on scroll
+        const barElements = document.querySelectorAll('.bar');
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const value = entry.target.dataset.value;
+                    entry.target.style.width = value + '%';
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        barElements.forEach(bar => {
+            bar.style.width = '0%';
+            barObserver.observe(bar);
+        });
+
+        // Results Chart
+        const ctx = document.getElementById('resultsChart');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Pre-Test', 'Immediate', '10 Days', '2 Months'],
+                    datasets: [
+                        {
+                            label: 'AI Dialogue',
+                            data: [91, 52, 50, 57],
+                            borderColor: '#92A4D2',
+                            backgroundColor: 'rgba(146, 164, 210, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            pointRadius: 6,
+                            pointBackgroundColor: '#92A4D2',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            fill: true
+                        },
+                        {
+                            label: 'Textbook',
+                            data: [93, 62, 64, 66],
+                            borderColor: '#75352D',
+                            backgroundColor: 'rgba(117, 53, 45, 0.05)',
+                            borderWidth: 3,
+                            tension: 0.3,
+                            pointRadius: 6,
+                            pointBackgroundColor: '#75352D',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            fill: true
+                        },
+                        {
+                            label: 'Control',
+                            data: [89, 85, 78, 75],
+                            borderColor: '#999',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            tension: 0.3,
+                            pointRadius: 4,
+                            pointBackgroundColor: '#999',
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: 'Inter', size: 13 },
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#3A1213',
+                            titleFont: { family: 'Inter', size: 13 },
+                            bodyFont: { family: 'Inter', size: 12 },
+                            padding: 12,
+                            cornerRadius: 8
+                        }
+                    },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Belief in Myth (0-100)',
+                                font: { family: 'Inter', size: 12, weight: '500' },
+                                color: '#666'
+                            },
+                            grid: { color: 'rgba(0,0,0,0.06)' },
+                            ticks: { font: { family: 'Inter', size: 11 } }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: 'Inter', size: 12 } }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

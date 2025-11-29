@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Open Science practices - transparent, reproducible research">
+    <title>Open Science | Brooklyn Corbett</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/global.css">
+    
+    <style>
+        :root {
+            --cream: #F1DDC4;
+            --rust: #75352D;
+            --dark-burgundy: #3A1213;
+            --soft-blue: #92A4D2;
+            --light-cream: #f7efe8;
+            --text-dark: #4b3f3a;
+        }
+
+        body {
+            background: var(--cream);
+        }
+
+        /* Hero */
+        .page-hero {
+            padding: 100px 40px 80px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--rust);
+            margin-bottom: 16px;
+        }
+
+        .page-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .hero-intro {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            max-width: 680px;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 40px 80px;
+        }
+
+        /* Section */
+        .content-section {
+            margin-bottom: 70px;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--soft-blue);
+            margin-bottom: 12px;
+        }
+
+        .content-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            margin-bottom: 20px;
+            line-height: 1.25;
+        }
+
+        .content-section p {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        /* OSF Section */
+        .osf-section {
+            background: white;
+            border-radius: 16px;
+            padding: 45px;
+            margin: 40px 0;
+            box-shadow: 0 4px 25px rgba(58, 18, 19, 0.06);
+        }
+
+        .osf-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .osf-header h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            margin: 0;
+        }
+
+        .osf-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--soft-blue);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(146, 164, 210, 0.35);
+        }
+
+        .osf-link:hover {
+            background: #7b91c4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(146, 164, 210, 0.45);
+        }
+
+        .osf-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .osf-item {
+            padding: 20px 0;
+            border-top: 2px solid var(--cream);
+        }
+
+        .osf-item h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--dark-burgundy);
+            margin-bottom: 8px;
+        }
+
+        .osf-item p {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        /* Quote */
+        .quote-block {
+            border-left: 4px solid var(--soft-blue);
+            padding-left: 28px;
+            margin: 35px 0;
+        }
+
+        .quote-block p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--dark-burgundy);
+            margin: 0;
+        }
+
+        .quote-block cite {
+            display: block;
+            margin-top: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-style: normal;
+            color: var(--rust);
+        }
+
+        /* LLM Section */
+        .llm-section {
+            background: var(--light-cream);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 40px;
+            border-left: 5px solid var(--rust);
+        }
+
+        .llm-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            margin-bottom: 16px;
+        }
+
+        .llm-section p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .llm-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .coming-soon {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--rust);
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 80px 25px 60px;
+            }
+
+            .page-hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .main-content {
+                padding: 0 25px 60px;
+            }
+
+            .osf-section {
+                padding: 30px 25px;
+            }
+
+            .osf-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .osf-items {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .osf-item {
+                padding: 18px 0;
+            }
+
+            .quote-block p {
+                font-size: 1.3rem;
+            }
+
+            .llm-section {
+                padding: 30px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">Brooklyn Corbett</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="research/index.html">Research Projects</a></li>
+                <li><a href="ai-education/index.html">AI in Education</a></li>
+                <li><a href="data-viz.html">Data Visualisation</a></li>
+                <li><a href="rigour.html" class="active">Open Science</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <section class="page-hero">
+            <p class="hero-eyebrow">Research Practices</p>
+            <h1>Open Science</h1>
+            <p class="hero-intro">
+                I believe research should be transparent enough that others can verify it, 
+                reproducible enough that others can build on it, and accessible enough 
+                that it actually reaches the people who need it.
+            </p>
+        </section>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            
+            <!-- Philosophy Section -->
+            <section class="content-section">
+                <p class="section-label">01 — Approach</p>
+                <h2>Why Open Science Matters</h2>
+                <p>
+                    Psychology has faced a replication crisis that shook confidence in published findings. 
+                    Many "established" effects failed to replicate when tested rigorously. The response 
+                    has been a shift toward practices that make research more transparent from the start—not 
+                    just at publication.
+                </p>
+                <p>
+                    For me, this means pre-registering studies before collecting data, sharing analysis 
+                    code so others can check my work, and making materials available so studies can 
+                    actually be replicated. It's not about perfection—it's about honesty.
+                </p>
+
+                <div class="quote-block">
+                    <p>"The first principle is that you must not fool yourself—and you are the easiest person to fool."</p>
+                    <cite>— Richard Feynman</cite>
+                </div>
+            </section>
+
+            <!-- OSF Section -->
+            <div class="osf-section">
+                <div class="osf-header">
+                    <h3>Open Science Framework</h3>
+                    <a href="https://osf.io/cd8mq/" target="_blank" class="osf-link">
+                        View OSF Project →
+                    </a>
+                </div>
+                
+                <div class="osf-items">
+                    <div class="osf-item">
+                        <h4>Pre-registration</h4>
+                        <p>Hypotheses, methods, and analysis plans registered before data collection to prevent p-hacking and HARKing.</p>
+                    </div>
+                    <div class="osf-item">
+                        <h4>Analysis Code</h4>
+                        <p>R scripts and computational notebooks shared openly so results can be verified and methods adapted.</p>
+                    </div>
+                    <div class="osf-item">
+                        <h4>Materials & Data</h4>
+                        <p>Study materials, instruments, and anonymised datasets made available where ethically appropriate.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LLM Section -->
+            <section class="content-section">
+                <p class="section-label">02 — Emerging Practices</p>
+                <h2>Transparent Use of LLMs</h2>
+                <p>
+                    Large language models are increasingly used in research—for coding assistance, 
+                    literature synthesis, and even qualitative analysis. This creates new questions 
+                    about transparency: What was the model's role? How were outputs validated? 
+                    Could the analysis be reproduced?
+                </p>
+                
+                <div class="llm-section">
+                    <h3>My Approach</h3>
+                    <p>
+                        When I use LLMs in research, I document the model, version, and prompts used. 
+                        For qualitative analysis, I've developed a three-stage validation approach that 
+                        combines LLM-assisted coding with human verification—balancing efficiency with rigour.
+                    </p>
+                    <p>
+                        This includes being transparent about this very website, which was built with 
+                        substantial AI assistance. The goal isn't to hide the tools—it's to be clear about 
+                        how they were used and what human judgment was applied.
+                    </p>
+                    <span class="coming-soon">Detailed methodology guide coming soon</span>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy;2025 Brooklyn Corbett</p>
+    </footer>
+
+    <!-- JavaScript for mobile nav -->
+    <script>
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

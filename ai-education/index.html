@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI in Education - AI-powered learning tools grounded in cognitive psychology">
+    <title>AI in Education | Brooklyn Corbett</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/ai-education.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">Brooklyn Corbett</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../research/index.html">Research Projects</a></li>
+                <li><a href="index.html" class="active">AI in Education</a></li>
+                <li><a href="../data-viz.html">Data Visualisation</a></li>
+                <li><a href="../rigour.html">Open Science</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="ai-education-section">
+            <div class="ai-education-wrapper">
+
+                <!-- LEFT COLUMN -->
+                <div class="ai-education-left">
+                    <p class="ai-eyebrow">AI-powered learning tools</p>
+                    <h1 class="ai-title">AI in Education</h1>
+
+                    <p class="ai-intro-text">
+                        I create AI-powered learning tools grounded in cognitive and educational psychology.
+                        These tools combine evidence-based principles, data-informed design, and practical AI
+                        capabilities to support deeper student learning. They have been adapted across courses
+                        in psychology, education, nutrition science, and computer science at the University of
+                        Queensland.
+                    </p>
+
+                    <p class="ai-intro-text">
+                        This page showcases some of these tools and includes practical guides for educators
+                        wanting to design or adopt AI-supported learning experiences.
+                    </p>
+                </div>
+
+                <!-- RIGHT COLUMN: CARDS -->
+                <div class="ai-education-right">
+
+                    <!-- CARD 1: Interactive Demos -->
+                    <div class="ai-row">
+                        <div class="ai-row-text">
+                            <h3>Building Interactive Demos</h3>
+                            <p>
+                                Self-contained HTML simulations that embed seamlessly into LMS platforms like Blackboard. 
+                                Explore cognitive psychology experiments, statistical concepts, and developmental milestones 
+                                through hands-on interaction.
+                            </p>
+                            <div class="ai-row-meta">
+                                <span>🎯 LMS-ready</span>
+                                <span>📋 Copy & embed</span>
+                            </div>
+                        </div>
+                        <a href="interactive-demos/index.html" class="ai-row-button">View examples & guide →</a>
+                    </div>
+
+                    <!-- CARD 2: Socratic Tutor -->
+                    <div class="ai-row">
+                        <div class="ai-row-text">
+                            <h3>Build a Socratic AI Tutor</h3>
+                            <p>
+                                Create an AI study partner that guides students through dialogue rather than giving 
+                                direct answers. Uses Socratic questioning to promote deeper learning and critical thinking. 
+                                Complete setup guide for Zapier.
+                            </p>
+                            <div class="ai-row-meta">
+                                <span>⏱️ 30 min setup</span>
+                                <span>💻 No coding</span>
+                                <span>💰 Free tier</span>
+                            </div>
+                        </div>
+                        <a href="socratic-tutor.html" class="ai-row-button">View guide →</a>
+                    </div>
+
+                    <!-- CARD 3: Client Simulation -->
+                    <div class="ai-row">
+                        <div class="ai-row-text">
+                            <h3>AI Client Simulation</h3>
+                            <p>
+                                Build realistic conversational AI clients for developing communication skills in psychology,
+                                nutrition, counselling, and other client-facing professions. Uses ElevenLabs for voice 
+                                interaction with customisable personas.
+                            </p>
+                            <div class="ai-row-meta">
+                                <span>🎙️ Voice-enabled</span>
+                                <span>🎭 Custom personas</span>
+                            </div>
+                        </div>
+                        <a href="client-simulation.html" class="ai-row-button">View guide →</a>
+                    </div>
+
+                    <!-- CARD 4: More Resources -->
+                    <div class="ai-row">
+                        <div class="ai-row-text">
+                            <h3>More Resources for Educators</h3>
+                            <p>
+                                Additional AI teaching resources, activities, and examples to extend your
+                                learning and practice. Includes prompt templates, assessment guides, and case 
+                                studies from various disciplines.
+                            </p>
+                        </div>
+                        <span class="ai-soon">Coming soon</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy;2025 Brooklyn Corbett</p>
+    </footer>
+
+    <!-- JavaScript for mobile nav -->
+    <script>
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
