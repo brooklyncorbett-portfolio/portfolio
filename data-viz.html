@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Data Visualisation Gallery - R code for transparent, publication-ready figures">
+    <meta name="description" content="Data Visualisation Gallery - Research figures, methods diagrams, and infographics">
     <title>Data Visualisation | Brooklyn Corbett</title>
     
     <!-- Google Fonts -->
@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/global.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
         :root {
@@ -20,14 +19,9 @@
             --rust: #75352D;
             --dark-burgundy: #3A1213;
             --soft-blue: #92A4D2;
-            --expert-purple: #7B5EA7;
-            --novice-gold: #E9B44C;
-            --code-bg: #1e1e2e;
-            --code-text: #cdd6f4;
-            --code-comment: #6c7086;
-            --code-string: #a6e3a1;
-            --code-keyword: #cba6f7;
-            --code-function: #89b4fa;
+            --light-cream: #f7efe8;
+            --text-dark: #4b3f3a;
+            --sage: #7fa8a8;
         }
 
         main {
@@ -36,14 +30,16 @@
             margin-top: 0;
         }
 
-        /* Hero Section - Split Layout */
+        /* ============================================
+           HERO SECTION
+           ============================================ */
         .viz-hero {
             min-height: 90vh;
             background: linear-gradient(135deg, var(--dark-burgundy) 0%, #4a1a1b 50%, #2a0d0e 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 6rem 4rem 4rem;
+            padding: 6rem 4rem 6rem;
             position: relative;
         }
 
@@ -51,20 +47,22 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            max-width: 1300px;
+            max-width: 1200px;
             width: 100%;
             align-items: center;
         }
 
         .hero-image-container {
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+            max-height: 380px;
         }
 
         .hero-image-container img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
         }
 
@@ -82,14 +80,14 @@
         }
 
         .viz-hero-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             color: rgba(255, 255, 255, 0.85);
             line-height: 1.7;
         }
 
         .scroll-indicator {
             position: absolute;
-            bottom: 5rem;
+            bottom: 2.5rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -107,7 +105,530 @@
             50% { transform: translateX(-50%) translateY(8px); }
         }
 
-        /* Lightbox */
+        /* ============================================
+           SECTION STYLING
+           ============================================ */
+        .content-section {
+            padding: 5rem 2rem;
+        }
+
+        .content-section.bg-cream {
+            background: var(--cream);
+        }
+
+        .content-section.bg-white {
+            background: white;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-number {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--soft-blue);
+            letter-spacing: 0.15em;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .section-header h2::after {
+            display: none;
+        }
+
+        .section-tagline {
+            font-size: 1.15rem;
+            color: var(--rust);
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .section-intro {
+            font-size: 1rem;
+            color: #5a4a42;
+            max-width: 700px;
+            margin: 1rem auto 0;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           PHILOSOPHY SECTION
+           ============================================ */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+        }
+
+        .philosophy-card {
+            background: white;
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .philosophy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .philosophy-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--soft-blue), #7b8fc7);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin: 0 auto 1rem;
+        }
+
+        .philosophy-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--dark-burgundy);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .philosophy-card p {
+            font-size: 0.9rem;
+            color: #5a4a42;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* ============================================
+           GALLERY GRIDS
+           ============================================ */
+        .viz-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .viz-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .viz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .viz-card-image {
+            width: 100%;
+            height: 200px;
+            background: var(--light-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .viz-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .viz-card-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--rust);
+            opacity: 0.5;
+        }
+
+        .viz-card-placeholder span:first-child {
+            font-size: 2.5rem;
+        }
+
+        .viz-card-placeholder span:last-child {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .viz-card-content {
+            padding: 1.25rem;
+        }
+
+        .viz-card-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--dark-burgundy);
+            margin: 0 0 0.35rem 0;
+        }
+
+        .viz-card-content p {
+            font-size: 0.85rem;
+            color: #5a4a42;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .viz-card-tag {
+            display: inline-block;
+            background: rgba(146, 164, 210, 0.15);
+            color: var(--soft-blue);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            margin-top: 0.75rem;
+        }
+
+        /* ============================================
+           CODE BLOCKS FOR RESEARCH VIZ
+           ============================================ */
+        .viz-card-expanded {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+        }
+
+        .viz-card-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .viz-card-image-large {
+            height: 300px;
+            background: var(--light-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .viz-card-image-large:hover {
+            opacity: 0.9;
+        }
+
+        .viz-card-image-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .viz-card-info {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--light-cream) 0%, white 100%);
+        }
+
+        .viz-card-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            margin: 0 0 0.75rem 0;
+        }
+
+        .viz-card-info p {
+            font-size: 0.95rem;
+            color: #5a4a42;
+            line-height: 1.6;
+            margin: 0 0 1rem 0;
+        }
+
+        .viz-card-info .viz-card-tag {
+            align-self: flex-start;
+        }
+
+        /* Code Toggle */
+        .code-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1e1e2e;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .code-toggle:hover {
+            background: #2a2a3e;
+        }
+
+        .code-toggle-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #cdd6f4;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .code-toggle-left svg {
+            width: 20px;
+            height: 20px;
+            color: var(--soft-blue);
+        }
+
+        .code-toggle-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .code-expand-icon {
+            color: #cdd6f4;
+            font-size: 0.85rem;
+            transition: transform 0.3s;
+        }
+
+        .code-toggle.expanded .code-expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .copy-code-btn {
+            background: var(--soft-blue);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .copy-code-btn:hover {
+            background: #7b8fc7;
+            transform: translateY(-1px);
+        }
+
+        .copy-code-btn.copied {
+            background: var(--sage);
+        }
+
+        /* Collapsible Code */
+        .code-collapsible {
+            display: none;
+            background: #1e1e2e;
+        }
+
+        .code-collapsible.show {
+            display: block;
+        }
+
+        .code-block {
+            padding: 1.5rem;
+            overflow-x: auto;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.8rem;
+            line-height: 1.7;
+            color: #cdd6f4;
+            white-space: pre;
+        }
+
+        /* Syntax highlighting */
+        .code-block .comment { color: #6c7086; font-style: italic; }
+        .code-block .string { color: #a6e3a1; }
+        .code-block .keyword { color: #cba6f7; }
+        .code-block .function { color: #89b4fa; }
+        .code-block .number { color: #fab387; }
+        .code-block .operator { color: #89dceb; }
+
+        /* ============================================
+           INFOGRAPHICS SECTION
+           ============================================ */
+        .infographics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .infographic-card {
+            background: linear-gradient(135deg, var(--soft-blue), #7b8fc7);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(146, 164, 210, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .infographic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px rgba(146, 164, 210, 0.4);
+        }
+
+        .infographic-card-image {
+            width: 100%;
+            height: 220px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .infographic-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .infographic-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            opacity: 0.6;
+        }
+
+        .infographic-placeholder span:first-child {
+            font-size: 2.5rem;
+        }
+
+        .infographic-placeholder span:last-child {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .infographic-card-content {
+            padding: 1rem 1.25rem;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .infographic-card-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+        }
+
+        .tool-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(146, 164, 210, 0.2);
+            color: var(--soft-blue);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-top: 1rem;
+        }
+
+        /* ============================================
+           LLM TIP SECTION
+           ============================================ */
+        .tip-box {
+            background: linear-gradient(135deg, rgba(146, 164, 210, 0.15), rgba(146, 164, 210, 0.05));
+            border: 2px solid var(--soft-blue);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tip-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tip-icon {
+            font-size: 2rem;
+        }
+
+        .tip-header h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--dark-burgundy);
+            margin: 0;
+        }
+
+        .tip-box p {
+            font-size: 1.05rem;
+            color: #5a4a42;
+            line-height: 1.7;
+            margin: 0 0 1rem 0;
+        }
+
+        .tip-box ol {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .tip-box li {
+            font-size: 1rem;
+            color: #5a4a42;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .tip-warning {
+            background: rgba(117, 53, 45, 0.1);
+            border-left: 4px solid var(--rust);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1.5rem;
+        }
+
+        .tip-warning h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--rust);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .tip-warning p {
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* ============================================
+           LIGHTBOX
+           ============================================ */
         .lightbox-overlay {
             display: none;
             position: fixed;
@@ -150,720 +671,25 @@
             opacity: 1;
         }
 
-        /* Smooth Section Transitions with Rounded Corners */
-        .roll-section {
-            position: relative;
-            border-radius: 32px 32px 0 0;
-            margin-top: -32px;
-            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.08);
-        }
-
-        .roll-section:first-of-type {
-            margin-top: 0;
-        }
-
-        /* Hero */
-        .viz-hero {
-            position: relative;
-            z-index: 0;
-            min-height: 85vh;
-            padding-bottom: 4rem;
-        }
-
-        /* Philosophy Section - Clean & Minimal */
-        .philosophy-section {
-            padding: 4rem 2rem;
-            background: var(--cream);
-            position: relative;
-        }
-
-        .philosophy-inner {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .philosophy-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .philosophy-header .section-number {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--soft-blue);
-            letter-spacing: 0.15em;
-            display: block;
-            margin-bottom: 1rem;
-        }
-
-        .philosophy-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark-burgundy);
-            margin: 0 0 0.75rem 0;
-        }
-
-        .philosophy-header h2::after {
-            display: none;
-        }
-
-        .philosophy-tagline {
-            font-size: 1.2rem;
-            color: var(--rust);
-            font-style: italic;
-            font-family: 'Cormorant Garamond', serif;
-            margin-bottom: 0.5rem;
-        }
-
-        .philosophy-intro {
-            font-size: 0.95rem;
-            color: #6b5b53;
-            margin-top: 0.5rem;
-        }
-
-        .philosophy-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .philosophy-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .philosophy-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-        }
-
-        .philosophy-icon {
-            width: 44px;
-            height: 44px;
-            min-width: 44px;
-            background: linear-gradient(135deg, var(--soft-blue), #7b8fc7);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: white;
-        }
-
-        .philosophy-card-content h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--dark-burgundy);
-            margin: 0 0 0.35rem 0;
-        }
-
-        .philosophy-card-content p {
-            font-size: 0.85rem;
-            color: #5a4a42;
-            line-height: 1.5;
-            margin: 0;
-        }
-
-        /* Gallery Section */
-        .gallery-section {
-            background: white;
-            padding: 4rem 2rem;
-        }
-
-        .gallery-section .section-inner {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .gallery-section .section-header {
-            margin-bottom: 1.5rem;
-        }
-
-        /* Gallery Navigation */
-        .gallery-nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-        }
-
-        .gallery-tabs {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .gallery-tab {
-            background: transparent;
-            border: 1px solid rgba(117, 53, 45, 0.2);
-            padding: 0.6rem 1.1rem;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--rust);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .gallery-tab:hover {
-            background: rgba(117, 53, 45, 0.08);
-            border-color: var(--rust);
-        }
-
-        .gallery-tab.active {
-            background: var(--rust);
-            color: white;
-            border-color: var(--rust);
-        }
-
-        .gallery-arrows {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .gallery-arrow {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 1px solid rgba(117, 53, 45, 0.2);
-            background: white;
-            color: var(--rust);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .gallery-arrow:hover {
-            background: var(--rust);
-            color: white;
-            border-color: var(--rust);
-        }
-
-        .gallery-arrow:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .gallery-arrow:disabled:hover {
-            background: white;
-            color: var(--rust);
-        }
-
-        /* Carousel */
-        .carousel-container {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .carousel-slide {
-            min-width: 100%;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .carousel-slide.active {
-            opacity: 1;
-        }
-
-        /* Slide indicator dots */
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .carousel-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(117, 53, 45, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .carousel-dot.active {
-            background: var(--rust);
-            transform: scale(1.2);
-        }
-
-        /* Viz Image Thumbnails */
-        .viz-image-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .viz-thumbnail {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: zoom-in;
-            background: #f8f8f8;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .viz-thumbnail:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .viz-thumbnail img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .viz-thumbnail-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.75));
-            color: white;
-            padding: 2rem 0.75rem 0.6rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .viz-thumbnail-zoom {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--dark-burgundy);
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .viz-thumbnail:hover .viz-thumbnail-zoom {
-            opacity: 1;
-        }
-
-        /* Infographics Section */
-        .infographics-section {
-            padding: 5rem 2rem 6rem;
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
             background: var(--dark-burgundy);
-            position: relative;
-        }
-
-        .infographics-inner {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .infographics-header {
+            color: white;
             text-align: center;
-            margin-bottom: 2.5rem;
+            padding: 2rem;
         }
 
-        .infographics-header .section-number {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--soft-blue);
-            letter-spacing: 0.15em;
-            display: block;
-            margin-bottom: 1rem;
-        }
-
-        .infographics-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-            margin: 0 0 0.75rem 0;
-        }
-
-        .infographics-header h2::after {
-            display: none;
-        }
-
-        .infographics-subtitle {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.75);
-            max-width: 550px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .infographics-tool-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 0.4rem 0.9rem;
-            border-radius: 20px;
-            margin-top: 1.25rem;
-            color: var(--cream);
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .infographics-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.25rem;
-        }
-
-        .infographic-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .infographic-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        .infographic-placeholder {
-            aspect-ratio: 4/3;
-            background: linear-gradient(135deg, rgba(146, 164, 210, 0.15), rgba(117, 53, 45, 0.15));
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.35);
-        }
-
-        .infographic-placeholder span:first-child {
-            font-size: 2.5rem;
-        }
-
-        .infographic-placeholder span:last-child {
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-        }
-
-        .infographic-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .infographic-label {
-            padding: 0.85rem 1rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.85rem;
-            font-weight: 500;
-            background: rgba(0, 0, 0, 0.15);
-        }
-
-        /* Tips Section */
-        .tips-section {
-            background: var(--cream);
-            padding: 5rem 2rem 6rem;
-        }
-
-        .tips-section .section-inner {
-            max-width: 700px;
-        }
-
-        /* Collapsible Code Section */
-        .code-section {
-            margin-top: 1.5rem;
-        }
-
-        .code-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #313244;
-            padding: 0.75rem 1.25rem;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .code-toggle:hover {
-            background: #3b3d54;
-        }
-
-        .code-toggle.expanded {
-            border-radius: 10px 10px 0 0;
-        }
-
-        .code-toggle-left {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--code-text);
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .code-toggle-left svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .code-toggle-right {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .code-expand-icon {
-            color: var(--code-text);
-            font-size: 0.8rem;
-            transition: transform 0.3s;
-        }
-
-        .code-toggle.expanded .code-expand-icon {
-            transform: rotate(180deg);
-        }
-
-        .code-collapsible {
-            display: none;
-            background: var(--code-bg);
-            border-radius: 0 0 10px 10px;
-        }
-
-        .code-collapsible.show {
-            display: block;
-        }
-
-        .code-header {
-            display: flex;
-            justify-content: flex-end;
-            padding: 0.5rem 1rem;
-            border-bottom: 1px solid #3b3d54;
-        }
-
-        /* Content Sections */
-        .content-section {
-            padding: 5rem 2rem;
-        }
-
-        .content-section.bg-cream {
-            background: var(--cream);
-        }
-
-        .content-section.bg-white {
-            background: white;
-        }
-
-        .section-inner {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            margin-bottom: 2.5rem;
-        }
-
-        .section-number {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--soft-blue);
-            letter-spacing: 0.1em;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .section-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark-burgundy);
+        footer p {
             margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
-        .section-header h2::after {
-            display: none;
-        }
-
-        .section-intro {
-            font-size: 1.15rem;
-            color: #5a4a42;
-            line-height: 1.75;
-            max-width: 800px;
-            margin-bottom: 3rem;
-        }
-
-        /* Visualisation Cards */
-        .viz-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
-            margin-bottom: 2rem;
-            overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.06);
-        }
-
-        .viz-card-header {
-            background: linear-gradient(135deg, var(--rust), var(--dark-burgundy));
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .viz-card-header h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.35rem;
-            font-weight: 600;
-            color: white;
-            margin: 0;
-        }
-
-        .viz-card-tag {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 0.35rem 0.75rem;
-            border-radius: 20px;
-        }
-
-        .viz-card-body {
-            padding: 1.5rem;
-        }
-
-        .viz-description {
-            font-size: 0.95rem;
-            color: #5a4a42;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        /* Visualisation Display Area */
-        .viz-display {
-            margin-bottom: 1.25rem;
-        }
-
-        .viz-display-title {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #999;
-            margin-bottom: 0.75rem;
-        }
-
-        .chart-container {
-            position: relative;
-            height: 280px;
-        }
-
-        .code-block {
-            padding: 1.5rem;
-            overflow-x: auto;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .code-block pre {
-            margin: 0;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            line-height: 1.6;
-            color: var(--code-text);
-        }
-
-        .code-block .comment { color: var(--code-comment); }
-        .code-block .string { color: var(--code-string); }
-        .code-block .keyword { color: var(--code-keyword); }
-        .code-block .function { color: var(--code-function); }
-        .code-block .number { color: #fab387; }
-
-        /* LLM Tip Box */
-        .llm-tip-box {
-            background: linear-gradient(135deg, rgba(146, 164, 210, 0.15), rgba(146, 164, 210, 0.05));
-            border: 2px solid var(--soft-blue);
-            border-radius: 16px;
-            padding: 2.5rem;
-        }
-
-        .llm-tip-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .llm-tip-icon {
-            font-size: 2rem;
-        }
-
-        .llm-tip-header h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--dark-burgundy);
-            margin: 0;
-        }
-
-        .llm-tip-box p {
-            font-size: 1.05rem;
-            color: #5a4a42;
-            line-height: 1.7;
-            margin: 0 0 1rem 0;
-        }
-
-        .llm-tip-box ol {
-            margin: 1.5rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .llm-tip-box li {
-            font-size: 1rem;
-            color: #5a4a42;
-            line-height: 1.6;
-            margin-bottom: 0.75rem;
-        }
-
-        .llm-warning {
-            background: rgba(117, 53, 45, 0.1);
-            border-left: 4px solid var(--rust);
-            padding: 1.25rem 1.5rem;
-            border-radius: 0 8px 8px 0;
-            margin-top: 1.5rem;
-        }
-
-        .llm-warning h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--rust);
-            margin: 0 0 0.5rem 0;
-        }
-
-        .llm-warning p {
-            font-size: 0.95rem;
-            margin: 0;
-        }
-
-        /* Responsive */
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
         @media (max-width: 1000px) {
             .hero-split {
                 grid-template-columns: 1fr;
@@ -890,8 +716,21 @@
                 font-size: 3rem;
             }
 
-            .roll-section {
-                border-radius: 30px 30px 0 0;
+            .philosophy-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .viz-grid,
+            .infographics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .viz-card-header {
+                grid-template-columns: 1fr;
+            }
+
+            .viz-card-image-large {
+                height: 220px;
             }
         }
 
@@ -904,29 +743,25 @@
                 font-size: 1.1rem;
             }
 
-            .code-block {
-                padding: 1rem;
-            }
-
-            .code-block pre {
-                font-size: 0.7rem;
+            .section-header h2 {
+                font-size: 2rem;
             }
 
             .philosophy-grid {
                 grid-template-columns: 1fr;
             }
 
+            .viz-grid,
             .infographics-grid {
                 grid-template-columns: 1fr;
             }
 
-            .philosophy-header h2,
-            .infographics-header h2 {
-                font-size: 2rem;
+            .content-section {
+                padding: 3.5rem 1.5rem;
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 500px) {
             .viz-hero {
                 padding: 5rem 1.5rem 3rem;
             }
@@ -935,50 +770,8 @@
                 font-size: 2rem;
             }
 
-            .gallery-section,
-            .tips-section,
-            .philosophy-section,
-            .infographics-section {
-                padding: 3.5rem 1.25rem;
-            }
-
-            .viz-card-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-
-            .section-header h2 {
-                font-size: 1.75rem;
-            }
-
-            .viz-image-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .roll-section {
-                border-radius: 20px 20px 0 0;
-                margin-top: -20px;
-            }
-
-            .gallery-nav {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: stretch;
-            }
-
-            .gallery-tabs {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .gallery-tab {
-                padding: 0.5rem 0.9rem;
-                font-size: 0.8rem;
-            }
-
-            .gallery-arrows {
-                justify-content: center;
+            .tip-box {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -1020,8 +813,8 @@
                 <div class="hero-content">
                     <h1>Data Visualisation</h1>
                     <p class="viz-hero-subtitle">
-                        Beautiful, transparent visualisations with reproducible R code. 
-                        Every figure tells a story—these are the ones I use in my research.
+                        Beautiful, transparent visualisations that communicate research clearly. 
+                        From publication figures to stakeholder infographics.
                     </p>
                 </div>
             </div>
@@ -1034,381 +827,701 @@
             </div>
         </section>
 
-        <!-- Philosophy Section -->
-        <section class="philosophy-section roll-section">
-            <div class="philosophy-inner">
-                <div class="philosophy-header">
+        <!-- Section 01: Philosophy -->
+        <section class="content-section bg-cream">
+            <div class="section-inner">
+                <div class="section-header">
                     <span class="section-number">01 — APPROACH</span>
                     <h2>Visualisation Philosophy</h2>
-                    <p class="philosophy-tagline">Show the data, not just the summary</p>
-                    <p class="philosophy-intro">Transparent, reproducible figures with R code you can adapt.</p>
+                    <p class="section-tagline">Show the data, not just the summary</p>
                 </div>
                 
                 <div class="philosophy-grid">
                     <div class="philosophy-card">
                         <div class="philosophy-icon">📊</div>
-                        <div class="philosophy-card-content">
-                            <h3>Individual Points</h3>
-                            <p>Show every participant, not just averages. Each dot is a person.</p>
-                        </div>
+                        <h3>Individual Points</h3>
+                        <p>Show every participant, not just averages. Each dot is a person.</p>
                     </div>
                     <div class="philosophy-card">
                         <div class="philosophy-icon">📈</div>
-                        <div class="philosophy-card-content">
-                            <h3>Distributions</h3>
-                            <p>Use density plots to reveal the shape behind summary statistics.</p>
-                        </div>
+                        <h3>Distributions</h3>
+                        <p>Use density plots to reveal the shape behind summary statistics.</p>
                     </div>
                     <div class="philosophy-card">
                         <div class="philosophy-icon">📉</div>
-                        <div class="philosophy-card-content">
-                            <h3>Uncertainty</h3>
-                            <p>Always include error bars or confidence intervals.</p>
-                        </div>
+                        <h3>Uncertainty</h3>
+                        <p>Always include error bars or confidence intervals.</p>
                     </div>
                     <div class="philosophy-card">
                         <div class="philosophy-icon">🔗</div>
-                        <div class="philosophy-card-content">
-                            <h3>Paired Data</h3>
-                            <p>Connect matched observations to reveal hidden patterns.</p>
-                        </div>
+                        <h3>Paired Data</h3>
+                        <p>Connect matched observations to reveal hidden patterns.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Visualisation Gallery -->
-        <section class="gallery-section roll-section" id="gallery">
+        <!-- Section 02: Research Visualisations -->
+        <section class="content-section bg-white">
             <div class="section-inner">
                 <div class="section-header">
-                    <span class="section-number">02 — GALLERY</span>
-                    <h2>Visualisation Types</h2>
+                    <span class="section-number">02 — RESEARCH FIGURES</span>
+                    <h2>Research Visualisations</h2>
+                    <p class="section-intro">Publication-ready figures with reproducible R code. Click "View R Code" to see heavily commented code you can adapt for your own data.</p>
                 </div>
-
-                <!-- Gallery Navigation -->
-                <div class="gallery-nav">
-                    <div class="gallery-tabs">
-                        <button class="gallery-tab active" onclick="goToSlide(0)">Raincloud</button>
-                        <button class="gallery-tab" onclick="goToSlide(1)">Correlation</button>
-                        <button class="gallery-tab" onclick="goToSlide(2)">Longitudinal</button>
-                    </div>
-                    <div class="gallery-arrows">
-                        <button class="gallery-arrow" onclick="prevSlide()" id="prevBtn">←</button>
-                        <button class="gallery-arrow" onclick="nextSlide()" id="nextBtn">→</button>
-                    </div>
-                </div>
-
-                <!-- Carousel -->
-                <div class="carousel-container">
-                    <div class="carousel-track" id="carouselTrack">
-                        
-                        <!-- Slide 1: Raincloud Plot -->
-                        <div class="carousel-slide active">
-                            <div class="viz-card">
-                                <div class="viz-card-header">
-                                    <h3>Raincloud Plot with Paired Data</h3>
-                                    <span class="viz-card-tag">Group Comparisons</span>
-                                </div>
-                                <div class="viz-card-body">
-                                    <p class="viz-description">
-                                        Compare two groups while showing distributions, individual points, and paired connections. Ideal for expert vs novice or pre vs post comparisons.
-                                    </p>
-
-                                    <div class="viz-display">
-                                        <div class="viz-display-title">From my research</div>
-                                        <div class="viz-image-grid">
-                                            <div class="viz-thumbnail" onclick="openLightbox('assets/figures/raincloud_1.jpeg')">
-                                                <img src="assets/figures/raincloud_1.jpeg" alt="Raincloud plot showing memory for distinctive fingerprints">
-                                                <span class="viz-thumbnail-zoom">🔍</span>
-                                                <span class="viz-thumbnail-label">Memory for Distinctive Prints</span>
-                                            </div>
-                                            <div class="viz-thumbnail" onclick="openLightbox('assets/figures/raincloud_2.jpeg')">
-                                                <img src="assets/figures/raincloud_2.jpeg" alt="Raincloud plot from think-aloud verbal protocol study">
-                                                <span class="viz-thumbnail-zoom">🔍</span>
-                                                <span class="viz-thumbnail-label">Think-Aloud Protocol Study</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="code-section">
-                                        <div class="code-toggle" onclick="toggleCode(this)">
-                                            <span class="code-toggle-left">
-                                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                                                View R Code
-                                            </span>
-                                            <span class="code-expand-icon">▼</span>
-                                        </div>
-                                        <div class="code-collapsible">
-                                            <div class="code-header">
-                                                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                                            </div>
-                                            <div class="code-block">
-<pre><span class="comment"># ============================================================</span>
-<span class="comment"># RAINCLOUD PLOT WITH PAIRED DATA</span>
-<span class="comment"># Shows distribution + individual points + paired connections</span>
-<span class="comment"># ============================================================</span>
-
-<span class="keyword">library</span>(ggplot2)
-<span class="keyword">library</span>(ggdist)      <span class="comment"># For half-violin (stat_halfeye)</span>
-<span class="keyword">library</span>(dplyr)
-
-<span class="comment"># COLOUR PALETTE - CUSTOMISE YOUR COLOURS</span>
-colours <- <span class="function">c</span>(
-  <span class="string">"Expert"</span> = <span class="string">"#7B5EA7"</span>,   <span class="comment"># Purple</span>
-  <span class="string">"Novice"</span> = <span class="string">"#E9B44C"</span>    <span class="comment"># Gold</span>
-)
-
-<span class="comment"># CREATE THE PLOT</span>
-p <- <span class="function">ggplot</span>(data, <span class="function">aes</span>(x = group, y = score, fill = group, colour = group)) +
-  <span class="function">stat_halfeye</span>(adjust = <span class="number">0.5</span>, width = <span class="number">0.6</span>, justification = <span class="number">-0.2</span>,
-    .width = <span class="number">0</span>, point_colour = <span class="function">NA</span>, alpha = <span class="number">0.7</span>) +
-  <span class="function">geom_boxplot</span>(width = <span class="number">0.15</span>, outlier.shape = <span class="function">NA</span>, alpha = <span class="number">0.5</span>) +
-  <span class="function">geom_point</span>(<span class="function">aes</span>(x = <span class="function">as.numeric</span>(<span class="function">factor</span>(group)) - <span class="number">0.25</span>),
-    position = <span class="function">position_jitter</span>(width = <span class="number">0.05</span>, seed = <span class="number">123</span>),
-    size = <span class="number">2</span>, alpha = <span class="number">0.6</span>) +
-  <span class="function">geom_line</span>(<span class="function">aes</span>(group = pair_id), alpha = <span class="number">0.3</span>, colour = <span class="string">"grey40"</span>) +
-  <span class="function">scale_fill_manual</span>(values = colours) +
-  <span class="function">scale_colour_manual</span>(values = colours) +
-  <span class="function">labs</span>(x = <span class="function">NULL</span>, y = <span class="string">"Proportion Correct"</span>) +
-  <span class="function">theme_minimal</span>(base_size = <span class="number">14</span>) +
-  <span class="function">theme</span>(legend.position = <span class="string">"none"</span>)
-
-<span class="function">ggsave</span>(<span class="string">"raincloud.png"</span>, p, width = <span class="number">8</span>, height = <span class="number">6</span>, dpi = <span class="number">300</span>)</pre>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                
+                <!-- Raincloud Plot -->
+                <div class="viz-card-expanded">
+                    <div class="viz-card-header">
+                        <div class="viz-card-image-large" onclick="openLightbox('assets/images/raincloud-plot.png')">
+                            <div class="viz-card-placeholder">
+                                <span>📊</span>
+                                <span>Coming Soon</span>
                             </div>
                         </div>
-
-                        <!-- Slide 2: Correlation Matrix -->
-                        <div class="carousel-slide">
-                            <div class="viz-card">
-                                <div class="viz-card-header">
-                                    <h3>Correlation Matrix</h3>
-                                    <span class="viz-card-tag">Exploratory Analysis</span>
-                                </div>
-                                <div class="viz-card-body">
-                                    <p class="viz-description">
-                                        Explore relationships among multiple variables at once. Circle size shows correlation strength; colour shows direction. Perfect for exploratory analysis before regression.
-                                    </p>
-
-                                    <div class="viz-display">
-                                        <div class="viz-display-title">From my research</div>
-                                        <div class="viz-image-grid" style="grid-template-columns: 1fr; max-width: 500px; margin: 0 auto;">
-                                            <div class="viz-thumbnail" onclick="openLightbox('assets/figures/correlation_jpg.png')">
-                                                <img src="assets/figures/correlation_jpg.png" alt="Correlation matrix showing relationships between cognitive and personality measures">
-                                                <span class="viz-thumbnail-zoom">🔍</span>
-                                                <span class="viz-thumbnail-label">Cognitive & Personality Measures</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="code-section">
-                                        <div class="code-toggle" onclick="toggleCode(this)">
-                                            <span class="code-toggle-left">
-                                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                                                View R Code
-                                            </span>
-                                            <span class="code-expand-icon">▼</span>
-                                        </div>
-                                        <div class="code-collapsible">
-                                            <div class="code-header">
-                                                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                                            </div>
-                                            <div class="code-block">
-<pre><span class="comment"># ============================================================</span>
-<span class="comment"># CORRELATION MATRIX VISUALISATION</span>
-<span class="comment"># Circle size = correlation strength, colour = direction</span>
+                        <div class="viz-card-info">
+                            <h3>Raincloud Plot</h3>
+                            <p>The "gold standard" for showing group differences. Combines a density distribution (the "cloud"), a box plot, and individual data points (the "rain") to give a complete picture of your data.</p>
+                            <span class="viz-card-tag">Group Comparison</span>
+                        </div>
+                    </div>
+                    <div class="code-toggle" onclick="toggleCode(this)">
+                        <div class="code-toggle-left">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>
+                            </svg>
+                            View R Code
+                        </div>
+                        <div class="code-toggle-right">
+                            <button class="copy-code-btn" onclick="event.stopPropagation(); copyCode(this)">Copy</button>
+                            <span class="code-expand-icon">▼</span>
+                        </div>
+                    </div>
+                    <div class="code-collapsible">
+                        <div class="code-block">
+                            <pre><span class="comment"># ============================================================</span>
+<span class="comment"># RAINCLOUD PLOT - Group Comparison Visualisation</span>
+<span class="comment"># ============================================================</span>
+<span class="comment"># This code creates a "raincloud plot" which combines:</span>
+<span class="comment">#   - A density distribution (shows the shape of your data)</span>
+<span class="comment">#   - A box plot (shows median, quartiles, outliers)</span>
+<span class="comment">#   - Individual data points (shows every participant)</span>
+<span class="comment">#</span>
+<span class="comment"># WHAT YOU NEED TO CHANGE:</span>
+<span class="comment">#   1. Replace 'your_data.csv' with your file name</span>
+<span class="comment">#   2. Replace 'group' with your grouping variable name</span>
+<span class="comment">#   3. Replace 'score' with your outcome variable name</span>
+<span class="comment">#   4. Adjust colours to match your preferences</span>
 <span class="comment"># ============================================================</span>
 
-<span class="keyword">library</span>(corrplot)
-<span class="keyword">library</span>(Hmisc)       <span class="comment"># For rcorr() with p-values</span>
+<span class="comment"># Load required packages</span>
+<span class="comment"># If you don't have these, run: install.packages(c("ggplot2", "ggdist", "dplyr"))</span>
+<span class="keyword">library</span>(ggplot2)
+<span class="keyword">library</span>(ggdist)
+<span class="keyword">library</span>(dplyr)
 
-<span class="comment"># Select numeric columns to correlate</span>
-data_numeric <- data <span class="function">%>%</span> 
-  <span class="function">select</span>(visual_search, spatial_memory, ravens, risk, xq_score)
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 1: Load your data</span>
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># Your CSV should have columns for:</span>
+<span class="comment">#   - A grouping variable (e.g., "Control" vs "Treatment")</span>
+<span class="comment">#   - A numeric outcome variable (e.g., test scores)</span>
 
-<span class="comment"># Calculate correlations with p-values</span>
-cor_results <- <span class="function">rcorr</span>(<span class="function">as.matrix</span>(data_numeric))
-cor_matrix <- cor_results$r
-p_matrix <- cor_results$P
+data <span class="operator">&lt;-</span> <span class="function">read.csv</span>(<span class="string">"your_data.csv"</span>)
 
-<span class="comment"># COLOUR PALETTE: green = positive, blue = negative</span>
-colours <- <span class="function">colorRampPalette</span>(<span class="function">c</span>(
-  <span class="string">"#2166AC"</span>, <span class="string">"#F7F7F7"</span>, <span class="string">"#1B7837"</span>
-))(<span class="number">200</span>)
+<span class="comment"># Quick check: see first few rows of your data</span>
+<span class="function">head</span>(data)
 
-<span class="comment"># Create the plot</span>
-<span class="function">corrplot</span>(cor_matrix,
-  method = <span class="string">"circle"</span>,
-  type = <span class="string">"upper"</span>,
-  order = <span class="string">"hclust"</span>,
-  col = colours,
-  p.mat = p_matrix,
-  sig.level = <span class="function">c</span>(<span class="number">0.001</span>, <span class="number">0.01</span>, <span class="number">0.05</span>),
-  insig = <span class="string">"label_sig"</span>,
-  tl.col = <span class="string">"grey20"</span>,
-  tl.srt = <span class="number">45</span>,
-  diag = <span class="function">FALSE</span>
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 2: Define your colours</span>
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># Change these hex codes to match your preferred colours</span>
+<span class="comment"># Tip: Use https://coolors.co to find nice colour combinations</span>
+
+group_colours <span class="operator">&lt;-</span> <span class="function">c</span>(
+  <span class="string">"Control"</span> <span class="operator">=</span> <span class="string">"#92A4D2"</span>,    <span class="comment"># Soft blue for control group</span>
+  <span class="string">"Treatment"</span> <span class="operator">=</span> <span class="string">"#75352D"</span>  <span class="comment"># Rust for treatment group</span>
+)
+
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 3: Create the raincloud plot</span>
+<span class="comment"># ------------------------------------------------------------</span>
+
+raincloud_plot <span class="operator">&lt;-</span> <span class="function">ggplot</span>(data, <span class="function">aes</span>(
+  x <span class="operator">=</span> group,           <span class="comment"># CHANGE: your grouping variable</span>
+  y <span class="operator">=</span> score,           <span class="comment"># CHANGE: your outcome variable</span>
+  fill <span class="operator">=</span> group,        <span class="comment"># Colours by group</span>
+  colour <span class="operator">=</span> group       <span class="comment"># Outline colours by group</span>
+)) <span class="operator">+</span>
+  
+  <span class="comment"># --- The "cloud" (density distribution) ---</span>
+  <span class="comment"># This shows the shape of your data distribution</span>
+  <span class="function">stat_halfeye</span>(
+    adjust <span class="operator">=</span> <span class="number">0.5</span>,           <span class="comment"># Smoothness of the density curve</span>
+    width <span class="operator">=</span> <span class="number">0.6</span>,            <span class="comment"># Width of the density "cloud"</span>
+    justification <span class="operator">=</span> <span class="number">-0.2</span>,   <span class="comment"># Position (negative = above the boxplot)</span>
+    .width <span class="operator">=</span> <span class="number">0</span>,             <span class="comment"># Don't show interval lines</span>
+    point_colour <span class="operator">=</span> <span class="function">NA</span>       <span class="comment"># Don't show point estimate</span>
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- The box plot ---</span>
+  <span class="comment"># Shows median, interquartile range, and outliers</span>
+  <span class="function">geom_boxplot</span>(
+    width <span class="operator">=</span> <span class="number">0.15</span>,           <span class="comment"># Width of the box</span>
+    outlier.shape <span class="operator">=</span> <span class="function">NA</span>,     <span class="comment"># Hide outliers (we show all points anyway)</span>
+    alpha <span class="operator">=</span> <span class="number">0.5</span>             <span class="comment"># Transparency (0 = invisible, 1 = solid)</span>
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- The "rain" (individual data points) ---</span>
+  <span class="comment"># Each dot represents one participant</span>
+  <span class="function">geom_jitter</span>(
+    width <span class="operator">=</span> <span class="number">0.05</span>,           <span class="comment"># Horizontal spread of points</span>
+    alpha <span class="operator">=</span> <span class="number">0.6</span>,            <span class="comment"># Transparency of points</span>
+    size <span class="operator">=</span> <span class="number">2</span>               <span class="comment"># Size of points</span>
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- Apply your colours ---</span>
+  <span class="function">scale_fill_manual</span>(values <span class="operator">=</span> group_colours) <span class="operator">+</span>
+  <span class="function">scale_colour_manual</span>(values <span class="operator">=</span> group_colours) <span class="operator">+</span>
+  
+  <span class="comment"># --- Labels ---</span>
+  <span class="comment"># CHANGE these to match your study</span>
+  <span class="function">labs</span>(
+    title <span class="operator">=</span> <span class="string">"Comparison of Scores by Group"</span>,
+    subtitle <span class="operator">=</span> <span class="string">"Each dot represents one participant"</span>,
+    x <span class="operator">=</span> <span class="string">"Group"</span>,
+    y <span class="operator">=</span> <span class="string">"Score"</span>,
+    caption <span class="operator">=</span> <span class="string">"Visualisation shows density, boxplot, and individual data points"</span>
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- Clean theme ---</span>
+  <span class="function">theme_minimal</span>(base_size <span class="operator">=</span> <span class="number">14</span>) <span class="operator">+</span>
+  <span class="function">theme</span>(
+    legend.position <span class="operator">=</span> <span class="string">"none"</span>,              <span class="comment"># Hide legend (groups are on x-axis)</span>
+    panel.grid.major.x <span class="operator">=</span> <span class="function">element_blank</span>(), <span class="comment"># Remove vertical grid lines</span>
+    plot.title <span class="operator">=</span> <span class="function">element_text</span>(face <span class="operator">=</span> <span class="string">"bold"</span>)
+  )
+
+<span class="comment"># --- Display the plot ---</span>
+<span class="function">print</span>(raincloud_plot)
+
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 4: Save the plot</span>
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># Adjust width, height, and dpi for your needs</span>
+<span class="comment"># dpi = 300 is good for publications</span>
+
+<span class="function">ggsave</span>(
+  <span class="string">"raincloud_plot.png"</span>,
+  plot <span class="operator">=</span> raincloud_plot,
+  width <span class="operator">=</span> <span class="number">8</span>,
+  height <span class="operator">=</span> <span class="number">6</span>,
+  dpi <span class="operator">=</span> <span class="number">300</span>
 )</pre>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Correlation Matrix -->
+                <div class="viz-card-expanded">
+                    <div class="viz-card-header">
+                        <div class="viz-card-image-large" onclick="openLightbox('assets/images/correlation-matrix.png')">
+                            <div class="viz-card-placeholder">
+                                <span>📈</span>
+                                <span>Coming Soon</span>
                             </div>
                         </div>
-
-                        <!-- Slide 3: Longitudinal Line Chart -->
-                        <div class="carousel-slide">
-                            <div class="viz-card">
-                                <div class="viz-card-header">
-                                    <h3>Longitudinal Line Chart</h3>
-                                    <span class="viz-card-tag">Time Series</span>
-                                </div>
-                                <div class="viz-card-body">
-                                    <p class="viz-description">
-                                        Track change over time across experimental conditions. Use for pre/post/follow-up designs with error bars showing uncertainty at each time point.
-                                    </p>
-
-                                    <div class="viz-display">
-                                        <div class="viz-display-title">From my research</div>
-                                        <div class="viz-image-grid">
-                                            <div class="viz-thumbnail" onclick="openLightbox('assets/figures/longitudinal_1.png')">
-                                                <img src="assets/figures/longitudinal_1.png" alt="Longitudinal belief change across conditions">
-                                                <span class="viz-thumbnail-zoom">🔍</span>
-                                                <span class="viz-thumbnail-label">Belief Change Over Time</span>
-                                            </div>
-                                            <div class="viz-thumbnail" onclick="openLightbox('assets/figures/longitudinal_2.png')">
-                                                <img src="assets/figures/longitudinal_2.png" alt="Faceted longitudinal plot by condition">
-                                                <span class="viz-thumbnail-zoom">🔍</span>
-                                                <span class="viz-thumbnail-label">By Condition (Faceted)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="code-section">
-                                        <div class="code-toggle" onclick="toggleCode(this)">
-                                            <span class="code-toggle-left">
-                                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                                                View R Code
-                                            </span>
-                                            <span class="code-expand-icon">▼</span>
-                                        </div>
-                                        <div class="code-collapsible">
-                                            <div class="code-header">
-                                                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                                            </div>
-                                            <div class="code-block">
-<pre><span class="comment"># ============================================================</span>
-<span class="comment"># LONGITUDINAL LINE CHART</span>
-<span class="comment"># Tracks change over time with confidence bands</span>
+                        <div class="viz-card-info">
+                            <h3>Correlation Heatmap</h3>
+                            <p>Visualise relationships between multiple variables at once. Colour intensity shows correlation strength, making it easy to spot patterns in complex datasets.</p>
+                            <span class="viz-card-tag">Relationships</span>
+                        </div>
+                    </div>
+                    <div class="code-toggle" onclick="toggleCode(this)">
+                        <div class="code-toggle-left">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>
+                            </svg>
+                            View R Code
+                        </div>
+                        <div class="code-toggle-right">
+                            <button class="copy-code-btn" onclick="event.stopPropagation(); copyCode(this)">Copy</button>
+                            <span class="code-expand-icon">▼</span>
+                        </div>
+                    </div>
+                    <div class="code-collapsible">
+                        <div class="code-block">
+                            <pre><span class="comment"># ============================================================</span>
+<span class="comment"># CORRELATION HEATMAP - Visualise Variable Relationships</span>
+<span class="comment"># ============================================================</span>
+<span class="comment"># This creates a colour-coded matrix showing correlations</span>
+<span class="comment"># between all pairs of numeric variables in your dataset.</span>
+<span class="comment">#</span>
+<span class="comment"># WHAT YOU NEED TO CHANGE:</span>
+<span class="comment">#   1. Replace 'your_data.csv' with your file name</span>
+<span class="comment">#   2. Select which columns to include in the correlation</span>
+<span class="comment">#   3. Adjust colours if desired</span>
 <span class="comment"># ============================================================</span>
 
+<span class="comment"># Load required packages</span>
+<span class="keyword">library</span>(ggplot2)
+<span class="keyword">library</span>(dplyr)
+<span class="keyword">library</span>(tidyr)
+<span class="keyword">library</span>(corrr)      <span class="comment"># Makes correlation matrices easy</span>
+
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 1: Load and prepare your data</span>
+<span class="comment"># ------------------------------------------------------------</span>
+
+data <span class="operator">&lt;-</span> <span class="function">read.csv</span>(<span class="string">"your_data.csv"</span>)
+
+<span class="comment"># Select only the numeric columns you want to correlate</span>
+<span class="comment"># CHANGE: list the column names you want to include</span>
+numeric_vars <span class="operator">&lt;-</span> data <span class="operator">%>%</span>
+  <span class="function">select</span>(
+    variable_1,    <span class="comment"># CHANGE: your variable names</span>
+    variable_2,
+    variable_3,
+    variable_4,
+    variable_5
+  )
+
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 2: Calculate correlations</span>
+<span class="comment"># ------------------------------------------------------------</span>
+
+<span class="comment"># Create correlation matrix</span>
+<span class="comment"># method options: "pearson" (default), "spearman", "kendall"</span>
+cor_matrix <span class="operator">&lt;-</span> numeric_vars <span class="operator">%>%</span>
+  <span class="function">correlate</span>(method <span class="operator">=</span> <span class="string">"pearson"</span>) <span class="operator">%>%</span>
+  <span class="function">shave</span>()  <span class="comment"># Remove upper triangle (redundant)</span>
+
+<span class="comment"># Convert to long format for ggplot</span>
+cor_long <span class="operator">&lt;-</span> cor_matrix <span class="operator">%>%</span>
+  <span class="function">pivot_longer</span>(
+    cols <span class="operator">=</span> <span class="operator">-</span>term,
+    names_to <span class="operator">=</span> <span class="string">"variable"</span>,
+    values_to <span class="operator">=</span> <span class="string">"correlation"</span>
+  ) <span class="operator">%>%</span>
+  <span class="function">filter</span>(<span class="operator">!</span><span class="function">is.na</span>(correlation))  <span class="comment"># Remove NA values</span>
+
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 3: Create the heatmap</span>
+<span class="comment"># ------------------------------------------------------------</span>
+
+heatmap_plot <span class="operator">&lt;-</span> <span class="function">ggplot</span>(cor_long, <span class="function">aes</span>(
+  x <span class="operator">=</span> term,
+  y <span class="operator">=</span> variable,
+  fill <span class="operator">=</span> correlation
+)) <span class="operator">+</span>
+  
+  <span class="comment"># --- The tiles ---</span>
+  <span class="function">geom_tile</span>(colour <span class="operator">=</span> <span class="string">"white"</span>, linewidth <span class="operator">=</span> <span class="number">0.5</span>) <span class="operator">+</span>
+  
+  <span class="comment"># --- Add correlation values as text ---</span>
+  <span class="function">geom_text</span>(
+    <span class="function">aes</span>(label <span class="operator">=</span> <span class="function">round</span>(correlation, <span class="number">2</span>)),
+    colour <span class="operator">=</span> <span class="string">"white"</span>,
+    size <span class="operator">=</span> <span class="number">4</span>,
+    fontface <span class="operator">=</span> <span class="string">"bold"</span>
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- Colour scale ---</span>
+  <span class="comment"># Blue = negative, White = zero, Red = positive</span>
+  <span class="function">scale_fill_gradient2</span>(
+    low <span class="operator">=</span> <span class="string">"#92A4D2"</span>,      <span class="comment"># Negative correlations</span>
+    mid <span class="operator">=</span> <span class="string">"white"</span>,        <span class="comment"># Zero correlation</span>
+    high <span class="operator">=</span> <span class="string">"#75352D"</span>,     <span class="comment"># Positive correlations</span>
+    midpoint <span class="operator">=</span> <span class="number">0</span>,
+    limits <span class="operator">=</span> <span class="function">c</span>(<span class="number">-1</span>, <span class="number">1</span>),
+    name <span class="operator">=</span> <span class="string">"Correlation"</span>
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- Labels ---</span>
+  <span class="function">labs</span>(
+    title <span class="operator">=</span> <span class="string">"Correlation Matrix"</span>,
+    subtitle <span class="operator">=</span> <span class="string">"Pearson correlations between study variables"</span>,
+    x <span class="operator">=</span> <span class="string">""</span>,
+    y <span class="operator">=</span> <span class="string">""</span>
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- Clean theme ---</span>
+  <span class="function">theme_minimal</span>(base_size <span class="operator">=</span> <span class="number">14</span>) <span class="operator">+</span>
+  <span class="function">theme</span>(
+    axis.text.x <span class="operator">=</span> <span class="function">element_text</span>(angle <span class="operator">=</span> <span class="number">45</span>, hjust <span class="operator">=</span> <span class="number">1</span>),
+    panel.grid <span class="operator">=</span> <span class="function">element_blank</span>(),
+    plot.title <span class="operator">=</span> <span class="function">element_text</span>(face <span class="operator">=</span> <span class="string">"bold"</span>)
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- Square tiles ---</span>
+  <span class="function">coord_fixed</span>()
+
+<span class="comment"># --- Display the plot ---</span>
+<span class="function">print</span>(heatmap_plot)
+
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 4: Save the plot</span>
+<span class="comment"># ------------------------------------------------------------</span>
+
+<span class="function">ggsave</span>(
+  <span class="string">"correlation_heatmap.png"</span>,
+  plot <span class="operator">=</span> heatmap_plot,
+  width <span class="operator">=</span> <span class="number">8</span>,
+  height <span class="operator">=</span> <span class="number">7</span>,
+  dpi <span class="operator">=</span> <span class="number">300</span>
+)</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Longitudinal Plot -->
+                <div class="viz-card-expanded">
+                    <div class="viz-card-header">
+                        <div class="viz-card-image-large" onclick="openLightbox('assets/images/longitudinal-plot.png')">
+                            <div class="viz-card-placeholder">
+                                <span>📉</span>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                        <div class="viz-card-info">
+                            <h3>Longitudinal Trajectories</h3>
+                            <p>Show how individuals change over time. Each line represents one participant's journey, with group averages overlaid. Perfect for pre-post or repeated measures designs.</p>
+                            <span class="viz-card-tag">Time Series</span>
+                        </div>
+                    </div>
+                    <div class="code-toggle" onclick="toggleCode(this)">
+                        <div class="code-toggle-left">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>
+                            </svg>
+                            View R Code
+                        </div>
+                        <div class="code-toggle-right">
+                            <button class="copy-code-btn" onclick="event.stopPropagation(); copyCode(this)">Copy</button>
+                            <span class="code-expand-icon">▼</span>
+                        </div>
+                    </div>
+                    <div class="code-collapsible">
+                        <div class="code-block">
+                            <pre><span class="comment"># ============================================================</span>
+<span class="comment"># LONGITUDINAL TRAJECTORIES - Individual Change Over Time</span>
+<span class="comment"># ============================================================</span>
+<span class="comment"># This creates a "spaghetti plot" showing:</span>
+<span class="comment">#   - Individual participant trajectories (thin lines)</span>
+<span class="comment">#   - Group means with confidence intervals (thick line + ribbon)</span>
+<span class="comment">#</span>
+<span class="comment"># WHAT YOU NEED TO CHANGE:</span>
+<span class="comment">#   1. Replace 'your_data.csv' with your file name</span>
+<span class="comment">#   2. Replace variable names (participant_id, time, score, group)</span>
+<span class="comment">#   3. Adjust colours to match your groups</span>
+<span class="comment"># ============================================================</span>
+
+<span class="comment"># Load required packages</span>
 <span class="keyword">library</span>(ggplot2)
 <span class="keyword">library</span>(dplyr)
 
-<span class="comment"># Data should have: time, condition, mean, se (standard error)</span>
-<span class="comment"># Set factor levels for proper time ordering</span>
-summary_data$time <- <span class="function">factor</span>(summary_data$time,
-  levels = <span class="function">c</span>(<span class="string">"Pre"</span>, <span class="string">"Post"</span>, <span class="string">"10 Days"</span>, <span class="string">"2 Months"</span>))
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 1: Load your data</span>
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># Your data should be in LONG format with columns:</span>
+<span class="comment">#   - participant_id: unique ID for each person</span>
+<span class="comment">#   - time: time point (e.g., 1, 2, 3 or "Pre", "Post")</span>
+<span class="comment">#   - score: your outcome measure</span>
+<span class="comment">#   - group: grouping variable (optional)</span>
 
-<span class="comment"># Colours - CHANGE FOR YOUR CONDITIONS</span>
-colours <- <span class="function">c</span>(
-  <span class="string">"AI Dialogue"</span> = <span class="string">"#75352D"</span>,
-  <span class="string">"Textbook"</span> = <span class="string">"#92A4D2"</span>,
-  <span class="string">"Control"</span> = <span class="string">"#A0AEC0"</span>
+data <span class="operator">&lt;-</span> <span class="function">read.csv</span>(<span class="string">"your_data.csv"</span>)
+
+<span class="comment"># Check your data structure</span>
+<span class="function">head</span>(data)
+
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 2: Calculate group summaries</span>
+<span class="comment"># ------------------------------------------------------------</span>
+
+group_summary <span class="operator">&lt;-</span> data <span class="operator">%>%</span>
+  <span class="function">group_by</span>(time, group) <span class="operator">%>%</span>  <span class="comment"># CHANGE: your variable names</span>
+  <span class="function">summarise</span>(
+    mean_score <span class="operator">=</span> <span class="function">mean</span>(score, na.rm <span class="operator">=</span> <span class="keyword">TRUE</span>),
+    se <span class="operator">=</span> <span class="function">sd</span>(score, na.rm <span class="operator">=</span> <span class="keyword">TRUE</span>) <span class="operator">/</span> <span class="function">sqrt</span>(<span class="function">n</span>()),
+    lower <span class="operator">=</span> mean_score <span class="operator">-</span> <span class="number">1.96</span> <span class="operator">*</span> se,  <span class="comment"># 95% CI</span>
+    upper <span class="operator">=</span> mean_score <span class="operator">+</span> <span class="number">1.96</span> <span class="operator">*</span> se,
+    .groups <span class="operator">=</span> <span class="string">"drop"</span>
+  )
+
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 3: Define colours</span>
+<span class="comment"># ------------------------------------------------------------</span>
+
+group_colours <span class="operator">&lt;-</span> <span class="function">c</span>(
+  <span class="string">"Control"</span> <span class="operator">=</span> <span class="string">"#92A4D2"</span>,
+  <span class="string">"Treatment"</span> <span class="operator">=</span> <span class="string">"#75352D"</span>
 )
 
-<span class="comment"># Create the plot</span>
-p <- <span class="function">ggplot</span>(summary_data, <span class="function">aes</span>(x = time, y = mean, 
-                               colour = condition, group = condition)) +
-  <span class="function">geom_ribbon</span>(<span class="function">aes</span>(ymin = mean - se, ymax = mean + se, fill = condition),
-              alpha = <span class="number">0.15</span>, colour = <span class="function">NA</span>) +
-  <span class="function">geom_line</span>(linewidth = <span class="number">1.5</span>) +
-  <span class="function">geom_point</span>(size = <span class="number">4</span>, shape = <span class="number">21</span>, fill = <span class="string">"white"</span>, stroke = <span class="number">2</span>) +
-  <span class="function">geom_errorbar</span>(<span class="function">aes</span>(ymin = mean - se, ymax = mean + se), width = <span class="number">0.1</span>) +
-  <span class="function">scale_colour_manual</span>(values = colours) +
-  <span class="function">scale_fill_manual</span>(values = colours) +
-  <span class="function">scale_y_continuous</span>(limits = <span class="function">c</span>(<span class="number">0</span>, <span class="number">100</span>)) +
-  <span class="function">labs</span>(x = <span class="function">NULL</span>, y = <span class="string">"Belief in Myth (0-100)"</span>) +
-  <span class="function">theme_minimal</span>(base_size = <span class="number">14</span>) +
-  <span class="function">theme</span>(legend.position = <span class="string">"top"</span>, legend.title = <span class="function">element_blank</span>())
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 4: Create the plot</span>
+<span class="comment"># ------------------------------------------------------------</span>
 
-<span class="function">ggsave</span>(<span class="string">"longitudinal.png"</span>, p, width = <span class="number">10</span>, height = <span class="number">6</span>, dpi = <span class="number">300</span>)</pre>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+trajectory_plot <span class="operator">&lt;-</span> <span class="function">ggplot</span>() <span class="operator">+</span>
+  
+  <span class="comment"># --- Individual trajectories (the "spaghetti") ---</span>
+  <span class="comment"># Thin, semi-transparent lines for each participant</span>
+  <span class="function">geom_line</span>(
+    data <span class="operator">=</span> data,
+    <span class="function">aes</span>(
+      x <span class="operator">=</span> time,              <span class="comment"># CHANGE: your time variable</span>
+      y <span class="operator">=</span> score,             <span class="comment"># CHANGE: your outcome variable</span>
+      group <span class="operator">=</span> participant_id, <span class="comment"># CHANGE: your ID variable</span>
+      colour <span class="operator">=</span> group         <span class="comment"># CHANGE: your grouping variable</span>
+    ),
+    alpha <span class="operator">=</span> <span class="number">0.3</span>,             <span class="comment"># Transparency (lower = more faded)</span>
+    linewidth <span class="operator">=</span> <span class="number">0.5</span>         <span class="comment"># Line thickness</span>
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- Confidence ribbon for group means ---</span>
+  <span class="function">geom_ribbon</span>(
+    data <span class="operator">=</span> group_summary,
+    <span class="function">aes</span>(
+      x <span class="operator">=</span> time,
+      ymin <span class="operator">=</span> lower,
+      ymax <span class="operator">=</span> upper,
+      fill <span class="operator">=</span> group
+    ),
+    alpha <span class="operator">=</span> <span class="number">0.2</span>
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- Group mean lines ---</span>
+  <span class="function">geom_line</span>(
+    data <span class="operator">=</span> group_summary,
+    <span class="function">aes</span>(
+      x <span class="operator">=</span> time,
+      y <span class="operator">=</span> mean_score,
+      colour <span class="operator">=</span> group
+    ),
+    linewidth <span class="operator">=</span> <span class="number">2</span>
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- Group mean points ---</span>
+  <span class="function">geom_point</span>(
+    data <span class="operator">=</span> group_summary,
+    <span class="function">aes</span>(
+      x <span class="operator">=</span> time,
+      y <span class="operator">=</span> mean_score,
+      colour <span class="operator">=</span> group
+    ),
+    size <span class="operator">=</span> <span class="number">4</span>
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- Apply colours ---</span>
+  <span class="function">scale_colour_manual</span>(values <span class="operator">=</span> group_colours) <span class="operator">+</span>
+  <span class="function">scale_fill_manual</span>(values <span class="operator">=</span> group_colours) <span class="operator">+</span>
+  
+  <span class="comment"># --- Labels ---</span>
+  <span class="function">labs</span>(
+    title <span class="operator">=</span> <span class="string">"Individual Trajectories Over Time"</span>,
+    subtitle <span class="operator">=</span> <span class="string">"Thin lines = individuals, thick lines = group means with 95% CI"</span>,
+    x <span class="operator">=</span> <span class="string">"Time Point"</span>,
+    y <span class="operator">=</span> <span class="string">"Score"</span>,
+    colour <span class="operator">=</span> <span class="string">"Group"</span>,
+    fill <span class="operator">=</span> <span class="string">"Group"</span>
+  ) <span class="operator">+</span>
+  
+  <span class="comment"># --- Clean theme ---</span>
+  <span class="function">theme_minimal</span>(base_size <span class="operator">=</span> <span class="number">14</span>) <span class="operator">+</span>
+  <span class="function">theme</span>(
+    legend.position <span class="operator">=</span> <span class="string">"bottom"</span>,
+    panel.grid.minor <span class="operator">=</span> <span class="function">element_blank</span>(),
+    plot.title <span class="operator">=</span> <span class="function">element_text</span>(face <span class="operator">=</span> <span class="string">"bold"</span>)
+  )
+
+<span class="comment"># --- Display the plot ---</span>
+<span class="function">print</span>(trajectory_plot)
+
+<span class="comment"># ------------------------------------------------------------</span>
+<span class="comment"># STEP 5: Save the plot</span>
+<span class="comment"># ------------------------------------------------------------</span>
+
+<span class="function">ggsave</span>(
+  <span class="string">"longitudinal_trajectories.png"</span>,
+  plot <span class="operator">=</span> trajectory_plot,
+  width <span class="operator">=</span> <span class="number">10</span>,
+  height <span class="operator">=</span> <span class="number">6</span>,
+  dpi <span class="operator">=</span> <span class="number">300</span>
+)</pre>
                         </div>
-
                     </div>
-                </div>
-
-                <!-- Carousel Dots -->
-                <div class="carousel-dots">
-                    <span class="carousel-dot active" onclick="goToSlide(0)"></span>
-                    <span class="carousel-dot" onclick="goToSlide(1)"></span>
-                    <span class="carousel-dot" onclick="goToSlide(2)"></span>
                 </div>
 
             </div>
         </section>
 
-        <!-- Infographics Section -->
-        <section class="infographics-section roll-section">
-            <div class="infographics-inner">
-                <div class="infographics-header">
-                    <span class="section-number">03 — VISUAL COMMUNICATION</span>
-                    <h2>Research Infographics</h2>
-                    <p class="infographics-subtitle">
-                        Transforming complex research findings into clear, engaging visual summaries 
-                        for broader audiences and stakeholder communication.
-                    </p>
-                    <div class="infographics-tool-badge">
-                        <span>✨</span>
-                        Created with Napkin.ai
-                    </div>
-                </div>
-
-                <div class="infographics-grid">
-                    <div class="infographic-card">
-                        <div class="infographic-placeholder">
-                            <span>📋</span>
-                            <span>Coming Soon</span>
-                        </div>
-                        <div class="infographic-label">Research Summary Infographic</div>
-                    </div>
-                    <div class="infographic-card">
-                        <div class="infographic-placeholder">
-                            <span>🎯</span>
-                            <span>Coming Soon</span>
-                        </div>
-                        <div class="infographic-label">Key Findings Visual</div>
-                    </div>
-                    <div class="infographic-card">
-                        <div class="infographic-placeholder">
-                            <span>💡</span>
-                            <span>Coming Soon</span>
-                        </div>
-                        <div class="infographic-label">Practical Implications</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Not Comfortable with R Section -->
-        <section class="tips-section roll-section">
+        <!-- Section 03: Methods Diagrams -->
+        <section class="content-section bg-cream">
             <div class="section-inner">
                 <div class="section-header">
-                    <span class="section-number">04 — ALTERNATIVE APPROACH</span>
+                    <span class="section-number">03 — STUDY DESIGN</span>
+                    <h2>Methods Diagrams</h2>
+                    <p class="section-intro">Clear visual explanations of research procedures, study designs, and data collection processes.</p>
+                </div>
+                
+                <div class="viz-grid">
+                    <div class="viz-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                        <div class="viz-card-image">
+                            <div class="viz-card-placeholder">
+                                <span>🔄</span>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                        <div class="viz-card-content">
+                            <h3>Study Flowchart</h3>
+                            <p>Participant flow through study phases and conditions</p>
+                            <span class="viz-card-tag">CONSORT Style</span>
+                        </div>
+                    </div>
+                    <div class="viz-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                        <div class="viz-card-image">
+                            <div class="viz-card-placeholder">
+                                <span>⏱️</span>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                        <div class="viz-card-content">
+                            <h3>Procedure Timeline</h3>
+                            <p>Visual timeline showing experimental procedure sequence</p>
+                            <span class="viz-card-tag">Methodology</span>
+                        </div>
+                    </div>
+                    <div class="viz-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                        <div class="viz-card-image">
+                            <div class="viz-card-placeholder">
+                                <span>🧪</span>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                        <div class="viz-card-content">
+                            <h3>Experimental Design</h3>
+                            <p>Visual representation of conditions and counterbalancing</p>
+                            <span class="viz-card-tag">Design Matrix</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 04: Models & Frameworks -->
+        <section class="content-section bg-white">
+            <div class="section-inner">
+                <div class="section-header">
+                    <span class="section-number">04 — THEORY</span>
+                    <h2>Models & Frameworks</h2>
+                    <p class="section-intro">Visual representations of theoretical models, conceptual frameworks, and analytical approaches.</p>
+                </div>
+                
+                <div class="viz-grid">
+                    <div class="viz-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                        <div class="viz-card-image">
+                            <div class="viz-card-placeholder">
+                                <span>🧠</span>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                        <div class="viz-card-content">
+                            <h3>Cognitive Model</h3>
+                            <p>Visual framework showing cognitive processes and relationships</p>
+                            <span class="viz-card-tag">Theory</span>
+                        </div>
+                    </div>
+                    <div class="viz-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                        <div class="viz-card-image">
+                            <div class="viz-card-placeholder">
+                                <span>🔀</span>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                        <div class="viz-card-content">
+                            <h3>Path Diagram</h3>
+                            <p>Structural equation model showing variable relationships</p>
+                            <span class="viz-card-tag">SEM</span>
+                        </div>
+                    </div>
+                    <div class="viz-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                        <div class="viz-card-image">
+                            <div class="viz-card-placeholder">
+                                <span>🎯</span>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                        <div class="viz-card-content">
+                            <h3>Conceptual Framework</h3>
+                            <p>Visual summary of research questions and hypotheses</p>
+                            <span class="viz-card-tag">Overview</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 05: Infographics -->
+        <section class="content-section bg-cream">
+            <div class="section-inner">
+                <div class="section-header">
+                    <span class="section-number">05 — COMMUNICATION</span>
+                    <h2>Research Infographics</h2>
+                    <p class="section-intro">Transforming complex research findings into clear, engaging visual summaries for broader audiences.</p>
+                    <div class="tool-badge">
+                        <span>✨</span>
+                        Created with Nano Banana Pro
+                    </div>
+                </div>
+                
+                <div class="infographics-grid">
+                    <div class="infographic-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                        <div class="infographic-card-image">
+                            <div class="infographic-placeholder">
+                                <span>📋</span>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                        <div class="infographic-card-content">
+                            <h3>Research Summary</h3>
+                        </div>
+                    </div>
+                    <div class="infographic-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                        <div class="infographic-card-image">
+                            <div class="infographic-placeholder">
+                                <span>🎯</span>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                        <div class="infographic-card-content">
+                            <h3>Key Findings</h3>
+                        </div>
+                    </div>
+                    <div class="infographic-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                        <div class="infographic-card-image">
+                            <div class="infographic-placeholder">
+                                <span>💡</span>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                        <div class="infographic-card-content">
+                            <h3>Practical Implications</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 06: Not Comfortable with R? -->
+        <section class="content-section bg-white">
+            <div class="section-inner">
+                <div class="section-header">
+                    <span class="section-number">06 — ALTERNATIVE</span>
                     <h2>Not Comfortable with R?</h2>
                 </div>
 
-                <div class="llm-tip-box">
-                    <div class="llm-tip-header">
-                        <span class="llm-tip-icon">💡</span>
+                <div class="tip-box">
+                    <div class="tip-header">
+                        <span class="tip-icon">💡</span>
                         <h3>Use an LLM to Help</h3>
                     </div>
                     <p>
@@ -1434,13 +1547,13 @@ p <- <span class="function">ggplot</span>(summary_data, <span class="function">a
                         adapt the code to your specific data structure.
                     </p>
 
-                    <div class="llm-warning">
+                    <div class="tip-warning">
                         <h4>⚠️ Ethics Reminder</h4>
                         <p>
                             <strong>Only upload de-identified data.</strong> Never share private, confidential, 
                             or identifiable information with LLMs. If your data contains names, IDs, dates of birth, 
                             or any other potentially identifying information, remove or anonymise it first. 
-                            Check with your ethics committee if you're unsure about what constitutes identifiable information.
+                            Check with your ethics committee if you're unsure.
                         </p>
                     </div>
                 </div>
@@ -1451,7 +1564,7 @@ p <- <span class="function">ggplot</span>(summary_data, <span class="function">a
 
     <!-- Footer -->
     <footer>
-        <p>&copy;2025 Brooklyn Corbett</p>
+        <p>&copy; 2025 Brooklyn Corbett</p>
     </footer>
 
     <!-- Scripts -->
@@ -1462,13 +1575,52 @@ p <- <span class="function">ggplot</span>(summary_data, <span class="function">a
             this.classList.toggle('active');
         });
 
+        // Toggle code visibility
+        function toggleCode(toggle) {
+            toggle.classList.toggle('expanded');
+            const collapsible = toggle.nextElementSibling;
+            collapsible.classList.toggle('show');
+        }
+
+        // Copy code to clipboard
+        function copyCode(button) {
+            const codeBlock = button.closest('.viz-card-expanded').querySelector('pre');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
         // Lightbox functions
         function openLightbox(src) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightboxImg');
-            lightboxImg.src = src;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            // Only open if not a placeholder
+            if (src && !src.includes('placeholder')) {
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightboxImg');
+                lightboxImg.src = src;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         }
 
         function closeLightbox() {
@@ -1489,85 +1641,6 @@ p <- <span class="function">ggplot</span>(summary_data, <span class="function">a
             if (e.key === 'Escape') {
                 closeLightbox();
             }
-        });
-
-        // Copy code functionality
-        function copyCode(button) {
-            const codeBlock = button.closest('.code-section').querySelector('pre');
-            const text = codeBlock.textContent;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                button.textContent = 'Copied!';
-                button.classList.add('copied');
-                setTimeout(() => {
-                    button.textContent = 'Copy';
-                    button.classList.remove('copied');
-                }, 2000);
-            });
-        }
-
-        // Toggle code visibility
-        function toggleCode(toggle) {
-            toggle.classList.toggle('expanded');
-            const collapsible = toggle.nextElementSibling;
-            collapsible.classList.toggle('show');
-        }
-
-        // Carousel functionality
-        let currentSlide = 0;
-        const totalSlides = 3;
-
-        function updateCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const slides = document.querySelectorAll('.carousel-slide');
-            const tabs = document.querySelectorAll('.gallery-tab');
-            const dots = document.querySelectorAll('.carousel-dot');
-
-            // Move track
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-            // Update slide visibility
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
-            });
-
-            // Update tabs
-            tabs.forEach((tab, index) => {
-                tab.classList.toggle('active', index === currentSlide);
-            });
-
-            // Update dots
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-
-            // Update arrow states
-            document.getElementById('prevBtn').disabled = currentSlide === 0;
-            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateCarousel();
-        }
-
-        function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateCarousel();
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateCarousel();
-            }
-        }
-
-        // Initialize carousel on load
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCarousel();
         });
     </script>
 </body>

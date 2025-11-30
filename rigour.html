@@ -21,102 +21,246 @@
             --soft-blue: #92A4D2;
             --light-cream: #f7efe8;
             --text-dark: #4b3f3a;
+            --sage: #7fa8a8;
         }
 
-        body {
-            background: var(--cream);
+        main {
+            max-width: none;
+            padding: 0;
+            margin-top: 0;
         }
 
-        /* Hero */
-        .page-hero {
-            padding: 100px 40px 80px;
-            max-width: 900px;
-            margin: 0 auto;
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            min-height: 85vh;
+            background: linear-gradient(135deg, var(--soft-blue) 0%, #7b8fc7 50%, #6a7eb8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative background elements */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -15%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-eyebrow {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.25rem;
+            border-radius: 30px;
             font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            color: var(--rust);
-            margin-bottom: 16px;
+            color: white;
+            margin-bottom: 1.5rem;
         }
 
-        .page-hero h1 {
+        .hero h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3.2rem;
+            font-size: 4rem;
             font-weight: 700;
-            color: var(--dark-burgundy);
-            line-height: 1.15;
-            margin-bottom: 24px;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
         }
 
-        .hero-intro {
-            font-size: 1.2rem;
+        .hero-subtitle {
+            font-size: 1.35rem;
             line-height: 1.7;
-            color: var(--text-dark);
-            max-width: 680px;
-        }
-
-        /* Main Content */
-        .main-content {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 40px 80px;
-        }
-
-        /* Section */
-        .content-section {
-            margin-bottom: 70px;
-        }
-
-        .section-label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--soft-blue);
-            margin-bottom: 12px;
-        }
-
-        .content-section h2 {
+            color: rgba(255, 255, 255, 0.9);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-style: italic;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            animation: bounce 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ============================================
+           SECTION STYLING
+           ============================================ */
+        .content-section {
+            padding: 5rem 2rem;
+        }
+
+        .content-section.bg-cream {
+            background: var(--cream);
+        }
+
+        .content-section.bg-white {
+            background: white;
+        }
+
+        .section-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .section-number-large {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            position: sticky;
+            top: 100px;
+            opacity: 0.2;
+        }
+
+        .bg-cream .section-number-large {
+            color: var(--rust);
+        }
+
+        .bg-white .section-number-large {
+            color: var(--soft-blue);
+        }
+
+        .section-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
             font-weight: 700;
             color: var(--dark-burgundy);
-            margin-bottom: 20px;
+            margin: 0 0 1.5rem 0;
             line-height: 1.25;
         }
 
-        .content-section p {
-            font-size: 1.05rem;
-            line-height: 1.75;
-            color: var(--text-dark);
-            margin-bottom: 16px;
+        .section-content h2::after {
+            display: none;
         }
 
-        /* OSF Section */
-        .osf-section {
+        .section-content p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 1.25rem;
+        }
+
+        /* ============================================
+           QUOTE BLOCK
+           ============================================ */
+        .quote-block {
             background: white;
             border-radius: 16px;
-            padding: 45px;
-            margin: 40px 0;
-            box-shadow: 0 4px 25px rgba(58, 18, 19, 0.06);
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            position: relative;
+            border-left: 5px solid var(--soft-blue);
+        }
+
+        .quote-block::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            color: var(--soft-blue);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .quote-block p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--dark-burgundy);
+            margin: 0;
+            padding-left: 1rem;
+        }
+
+        .quote-block cite {
+            display: block;
+            margin-top: 1rem;
+            padding-left: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-style: normal;
+            color: var(--rust);
+            font-weight: 500;
+        }
+
+        /* ============================================
+           OSF SECTION
+           ============================================ */
+        .osf-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 35px rgba(0, 0, 0, 0.06);
         }
 
         .osf-header {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
-            gap: 30px;
-            margin-bottom: 30px;
+            gap: 2rem;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
         }
 
         .osf-header h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--dark-burgundy);
             margin: 0;
@@ -125,149 +269,331 @@
         .osf-link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 0.5rem;
             background: var(--soft-blue);
             color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 0.85rem 1.75rem;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95rem;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 15px rgba(146, 164, 210, 0.35);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(146, 164, 210, 0.35);
         }
 
         .osf-link:hover {
             background: #7b91c4;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(146, 164, 210, 0.45);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(146, 164, 210, 0.45);
         }
 
-        .osf-items {
+        .osf-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            gap: 2rem;
         }
 
         .osf-item {
-            padding: 20px 0;
-            border-top: 2px solid var(--cream);
+            padding-top: 1.25rem;
+            border-top: 3px solid var(--cream);
         }
 
         .osf-item h4 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             color: var(--dark-burgundy);
-            margin-bottom: 8px;
+            margin: 0 0 0.5rem 0;
         }
 
         .osf-item p {
-            font-size: 0.92rem;
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        /* ============================================
+           PRINCIPLES GRID
+           ============================================ */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .principle-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            text-align: center;
+            border-top: 4px solid var(--soft-blue);
+        }
+
+        .principle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .principle-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--soft-blue), #7b8fc7);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto 1.25rem;
+        }
+
+        .principle-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            margin-bottom: 0.75rem;
+        }
+
+        .principle-card p {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ============================================
+           LLM APPROACH SECTION
+           ============================================ */
+        .llm-approach {
+            background: linear-gradient(135deg, var(--light-cream) 0%, white 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border: 2px solid var(--cream);
+            position: relative;
+        }
+
+        .llm-approach::before {
+            content: '';
+            display: none;
+        }
+
+        .llm-approach h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            margin: 0.5rem 0 1.25rem 0;
+        }
+
+        .llm-approach p {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .llm-approach p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .coming-soon-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(117, 53, 45, 0.1);
+            color: var(--rust);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-top: 1.25rem;
+        }
+
+        /* ============================================
+           TIMELINE
+           ============================================ */
+        .timeline {
+            margin: 2.5rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-marker {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            background: var(--soft-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-item:not(:last-child) .timeline-marker::after {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: calc(100% + 2rem);
+            background: linear-gradient(to bottom, var(--soft-blue), var(--cream));
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-content h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .timeline-content p {
+            font-size: 0.95rem;
             line-height: 1.6;
             color: var(--text-dark);
             margin: 0;
         }
 
-        /* Quote */
-        .quote-block {
-            border-left: 4px solid var(--soft-blue);
-            padding-left: 28px;
-            margin: 35px 0;
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--dark-burgundy);
+            color: white;
+            text-align: center;
+            padding: 2rem;
         }
 
-        .quote-block p {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-style: italic;
-            line-height: 1.5;
-            color: var(--dark-burgundy);
+        footer p {
             margin: 0;
-        }
-
-        .quote-block cite {
-            display: block;
-            margin-top: 12px;
-            font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
-            font-style: normal;
-            color: var(--rust);
+            opacity: 0.8;
         }
 
-        /* LLM Section */
-        .llm-section {
-            background: var(--light-cream);
-            border-radius: 16px;
-            padding: 40px;
-            margin-top: 40px;
-            border-left: 5px solid var(--rust);
+        /* ============================================
+           SCROLL REVEAL
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        .llm-section h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--dark-burgundy);
-            margin-bottom: 16px;
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .llm-section p {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--text-dark);
-            margin-bottom: 12px;
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 900px) {
+            .section-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .section-number-large {
+                position: relative;
+                top: 0;
+                font-size: 3.5rem;
+                margin-bottom: -0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .osf-grid,
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .llm-section p:last-child {
-            margin-bottom: 0;
-        }
-
-        .coming-soon {
-            display: inline-block;
-            font-size: 0.85rem;
-            color: var(--rust);
-            font-style: italic;
-            margin-top: 8px;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .page-hero {
-                padding: 80px 25px 60px;
+            .hero {
+                padding: 5rem 1.5rem;
+                min-height: 70vh;
             }
 
-            .page-hero h1 {
-                font-size: 2.4rem;
+            .hero h1 {
+                font-size: 2.5rem;
             }
 
-            .main-content {
-                padding: 0 25px 60px;
+            .hero-subtitle {
+                font-size: 1.15rem;
             }
 
-            .osf-section {
-                padding: 30px 25px;
+            .content-section {
+                padding: 3.5rem 1.5rem;
+            }
+
+            .section-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .osf-card {
+                padding: 2rem;
             }
 
             .osf-header {
                 flex-direction: column;
-                gap: 20px;
+                align-items: flex-start;
             }
 
-            .osf-items {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .osf-item {
-                padding: 18px 0;
+            .quote-block {
+                padding: 2rem;
             }
 
             .quote-block p {
                 font-size: 1.3rem;
             }
 
-            .llm-section {
-                padding: 30px 25px;
+            .quote-block::before {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .timeline-marker::after {
+                display: none;
             }
         }
     </style>
@@ -294,108 +620,217 @@
     </nav>
 
     <main>
-        <!-- Hero -->
-        <section class="page-hero">
-            <p class="hero-eyebrow">Research Practices</p>
-            <h1>Open Science</h1>
-            <p class="hero-intro">
-                I believe research should be transparent enough that others can verify it, 
-                reproducible enough that others can build on it, and accessible enough 
-                that it actually reaches the people who need it.
-            </p>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-eyebrow">Research Practices</span>
+                <h1>Open Science</h1>
+                <p class="hero-subtitle">
+                    Research should be transparent enough to verify, reproducible enough to build on, 
+                    and accessible enough to reach the people who need it.
+                </p>
+            </div>
+            
+            <div class="scroll-indicator">
+                <span>Scroll to explore</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </div>
         </section>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            
-            <!-- Philosophy Section -->
-            <section class="content-section">
-                <p class="section-label">01 — Approach</p>
-                <h2>Why Open Science Matters</h2>
-                <p>
-                    Psychology has faced a replication crisis that shook confidence in published findings. 
-                    Many "established" effects failed to replicate when tested rigorously. The response 
-                    has been a shift toward practices that make research more transparent from the start—not 
-                    just at publication.
-                </p>
-                <p>
-                    For me, this means pre-registering studies before collecting data, sharing analysis 
-                    code so others can check my work, and making materials available so studies can 
-                    actually be replicated. It's not about perfection—it's about honesty.
-                </p>
+        <!-- Section 01: Why Open Science -->
+        <section class="content-section bg-cream">
+            <div class="section-inner">
+                <div class="section-grid">
+                    <div class="section-number-large reveal">01</div>
+                    <div class="section-content">
+                        <h2 class="reveal">Why Open Science Matters</h2>
+                        <p class="reveal">
+                            Psychology has faced a replication crisis that shook confidence in published findings. 
+                            Many "established" effects failed to replicate when tested rigorously. The response 
+                            has been a shift toward practices that make research more transparent from the start—not 
+                            just at publication.
+                        </p>
+                        <p class="reveal">
+                            For me, this means pre-registering studies before collecting data, sharing analysis 
+                            code so others can check my work, and making materials available so studies can 
+                            actually be replicated. It's not about perfection—it's about honesty.
+                        </p>
 
-                <div class="quote-block">
-                    <p>"The first principle is that you must not fool yourself—and you are the easiest person to fool."</p>
-                    <cite>— Richard Feynman</cite>
-                </div>
-            </section>
-
-            <!-- OSF Section -->
-            <div class="osf-section">
-                <div class="osf-header">
-                    <h3>Open Science Framework</h3>
-                    <a href="https://osf.io/cd8mq/" target="_blank" class="osf-link">
-                        View OSF Project →
-                    </a>
-                </div>
-                
-                <div class="osf-items">
-                    <div class="osf-item">
-                        <h4>Pre-registration</h4>
-                        <p>Hypotheses, methods, and analysis plans registered before data collection to prevent p-hacking and HARKing.</p>
-                    </div>
-                    <div class="osf-item">
-                        <h4>Analysis Code</h4>
-                        <p>R scripts and computational notebooks shared openly so results can be verified and methods adapted.</p>
-                    </div>
-                    <div class="osf-item">
-                        <h4>Materials & Data</h4>
-                        <p>Study materials, instruments, and anonymised datasets made available where ethically appropriate.</p>
+                        <div class="quote-block reveal">
+                            <p>"The first principle is that you must not fool yourself—and you are the easiest person to fool."</p>
+                            <cite>— Richard Feynman</cite>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- LLM Section -->
-            <section class="content-section">
-                <p class="section-label">02 — Emerging Practices</p>
-                <h2>Transparent Use of LLMs</h2>
-                <p>
-                    Large language models are increasingly used in research—for coding assistance, 
-                    literature synthesis, and even qualitative analysis. This creates new questions 
-                    about transparency: What was the model's role? How were outputs validated? 
-                    Could the analysis be reproduced?
-                </p>
-                
-                <div class="llm-section">
-                    <h3>My Approach</h3>
-                    <p>
-                        When I use LLMs in research, I document the model, version, and prompts used. 
-                        For qualitative analysis, I've developed a three-stage validation approach that 
-                        combines LLM-assisted coding with human verification—balancing efficiency with rigour.
-                    </p>
-                    <p>
-                        This includes being transparent about this very website, which was built with 
-                        substantial AI assistance. The goal isn't to hide the tools—it's to be clear about 
-                        how they were used and what human judgment was applied.
-                    </p>
-                    <span class="coming-soon">Detailed methodology guide coming soon</span>
+        <!-- Section 02: Core Principles -->
+        <section class="content-section bg-white">
+            <div class="section-inner">
+                <div class="section-grid">
+                    <div class="section-number-large reveal">02</div>
+                    <div class="section-content">
+                        <h2 class="reveal">Core Principles</h2>
+                        <p class="reveal">
+                            These aren't just ideals—they're practices I apply to every research project.
+                        </p>
+
+                        <div class="principles-grid reveal">
+                            <div class="principle-card">
+                                <div class="principle-icon"></div>
+                                <h3>Transparency</h3>
+                                <p>Document decisions as they happen, not as you wish they had happened. Share the mess, not just the polished result.</p>
+                            </div>
+                            <div class="principle-card">
+                                <div class="principle-icon"></div>
+                                <h3>Reproducibility</h3>
+                                <p>If someone else can't run your analysis and get the same results, the results don't mean much.</p>
+                            </div>
+                            <div class="principle-card">
+                                <div class="principle-icon"></div>
+                                <h3>Accessibility</h3>
+                                <p>Research locked behind paywalls doesn't help anyone. Share what you can, where you can.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-        </div>
+        <!-- Section 03: OSF -->
+        <section class="content-section bg-cream">
+            <div class="section-inner">
+                <div class="section-grid">
+                    <div class="section-number-large reveal">03</div>
+                    <div class="section-content">
+                        <h2 class="reveal">Open Science Framework</h2>
+                        <p class="reveal">
+                            I use the Open Science Framework (OSF) to organise and share research materials. 
+                            Here's what you'll find there:
+                        </p>
+
+                        <div class="osf-card reveal">
+                            <div class="osf-header">
+                                <h3>My OSF Repository</h3>
+                                <a href="https://osf.io/cd8mq/" target="_blank" class="osf-link">
+                                    View OSF Profile →
+                                </a>
+                            </div>
+                            
+                            <div class="osf-grid">
+                                <div class="osf-item">
+                                    <h4>Pre-registration</h4>
+                                    <p>Hypotheses, methods, and analysis plans registered before data collection to prevent p-hacking and HARKing.</p>
+                                </div>
+                                <div class="osf-item">
+                                    <h4>Analysis Code</h4>
+                                    <p>R scripts and computational notebooks shared openly so results can be verified and methods adapted.</p>
+                                </div>
+                                <div class="osf-item">
+                                    <h4>Materials & Data</h4>
+                                    <p>Study materials, instruments, and anonymised datasets made available where ethically appropriate.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 04: LLM Transparency -->
+        <section class="content-section bg-white">
+            <div class="section-inner">
+                <div class="section-grid">
+                    <div class="section-number-large reveal">04</div>
+                    <div class="section-content">
+                        <h2 class="reveal">Transparent Use of LLMs</h2>
+                        <p class="reveal">
+                            Large language models are increasingly used in research—for coding assistance, 
+                            literature synthesis, and even qualitative analysis. This creates new questions 
+                            about transparency: What was the model's role? How were outputs validated? 
+                            Could the analysis be reproduced?
+                        </p>
+
+                        <div class="llm-approach reveal">
+                            <h3>My Approach to AI in Research</h3>
+                            <p>
+                                When I use LLMs in research, I document the model, version, and prompts used. 
+                                For qualitative analysis, I've developed a three-stage validation approach that 
+                                combines LLM-assisted coding with human verification—balancing efficiency with rigour.
+                            </p>
+                            <p>
+                                This includes being transparent about this very website, which was built with 
+                                substantial AI assistance. The goal isn't to hide the tools—it's to be clear about 
+                                how they were used and what human judgment was applied.
+                            </p>
+                            <div class="coming-soon-badge">
+                                Detailed methodology guide coming soon
+                            </div>
+                        </div>
+
+                        <h3 class="reveal" style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--dark-burgundy); margin: 2.5rem 0 1.5rem;">Three-Stage Validation Process</h3>
+
+                        <div class="timeline reveal">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">1</div>
+                                <div class="timeline-content">
+                                    <h4>LLM-Assisted First Pass</h4>
+                                    <p>Use the LLM to generate initial codes or themes, documenting the exact prompts used. This provides a starting point, not a final answer.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">2</div>
+                                <div class="timeline-content">
+                                    <h4>Human Verification</h4>
+                                    <p>Independently review the LLM's outputs against the source data. Correct errors, add nuance, and document disagreements between human and machine coding.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">3</div>
+                                <div class="timeline-content">
+                                    <h4>Transparency Reporting</h4>
+                                    <p>Report exactly how the LLM was used, what was changed after human review, and provide all prompts and outputs for others to scrutinise.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy;2025 Brooklyn Corbett</p>
+        <p>&copy; 2025 Brooklyn Corbett</p>
     </footer>
 
-    <!-- JavaScript for mobile nav -->
+    <!-- Scripts -->
     <script>
+        // Mobile nav
         document.getElementById('hamburger').addEventListener('click', function() {
             document.getElementById('navLinks').classList.toggle('active');
             this.classList.toggle('active');
         });
+
+        // Scroll reveal animations
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '-50px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
     </script>
 </body>
 </html>
