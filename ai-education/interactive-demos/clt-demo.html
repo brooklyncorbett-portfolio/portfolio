@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central Limit Theorem Explorer</title>
+    <title>Central Limit Theorem Explorer | Brooklyn Corbett</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --cream: #F1DDC4;
@@ -16,102 +17,155 @@
             --sage: #7fa8a8;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            background: var(--cream);
-            padding: 20px;
+            background-color: var(--cream);
             min-height: 100vh;
         }
 
-        .back-button {
-            display: inline-block;
-            background: var(--dark-burgundy);
+        /* === NAVIGATION === */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--dark-burgundy);
             color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9em;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(58, 18, 19, 0.2);
+            padding: 1rem 3rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .back-button:hover {
-            background: var(--rust);
-            transform: translateY(-2px);
-        }
-
-        .demo-container {
+        .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 8px 30px rgba(58, 18, 19, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .demo-header {
+        .nav-brand {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.2rem;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: white;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+        }
+
+        /* === HERO SECTION === */
+        .hero-section {
+            background: linear-gradient(135deg, var(--dark-burgundy) 0%, #4a1a1b 100%);
+            color: white;
+            padding: 6rem 2rem 3rem;
             text-align: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--cream);
+            margin-bottom: 0;
         }
 
-        h1 {
+        .hero-section h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5em;
-            color: var(--dark-burgundy);
-            margin-bottom: 8px;
+            font-size: 3rem;
             font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
         }
 
-        .subtitle {
-            font-size: 1.1em;
-            color: var(--rust);
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
             font-style: italic;
         }
 
-        .intro {
-            background: linear-gradient(135deg, rgba(146, 164, 210, 0.15), rgba(146, 164, 210, 0.08));
-            padding: 18px 22px;
-            border-radius: 12px;
-            border-left: 4px solid var(--soft-blue);
-            margin-bottom: 25px;
-            font-size: 0.95em;
+        .hero-description {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
         }
 
-        .intro strong {
-            color: var(--dark-burgundy);
+        .hero-back-btn {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            margin-top: 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .hero-back-btn:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* === MAIN CONTENT === */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
         }
 
         /* Main Layout: Controls Left, Charts Right */
         .main-layout {
             display: grid;
             grid-template-columns: 380px 1fr;
-            gap: 30px;
+            gap: 2rem;
             align-items: start;
         }
 
         /* Left Panel - Controls */
         .controls-panel {
             position: sticky;
-            top: 20px;
+            top: 100px;
         }
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3em;
+            font-size: 1.3rem;
             color: var(--dark-burgundy);
-            margin-bottom: 12px;
+            margin-bottom: 1rem;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -127,14 +181,15 @@
         }
 
         .controls {
-            background: var(--light-cream);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
         }
 
         .control-group {
-            margin-bottom: 18px;
+            margin-bottom: 1.25rem;
         }
 
         .control-group:last-child {
@@ -145,8 +200,8 @@
             display: block;
             font-weight: 600;
             color: var(--dark-burgundy);
-            margin-bottom: 10px;
-            font-size: 0.9em;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
         }
 
         .distribution-grid {
@@ -156,14 +211,14 @@
         }
 
         .dist-btn {
-            background: white;
-            border: 2px solid var(--cream);
+            background: var(--light-cream);
+            border: 2px solid transparent;
             padding: 10px 8px;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.25s ease;
             font-family: 'Inter', sans-serif;
-            font-size: 0.85em;
+            font-size: 0.85rem;
             font-weight: 500;
             color: var(--text-dark);
             text-align: center;
@@ -171,7 +226,7 @@
 
         .dist-btn:hover {
             border-color: var(--soft-blue);
-            background: rgba(146, 164, 210, 0.1);
+            background: rgba(146, 164, 210, 0.15);
         }
 
         .dist-btn.active {
@@ -215,13 +270,12 @@
         }
 
         .slider-value {
-            background: white;
+            background: var(--light-cream);
             padding: 5px 12px;
             border-radius: 15px;
             font-weight: 600;
             color: var(--rust);
-            font-size: 0.85em;
-            border: 2px solid var(--cream);
+            font-size: 0.85rem;
             min-width: 60px;
             text-align: center;
         }
@@ -233,108 +287,95 @@
         }
 
         .btn {
-            background: var(--rust);
+            background: linear-gradient(135deg, var(--rust) 0%, var(--dark-burgundy) 100%);
             color: white;
             border: none;
-            padding: 10px 16px;
+            padding: 12px 16px;
             border-radius: 8px;
-            cursor: pointer;
             font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
             font-weight: 600;
-            font-size: 0.85em;
-            transition: all 0.25s ease;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(117, 53, 45, 0.2);
         }
 
         .btn:hover {
-            background: var(--dark-burgundy);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(117, 53, 45, 0.3);
         }
 
         .btn.secondary {
             background: white;
             color: var(--rust);
             border: 2px solid var(--rust);
+            box-shadow: none;
         }
 
         .btn.secondary:hover {
             background: var(--light-cream);
         }
 
-        /* Stats in controls panel */
-        .stats-mini {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid var(--cream);
+        .btn.full-width {
+            grid-column: span 2;
         }
 
-        .stat-mini {
-            text-align: center;
+        /* Pulse animation on sample buttons */
+        .btn:not(.secondary):not(:disabled) {
+            animation: subtlePulse 2s ease-in-out infinite;
         }
 
-        .stat-mini-label {
-            font-size: 0.7em;
-            color: var(--rust);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
+        @keyframes subtlePulse {
+            0%, 100% { 
+                box-shadow: 0 4px 15px rgba(117, 53, 45, 0.2);
+            }
+            50% { 
+                box-shadow: 0 6px 25px rgba(117, 53, 45, 0.35);
+            }
         }
 
-        .stat-mini-value {
-            font-size: 1.4em;
-            font-weight: 700;
-            color: var(--dark-burgundy);
-            font-family: 'Cormorant Garamond', serif;
+        .btn:hover {
+            animation: none;
         }
 
         /* Right Panel - Charts */
         .charts-panel {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 1.5rem;
         }
 
-        .progress-text {
-            text-align: center;
-            padding: 12px 16px;
-            background: var(--cream);
-            border-radius: 8px;
-            font-weight: 500;
-            color: var(--dark-burgundy);
-            font-size: 0.9em;
-        }
-
-        .chart-box {
+        .chart-card {
             background: white;
-            padding: 20px;
-            border-radius: 12px;
-            border: 2px solid var(--cream);
-            position: relative;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
         }
 
-        .chart-label {
-            font-weight: 600;
-            color: var(--dark-burgundy);
-            margin-bottom: 10px;
-            font-size: 0.9em;
+        .chart-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
+            margin-bottom: 1rem;
         }
 
-        .chart-label .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+        .chart-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--dark-burgundy);
+            font-weight: 600;
         }
 
-        .chart-label .dot.population {
+        .chart-badge {
             background: var(--soft-blue);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
-        .chart-label .dot.samples {
+        .chart-badge.rust {
             background: var(--rust);
         }
 
@@ -343,125 +384,191 @@
             position: relative;
         }
 
-        .insight-box {
-            background: linear-gradient(135deg, rgba(146, 164, 210, 0.15), rgba(146, 164, 210, 0.08));
-            border-left: 4px solid var(--soft-blue);
-            padding: 16px 20px;
-            border-radius: 0 12px 12px 0;
-            display: none;
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
-        .insight-box.show {
-            display: block;
-            animation: fadeIn 0.4s ease;
+        .stat-card {
+            background: var(--light-cream);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
         }
 
-        .insight-box h4 {
-            color: var(--dark-burgundy);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1em;
-            margin-bottom: 6px;
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--rust);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
             font-weight: 600;
         }
 
-        .insight-box p {
+        .stat-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--dark-burgundy);
+            font-weight: 700;
+        }
+
+        /* Progress Text */
+        .progress-text {
+            background: rgba(146, 164, 210, 0.1);
+            border-left: 4px solid var(--soft-blue);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
             color: var(--text-dark);
-            font-size: 0.9em;
-            line-height: 1.6;
+            margin-top: 1rem;
+        }
+
+        /* Insight Box */
+        .insight-box {
+            background: linear-gradient(135deg, rgba(127, 168, 168, 0.15), rgba(127, 168, 168, 0.08));
+            border-left: 4px solid var(--sage);
+            padding: 1.25rem 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .insight-box.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .insight-box h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--dark-burgundy);
+            margin-bottom: 0.5rem;
+        }
+
+        .insight-box p {
+            font-size: 0.9rem;
+            line-height: 1.7;
         }
 
         /* Teaching Note */
         .teaching-note {
-            background: var(--light-cream);
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 25px;
-            border-top: 4px solid var(--rust);
+            background: linear-gradient(135deg, rgba(117, 53, 45, 0.08), rgba(117, 53, 45, 0.04));
+            border-left: 4px solid var(--rust);
+            padding: 1.25rem 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
         }
 
         .teaching-note h4 {
-            color: var(--dark-burgundy);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .teaching-note h4::before {
-            content: '💡';
+            font-size: 1.1rem;
+            color: var(--dark-burgundy);
+            margin-bottom: 0.5rem;
         }
 
         .teaching-note p {
-            font-size: 0.9em;
+            font-size: 0.9rem;
             line-height: 1.7;
-            color: var(--text-dark);
         }
 
         .teaching-note strong {
             color: var(--rust);
         }
 
-        /* Embed Section */
+        /* === EMBED SECTION WITH PARALLAX === */
+        .embed-section-wrapper {
+            background: linear-gradient(135deg, var(--soft-blue), #b8c4e8);
+            margin-top: 3rem;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+            border-radius: 60px 60px 0 0;
+            padding: 4rem 2rem 12rem;
+            overflow: visible;
+        }
+
         .embed-section {
-            background: linear-gradient(135deg, var(--cream) 0%, #f8ece0 100%);
-            border-radius: 16px;
-            padding: 30px;
-            margin-top: 30px;
-            border: 2px solid var(--rust);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 2.5rem 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+            transition: transform 0.1s ease-out;
         }
 
         .embed-section h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6em;
+            font-size: 2rem;
             color: var(--dark-burgundy);
-            margin-bottom: 12px;
+            margin-bottom: 1rem;
             text-align: center;
         }
 
         .embed-section > p {
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 2rem;
             color: #555;
-            font-size: 0.95em;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
         }
 
         .embed-buttons {
             display: flex;
-            gap: 15px;
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 1.5rem;
         }
 
         .embed-btn {
             background: var(--rust);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 14px 28px;
             border-radius: 8px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.95em;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(117, 53, 45, 0.2);
         }
 
         .embed-btn:hover {
             background: var(--dark-burgundy);
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(117, 53, 45, 0.3);
         }
 
         .embed-btn.secondary {
             background: white;
             color: var(--rust);
             border: 2px solid var(--rust);
+            box-shadow: none;
         }
 
         .embed-btn.secondary:hover {
@@ -469,19 +576,43 @@
         }
 
         .embed-note {
-            margin-top: 18px;
-            padding: 15px;
-            background: white;
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            background: rgba(146, 164, 210, 0.1);
             border-radius: 8px;
-            font-size: 0.9em;
+            font-size: 0.9rem;
+            color: #555;
+            text-align: center;
             line-height: 1.6;
         }
 
-        .embed-note strong {
-            color: var(--rust);
+        /* === FOOTER === */
+        footer {
+            background-color: var(--dark-burgundy);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 0;
         }
 
-        /* Responsive */
+        .footer-back-btn {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.6rem 1.2rem;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .footer-back-btn:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* === RESPONSIVE === */
         @media (max-width: 900px) {
             .main-layout {
                 grid-template-columns: 1fr;
@@ -494,36 +625,109 @@
             .chart-canvas-container {
                 height: 180px;
             }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
-        @media (max-width: 600px) {
-            .demo-container {
-                padding: 25px 20px;
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
             }
 
-            h1 {
-                font-size: 2em;
+            nav {
+                padding: 1rem;
             }
 
-            .distribution-grid {
-                grid-template-columns: 1fr 1fr;
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                flex-direction: column;
+                background-color: var(--dark-burgundy);
+                width: 100%;
+                padding: 2rem;
+                gap: 1rem;
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hero-section {
+                padding: 7rem 1.5rem 3rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .embed-section-wrapper {
+                border-radius: 40px 40px 0 0;
+                padding: 3rem 1rem 10rem;
+            }
+
+            .embed-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+
+            .btn.full-width {
+                grid-column: span 1;
             }
         }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-button">← Back to Interactive Demos</a>
-
-    <div class="demo-container">
-        <div class="demo-header">
-            <h1>Central Limit Theorem Explorer</h1>
-            <div class="subtitle">Watch sample means converge to a normal distribution</div>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Brooklyn Corbett</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../about.html">About</a></li>
+                <li><a href="../../research/index.html">Research Projects</a></li>
+                <li><a href="../index.html" class="active">AI in Education</a></li>
+                <li><a href="../../data-viz.html">Data Visualisation</a></li>
+                <li><a href="../../rigour.html">Open Science</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <div class="intro">
-            <p><strong>The Central Limit Theorem</strong> states that regardless of a population's distribution shape, the distribution of sample means approaches a normal distribution as sample size increases. Adjust the controls and watch the magic happen in real time.</p>
-        </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Central Limit Theorem Explorer</h1>
+        <p class="hero-subtitle">Watch sample means converge to a normal distribution</p>
+        <p class="hero-description">
+            The Central Limit Theorem states that regardless of a population's distribution shape, 
+            the distribution of sample means approaches a normal distribution as sample size increases. 
+            Adjust the controls and watch the magic happen in real time.
+        </p>
+        <a href="index.html" class="hero-back-btn">← Back to Interactive Demos</a>
+    </section>
 
+    <!-- Main Content -->
+    <main class="main-content">
         <div class="main-layout">
             <!-- Left: Controls -->
             <div class="controls-panel">
@@ -550,154 +754,207 @@
                     <div class="control-group">
                         <label class="control-label">3. Draw Samples</label>
                         <div class="button-group">
-                            <button class="btn" onclick="takeSample()">Draw 1</button>
-                            <button class="btn" onclick="takeMultiple(10)">Draw 10</button>
-                            <button class="btn" onclick="takeMultiple(100)">Draw 100</button>
+                            <button class="btn" onclick="takeSample()">+1 Sample</button>
+                            <button class="btn" onclick="takeMultiple(10)">+10 Samples</button>
+                            <button class="btn" onclick="takeMultiple(100)">+100 Samples</button>
                             <button class="btn secondary" onclick="reset()">Reset</button>
                         </div>
                     </div>
+                </div>
 
-                    <div class="stats-mini">
-                        <div class="stat-mini">
-                            <div class="stat-mini-label">Samples</div>
-                            <div class="stat-mini-value" id="count">0</div>
-                        </div>
-                        <div class="stat-mini">
-                            <div class="stat-mini-label">Mean</div>
-                            <div class="stat-mini-value" id="mean">—</div>
-                        </div>
-                        <div class="stat-mini">
-                            <div class="stat-mini-label">SE</div>
-                            <div class="stat-mini-value" id="stderr">—</div>
-                        </div>
-                    </div>
+                <!-- Teaching Note -->
+                <div class="teaching-note">
+                    <h4>📚 Teaching Tip</h4>
+                    <p>Start with a <strong>skewed</strong> or <strong>bimodal</strong> population to make the CLT effect most dramatic. Increase sample size to n ≥ 30 and watch the sample means form a beautiful bell curve!</p>
                 </div>
             </div>
 
             <!-- Right: Charts -->
             <div class="charts-panel">
-                <div class="progress-text" id="progress">
-                    No samples drawn yet. Click a button to begin!
-                </div>
-
-                <div class="chart-box">
-                    <div class="chart-label">
-                        <span class="dot population"></span>
-                        Population Distribution
+                <!-- Population Chart -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">Population Distribution</span>
+                        <span class="chart-badge">N = 10,000</span>
                     </div>
                     <div class="chart-canvas-container">
                         <canvas id="popChart"></canvas>
                     </div>
                 </div>
 
-                <div class="chart-box">
-                    <div class="chart-label">
-                        <span class="dot samples"></span>
-                        Distribution of Sample Means
+                <!-- Sample Means Chart -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <span class="chart-title">Distribution of Sample Means</span>
+                        <span class="chart-badge rust" id="sampleBadge">0 samples</span>
                     </div>
                     <div class="chart-canvas-container">
                         <canvas id="sampChart"></canvas>
                     </div>
-                </div>
 
-                <div class="insight-box" id="insight">
-                    <h4>What You're Seeing</h4>
-                    <p id="insightText"></p>
+                    <!-- Stats -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Samples</div>
+                            <div class="stat-value" id="count">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Mean of Means</div>
+                            <div class="stat-value" id="mean">—</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Std Error</div>
+                            <div class="stat-value" id="stderr">—</div>
+                        </div>
+                    </div>
+
+                    <!-- Progress -->
+                    <div class="progress-text" id="progress">
+                        No samples drawn yet. Click a button to begin!
+                    </div>
+
+                    <!-- Insight (appears after 30+ samples) -->
+                    <div class="insight-box" id="insight">
+                        <h4>🎯 Key Insight</h4>
+                        <p id="insightText"></p>
+                    </div>
                 </div>
             </div>
         </div>
+    </main>
 
-        <div class="teaching-note">
-            <h4>Why This Matters</h4>
-            <p>The Central Limit Theorem explains why we can use normal distribution tools (z-tests, t-tests) even when our population data isn't normally distributed. <strong>Try this:</strong> Start with the bimodal distribution, set n = 30, and draw 100 samples. Watch two peaks transform into one bell curve!</p>
-        </div>
-
-        <!-- Embed Section -->
-        <div class="embed-section">
+    <!-- Embed Section with Parallax -->
+    <div class="embed-section-wrapper" id="embedSectionWrapper">
+        <div class="embed-section" id="embedSection">
             <h3>Use This Demo in Your Teaching</h3>
-            <p>This demo is self-contained and can be embedded in Blackboard, Canvas, Moodle, or any website.</p>
+            <p>
+                This interactive demo is self-contained and can be embedded directly into your LMS 
+                (like Blackboard) or downloaded for offline use. No coding required.
+            </p>
             
             <div class="embed-buttons">
-                <button class="embed-btn" onclick="copyDemoCode()">Copy HTML Code</button>
-                <button class="embed-btn secondary" onclick="downloadDemo()">Download HTML File</button>
+                <button class="embed-btn" onclick="copyDemoCode()">📋 Copy HTML Code</button>
+                <button class="embed-btn secondary" onclick="downloadDemo()">⬇️ Download File</button>
             </div>
             
             <div class="embed-note">
-                <strong>How to use:</strong> Copy the code and paste it into your LMS's HTML editor, or download the file and upload it directly. The demo works completely offline with no external dependencies (except Chart.js CDN).
+                <strong>Tip:</strong> In Blackboard, create a new Item, switch to HTML view, and paste the code. 
+                The demo will work directly in students' browsers with no additional setup needed.
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
-    <script>
-        let distribution = 'uniform';
-        let sampleSize = 5;
-        let sampleMeans = [];
-        let population = [];
-        let popChart, sampChart;
+    <!-- Footer -->
+    <footer>
+        <a href="index.html" class="footer-back-btn">← Back to Interactive Demos</a>
+    </footer>
 
+    <!-- JavaScript -->
+    <script>
+        // Mobile nav toggle
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Parallax effect for embed section
+        function initParallaxEffect() {
+            const wrapper = document.getElementById('embedSectionWrapper');
+            const section = document.getElementById('embedSection');
+            
+            if (!wrapper || !section) return;
+            
+            function handleScroll() {
+                const rect = wrapper.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                if (rect.top < windowHeight && rect.bottom > 0) {
+                    const sectionTop = wrapper.offsetTop;
+                    const scrolled = window.pageYOffset;
+                    const relativeScroll = scrolled - sectionTop + windowHeight;
+                    
+                    if (relativeScroll > 0) {
+                        const parallaxOffset = Math.min(relativeScroll * 0.15, 80);
+                        section.style.transform = `translateY(${parallaxOffset}px)`;
+                    }
+                }
+            }
+            
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            handleScroll();
+        }
+        
+        document.addEventListener('DOMContentLoaded', initParallaxEffect);
+
+        // Chart colors
         const colors = {
-            softBlue: 'rgba(146, 164, 210, 0.7)',
-            softBlueBorder: '#92A4D2',
-            rust: 'rgba(117, 53, 45, 0.7)',
-            rustBorder: '#75352D'
+            softBlue: 'rgba(146, 164, 210, 0.6)',
+            softBlueBorder: 'rgba(146, 164, 210, 1)',
+            rust: 'rgba(117, 53, 45, 0.6)',
+            rustBorder: 'rgba(117, 53, 45, 1)'
         };
 
-        function initializeDemo() {
-            if (typeof Chart === 'undefined') {
-                setTimeout(initializeDemo, 100);
-                return;
-            }
+        // State
+        let distribution = 'uniform';
+        let sampleSize = 5;
+        let population = [];
+        let sampleMeans = [];
+        let popChart, sampChart;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
             generatePopulation();
             createCharts();
-        }
+        });
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeDemo);
-        } else {
-            initializeDemo();
-        }
-
-        function setDistribution(type, btn) {
+        function setDistribution(dist, btn) {
+            distribution = dist;
             document.querySelectorAll('.dist-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            distribution = type;
             reset();
         }
 
         function updateSampleSize(val) {
             sampleSize = parseInt(val);
-            document.getElementById('sampleValue').textContent = `n = ${sampleSize}`;
+            document.getElementById('sampleValue').textContent = 'n = ' + val;
         }
 
         function generatePopulation() {
             population = [];
-            const size = 10000;
+            const n = 10000;
 
-            for (let i = 0; i < size; i++) {
-                if (distribution === 'uniform') {
-                    population.push(Math.random() * 100);
-                } else if (distribution === 'normal') {
-                    population.push(boxMuller(50, 15));
-                } else if (distribution === 'skewed') {
-                    population.push(Math.pow(Math.random(), 2) * 100);
-                } else if (distribution === 'bimodal') {
-                    population.push(Math.random() < 0.5 ? boxMuller(30, 8) : boxMuller(70, 8));
+            if (distribution === 'uniform') {
+                for (let i = 0; i < n; i++) population.push(Math.random() * 100);
+            } else if (distribution === 'normal') {
+                for (let i = 0; i < n; i++) {
+                    let u1 = Math.random(), u2 = Math.random();
+                    let z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+                    population.push(50 + z * 15);
+                }
+            } else if (distribution === 'skewed') {
+                for (let i = 0; i < n; i++) {
+                    let val = Math.pow(Math.random(), 3) * 100;
+                    population.push(val);
+                }
+            } else if (distribution === 'bimodal') {
+                for (let i = 0; i < n; i++) {
+                    if (Math.random() < 0.5) {
+                        let u1 = Math.random(), u2 = Math.random();
+                        let z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+                        population.push(30 + z * 8);
+                    } else {
+                        let u1 = Math.random(), u2 = Math.random();
+                        let z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+                        population.push(70 + z * 8);
+                    }
                 }
             }
 
             if (popChart) updatePopChart();
         }
 
-        function boxMuller(mean, std) {
-            let u1 = Math.random();
-            let u2 = Math.random();
-            let z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-            return z * std + mean;
-        }
-
         function takeSample() {
-            let sample = [];
+            const sample = [];
             for (let i = 0; i < sampleSize; i++) {
                 sample.push(population[Math.floor(Math.random() * population.length)]);
             }
@@ -715,6 +972,7 @@
         function updateDisplay() {
             const count = sampleMeans.length;
             document.getElementById('count').textContent = count;
+            document.getElementById('sampleBadge').textContent = count + ' sample' + (count !== 1 ? 's' : '');
 
             if (count > 0) {
                 const meanOfMeans = sampleMeans.reduce((a, b) => a + b, 0) / count;
@@ -760,6 +1018,7 @@
             sampleMeans = [];
             generatePopulation();
             document.getElementById('count').textContent = '0';
+            document.getElementById('sampleBadge').textContent = '0 samples';
             document.getElementById('mean').textContent = '—';
             document.getElementById('stderr').textContent = '—';
             document.getElementById('progress').textContent = 'No samples drawn yet. Click a button to begin!';
@@ -874,7 +1133,6 @@
             }
 
             const bins = 25;
-            // Use fixed range centered around expected mean (50)
             const min = 0;
             const max = 100;
             const width = (max - min) / bins;
@@ -899,13 +1157,14 @@
         // Embed functions
         function copyDemoCode() {
             let code = document.documentElement.outerHTML;
-            code = code.replace(/<a[^>]*class="back-button"[^>]*>.*?<\/a>/gs, '');
-            code = code.replace(/<div[^>]*class="embed-section"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*(?=<script>)/g, '</div>');
+            code = code.replace(/<nav[\s\S]*?<\/nav>/g, '');
+            code = code.replace(/<div class="embed-section-wrapper"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/g, '');
+            code = code.replace(/<footer[\s\S]*?<\/footer>/g, '');
             
             navigator.clipboard.writeText(code).then(() => {
                 const btn = event.target;
                 const originalText = btn.textContent;
-                btn.textContent = 'Copied!';
+                btn.textContent = '✓ Copied!';
                 btn.style.background = 'var(--sage)';
                 setTimeout(() => {
                     btn.textContent = originalText;
@@ -924,8 +1183,9 @@
 
         function downloadDemo() {
             let code = document.documentElement.outerHTML;
-            code = code.replace(/<a[^>]*class="back-button"[^>]*>.*?<\/a>/gs, '');
-            code = code.replace(/<div[^>]*class="embed-section"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*(?=<script>)/g, '</div>');
+            code = code.replace(/<nav[\s\S]*?<\/nav>/g, '');
+            code = code.replace(/<div class="embed-section-wrapper"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/g, '');
+            code = code.replace(/<footer[\s\S]*?<\/footer>/g, '');
             
             const blob = new Blob([code], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
