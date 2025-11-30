@@ -527,6 +527,7 @@
 
         .infographic-card-content {
             padding: 1.25rem 1.5rem;
+            background: linear-gradient(135deg, var(--light-cream) 0%, white 100%);
         }
 
         .infographic-card-content h3 {
@@ -562,7 +563,7 @@
            ============================================ */
         .create-own-section {
             margin-top: 3rem;
-            background: white;
+            background: linear-gradient(135deg, var(--light-cream) 0%, white 100%);
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
@@ -579,7 +580,7 @@
         }
 
         .create-own-toggle:hover {
-            background: var(--light-cream);
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .create-own-toggle.expanded {
@@ -858,13 +859,17 @@
         }
 
         .lightbox-content {
-            max-width: 430px;
+            max-width: 700px;
             width: 90%;
             height: auto;
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             margin: auto;
+        }
+
+        .lightbox-content.infographic {
+            max-width: 430px;
         }
 
         .lightbox-close {
@@ -1696,7 +1701,7 @@ trajectory_plot <span class="operator">&lt;-</span> <span class="function">ggplo
                 </div>
                 
                 <div class="infographics-grid">
-                    <div class="infographic-card" onclick="openLightbox('assets/infographics/infographic_1.png')">
+                    <div class="infographic-card" onclick="openLightbox('assets/infographics/infographic_1.png', 'small')">
                         <div class="infographic-card-image">
                             <img src="assets/infographics/infographic_1.png" alt="AI Tutors vs Tenacious Myths infographic">
                         </div>
@@ -1705,7 +1710,7 @@ trajectory_plot <span class="operator">&lt;-</span> <span class="function">ggplo
                             <p>Can personalised AI dialogue change minds about persistent educational misconceptions?</p>
                         </div>
                     </div>
-                    <div class="infographic-card" onclick="openLightbox('assets/infographics/infographic_2.png')">
+                    <div class="infographic-card" onclick="openLightbox('assets/infographics/infographic_2.png', 'small')">
                         <div class="infographic-card-image">
                             <img src="assets/infographics/infographic_2.png" alt="Student Experiences with AI Learning Tools infographic">
                         </div>
@@ -1714,7 +1719,7 @@ trajectory_plot <span class="operator">&lt;-</span> <span class="function">ggplo
                             <p>Navigating the gap between educational practice and emerging professional needs.</p>
                         </div>
                     </div>
-                    <div class="infographic-card" onclick="openLightbox('assets/infographics/infographic_3.png')">
+                    <div class="infographic-card" onclick="openLightbox('assets/infographics/infographic_3.png', 'small')">
                         <div class="infographic-card-image">
                             <img src="assets/infographics/infographic_3.png" alt="Mining Supervisor Competencies infographic">
                         </div>
@@ -1887,11 +1892,17 @@ The audience is [academics/practitioners/general public] so adjust the technical
         }
 
         // Lightbox functions
-        function openLightbox(src) {
+        function openLightbox(src, size) {
             if (src && !src.includes('placeholder')) {
                 const lightbox = document.getElementById('lightbox');
                 const lightboxImg = document.getElementById('lightboxImg');
                 lightboxImg.src = src;
+                // Remove any size classes first
+                lightboxImg.classList.remove('infographic');
+                // Add size class if specified
+                if (size === 'small') {
+                    lightboxImg.classList.add('infographic');
+                }
                 lightbox.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
