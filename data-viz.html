@@ -245,17 +245,19 @@
         .viz-card-image {
             width: 100%;
             height: 200px;
-            background: var(--light-cream);
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            cursor: zoom-in;
         }
 
         .viz-card-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            padding: 0.5rem;
         }
 
         .viz-card-placeholder {
@@ -1647,43 +1649,34 @@ trajectory_plot <span class="operator">&lt;-</span> <span class="function">ggplo
                 </div>
                 
                 <div class="viz-grid">
-                    <div class="viz-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                    <div class="viz-card" onclick="openLightbox('assets/diagrams/method_diagram_1.jpg')">
                         <div class="viz-card-image">
-                            <div class="viz-card-placeholder">
-                                <span>🔄</span>
-                                <span>Coming Soon</span>
-                            </div>
-                        </div>
-                        <div class="viz-card-content">
-                            <h3>Study Flowchart</h3>
-                            <p>Participant flow through study phases and conditions</p>
-                            <span class="viz-card-tag">CONSORT Style</span>
-                        </div>
-                    </div>
-                    <div class="viz-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
-                        <div class="viz-card-image">
-                            <div class="viz-card-placeholder">
-                                <span>⏱️</span>
-                                <span>Coming Soon</span>
-                            </div>
+                            <img src="assets/diagrams/method_diagram_1.jpg" alt="Delayed match-to-sample memory task procedure">
                         </div>
                         <div class="viz-card-content">
                             <h3>Procedure Timeline</h3>
-                            <p>Visual timeline showing experimental procedure sequence</p>
-                            <span class="viz-card-tag">Methodology</span>
+                            <p>Delayed match-to-sample memory task for fingerprint recognition</p>
+                            <span class="viz-card-tag">Experimental Task</span>
                         </div>
                     </div>
-                    <div class="viz-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                    <div class="viz-card" onclick="openLightbox('assets/diagrams/method_diagram_2.jpg')">
                         <div class="viz-card-image">
-                            <div class="viz-card-placeholder">
-                                <span>🧪</span>
-                                <span>Coming Soon</span>
-                            </div>
+                            <img src="assets/diagrams/method_diagram_2.jpg" alt="Randomised controlled trial design">
                         </div>
                         <div class="viz-card-content">
-                            <h3>Experimental Design</h3>
-                            <p>Visual representation of conditions and counterbalancing</p>
-                            <span class="viz-card-tag">Design Matrix</span>
+                            <h3>RCT Design</h3>
+                            <p>Randomised controlled trial with three conditions and longitudinal follow-up</p>
+                            <span class="viz-card-tag">Study Design</span>
+                        </div>
+                    </div>
+                    <div class="viz-card" onclick="openLightbox('assets/diagrams/method_diagram_3.jpg')">
+                        <div class="viz-card-image">
+                            <img src="assets/diagrams/method_diagram_3.jpg" alt="Matched-pairs experimental design">
+                        </div>
+                        <div class="viz-card-content">
+                            <h3>Matched-Pairs Design</h3>
+                            <p>Expert-novice comparison with matched controls on age, gender, and education</p>
+                            <span class="viz-card-tag">Experimental Design</span>
                         </div>
                     </div>
                 </div>
@@ -1796,14 +1789,15 @@ trajectory_plot <span class="operator">&lt;-</span> <span class="function">ggplo
                     </div>
                     <div class="create-own-content">
                         <p>
-                         These infographics were created using <a href="https://gemini.google/overview/image-generation/" target="_blank">Nano Banana Pro</a>, Google DeepMind’s new image-generation and editing model built on Gemini 3 Pro. It produces accurate, high-quality visuals with legible text across multiple languages. Here’s how to create your own research summary:
+                            These infographics were created using <a href="https://notebooklm.google.com/" target="_blank">Nano Banana Pro</a> (part of Google's NotebookLM), 
+                            an AI tool that transforms text into visual diagrams. Here's how to create your own research summary:
                         </p>
                         
                         <div class="create-own-steps">
                             <div class="create-own-step">
                                 <span class="step-number">1</span>
                                 <div>
-                                    <strong>Upload your paper</strong> — Paste in or upload your paper.
+                                    <strong>Upload your paper</strong> — Paste in or upload your paper. Nano Banana Pro works best with the abstract and key findings sections.
                                 </div>
                             </div>
                             <div class="create-own-step">
