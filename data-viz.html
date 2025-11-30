@@ -192,13 +192,16 @@
         .philosophy-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--soft-blue), #7b8fc7);
-            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
             margin: 0 auto 1rem;
+        }
+
+        .philosophy-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .philosophy-card h3 {
@@ -329,7 +332,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            cursor: pointer;
+            cursor: zoom-in;
             transition: opacity 0.2s;
         }
 
@@ -340,7 +343,9 @@
         .viz-card-image-large img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            padding: 1rem;
+            background: white;
         }
 
         .viz-card-info {
@@ -483,23 +488,23 @@
         }
 
         .infographic-card {
-            background: linear-gradient(135deg, var(--soft-blue), #7b8fc7);
+            background: white;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 8px 30px rgba(146, 164, 210, 0.3);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
+            cursor: zoom-in;
         }
 
         .infographic-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 45px rgba(146, 164, 210, 0.4);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
         }
 
         .infographic-card-image {
             width: 100%;
-            height: 220px;
-            background: rgba(255, 255, 255, 0.1);
+            height: 280px;
+            background: var(--light-cream);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -510,36 +515,30 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: top;
+            transition: transform 0.3s ease;
         }
 
-        .infographic-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            color: white;
-            opacity: 0.6;
-        }
-
-        .infographic-placeholder span:first-child {
-            font-size: 2.5rem;
-        }
-
-        .infographic-placeholder span:last-child {
-            font-size: 0.85rem;
-            font-weight: 500;
+        .infographic-card:hover .infographic-card-image img {
+            transform: scale(1.03);
         }
 
         .infographic-card-content {
-            padding: 1rem 1.25rem;
-            background: rgba(0, 0, 0, 0.1);
+            padding: 1.25rem 1.5rem;
         }
 
         .infographic-card-content h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: white;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .infographic-card-content p {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            line-height: 1.5;
             margin: 0;
         }
 
@@ -557,73 +556,280 @@
         }
 
         /* ============================================
-           LLM TIP SECTION
+           CREATE YOUR OWN SECTION
            ============================================ */
-        .tip-box {
-            background: linear-gradient(135deg, rgba(146, 164, 210, 0.15), rgba(146, 164, 210, 0.05));
-            border: 2px solid var(--soft-blue);
+        .create-own-section {
+            margin-top: 3rem;
+            background: white;
             border-radius: 16px;
-            padding: 2.5rem;
-            max-width: 800px;
-            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
         }
 
-        .tip-header {
+        .create-own-toggle {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            justify-content: space-between;
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .create-own-toggle:hover {
+            background: var(--light-cream);
+        }
+
+        .create-own-toggle.expanded {
+            border-bottom: 1px solid var(--cream);
+        }
+
+        .create-own-toggle-left h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            margin: 0 0 0.25rem 0;
+        }
+
+        .create-own-toggle-left p {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .create-own-expand-icon {
+            font-size: 1.75rem;
+            color: var(--soft-blue);
+            font-weight: 300;
+            transition: transform 0.3s;
+            line-height: 1;
+        }
+
+        .create-own-toggle.expanded .create-own-expand-icon {
+            transform: rotate(45deg);
+        }
+
+        .create-own-content {
+            display: none;
+            padding: 2rem;
+        }
+
+        .create-own-content.show {
+            display: block;
+        }
+
+        .create-own-content > p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin: 0 0 1.5rem 0;
+        }
+
+        .create-own-content a {
+            color: var(--soft-blue);
+            font-weight: 500;
+        }
+
+        .create-own-content a:hover {
+            color: var(--rust);
+        }
+
+        .create-own-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .create-own-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            background: var(--soft-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .create-own-step > div {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-top: 0.25rem;
+        }
+
+        .prompt-box {
+            background: #1e1e2e;
+            border-radius: 12px;
+            overflow: hidden;
             margin-bottom: 1.5rem;
         }
 
-        .tip-icon {
-            font-size: 2rem;
+        .prompt-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .tip-header h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.75rem;
+        .prompt-header span {
+            color: #cdd6f4;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: var(--dark-burgundy);
-            margin: 0;
         }
 
-        .tip-box p {
-            font-size: 1.05rem;
-            color: #5a4a42;
+        .copy-prompt-btn {
+            background: var(--soft-blue);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .copy-prompt-btn:hover {
+            background: #7b8fc7;
+        }
+
+        .copy-prompt-btn.copied {
+            background: var(--sage);
+        }
+
+        .prompt-text {
+            padding: 1.25rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
             line-height: 1.7;
-            margin: 0 0 1rem 0;
+            color: #cdd6f4;
+            white-space: pre-wrap;
         }
 
-        .tip-box ol {
-            margin: 1.5rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .tip-box li {
-            font-size: 1rem;
-            color: #5a4a42;
-            line-height: 1.6;
-            margin-bottom: 0.75rem;
-        }
-
-        .tip-warning {
-            background: rgba(117, 53, 45, 0.1);
-            border-left: 4px solid var(--rust);
-            padding: 1.25rem 1.5rem;
-            border-radius: 0 8px 8px 0;
-            margin-top: 1.5rem;
-        }
-
-        .tip-warning h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--rust);
-            margin: 0 0 0.5rem 0;
-        }
-
-        .tip-warning p {
-            font-size: 0.95rem;
+        .create-own-note {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            background: var(--light-cream);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--soft-blue);
             margin: 0;
+        }
+
+        /* ============================================
+           R HELP ACCORDION (in Research Viz section)
+           ============================================ */
+        .r-help-accordion {
+            margin-top: 3rem;
+            background: var(--light-cream);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid var(--cream);
+        }
+
+        .r-help-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .r-help-toggle:hover {
+            background: rgba(241, 221, 196, 0.5);
+        }
+
+        .r-help-toggle.expanded {
+            border-bottom: 2px solid var(--cream);
+        }
+
+        .r-help-toggle-left h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark-burgundy);
+            margin: 0 0 0.25rem 0;
+        }
+
+        .r-help-toggle-left p {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .r-help-expand-icon {
+            font-size: 1.75rem;
+            color: var(--soft-blue);
+            font-weight: 300;
+            transition: transform 0.3s;
+            line-height: 1;
+        }
+
+        .r-help-toggle.expanded .r-help-expand-icon {
+            transform: rotate(45deg);
+        }
+
+        .r-help-content {
+            display: none;
+            padding: 2rem;
+            background: white;
+        }
+
+        .r-help-content.show {
+            display: block;
+        }
+
+        .r-help-content > p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin: 0 0 1.5rem 0;
+        }
+
+        .r-help-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .r-help-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .r-help-step > div {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-top: 0.25rem;
+        }
+
+        .ethics-warning {
+            font-size: 0.9rem;
+            color: var(--rust);
+            background: rgba(117, 53, 45, 0.08);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--rust);
+            margin-top: 1.5rem;
         }
 
         /* ============================================
@@ -639,9 +845,10 @@
             background: rgba(0, 0, 0, 0.95);
             z-index: 10000;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             padding: 2rem;
             cursor: zoom-out;
+            overflow-y: auto;
         }
 
         .lightbox-overlay.active {
@@ -649,15 +856,17 @@
         }
 
         .lightbox-content {
-            max-width: 95vw;
-            max-height: 90vh;
+            max-width: 700px;
+            width: 90%;
+            height: auto;
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            margin: auto;
         }
 
         .lightbox-close {
-            position: absolute;
+            position: fixed;
             top: 1.5rem;
             right: 2rem;
             color: white;
@@ -665,6 +874,7 @@
             cursor: pointer;
             opacity: 0.7;
             transition: opacity 0.2s;
+            z-index: 10001;
         }
 
         .lightbox-close:hover {
@@ -759,6 +969,22 @@
             .content-section {
                 padding: 3.5rem 1.5rem;
             }
+
+            .create-own-toggle {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .create-own-toggle-left h3 {
+                font-size: 1.2rem;
+            }
+
+            .create-own-content {
+                padding: 1.5rem;
+            }
+
+            .prompt-text {
+                font-size: 0.85rem;
+            }
         }
 
         @media (max-width: 500px) {
@@ -772,6 +998,14 @@
 
             .tip-box {
                 padding: 1.5rem;
+            }
+
+            .create-own-toggle {
+                padding: 1rem 1.25rem;
+            }
+
+            .create-own-expand-icon {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -838,22 +1072,30 @@
                 
                 <div class="philosophy-grid">
                     <div class="philosophy-card">
-                        <div class="philosophy-icon">📊</div>
+                        <div class="philosophy-icon">
+                            <img src="assets/images/data_point_icon.png" alt="Data points icon">
+                        </div>
                         <h3>Individual Points</h3>
                         <p>Show every participant, not just averages. Each dot is a person.</p>
                     </div>
                     <div class="philosophy-card">
-                        <div class="philosophy-icon">📈</div>
+                        <div class="philosophy-icon">
+                            <img src="assets/images/distribution_icon.png" alt="Distribution icon">
+                        </div>
                         <h3>Distributions</h3>
                         <p>Use density plots to reveal the shape behind summary statistics.</p>
                     </div>
                     <div class="philosophy-card">
-                        <div class="philosophy-icon">📉</div>
+                        <div class="philosophy-icon">
+                            <img src="assets/images/error_icon.png" alt="Error bars icon">
+                        </div>
                         <h3>Uncertainty</h3>
                         <p>Always include error bars or confidence intervals.</p>
                     </div>
                     <div class="philosophy-card">
-                        <div class="philosophy-icon">🔗</div>
+                        <div class="philosophy-icon">
+                            <img src="assets/images/link_icon.png" alt="Linked data icon">
+                        </div>
                         <h3>Paired Data</h3>
                         <p>Connect matched observations to reveal hidden patterns.</p>
                     </div>
@@ -873,16 +1115,13 @@
                 <!-- Raincloud Plot -->
                 <div class="viz-card-expanded">
                     <div class="viz-card-header">
-                        <div class="viz-card-image-large" onclick="openLightbox('assets/images/raincloud-plot.png')">
-                            <div class="viz-card-placeholder">
-                                <span>📊</span>
-                                <span>Coming Soon</span>
-                            </div>
+                        <div class="viz-card-image-large" onclick="openLightbox('assets/figures/raincloud_1.jpeg')">
+                            <img src="assets/figures/raincloud_1.jpeg" alt="Raincloud plot showing novice vs expert performance">
                         </div>
                         <div class="viz-card-info">
-                            <h3>Raincloud Plot</h3>
-                            <p>The "gold standard" for showing group differences. Combines a density distribution (the "cloud"), a box plot, and individual data points (the "rain") to give a complete picture of your data.</p>
-                            <span class="viz-card-tag">Group Comparison</span>
+                            <h3>Paired Raincloud Plot</h3>
+                            <p>Combines density distributions on the sides, individual data points, connected paired observations (grey lines showing each participant's change), and group means with error bars. Perfect for showing within-subject changes between conditions.</p>
+                            <span class="viz-card-tag">Paired Comparison</span>
                         </div>
                     </div>
                     <div class="code-toggle" onclick="toggleCode(this)">
@@ -1025,15 +1264,12 @@ raincloud_plot <span class="operator">&lt;-</span> <span class="function">ggplot
                 <!-- Correlation Matrix -->
                 <div class="viz-card-expanded">
                     <div class="viz-card-header">
-                        <div class="viz-card-image-large" onclick="openLightbox('assets/images/correlation-matrix.png')">
-                            <div class="viz-card-placeholder">
-                                <span>📈</span>
-                                <span>Coming Soon</span>
-                            </div>
+                        <div class="viz-card-image-large" onclick="openLightbox('assets/figures/correlation_jpg.png')">
+                            <img src="assets/figures/correlation_jpg.png" alt="Correlation matrix showing relationships between cognitive variables">
                         </div>
                         <div class="viz-card-info">
-                            <h3>Correlation Heatmap</h3>
-                            <p>Visualise relationships between multiple variables at once. Colour intensity shows correlation strength, making it easy to spot patterns in complex datasets.</p>
+                            <h3>Correlation Matrix</h3>
+                            <p>Visualise relationships between multiple variables at once. Circle size indicates correlation strength, colour shows direction (green = negative, blue = positive), and asterisks mark statistical significance.</p>
                             <span class="viz-card-tag">Relationships</span>
                         </div>
                     </div>
@@ -1177,15 +1413,12 @@ heatmap_plot <span class="operator">&lt;-</span> <span class="function">ggplot</
                 <!-- Longitudinal Plot -->
                 <div class="viz-card-expanded">
                     <div class="viz-card-header">
-                        <div class="viz-card-image-large" onclick="openLightbox('assets/images/longitudinal-plot.png')">
-                            <div class="viz-card-placeholder">
-                                <span>📉</span>
-                                <span>Coming Soon</span>
-                            </div>
+                        <div class="viz-card-image-large" onclick="openLightbox('assets/figures/longitudinal_1.png')">
+                            <img src="assets/figures/longitudinal_1.png" alt="Longitudinal plot showing belief ratings across time points">
                         </div>
                         <div class="viz-card-info">
-                            <h3>Longitudinal Trajectories</h3>
-                            <p>Show how individuals change over time. Each line represents one participant's journey, with group averages overlaid. Perfect for pre-post or repeated measures designs.</p>
+                            <h3>Repeated Measures Plot</h3>
+                            <p>Track changes across multiple time points with box plots showing distributions, individual data points (jittered), and connected group means. Ideal for intervention studies with pre-post and follow-up measurements.</p>
                             <span class="viz-card-tag">Time Series</span>
                         </div>
                     </div>
@@ -1351,6 +1584,56 @@ trajectory_plot <span class="operator">&lt;-</span> <span class="function">ggplo
                     </div>
                 </div>
 
+                <!-- Not Comfortable with R? Accordion -->
+                <div class="r-help-accordion">
+                    <div class="r-help-toggle" onclick="toggleRHelp(this)">
+                        <div class="r-help-toggle-left">
+                            <h3>Not Comfortable with R?</h3>
+                            <p>Use an LLM to help create these visualisations with your data</p>
+                        </div>
+                        <span class="r-help-expand-icon">+</span>
+                    </div>
+                    <div class="r-help-content">
+                        <p>
+                            If you like these visualisation styles but aren't ready to dive into R code, you can 
+                            use a large language model (like ChatGPT or Claude) to help create them with your data.
+                        </p>
+                        
+                        <div class="r-help-steps">
+                            <div class="r-help-step">
+                                <span class="step-number">1</span>
+                                <div><strong>Screenshot the visualisation</strong> you want to recreate from this page</div>
+                            </div>
+                            <div class="r-help-step">
+                                <span class="step-number">2</span>
+                                <div><strong>Prepare your de-identified data</strong> as a CSV file</div>
+                            </div>
+                            <div class="r-help-step">
+                                <span class="step-number">3</span>
+                                <div><strong>Upload both to an LLM</strong> and ask it to write R code to create that visualisation with your data</div>
+                            </div>
+                        </div>
+
+                        <div class="prompt-box">
+                            <div class="prompt-header">
+                                <span>Example Prompt</span>
+                                <button class="copy-prompt-btn" onclick="copyPrompt(this)">Copy</button>
+                            </div>
+                            <div class="prompt-text">I want to create a raincloud plot that looks like this [screenshot]. My data has two groups (treatment and control) comparing test scores. Can you write R code to create this visualisation with my data? Please include comments explaining what each part does.</div>
+                        </div>
+
+                        <p>
+                            The LLM can also help you troubleshoot errors, adjust colours, modify labels, and 
+                            adapt the code to your specific data structure.
+                        </p>
+
+                        <div class="ethics-warning">
+                            <strong>Ethics Reminder:</strong> Only upload de-identified data. Never share private, confidential, 
+                            or identifiable information with LLMs. Check with your ethics committee if you're unsure.
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -1468,92 +1751,102 @@ trajectory_plot <span class="operator">&lt;-</span> <span class="function">ggplo
                     <h2>Research Infographics</h2>
                     <p class="section-intro">Transforming complex research findings into clear, engaging visual summaries for broader audiences.</p>
                     <div class="tool-badge">
-                        <span>✨</span>
                         Created with Nano Banana Pro
                     </div>
                 </div>
                 
                 <div class="infographics-grid">
-                    <div class="infographic-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                    <div class="infographic-card" onclick="openLightbox('assets/infographics/infographic_1.png')">
                         <div class="infographic-card-image">
-                            <div class="infographic-placeholder">
-                                <span>📋</span>
-                                <span>Coming Soon</span>
-                            </div>
+                            <img src="assets/infographics/infographic_1.png" alt="AI Tutors vs Tenacious Myths infographic">
                         </div>
                         <div class="infographic-card-content">
-                            <h3>Research Summary</h3>
+                            <h3>AI Tutors vs. Tenacious Myths</h3>
+                            <p>Can personalised AI dialogue change minds about persistent educational misconceptions?</p>
                         </div>
                     </div>
-                    <div class="infographic-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                    <div class="infographic-card" onclick="openLightbox('assets/infographics/infographic_2.png')">
                         <div class="infographic-card-image">
-                            <div class="infographic-placeholder">
-                                <span>🎯</span>
-                                <span>Coming Soon</span>
-                            </div>
+                            <img src="assets/infographics/infographic_2.png" alt="Student Experiences with AI Learning Tools infographic">
                         </div>
                         <div class="infographic-card-content">
-                            <h3>Key Findings</h3>
+                            <h3>Student Experiences with AI Tools</h3>
+                            <p>Navigating the gap between educational practice and emerging professional needs.</p>
                         </div>
                     </div>
-                    <div class="infographic-card" onclick="openLightbox('assets/images/viz-placeholder.jpg')">
+                    <div class="infographic-card" onclick="openLightbox('assets/infographics/infographic_3.png')">
                         <div class="infographic-card-image">
-                            <div class="infographic-placeholder">
-                                <span>💡</span>
-                                <span>Coming Soon</span>
-                            </div>
+                            <img src="assets/infographics/infographic_3.png" alt="Mining Supervisor Competencies infographic">
                         </div>
                         <div class="infographic-card-content">
-                            <h3>Practical Implications</h3>
+                            <h3>Mining Supervisor Competencies</h3>
+                            <p>Industry perspectives on holistic workforce development beyond technical compliance.</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Section 06: Not Comfortable with R? -->
-        <section class="content-section bg-white">
-            <div class="section-inner">
-                <div class="section-header">
-                    <span class="section-number">06 — ALTERNATIVE</span>
-                    <h2>Not Comfortable with R?</h2>
-                </div>
-
-                <div class="tip-box">
-                    <div class="tip-header">
-                        <span class="tip-icon">💡</span>
-                        <h3>Use an LLM to Help</h3>
+                <!-- Create Your Own Expandable Section -->
+                <div class="create-own-section">
+                    <div class="create-own-toggle" onclick="toggleCreateOwn(this)">
+                        <div class="create-own-toggle-left">
+                            <h3>Create Your Own</h3>
+                            <p>Turn any research paper into a visual summary</p>
+                        </div>
+                        <span class="create-own-expand-icon">+</span>
                     </div>
-                    <p>
-                        If you like these visualisation styles but aren't ready to dive into R code, you can 
-                        use a large language model (like ChatGPT or Claude) to help create them with your data.
-                    </p>
-                    
-                    <ol>
-                        <li><strong>Screenshot the visualisation</strong> you want to recreate from this page</li>
-                        <li><strong>Prepare your de-identified data</strong> as a CSV file</li>
-                        <li><strong>Upload both to an LLM</strong> and ask it to write R code to create that visualisation with your data</li>
-                    </ol>
-
-                    <p>
-                        <strong>Example prompt:</strong> <em>"I want to create a raincloud plot that looks like this 
-                        [screenshot]. My data has two groups (treatment and control) comparing test scores. 
-                        Can you write R code to create this visualisation with my data? Please include comments 
-                        explaining what each part does."</em>
-                    </p>
-
-                    <p>
-                        The LLM can also help you troubleshoot errors, adjust colours, modify labels, and 
-                        adapt the code to your specific data structure.
-                    </p>
-
-                    <div class="tip-warning">
-                        <h4>⚠️ Ethics Reminder</h4>
+                    <div class="create-own-content">
                         <p>
-                            <strong>Only upload de-identified data.</strong> Never share private, confidential, 
-                            or identifiable information with LLMs. If your data contains names, IDs, dates of birth, 
-                            or any other potentially identifying information, remove or anonymise it first. 
-                            Check with your ethics committee if you're unsure.
+                            These infographics were created using <a href="https://notebooklm.google.com/" target="_blank">Nano Banana Pro</a> (part of Google's NotebookLM), 
+                            an AI tool that transforms text into visual diagrams. Here's how to create your own research summary:
+                        </p>
+                        
+                        <div class="create-own-steps">
+                            <div class="create-own-step">
+                                <span class="step-number">1</span>
+                                <div>
+                                    <strong>Upload your paper</strong> — Paste in or upload your paper. Nano Banana Pro works best with the abstract and key findings sections.
+                                </div>
+                            </div>
+                            <div class="create-own-step">
+                                <span class="step-number">2</span>
+                                <div>
+                                    <strong>Use this prompt</strong> — Copy and adapt the prompt below to guide the AI.
+                                </div>
+                            </div>
+                            <div class="create-own-step">
+                                <span class="step-number">3</span>
+                                <div>
+                                    <strong>Iterate and refine</strong> — Adjust colours, layout, and text density to suit your audience.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="prompt-box">
+                            <div class="prompt-header">
+                                <span>Example Prompt</span>
+                                <button class="copy-prompt-btn" onclick="copyPrompt(this)">Copy</button>
+                            </div>
+                            <div class="prompt-text">Create a research infographic summarising this paper. Structure it with:
+
+1. A clear title and subtitle at the top
+2. A brief "The Problem" or "Context" section
+3. A visual representation of the methodology
+4. Key findings with simple icons or diagrams
+5. Practical implications or takeaways at the bottom
+
+Style guidelines:
+- Use a cohesive colour palette (2-3 main colours)
+- Keep text concise — bullet points over paragraphs
+- Include visual icons to break up text
+- Make the flow logical from top to bottom
+- Ensure it's readable at [insert desired size, e.g., A4/poster]
+
+The audience is [academics/practitioners/general public] so adjust the technical language accordingly.</div>
+                        </div>
+
+                        <p class="create-own-note">
+                            <strong>Tip:</strong> After generating, you can ask Nano Banana Pro to adjust specific elements — 
+                            "make the colours more muted", "add more white space", or "simplify the methodology diagram".
                         </p>
                     </div>
                 </div>
@@ -1574,6 +1867,48 @@ trajectory_plot <span class="operator">&lt;-</span> <span class="function">ggplo
             document.getElementById('navLinks').classList.toggle('active');
             this.classList.toggle('active');
         });
+
+        // Toggle Create Your Own section
+        function toggleCreateOwn(toggle) {
+            toggle.classList.toggle('expanded');
+            const content = toggle.nextElementSibling;
+            content.classList.toggle('show');
+        }
+
+        // Toggle R Help accordion
+        function toggleRHelp(toggle) {
+            toggle.classList.toggle('expanded');
+            const content = toggle.nextElementSibling;
+            content.classList.toggle('show');
+        }
+
+        // Copy prompt to clipboard
+        function copyPrompt(button) {
+            const promptText = button.closest('.prompt-box').querySelector('.prompt-text').textContent;
+            
+            navigator.clipboard.writeText(promptText).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                // Fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = promptText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
 
         // Toggle code visibility
         function toggleCode(toggle) {
@@ -1613,7 +1948,6 @@ trajectory_plot <span class="operator">&lt;-</span> <span class="function">ggplo
 
         // Lightbox functions
         function openLightbox(src) {
-            // Only open if not a placeholder
             if (src && !src.includes('placeholder')) {
                 const lightbox = document.getElementById('lightbox');
                 const lightboxImg = document.getElementById('lightboxImg');
