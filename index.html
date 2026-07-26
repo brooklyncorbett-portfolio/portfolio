@@ -564,6 +564,44 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 .nav-links{display:flex;gap:clamp(16px,3vw,32px);opacity:0}
 .nav-links a{font-family:var(--fbody);font-weight:600;font-size:14px;color:var(--muted);text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:var(--accent)}.nabbr{display:none}@media(max-width:820px){.nav-links{gap:14px}.nav-links a{font-size:13px}.nfull{display:none}.nabbr{display:inline}}
+
+/* ---- study illustrations: motion ---- */
+@keyframes saLens{from{transform:translate(54px,74px)}to{transform:translate(146px,74px)}}
+.sa-lens{animation:saLens 2.8s ease-in-out infinite alternate}
+@keyframes saRot{from{transform:translate(146px,56px) rotate(0deg)}to{transform:translate(146px,56px) rotate(360deg)}}
+.sa-rot{animation:saRot 6s linear infinite;transform-origin:0 0}
+@keyframes saTarget{0%,100%{opacity:.35}50%{opacity:1}}
+.sa-target{animation:saTarget 1.9s ease-in-out infinite}
+@keyframes saS1{0%,26%{opacity:1}36%,100%{opacity:.16}}
+@keyframes saS2{0%,30%{opacity:.16}40%,62%{opacity:1}72%,100%{opacity:.16}}
+@keyframes saS3{0%,62%{opacity:.16}74%,100%{opacity:1}}
+.sa-s1{animation:saS1 4.2s ease-in-out infinite}
+.sa-s2{animation:saS2 4.2s ease-in-out infinite}
+.sa-s3{animation:saS3 4.2s ease-in-out infinite}
+
+/* ---- participant-view figures ---- */
+.sc-fig{margin:18px 0 0;padding:16px 16px 10px;background:var(--paper-2);border:1px solid var(--border);border-radius:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.sc-fig svg{width:100%;min-width:318px;height:auto;color:var(--accent);display:block;overflow:visible}
+.sc-fig figcaption{margin-top:10px;font-family:var(--fbody);font-size:12px;color:var(--faint);font-style:italic}
+@keyframes fgLink{0%,100%{opacity:.25}50%{opacity:1}}
+.fg-link{animation:fgLink 2.4s ease-in-out infinite}
+@keyframes fgPulse{0%,100%{opacity:.3}50%{opacity:.95}}
+.fg-choice,.fg-target,.fg-stop{animation:fgPulse 2.1s ease-in-out infinite}
+
+@media(prefers-reduced-motion:reduce){
+  .sa-lens,.sa-rot,.sa-target,.sa-s1,.sa-s2,.sa-s3,.fg-link,.fg-choice,.fg-target,.fg-stop{animation:none}
+  .sa-s1,.sa-s2,.sa-s3{opacity:1}
+}
+
+.sc-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.sc-chip{font-family:var(--fbody);font-size:13px;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:7px 14px}
+@keyframes saPass{from{transform:translateX(0)}to{transform:translateX(60px)}}
+.sa-pass{animation:saPass 2.6s ease-in-out infinite}
+@keyframes saSpoke{0%,100%{opacity:.28}50%{opacity:1}}
+.sa-spoke{animation:saSpoke 2.6s ease-in-out infinite}
+@keyframes saTravel{0%{transform:translateX(36px)}50%{transform:translateX(100px)}100%{transform:translateX(164px)}}
+.sa-travel{animation:saTravel 4.4s ease-in-out infinite alternate}
+@media(prefers-reduced-motion:reduce){.sa-pass,.sa-spoke,.sa-travel{animation:none}.sa-spoke{opacity:.8}}
 </style>
 
 <nav class="nav" id="nav">
@@ -1082,6 +1120,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 
       {k:"Student engagement \u00B7 2022-2025",t:"What actually keeps students showing up",
        lead:"How the community around a school shapes whether students turn up, across 264 Queensland schools and three years on an ARC Discovery project.",
+       tone:{accent:"#4F6B3F",hover:"#6B8A57",panel:"#374A2B",soft:"#E5EBDF"},
        stats:[{n:"264",l:"schools analysed"},{n:"44%",l:"missed 10%+ of days, 2024"},{n:"16",l:"leaders interviewed"}],
        links:[],
        layout:"editorial",
@@ -1093,14 +1132,18 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
               "In 2024, <strong>44% of Queensland students missed at least 10% of school days</strong>. Absenteeism is rising here and worldwide, and schools are usually the ones held responsible for turning it around.",
               "The longer view complicates that. Across Queensland secondary schools, the median attendance rate climbed to 2017, then fell back by 2019. The slide was well underway before the pandemic ever arrived."
             ]},
-           {kicker:"The lens",h:"Attendance as a community question",
-            p:["We read attendance through collective efficacy: the trust, shared norms, and willingness of a community to step in for the common good. It moves the question beyond the school gate, into the neighbourhood around it."]},
-           {kicker:"The study",h:"Three phases, hard data to lived experience",
+           {kicker:"The lens",h:"Attendance as a question of social justice",
+            p:[
+              "Missing school is not evenly distributed. It tracks disadvantage, and treating it as individual non-compliance puts the responsibility on the families already carrying the most. We approached attendance as a social justice issue rather than a behavioural one.",
+              "That means reading a student inside widening circles of influence, through <strong>ecological systems theory</strong>, and asking what a community can build rather than what a school must enforce, through a <strong>community development</strong> lens. Collective efficacy, the trust and shared willingness of neighbours to act for the common good, sits inside that picture as one of the things a community can grow, not as the whole explanation."
+            ]},
+           {kicker:"The study",h:"Four phases, from the evidence base to lived experience",
             p:["A three-year ARC Discovery project linking administrative data to the voices of the people inside these schools."],
             phases:[
-              {n:"01",t:"Administrative data",p:"Quantile regression on 264 secondary schools (2013 to 2019), linked to area volunteering and crime, controlling for disadvantage."},
-              {n:"02",t:"Leader interviews",p:"16 school leaders across metro, regional and remote settings, chosen for lifting attendance in low-SES communities."},
-              {n:"03",t:"Case studies",p:"Five school communities in depth, from students and teachers to parents and community members."}
+              {n:"01",t:"Systematic review",p:"A systematic review of school-community partnerships and student attendance, from database searching and evidence extraction through quality appraisal and synthesis. I led this strand."},
+              {n:"02",t:"Administrative data",p:"Quantile regression on 264 secondary schools (2013 to 2019), linked to area volunteering and crime, controlling for disadvantage."},
+              {n:"03",t:"Leader interviews",p:"16 school leaders across metro, regional and remote settings, chosen for lifting attendance in low-SES communities."},
+              {n:"04",t:"Case studies",p:"Five school communities in depth, from students and teachers to parents and community members."}
             ]},
            {kicker:"What we found",h:"Community cohesion tracks attendance",
             p:["Schools in communities with more volunteering had higher attendance, and those in areas with more violent crime had lower attendance, <strong>even after accounting for socio-economic status</strong>. The community context matters beyond what a single school can control."],
@@ -1111,61 +1154,96 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
             ]},caption:"Adjusted median attendance rate by community volunteering, 2019. Higher-volunteering areas show higher attendance, controlling for socio-economic disadvantage."}},
            {kicker:"In the field",h:"Locals looking after locals",
             p:["The interviews put flesh on the numbers. Again and again, attendance came back to relationships, belonging, and a community keeping an eye on its own."],
-            pull:{t:"It's locals looking after locals, our generations.",who:"Interview participant"}}
+            pull:{t:"It's locals looking after locals, our generations.",who:"Interview participant"}},
+           {kicker:"Where it is now",h:"Three papers under review",
+            p:["Three papers from the project are currently under review, spanning the systematic review, the administrative-data analysis, and the school-community partnership work."]}
          ],
          team:{h:"Project team",members:[
            {name:"Prof Annemaree Carroll",role:"Lead Chief Investigator",org:"UQ"},
            {name:"Prof Martin Mills",role:"Chief Investigator",org:"QUT"},
            {name:"A/Prof Wojtek Tomaszewski",role:"Chief Investigator",org:"UQ"},
            {name:"Dr Deborah Lynch",role:"Chief Investigator",org:"UQ"}
-         ],note:"I contributed to the project as a research assistant, supporting data analysis, qualitative coding, and research outputs across all three phases."}
+         ],note:"I joined the project as a senior research assistant. I led the systematic review, contributed to interview protocol design, analysed interview data, managed ethics across UQ and the Department of Education, and supported research outputs across the project."}
        }},
 
       {k:"Workplace learning \u00B7 2021-2026",t:"What makes learning stick in high-risk work",
-       lead:"How people learn on the job in high-risk industries, and what makes a supervisor effective.",
-       stats:[{n:"83",l:"interviews"},{n:"28",l:"surveys"},{n:"3",l:"mine sites"}],
-       links:[{label:"Read 'What Good Looks Like'",href:"https://doi.org/10.1007/s12186-024-09353-2"},{label:"Read 'Passion, Style, and Smarts'",href:"https://doi.org/10.1108/JWL-03-2025-0052"}],
-       chapters:[
-         {label:"How workers learn",kicker:"Study 1 \u00B7 Vocations and Learning, 2024",title:"Learning beats training",
-          beats:[
-            {k:"The question",v:"How do frontline workers in mining actually learn, where a mistake can be fatal?"},
-            {k:"What we did",v:"83 interviews and 28 surveys across three Queensland mines, from newcomers to 40-year veterans."},
-            {k:"What we found",v:"The industry over-values formal training and under-values the social, on-the-job learning that happens every day."}
-          ],
-          block:{t:"quote",body:"So we ended up with fruit from a contaminated tree. Johnny hasn't learnt properly, now he's teaching someone else, but he's only got 80% of the knowledge.",cite:"Frontline worker"}},
-         {label:"Good supervisors",kicker:"Study 2 \u00B7 Journal of Workplace Learning, 2025",title:"Passion, style and smarts",
-          beats:[
-            {k:"The question",v:"What actually makes a supervisor effective, beyond technical know-how?"},
-            {k:"What we found",v:"Workers ranked behaviour over credentials. Good supervision needs six competencies, from empathy to systems thinking."}
-          ],
-          block:{t:"chips",items:["Knowledge & skills","Accountable leadership","Empathetic & ethical","Facilitator of growth","Adaptive communicator","Systems & culture"]}},
-         {label:"Workforce agility",kicker:"2025-2026 \u00B7 in progress",title:"Learning across boundaries",
-          beats:[{k:"What's next",v:"An EAIT and HASS SEED project building a framework for adaptive, boundary-crossing workforce learning, as automation and decarbonisation reshape mining."}]}
+       lead:"How people actually learn on the job in mining, where getting it wrong can kill someone, and what separates a supervisor people learn from.",
+       stats:[],links:[],
+       tone:{accent:"#8A5230",hover:"#A96A42",panel:"#5E3720",soft:"#F2E5DA"},
+       layout:"pair",
+       pair:[
+         {short:"How workers learn",railLabel:"How they learn",icon:"think",art:"handover",
+          question:"How do frontline workers actually learn, where a mistake can be fatal?",
+          link:{label:"Read the paper",href:"https://doi.org/10.1007/s12186-024-09353-2"},
+          sections:[
+            {k:"Problem",v:"High-risk industries invest heavily in formal training and assume that is where competence comes from. Yet most of what a worker knows was picked up standing next to someone else, and that learning is largely unmanaged and unexamined."},
+            {k:"As a participant",v:"A researcher meets you on site, in your crib room or beside the machine, and asks how you learned to do your job. Not what your ticket says you can do, but who showed you, what you picked up watching, and where the training missed.",fig:"sitewalk"},
+            {k:"Method",v:"83 interviews and 28 surveys across three Queensland mine sites, spanning brand-new starters through to forty-year veterans, plus supervisors, trainers and safety leads."},
+            {k:"What we found",v:"The industry over-values formal training and under-values the social, on-the-job learning that happens every day. Where that informal chain is left unchecked, gaps are inherited: each person passes on a slightly thinner version of what they were taught.",
+             quotes:[{t:"So we ended up with fruit from a contaminated tree. Johnny hasn't learnt properly, now he's teaching someone else, but he's only got 80% of the knowledge.",who:"Frontline worker"}]},
+            {k:"Why it matters",v:"If most learning is informal, then quality depends on who happens to be standing next to you. That makes the supervisor, not the training package, the real unit of intervention."}
+          ]},
+
+         {short:"What good supervisors do",railLabel:"Good supervisors",icon:"grid",art:"competency",
+          question:"What actually makes a supervisor effective, beyond technical know-how?",
+          link:{label:"Read the paper",href:"https://doi.org/10.1108/JWL-03-2025-0052"},
+          sections:[
+            {k:"Problem",v:"Supervisors are promoted for technical skill and then made responsible for other people's learning and safety, with little agreement about what the job actually requires."},
+            {k:"As a participant",v:"You are asked to think of the best supervisor you ever worked under, and the worst, and say what separated them. Then you weigh a set of supervisor qualities against each other and justify the order you put them in.",fig:"ranking"},
+            {k:"Method",v:"Industry interviews and surveys across the same three sites, analysed thematically to build a shared picture of supervisor competence from the people being supervised."},
+            {k:"What we found",v:"Workers ranked behaviour above credentials. What they described was not a technical profile but six competencies, weighted toward how a supervisor treats people and reads the system around them.",
+             chips:["Knowledge and skills","Accountable leadership","Empathetic and ethical","Facilitator of growth","Adaptive communicator","Systems and culture"]},
+            {k:"Why it matters",v:"It gives industry something concrete to select, develop and appraise supervisors against, drawn from the workforce rather than from a competency catalogue."}
+          ]},
+
+         {short:"Learning across boundaries",railLabel:"Workforce agility",icon:"grid",art:"agility",
+          question:"What will this workforce need to learn as automation and decarbonisation reshape the industry?",
+          sections:[
+            {k:"Problem",v:"Automation and the shift to cleaner energy are redrawing what mining roles involve. Workers will have to move across boundaries that used to be fixed, between trades, between sites, and between industries."},
+            {k:"What we are doing",v:"An EAIT and HASS SEED project extending the workplace learning frameworks from the first two studies into a model of adaptive, boundary-crossing capability, across mining, defence and advanced manufacturing."},
+            {k:"Where it is up to",v:"In progress through 2026. This is the strand I now lead."}
+          ]}
        ]},
 
       {k:"PhD, psychology \u00B7 2024",t:"How people become expert at difficult things",
-       lead:"What separates exceptional performers from novices? My PhD used fingerprint examination to reverse-engineer expertise.",
-       stats:[{n:"130+",l:"participants"},{n:"3",l:"studies"}],
-       links:[{label:"How experts think (paper)",href:"https://doi.org/10.1002/acp.70010"},{label:"How experts remember (paper)",href:"https://doi.org/10.1186/s41235-024-00539-9"}],
-       chapters:[
-         {label:"How experts think",kicker:"Study 1 \u00B7 Applied Cognitive Psychology",title:"Not knowing more, thinking differently",
-          beats:[
-            {k:"The question",v:"What is actually going on in an expert's head during a high-stakes judgement?"},
-            {k:"What we did",v:"Think-aloud protocol analysis with 44 fingerprint examiners and 44 novices."},
-            {k:"What we found",v:"Expertise is a shift in cognition: experts fix on local detail, adapt their strategy, and constantly weigh their own reliability."}
-          ],
-          block:{t:"quote",body:"Becoming an expert is not just about knowing more; it is about thinking differently.",cite:"From the thesis"}},
-         {label:"How experts remember",kicker:"Study 2 \u00B7 Cognitive Research",title:"Memory sharpened by expertise",
-          beats:[
-            {k:"What we did",v:"Visual short-term memory experiments for domain-specific prints."},
-            {k:"What we found",v:"Experts remembered more, and won even on the hardest, nondistinctive prints, so expertise itself sharpens memory."}
+       lead:"What separates exceptional performers from novices? My PhD used fingerprint examination, where a judgement can decide a court case, to reverse-engineer expertise across three studies.",
+       stats:[],links:[],
+       tone:{accent:"#2D5A66",hover:"#3E7E8D",panel:"#22454E",soft:"#DDE9EB"},
+       layout:"pair",
+       pair:[
+         {short:"How experts think",railLabel:"How they think",icon:"think",art:"prints",
+          question:"What is actually going on in an expert's head during a high-stakes judgement?",
+          link:{label:"Read the paper",href:"https://doi.org/10.1002/acp.70010"},
+          sections:[
+            {k:"Problem",v:"A fingerprint identification can decide a criminal case, but the reasoning behind it happens silently, inside one person's head. What cannot be seen cannot be taught, checked, or improved."},
+            {k:"As a participant",v:"You are given two prints and asked to decide whether they came from the same finger, saying every thought out loud as you go. Nothing is hidden and nothing is timed. The commentary is the data.",fig:"compare"},
+            {k:"Method",v:"Think-aloud protocol analysis with 44 qualified fingerprint examiners and 44 novices, coding every utterance into what people attended to, the strategies they used, and how they judged their own certainty."},
+            {k:"What we found",v:"Expertise showed up as a different way of thinking, not a larger store of facts. Experts fixed on small local detail, changed strategy when a comparison resisted them, and kept weighing how much to trust their own conclusion.",
+             quotes:[{t:"Becoming an expert is not just about knowing more; it is about thinking differently.",who:"From the thesis"}]},
+            {k:"Why it matters",v:"If expertise is a set of habits of attention and self-monitoring, then it can be trained and assessed directly, rather than waited for."}
           ]},
-         {label:"What predicts it",kicker:"Study 3 \u00B7 under review",title:"Mostly made, not born",
-          beats:[
-            {k:"What we did",v:"Compared experts and novices across cognitive tasks and personality traits."},
-            {k:"What we found",v:"Visual search and mental rotation helped, but were overshadowed by domain skill built through years of experience."}
-          ],
-          block:{t:"two",l:{h:"Cognitive tasks",items:["Visual search","Mental rotation","Inhibition","Intelligence"]},mid:"+",r:{h:"Personality",items:["Big Five","Risk propensity","Uncertainty","Resilience"]}}}
+
+         {short:"How experts remember",railLabel:"How they remember",icon:"memory",art:"memtask",
+          question:"Does becoming an expert change what you can hold in mind?",
+          link:{label:"Read the paper",href:"https://doi.org/10.1186/s41235-024-00539-9"},
+          sections:[
+            {k:"Problem",v:"Experts are often said to have better memory for their own material. The usual explanation is familiarity with distinctive patterns, which would make the advantage a filing trick rather than a change in the memory system."},
+            {k:"As a participant",v:"A print appears for a moment, the screen clears, and then a second print arrives. Same finger, or different? The prints are sometimes distinctive and sometimes deliberately plain, so familiarity alone will not carry you.",fig:"recall"},
+            {k:"Method",v:"Visual short-term memory experiments using domain-specific prints, comparing examiners with novices across distinctive and nondistinctive stimuli."},
+            {k:"What we found",v:"Experts held more in mind, and their advantage survived on the hardest, least distinctive prints, where a familiarity shortcut has nothing to grip."},
+            {k:"Why it matters",v:"The advantage is not only knowing which patterns matter. Sustained practice appears to sharpen the visual memory system itself."}
+          ]},
+
+         {short:"What predicts it",railLabel:"What predicts it",icon:"grid",art:"battery",
+          question:"Is expertise something you build, or something you were always suited to?",
+          sections:[
+            {k:"Problem",v:"If raw aptitude explains expert performance, you select for it. If experience explains it, you train for it. The two answers lead to completely different investments."},
+            {k:"As a participant",v:"You work through a battery: find the odd shape in a crowded grid, decide whether two rotated objects are the same, hold your response back when the rule says stop, then answer questionnaires about personality and how you handle uncertainty.",fig:"cogbattery"},
+            {k:"Method",v:"Experts and novices compared across cognitive tasks (visual search, mental rotation, inhibition, reasoning) and trait measures (Big Five, risk propensity, tolerance of uncertainty, resilience)."},
+            {k:"What we found",v:"Visual search and mental rotation did carry some weight, but both were overshadowed by domain skill built through years of doing the work."},
+            {k:"Why it matters",v:"Mostly made, not born. Selecting for aptitude buys far less than giving people sustained, well-structured experience.",
+             quotes:[{t:"Study 3 is under review.",who:"Status"}]}
+          ]}
        ]}
     ];
 
@@ -1396,7 +1474,21 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       sc.addEventListener("scroll",onScroll,{passive:true});
       spyEl=sc;spyFn=onScroll;onScroll();
     }
+    function taskFig(kind){
+      if(kind==="sitewalk")return '<svg viewBox="0 0 340 186" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="326" height="172" rx="12" opacity=".35"/><circle cx="88" cy="54" r="13"/><path d="M72 49 a16 16 0 0 1 32 0"/><path d="M69 49 h38"/><path d="M70 98 v-13 a18 18 0 0 1 36 0 v13"/><circle cx="196" cy="54" r="13"/><path d="M178 98 v-13 a18 18 0 0 1 36 0 v13"/><rect x="252" y="66" width="60" height="34" rx="8"/><circle class="sc-dot" cx="268" cy="83" r="3" fill="currentColor" stroke="none"/><circle class="sc-dot" cx="282" cy="83" r="3" fill="currentColor" stroke="none" style="animation-delay:.2s"/><circle class="sc-dot" cx="296" cy="83" r="3" fill="currentColor" stroke="none" style="animation-delay:.4s"/><path d="M30 128 h280" opacity=".3"/><text x="88" y="152" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".7">you</text><text x="196" y="152" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".7">researcher</text><text x="282" y="120" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity=".55">recorded</text></svg>';
+      if(kind==="ranking")return '<svg viewBox="0 0 340 186" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="326" height="172" rx="12" opacity=".35"/><rect x="60" y="34" width="220" height="26" rx="13" opacity=".95"/><circle cx="42" cy="47" r="11" opacity=".95"/><text x="42" y="52" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".95">1</text><text x="170" y="52" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".95">Treats people well</text><rect x="60" y="68" width="220" height="26" rx="13" opacity=".95"/><circle cx="42" cy="81" r="11" opacity=".95"/><text x="42" y="86" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".95">2</text><text x="170" y="86" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".95">Explains the why</text><rect x="60" y="102" width="220" height="26" rx="13" opacity=".5"/><circle cx="42" cy="115" r="11" opacity=".5"/><text x="42" y="120" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".5">3</text><text x="170" y="120" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".5">Knows the job</text><rect x="60" y="136" width="220" height="26" rx="13" opacity=".5"/><circle cx="42" cy="149" r="11" opacity=".5"/><text x="42" y="154" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".5">4</text><text x="170" y="154" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".5">Has the ticket</text><path class="fg-link" d="M300 47 v92" stroke-dasharray="5 5"/><text x="300" y="34" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".55">most</text><text x="300" y="152" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".55">least</text></svg>';
+      if(kind==="compare")return '<svg viewBox="0 0 340 186" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="326" height="172" rx="12" opacity=".4"/><rect x="26" y="26" width="88" height="100" rx="8"/><rect x="128" y="26" width="88" height="100" rx="8"/><path d="M50 104 a 20 26 0 0 1 40 0"/><path d="M55 104 a 15 18 0 0 1 29 0"/><path d="M61 104 a 9 11 0 0 1 18 0"/><path d="M65 104 a 5 6 0 0 1 9 0"/><path d="M48 112 q 22 7 44 0"/><path d="M50 120 q 20 7 40 0"/><path d="M152 104 a 20 26 0 0 1 40 0"/><path d="M157 104 a 15 18 0 0 1 29 0"/><path d="M163 104 a 9 11 0 0 1 18 0"/><path d="M167 104 a 5 6 0 0 1 9 0"/><path d="M150 112 q 22 7 44 0"/><path d="M152 120 q 20 7 40 0"/><path class="fg-link" d="M98 60 H144" stroke-dasharray="5 5"/><circle cx="98" cy="60" r="3.4" fill="currentColor" stroke="none"/><circle cx="144" cy="60" r="3.4" fill="currentColor" stroke="none"/><text x="70" y="148" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".72">Latent</text><text x="172" y="148" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".72">Known</text><rect x="238" y="40" width="82" height="48" rx="12"/><path d="M252 88 l-3 12 13 -12"/><circle class="sc-dot" cx="261" cy="64" r="3" fill="currentColor" stroke="none"/><circle class="sc-dot" cx="274" cy="64" r="3" fill="currentColor" stroke="none" style="animation-delay:.2s"/><circle class="sc-dot" cx="287" cy="64" r="3" fill="currentColor" stroke="none" style="animation-delay:.4s"/><text x="279" y="124" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".62">thinking aloud</text></svg>';
+      if(kind==="recall")return '<svg viewBox="0 0 340 150" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="26" width="86" height="74" rx="8"/><path d="M37 88 Q53 50 69 88"/><path d="M42 88 Q53 55 64 88"/><path d="M46 88 Q53 60 60 88"/><text x="53" y="116" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".72">study</text><text x="53" y="131" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".45">brief</text><path d="M104 63 h26" opacity=".5"/><path d="M124 58 l6 5 -6 5" opacity=".5"/><rect x="138" y="26" width="64" height="74" rx="8" stroke-dasharray="5 5"/><text x="170" y="68" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity=".55">blank</text><text x="170" y="116" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".72">delay</text><path d="M210 63 h26" opacity=".5"/><path d="M230 58 l6 5 -6 5" opacity=".5"/><rect x="244" y="26" width="86" height="74" rx="8"/><path d="M271 88 Q287 50 303 88"/><path d="M276 88 Q287 55 298 88"/><path d="M280 88 Q287 60 294 88"/><text x="287" y="116" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".72">test</text><rect class="fg-choice" x="248" y="122" width="36" height="18" rx="9"/><text x="266" y="135" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".8">same</text><rect x="290" y="122" width="40" height="18" rx="9" opacity=".5"/><text x="310" y="135" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".5">differs</text></svg>';
+      if(kind==="cogbattery")return '<svg viewBox="0 0 340 150" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="22" width="72" height="72" rx="9"/><circle cx="26" cy="40" r="4.5"/><circle cx="46" cy="40" r="4.5"/><circle cx="66" cy="40" r="4.5"/><circle cx="26" cy="60" r="4.5"/><circle cx="66" cy="60" r="4.5"/><rect class="fg-target" x="61" y="55" width="11" height="11" rx="2.5"/><text x="46" y="112" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".72">visual search</text><rect x="96" y="22" width="72" height="72" rx="9"/><g class="sa-rot" transform="translate(132 58)"><path d="M-13 6 l8 -13 h10 l8 13 -8 13 h-10 z"/></g><text x="132" y="112" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".72">mental rotation</text><rect x="182" y="22" width="72" height="72" rx="9"/><path d="M200 58 h40"/><path d="M232 50 l8 8 -8 8"/><circle class="fg-stop" cx="218" cy="58" r="11"/><text x="218" y="112" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".72">inhibition</text><rect x="268" y="22" width="72" height="72" rx="9"/><path d="M284 76 v-16"/><path d="M300 76 v-30"/><path d="M316 76 v-24"/><path d="M280 82 h40" opacity=".5"/><text x="304" y="112" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".72">reasoning</text></svg>';
+      return "";
+    }
     function studyArt(kind){
+      if(kind==="handover")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="48" cy="52" r="10"/><path d="M35 48 a13 13 0 0 1 26 0"/><path d="M32 48 h32"/><path d="M34 86 v-10 a14 14 0 0 1 28 0 v10"/><circle cx="152" cy="52" r="10"/><path d="M139 48 a13 13 0 0 1 26 0"/><path d="M136 48 h32"/><path d="M138 86 v-10 a14 14 0 0 1 28 0 v10"/><path d="M70 74 h60" opacity=".4" stroke-dasharray="4 4"/><circle class="sa-pass" cx="70" cy="74" r="4.5" fill="currentColor" stroke="none"/><path d="M28 122 h48" opacity=".8"/><path d="M124 122 h48" opacity=".35"/><text x="52" y="146" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity=".6">100%</text><text x="148" y="146" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity=".45">80%</text></svg>';
+      if(kind==="competency")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="100" cy="54" r="10"/><path d="M87 50 a13 13 0 0 1 26 0"/><path d="M84 50 h32"/><path d="M86 88 v-10 a14 14 0 0 1 28 0 v10"/><path class="sa-spoke" style="animation-delay:0.00s" d="M100 48 L100 24"/><circle class="sa-spoke" style="animation-delay:0.00s" cx="100" cy="24" r="6"/><path class="sa-spoke" style="animation-delay:0.22s" d="M119 59 L140 47"/><circle class="sa-spoke" style="animation-delay:0.22s" cx="140" cy="47" r="6"/><path class="sa-spoke" style="animation-delay:0.44s" d="M119 81 L140 93"/><circle class="sa-spoke" style="animation-delay:0.44s" cx="140" cy="93" r="6"/><path class="sa-spoke" style="animation-delay:0.66s" d="M100 92 L100 116"/><circle class="sa-spoke" style="animation-delay:0.66s" cx="100" cy="116" r="6"/><path class="sa-spoke" style="animation-delay:0.88s" d="M81 81 L60 93"/><circle class="sa-spoke" style="animation-delay:0.88s" cx="60" cy="93" r="6"/><path class="sa-spoke" style="animation-delay:1.10s" d="M81 59 L60 47"/><circle class="sa-spoke" style="animation-delay:1.10s" cx="60" cy="47" r="6"/><path d="M40 134 h120" opacity=".3"/></svg>';
+      if(kind==="agility")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="44" width="52" height="60" rx="8" opacity=".55"/><rect x="74" y="44" width="52" height="60" rx="8" opacity=".55"/><rect x="138" y="44" width="52" height="60" rx="8" opacity=".55"/><path d="M36 74 h128" opacity=".3" stroke-dasharray="5 5"/><g class="sa-travel"><circle cx="0" cy="74" r="7" fill="currentColor" stroke="none"/></g><text x="36" y="126" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".6">mining</text><text x="100" y="126" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".6">defence</text><text x="164" y="126" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".6">advanced mfg</text></svg>';
+      if(kind==="prints")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="26" width="76" height="96" rx="9"/><rect x="108" y="26" width="76" height="96" rx="9"/><path d="M32 86 a 22 28 0 0 1 44 0"/><path d="M38 86 a 16 20 0 0 1 32 0"/><path d="M44 86 a 10 12 0 0 1 20 0"/><path d="M49 86 a 5 6 0 0 1 10 0"/><path d="M30 95 q 24 8 48 0"/><path d="M32 103 q 22 8 44 0"/><path d="M124 86 a 22 28 0 0 1 44 0"/><path d="M130 86 a 16 20 0 0 1 32 0"/><path d="M136 86 a 10 12 0 0 1 20 0"/><path d="M141 86 a 5 6 0 0 1 10 0"/><path d="M122 95 q 24 8 48 0"/><path d="M124 103 q 22 8 44 0"/><circle class="sc-dot" cx="45" cy="80" r="2.6" fill="currentColor" stroke="none"/><circle class="sc-dot" cx="64" cy="70" r="2.6" fill="currentColor" stroke="none" style="animation-delay:.25s"/><circle class="sc-dot" cx="137" cy="80" r="2.6" fill="currentColor" stroke="none" style="animation-delay:.5s"/><circle class="sc-dot" cx="156" cy="70" r="2.6" fill="currentColor" stroke="none" style="animation-delay:.75s"/><g class="sa-lens"><circle cx="0" cy="0" r="17"/><path d="M12 12 L21 21"/></g></svg>';
+      if(kind==="memtask")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g class="sa-stage sa-s1"><rect x="6" y="34" width="54" height="70" rx="8"/><path d="M19 84 a 14 17 0 0 1 27 0"/><path d="M23 84 a 10 12 0 0 1 20 0"/><path d="M27 84 a 6 7 0 0 1 12 0"/><path d="M30 84 a 3 4 0 0 1 6 0"/><path d="M18 90 q 15 5 30 0"/><path d="M19 95 q 14 5 27 0"/></g><path d="M64 69 h12" opacity=".5"/><path d="M71 64 l5 5 -5 5" opacity=".5"/><g class="sa-stage sa-s2"><rect x="82" y="34" width="36" height="70" rx="8" stroke-dasharray="5 5"/><path d="M94 62 q6 -8 12 0 t-6 9 v4"/><circle cx="100" cy="84" r="1.8" fill="currentColor" stroke="none"/></g><path d="M124 69 h12" opacity=".5"/><path d="M131 64 l5 5 -5 5" opacity=".5"/><g class="sa-stage sa-s3"><rect x="140" y="34" width="54" height="70" rx="8"/><path d="M153 84 a 14 17 0 0 1 27 0"/><path d="M157 84 a 10 12 0 0 1 20 0"/><path d="M161 84 a 6 7 0 0 1 12 0"/><path d="M164 84 a 3 4 0 0 1 6 0"/><path d="M152 90 q 15 5 30 0"/><path d="M153 95 q 14 5 27 0"/></g><text x="33" y="120" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".6">study</text><text x="100" y="120" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".6">delay</text><text x="167" y="120" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".6">test</text><text x="100" y="144" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity=".7">same or different?</text></svg>';
+      if(kind==="battery")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="36" r="6"/><circle cx="44" cy="36" r="6"/><circle cx="66" cy="36" r="6"/><circle cx="22" cy="58" r="6"/><circle cx="44" cy="58" r="6"/><rect class="sa-target" x="58" y="50" width="16" height="16" rx="3"/><circle cx="22" cy="80" r="6"/><circle cx="44" cy="80" r="6"/><circle cx="66" cy="80" r="6"/><g class="sa-rot" transform="translate(150 58)"><path d="M-17 8 l11 -17 h12 l11 17 -11 17 h-12 z"/></g><path d="M22 112 h58" stroke-width="5" opacity=".85"/><path d="M22 127 h94" stroke-width="5" opacity=".55"/><path d="M22 142 h34" stroke-width="5" opacity=".35"/></svg>';
       if(kind==="chatscreen")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+
         '<rect x="26" y="16" width="148" height="98" rx="10"/>'+
         '<path d="M100 114 V130"/><path d="M80 132 H120"/>'+
@@ -1466,6 +1558,8 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           row.appendChild(el("div","sc-rlabel",esc(sec.k)));
           var body=el("div","sc-rbody");
           body.appendChild(el("p",null,sec.v));
+          if(sec.chips){var cw=el("div","sc-chips");sec.chips.forEach(function(c){cw.appendChild(el("span","sc-chip",esc(c)));});body.appendChild(cw);}
+          if(sec.fig){var fg=el("figure","sc-fig");fg.innerHTML=taskFig(sec.fig);fg.appendChild(el("figcaption",null,"What the participant sees."));body.appendChild(fg);}
           if(sec.chart)body.appendChild(buildChart(sec.chart));
           (sec.quotes||[]).forEach(function(q){var bq=el("blockquote","sc-quote");bq.appendChild(el("p",null,esc(q.t)));if(q.who)bq.appendChild(el("cite",null,esc(q.who)));body.appendChild(bq);});
           row.appendChild(body);secs.appendChild(row);
@@ -1487,7 +1581,17 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       });
       return wrap;
     }
+    function applyTone(t){
+      var m=modal;if(!m)return;
+      ["--accent","--accent-hover","--panel","--accent-soft"].forEach(function(v){m.style.removeProperty(v);});
+      if(!t)return;
+      if(t.accent)m.style.setProperty("--accent",t.accent);
+      if(t.hover)m.style.setProperty("--accent-hover",t.hover);
+      if(t.panel)m.style.setProperty("--panel",t.panel);
+      if(t.soft)m.style.setProperty("--accent-soft",t.soft);
+    }
     function openM(i){var p=PROJ[i];if(!p)return;
+      applyTone(p.tone);
       pmK.textContent=p.k||"";pmK.style.display=p.k?"":"none";
       pmT.textContent=p.t;pmLead.textContent=p.lead;
       pmLinks.innerHTML="";(p.links||[]).forEach(function(l){var a=el("a",null,l.label+" &rarr;");a.setAttribute("href",l.href);if((l.href||"").indexOf("http")===0){a.target="_blank";a.rel="noopener";}pmLinks.appendChild(a);});
