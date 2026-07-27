@@ -306,7 +306,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 .pmodal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px}
 .pmodal.open{display:flex}
 .pmodal-backdrop{position:absolute;inset:0;background:rgba(28,31,43,.5);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);animation:pmFade .25s ease}
-.pmodal-card{position:relative;z-index:1;background:var(--paper);border-radius:22px;max-width:1000px;width:100%;max-height:92vh;
+.pmodal-card{position:relative;z-index:1;background:var(--paper);border-radius:22px;max-width:1240px;width:100%;max-height:92vh;
   display:flex;flex-direction:column;overflow:hidden;box-shadow:0 40px 90px -40px rgba(20,22,30,.6);animation:pmPop .32s cubic-bezier(.2,.7,.2,1)}
 .pmodal-scroll{overflow-y:auto;overscroll-behavior:contain}
 .pmodal-strip{height:8px;background:linear-gradient(90deg,var(--accent),var(--accent-hover))}
@@ -660,6 +660,8 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 .trial-pairitem span:first-child{font-family:var(--fbody);font-size:11.5px;color:var(--faint)}
 .trial-pairitem .trial-mini svg{width:76px}
 @media(max-width:520px){.trial-opts{gap:8px}.trial-mini svg{width:72px}.trial-target svg{width:126px}}
+
+.sc-rbody p + p{margin-top:.85em}
 </style>
 
 <nav class="nav" id="nav">
@@ -1235,8 +1237,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           link:{label:"Read the paper",href:"https://doi.org/10.1007/s12186-024-09353-2"},
           sections:[
             {k:"Problem",v:"High-risk industries invest heavily in formal training and assume that is where competence comes from. Yet most of what a worker knows was picked up standing next to someone else, and that learning is largely unmanaged and unexamined."},
-            {k:"As a participant",v:"A researcher meets you on site, in your crib room or beside the machine, and asks how you learned to do your job. Not what your ticket says you can do, but who showed you, what you picked up watching, and where the training missed.",fig:"sitewalk"},
-            {k:"Method",v:"83 interviews and 28 surveys across three Queensland mine sites, spanning brand-new starters through to forty-year veterans, plus supervisors, trainers and safety leads."},
+            {k:"What we did",v:["83 interviews and 28 surveys across three Queensland mine sites, spanning brand-new starters through to forty-year veterans, plus supervisors, trainers and safety leads.","A researcher meets you on site, in your crib room or beside the machine, and asks how you learned to do your job. Not what your ticket says you can do, but who showed you, what you picked up watching, and where the training missed."],fig:"sitewalk"},
             {k:"What we found",v:"The industry over-values formal training and under-values the social, on-the-job learning that happens every day. Where that informal chain is left unchecked, gaps are inherited: each person passes on a slightly thinner version of what they were taught.",
              quotes:[{t:"So we ended up with fruit from a contaminated tree. Johnny hasn't learnt properly, now he's teaching someone else, but he's only got 80% of the knowledge.",who:"Frontline worker"}]},
             {k:"Why it matters",v:"If most learning is informal, then quality depends on who happens to be standing next to you. That makes the supervisor, not the training package, the real unit of intervention."}
@@ -1247,8 +1248,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           link:{label:"Read the paper",href:"https://doi.org/10.1108/JWL-03-2025-0052"},
           sections:[
             {k:"Problem",v:"Supervisors are promoted for technical skill and then made responsible for other people's learning and safety, with little agreement about what the job actually requires."},
-            {k:"As a participant",v:"You are asked to think of the best supervisor you ever worked under, and the worst, and say what separated them. Then you weigh a set of supervisor qualities against each other and justify the order you put them in.",fig:"ranking"},
-            {k:"Method",v:"Industry interviews and surveys across the same three sites, analysed thematically to build a shared picture of supervisor competence from the people being supervised."},
+            {k:"What we did",v:["Industry interviews and surveys across the same three sites, analysed thematically to build a shared picture of supervisor competence from the people being supervised.","You are asked to think of the best supervisor you ever worked under, and the worst, and say what separated them. Then you weigh a set of supervisor qualities against each other and justify the order you put them in."],fig:"ranking"},
             {k:"What we found",v:"Workers ranked behaviour above credentials. What they described was not a technical profile but six competencies, weighted toward how a supervisor treats people and reads the system around them.",
              chips:["Knowledge and skills","Accountable leadership","Empathetic and ethical","Facilitator of growth","Adaptive communicator","Systems and culture"]},
             {k:"Why it matters",v:"It gives industry something concrete to select, develop and appraise supervisors against, drawn from the workforce rather than from a competency catalogue."}
@@ -1276,8 +1276,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           link:{label:"Read the paper",href:"https://doi.org/10.1002/acp.70010"},
           sections:[
             {k:"Problem",v:"A fingerprint identification can decide a criminal case, but the reasoning behind it happens silently, inside one person's head. What cannot be seen cannot be taught, checked, or improved."},
-            {k:"As a participant",v:"You are given two prints and asked to decide whether they came from the same finger, saying every thought out loud as you go. Nothing is hidden and nothing is timed. The commentary is the data.",fig:"compare"},
-            {k:"Method",v:"Think-aloud protocol analysis with 44 qualified fingerprint examiners and 44 novices, coding every utterance into what people attended to, the strategies they used, and how they judged their own certainty."},
+            {k:"What we did",v:["You are given two prints and asked to decide whether they came from the same finger, saying every thought out loud as you go. Nothing is hidden and nothing is timed. The commentary is the data.","Think-aloud protocol analysis with 44 qualified fingerprint examiners and 44 novices, coding every utterance into what people attended to, the strategies they used, and how they judged their own certainty."],fig:"compare"},
             {k:"What we found",v:"Expertise showed up as a different way of thinking, not a larger store of facts. Experts fixed on small local detail, changed strategy when a comparison resisted them, and kept weighing how much to trust their own conclusion.",
              quotes:[{t:"Becoming an expert is not just about knowing more; it is about thinking differently.",who:"From the thesis"}]},
             {k:"Why it matters",v:"If expertise is a set of habits of attention and self-monitoring, then it can be trained and assessed directly, rather than waited for."}
@@ -1288,9 +1287,9 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           link:{label:"Read the paper",href:"https://doi.org/10.1186/s41235-024-00539-9"},
           sections:[
             {k:"Problem",v:"Experts are often said to have better memory for their own material. The usual explanation is familiarity with distinctive patterns, which would make the advantage a filing trick rather than a change in the memory system."},
-            {k:"As a participant",v:"A print appears for a moment, the screen clears, and then you have to pick it out again. The prints are sometimes distinctive and sometimes deliberately plain, so familiarity alone will not carry you. Try a trial yourself.",trial:true},
-            {k:"Method",v:"Visual short-term memory experiments using domain-specific prints, comparing examiners with novices across distinctive and nondistinctive stimuli."},
-            {k:"What we found",v:"Experts held more in mind, and their advantage survived on the hardest, least distinctive prints, where a familiarity shortcut has nothing to grip."},
+            {k:"What we did",v:["Visual short-term memory experiments using domain-specific prints, comparing examiners with novices across distinctive and nondistinctive stimuli.","A print appears for a moment, the screen clears, and then you have to pick it out again. Some prints are distinctive and some are deliberately plain, so familiarity alone will not carry you. Try a trial yourself."],trial:true},
+            {k:"What we found",v:["Experts identified the print they had studied 76% of the time. Novices managed 41%. Chance was 10%, so both groups were doing something, but the gap between them is the size of the expertise effect.","A second experiment split the prints into the hundred most distinctive and the hundred least distinctive. Both groups did better on distinctive prints, as you would expect. The expert advantage did not change between them, which is the part that matters: if expertise were just familiarity with striking patterns, it should have shrunk when the patterns stopped being striking."],
+             result:"Experiment 1 accuracy. The bar is the group mean and the band is one standard deviation either side, as published. The paper plots every participant individually."},
             {k:"Why it matters",v:"The advantage is not only knowing which patterns matter. Sustained practice appears to sharpen the visual memory system itself."}
           ]},
 
@@ -1298,8 +1297,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           question:"Is expertise something you build, or something you were always suited to?",
           sections:[
             {k:"Problem",v:"If raw aptitude explains expert performance, you select for it. If experience explains it, you train for it. The two answers lead to completely different investments."},
-            {k:"As a participant",v:"You work through a battery: find the odd shape in a crowded grid, decide whether two rotated objects are the same, hold your response back when the rule says stop, then answer questionnaires about personality and how you handle uncertainty.",fig:"cogbattery"},
-            {k:"Method",v:"Experts and novices compared across cognitive tasks (visual search, mental rotation, inhibition, reasoning) and trait measures (Big Five, risk propensity, tolerance of uncertainty, resilience)."},
+            {k:"What we did",v:["Experts and novices compared across cognitive tasks and trait measures.","As a participant you work through a battery: find the odd shape in a crowded grid, decide whether two rotated objects are the same, hold your response back when the rule says stop, then answer questionnaires on the Big Five, risk propensity, tolerance of uncertainty and resilience."],fig:"cogbattery"},
             {k:"What we found",v:"Visual search and mental rotation did carry some weight, but both were overshadowed by domain skill built through years of doing the work."},
             {k:"Why it matters",v:"Mostly made, not born. Selecting for aptitude buys far less than giving people sustained, well-structured experience.",
              quotes:[{t:"Study 3 is under review.",who:"Status"}]}
@@ -1634,6 +1632,38 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       intro();
       return box;
     }
+
+    /* Experiment 1 of the memory paper, drawn the way the paper draws it:
+       spread first, mean second. Values are the published M and SD. */
+    function memoryResult(){
+      var C_GRID="#e0d8cc",C_LAB="#8a8177",C_INK="#2E2621",C_NOV="#9C9089",C_EXP="#2D5A66";
+      var W=560,H=300,pl=64,pr=26,pt=26,pb=52,pw=W-pl-pr,ph=H-pt-pb;
+      function yp(v){return pt+ph*(1-v/100);}
+      var g="";
+      [0,10,25,50,75,100].forEach(function(t){
+        var y=yp(t);
+        g+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(pl+pw)+'" y2="'+y.toFixed(1)+'" stroke="'+C_GRID+'" stroke-width="1"/>';
+        g+='<text x="'+(pl-10)+'" y="'+(y+4).toFixed(1)+'" text-anchor="end" font-size="11.5" fill="'+C_LAB+'">'+t+'%</text>';
+      });
+      var groups=[{n:"Novices",N:44,m:41,sd:14,x:pl+pw*0.30,c:C_NOV},
+                  {n:"Experts",N:44,m:76,sd:11,x:pl+pw*0.70,c:C_EXP}];
+      groups.forEach(function(gr){
+        var top=Math.min(100,gr.m+gr.sd), bot=Math.max(0,gr.m-gr.sd);
+        /* the band is one standard deviation either side of the mean */
+        g+='<rect x="'+(gr.x-34)+'" y="'+yp(top).toFixed(1)+'" width="68" height="'+(yp(bot)-yp(top)).toFixed(1)+
+           '" rx="8" fill="'+gr.c+'" opacity="0.16"/>';
+        g+='<line x1="'+(gr.x-34)+'" y1="'+yp(gr.m).toFixed(1)+'" x2="'+(gr.x+34)+'" y2="'+yp(gr.m).toFixed(1)+
+           '" stroke="'+gr.c+'" stroke-width="3"/>';
+        g+='<text x="'+gr.x+'" y="'+(yp(gr.m)-12).toFixed(1)+'" text-anchor="middle" font-size="17" font-weight="700" fill="'+C_INK+'">'+gr.m+'%</text>';
+        g+='<text x="'+gr.x+'" y="'+(H-30)+'" text-anchor="middle" font-size="12.5" fill="'+C_INK+'">'+gr.n+'</text>';
+        g+='<text x="'+gr.x+'" y="'+(H-14)+'" text-anchor="middle" font-size="11" fill="'+C_LAB+'">n = '+gr.N+'</text>';
+      });
+      var yc=yp(10);
+      g+='<line x1="'+pl+'" y1="'+yc.toFixed(1)+'" x2="'+(pl+pw)+'" y2="'+yc.toFixed(1)+
+         '" stroke="'+C_INK+'" stroke-width="1.5" stroke-dasharray="5 4"/>';
+      g+='<text x="'+(pl+pw)+'" y="'+(yc-8).toFixed(1)+'" text-anchor="end" font-size="11" font-weight="600" fill="'+C_INK+'">chance, 10%</text>';
+      return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Accuracy for experts and novices against chance" style="width:100%;height:auto">'+g+'</svg>';
+    }
     function taskFig(kind){
       if(kind==="sitewalk")return '<svg viewBox="0 0 340 186" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="326" height="172" rx="12" opacity=".35"/><circle cx="88" cy="54" r="13"/><path d="M72 49 a16 16 0 0 1 32 0"/><path d="M69 49 h38"/><path d="M70 98 v-13 a18 18 0 0 1 36 0 v13"/><circle cx="196" cy="54" r="13"/><path d="M178 98 v-13 a18 18 0 0 1 36 0 v13"/><rect x="252" y="66" width="60" height="34" rx="8"/><circle class="sc-dot" cx="268" cy="83" r="3" fill="currentColor" stroke="none"/><circle class="sc-dot" cx="282" cy="83" r="3" fill="currentColor" stroke="none" style="animation-delay:.2s"/><circle class="sc-dot" cx="296" cy="83" r="3" fill="currentColor" stroke="none" style="animation-delay:.4s"/><path d="M30 128 h280" opacity=".3"/><text x="88" y="152" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".7">you</text><text x="196" y="152" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".7">researcher</text><text x="282" y="120" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity=".55">recorded</text></svg>';
       if(kind==="ranking")return '<svg viewBox="0 0 340 186" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="326" height="172" rx="12" opacity=".35"/><rect x="60" y="34" width="220" height="26" rx="13" opacity=".95"/><circle cx="42" cy="47" r="11" opacity=".95"/><text x="42" y="52" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".95">1</text><text x="170" y="52" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".95">Treats people well</text><rect x="60" y="68" width="220" height="26" rx="13" opacity=".95"/><circle cx="42" cy="81" r="11" opacity=".95"/><text x="42" y="86" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".95">2</text><text x="170" y="86" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".95">Explains the why</text><rect x="60" y="102" width="220" height="26" rx="13" opacity=".5"/><circle cx="42" cy="115" r="11" opacity=".5"/><text x="42" y="120" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".5">3</text><text x="170" y="120" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".5">Knows the job</text><rect x="60" y="136" width="220" height="26" rx="13" opacity=".5"/><circle cx="42" cy="149" r="11" opacity=".5"/><text x="42" y="154" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".5">4</text><text x="170" y="154" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".5">Has the ticket</text><path class="fg-link" d="M300 47 v92" stroke-dasharray="5 5"/><text x="300" y="34" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".55">most</text><text x="300" y="152" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".55">least</text></svg>';
@@ -1717,7 +1747,10 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           var row=el("div","sc-row");
           row.appendChild(el("div","sc-rlabel",esc(sec.k)));
           var body=el("div","sc-rbody");
-          body.appendChild(el("p",null,sec.v));
+          (Object.prototype.toString.call(sec.v)==="[object Array]"?sec.v:[sec.v])
+            .forEach(function(par){body.appendChild(el("p",null,par));});
+          if(sec.result){var rf=el("figure","sc-fig");rf.innerHTML=memoryResult();
+            rf.appendChild(el("figcaption",null,sec.result));body.appendChild(rf);}
           if(sec.trial)body.appendChild(buildTrial());
           if(sec.chips){var cw=el("div","sc-chips");sec.chips.forEach(function(c){cw.appendChild(el("span","sc-chip",esc(c)));});body.appendChild(cw);}
           if(sec.fig){var fg=el("figure","sc-fig");fg.innerHTML=taskFig(sec.fig);fg.appendChild(el("figcaption",null,"What the participant sees."));body.appendChild(fg);}
