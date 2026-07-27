@@ -703,19 +703,19 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
   transition:background .2s,color .2s;font-family:var(--fbody)}
 .sctab:last-child{border-right:0}
 .sctab:hover{background:#E6E0D6}
-.sctab.on{background:var(--panel)}
-.sctab.on:hover{background:var(--panel)}
+.sctab.on{background:var(--paper)}
+.sctab.on:hover{background:var(--paper)}
 .sctab-lab{font-family:var(--fbody);font-weight:700;font-size:11px;letter-spacing:.18em;
   text-transform:uppercase;color:var(--accent);opacity:.75}
-.sctab.on .sctab-lab{color:var(--lit);opacity:.9}
+.sctab.on .sctab-lab{color:var(--accent);opacity:1}
 .sctab-chev{position:absolute;right:20px;top:50%;transform:translateY(-50%);
   font-family:var(--fdisplay);font-size:26px;line-height:1;color:var(--accent);opacity:.45;
   transition:transform .2s,opacity .2s}
 .sctab:hover .sctab-chev{opacity:.9;transform:translateY(-50%) translateX(3px)}
-.sctab.on .sctab-chev{color:var(--lit);opacity:.85;transform:translateY(-50%) rotate(90deg)}
+.sctab.on .sctab-chev{color:var(--accent);opacity:1;transform:translateY(-50%) rotate(90deg)}
 .sctab-t{font-family:var(--fdisplay);font-weight:600;font-size:clamp(16.5px,1.6vw,20px);
   line-height:1.18;letter-spacing:-.015em;color:var(--ink)}
-.sctab.on .sctab-t{color:#fff}
+.sctab.on .sctab-t{color:var(--accent)}
 @media(max-width:720px){
   .sctab-bar{flex-direction:column}
   .sctab{border-right:0;border-bottom:1px solid var(--border);flex-direction:column;gap:5px;
@@ -1054,7 +1054,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 
 /* the rain fills the banner: one column of copy, the streams behind it */
 .pmodal-head.banner.wide.bleed{grid-template-columns:1fr;
-  background:linear-gradient(180deg,#050a09 0%,#07100d 50%,#030706 100%);
+  background:var(--panel,#07100d);
   padding-top:clamp(48px,6vw,84px);padding-bottom:clamp(48px,6vw,84px)}
 .pmodal-head.banner.wide.bleed::before,
 .pmodal-head.banner.wide.bleed::after{display:none}
@@ -1186,12 +1186,13 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 
 /* the two focus-group quotes, where study 1 has its figure */
 .vo-quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:clamp(20px,2.6vw,32px);margin-top:clamp(32px,3.6vw,48px)}
+  gap:clamp(20px,2.6vw,32px);margin-top:clamp(32px,3.6vw,48px);align-items:stretch}
+.pr-div>.vo-quotes:first-child{margin-top:0}
 @media(max-width:760px){.vo-quotes{grid-template-columns:1fr}}
 .vo-q{margin:0;padding:22px 26px;border-radius:16px;background:rgba(255,255,255,.035);
   border:1px solid rgba(255,255,255,.1)}
-.vo-q p{margin:0;font-family:var(--fdisplay);font-weight:500;
-  font-size:clamp(18px,1.9vw,24px);line-height:1.26;letter-spacing:-.018em;color:#fff}
+.vo-q p{margin:0;font-family:var(--fbody);font-weight:400;
+  font-size:clamp(16px,1.6vw,19.5px);line-height:1.56;color:rgba(255,255,255,.9)}
 .vo-q cite{display:block;margin-top:12px;font-family:var(--fbody);font-style:normal;
   font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
   color:var(--lit,#62DD9A);opacity:.8}
@@ -1199,6 +1200,225 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 .ia-note{margin:0;padding:16px 32px 22px;border-top:1px solid rgba(247,244,238,.08);
   font-size:12px;line-height:1.55;color:rgba(247,244,238,.36)}
 @media(max-width:640px){.ia-note{padding-left:20px;padding-right:20px}}
+
+/* ---- uploaded open-cut mine, recoloured, sitting in half the banner ---- */
+.mn{position:relative;width:100%;height:100%;overflow:hidden}
+.mn svg{width:100%;height:100%;position:absolute;inset:0}
+.mn-c{fill:none;stroke:url(#mnLine);stroke-width:2;vector-effect:non-scaling-stroke;
+  transform-origin:50% 50%;animation:mnBreathe 9s ease-in-out infinite alternate}
+.mn-c:nth-child(1){opacity:.76}
+.mn-c:nth-child(2){opacity:.67;animation-delay:-.9s}
+.mn-c:nth-child(3){opacity:.61;animation-delay:-1.8s}
+.mn-c:nth-child(4){opacity:.55;animation-delay:-2.7s}
+.mn-c:nth-child(5){opacity:.49;animation-delay:-3.6s}
+.mn-c:nth-child(6){opacity:.43;animation-delay:-4.5s}
+.mn-road{fill:none;stroke:rgba(240,226,250,.5);stroke-width:2;stroke-dasharray:4 10;
+  vector-effect:non-scaling-stroke}
+.mn-roadsh{stroke:rgba(160,100,200,.14);stroke-width:15;stroke-dasharray:none;filter:blur(6px)}
+.mn-truck{fill:#D9B0EE;stroke:#F1E1FA;stroke-width:1;filter:url(#mnGlow)}
+.mn-light{fill:#FBF2FF;stroke:none}
+@keyframes mnBreathe{to{transform:scale(1.012) translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.mn-c{animation:none}.mn-truck{display:none}}
+
+/* ---- keeping the other studies obviously live ---- */
+/* once one is open the closed tabs must not read as spent, so their chevron
+   comes up to full strength and they gain a hover lift */
+.sctabs.open .sctab:not(.on) .sctab-chev{opacity:.85}
+.sctabs.open .sctab:not(.on):hover{background:#E6E0D6}
+.sctab:not(.on)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;
+  transition:transform .22s ease}
+.sctab:not(.on):hover::after{transform:scaleX(1)}
+.sctab:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+
+/* the step to the next study, at the foot of the open panel */
+/* .pr pulls itself out to the card edges with a negative bottom margin, which
+   would drag this strip up over the study's own footer */
+.sctab-panel .pr:not(:last-child){margin-bottom:0}
+.sctab-next{display:flex;align-items:center;gap:14px;width:calc(100% + 2*var(--pmpad));
+  margin:0 calc(-1*var(--pmpad)) calc(-1*var(--pmpad));padding:clamp(20px,2.4vw,28px) var(--pmpad);
+  border:0;border-top:1px solid var(--border);background:var(--paper-2);
+  cursor:pointer;text-align:left;font-family:var(--fbody);
+  transition:background .2s}
+.sctab-next:hover{background:#E6E0D6}
+.sctab-nlab{font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);opacity:.8;flex:none}
+.sctab-nt{font-family:var(--fdisplay);font-weight:600;font-size:clamp(16px,1.5vw,19px);
+  letter-spacing:-.015em;color:var(--ink)}
+.sctab-nchev{margin-left:auto;font-family:var(--fdisplay);font-size:26px;line-height:1;
+  color:var(--accent);opacity:.6;transition:transform .2s,opacity .2s}
+.sctab-next:hover .sctab-nchev{opacity:1;transform:translateX(4px)}
+@media(max-width:640px){.sctab-next{flex-wrap:wrap;gap:6px 12px}
+  .sctab-nchev{margin-left:0}}
+
+/* ---- the tab bar has to read as navigation, not as a header for the columns
+       below it. a selected-tab marker and a lip under the bar do that without
+       moving anything. ---- */
+.sctab.on::before{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:var(--accent);z-index:3}
+.sctabs.open .sctab-bar{position:relative;z-index:2;
+  box-shadow:0 10px 18px -12px rgba(0,0,0,.45)}
+/* the closed tabs carry a hint of the accent so they read as the way on */
+.sctabs.open .sctab:not(.on) .sctab-lab{opacity:1}
+
+/* the mine is not a plate: it shares the banner's surface and dissolves into it
+   on the left, so it can run behind the copy */
+.pmodal-head.banner.wide.mineart{grid-template-columns:1fr;
+  background:radial-gradient(62% 120% at 76% 46%,rgba(var(--glow),.26),transparent 60%),
+    linear-gradient(120deg,#150E1C 0%,#1B1024 58%,#221630 100%)}
+.pmodal-head.banner.wide.mineart>.hero-figwrap{position:absolute;top:0;right:0;bottom:0;left:auto;
+  width:74%;max-width:none;z-index:0;pointer-events:none}
+.pmodal-head.banner.wide.mineart .mn{
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 32%);
+  mask-image:linear-gradient(to right,transparent 0,#000 32%)}
+.pmodal-head.banner.wide.mineart .hero-copy{position:relative;z-index:1}
+@media(max-width:900px){
+  .pmodal-head.banner.wide.mineart>.hero-figwrap{width:100%;opacity:.5}
+}
+
+/* ---- workplace project: the two instruments ---- */
+.sv,.bd{display:flex;flex-direction:column;width:100%;min-width:0;border-radius:16px;
+  overflow:hidden;background:var(--surf,#251A2E);font-family:var(--fbody)}
+.sv-bar,.bd-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:20px 30px;border-bottom:1px solid rgba(247,244,238,.1);
+  font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+  color:rgba(247,244,238,.5)}
+.sv-count,.bd-count{letter-spacing:.14em;font-weight:500;color:rgba(247,244,238,.32);
+  text-transform:none}
+.sv-stage,.bd-stage{flex:1;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(26px,3vw,36px) 30px;min-height:300px}
+.sv-kick{margin:0 0 10px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:#C9A78C}
+.sv-kick.is-on{color:var(--lit,#C79BE0)}
+.sv-h{margin:0 0 6px;font-family:var(--fdisplay);font-weight:500;
+  font-size:clamp(20px,2.1vw,26px);line-height:1.14;letter-spacing:-.022em;color:#f7f4ee}
+.sv-lede{margin:0 0 22px;font-size:14.5px;line-height:1.55;color:rgba(247,244,238,.55)}
+
+/* the supervisor ranking */
+.sv-opts{display:flex;flex-direction:column;gap:9px}
+.sv-opt{text-align:left;font:600 14px/1.4 var(--fbody);padding:13px 17px;border-radius:12px;
+  border:1px solid rgba(247,244,238,.2);background:rgba(247,244,238,.03);
+  color:rgba(247,244,238,.88);cursor:pointer;transition:background .18s,border-color .18s}
+.sv-opt:hover{background:rgba(247,244,238,.09);border-color:rgba(247,244,238,.48)}
+.sv-verdict{margin:0 0 20px;font-size:14.5px;line-height:1.58;color:rgba(247,244,238,.68);max-width:48ch}
+.sv-rows{display:flex;flex-direction:column;gap:8px}
+.sv-row{display:flex;align-items:baseline;gap:14px;padding:11px 15px;border-radius:10px;
+  background:rgba(247,244,238,.04);border:1px solid transparent}
+.sv-row.is-top{background:rgba(199,155,224,.13);border-color:rgba(199,155,224,.34)}
+.sv-row.is-mine{border-color:#C9A78C}
+.sv-rank{font-family:var(--fdisplay);font-weight:600;font-size:15px;color:rgba(247,244,238,.42);
+  width:14px;flex:none}
+.sv-row.is-top .sv-rank{color:var(--lit,#C79BE0)}
+.sv-nm{font-size:14px;font-weight:600;color:rgba(247,244,238,.88)}
+.sv-note{margin-left:auto;font-size:11.5px;color:rgba(247,244,238,.4);white-space:nowrap}
+.sv-again{align-self:flex-start;margin-top:20px;font:600 13px/1 var(--fbody);padding:11px 22px;
+  border-radius:999px;border:1px solid rgba(247,244,238,.3);background:transparent;
+  color:#f7f4ee;cursor:pointer}
+.sv-again:hover{background:rgba(247,244,238,.1)}
+.sv-comps{list-style:none;counter-reset:c;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+.sv-comps li{counter-increment:c;padding-left:40px;position:relative}
+.sv-comps li::before{content:counter(c);position:absolute;left:0;top:1px;
+  width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  font:700 12px/1 var(--fbody);color:var(--lit,#C79BE0);
+  border:1px solid rgba(199,155,224,.4)}
+.sv-comps h6{font-family:var(--fdisplay);font-weight:600;font-size:16.5px;line-height:1.24;
+  color:#fff;margin:0 0 5px}
+.sv-comps p{font-size:14px;line-height:1.55;color:rgba(237,240,244,.56);margin:0}
+
+/* the boundary crossings */
+.bd-chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:24px}
+.bd-chip{font:600 13px/1 var(--fbody);padding:11px 17px;border-radius:999px;
+  border:1px solid rgba(247,244,238,.22);background:transparent;color:rgba(247,244,238,.82);
+  cursor:pointer;transition:background .18s,border-color .18s,color .18s}
+.bd-chip:hover{background:rgba(247,244,238,.09);border-color:rgba(247,244,238,.5)}
+.bd-chip.is-on{background:var(--lit,#C79BE0);border-color:var(--lit,#C79BE0);color:#1B1024}
+.bd-idle{margin:0;font-size:14.5px;line-height:1.6;color:rgba(247,244,238,.5);max-width:46ch}
+.bd-body{display:flex;flex-direction:column;gap:16px;animation:bdIn .45s cubic-bezier(.16,.84,.24,1) both}
+@keyframes bdIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.bd-fric,.bd-item{padding-left:15px;border-left:2px solid rgba(247,244,238,.2)}
+.bd-item{border-left-color:var(--lit,#C79BE0)}
+.bd-fric span,.bd-item span{font:700 10.5px/1 var(--fbody);letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(247,244,238,.4)}
+.bd-item span{color:var(--lit,#C79BE0)}
+.bd-fric p,.bd-item p{margin:7px 0 0;font-size:14.5px;line-height:1.56;color:rgba(247,244,238,.84)}
+.bd-status{padding:24px 26px;border-radius:16px;background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.1);align-self:start}
+.bd-status span{font:700 11px/1 var(--fbody);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--lit,#C79BE0);opacity:.85}
+.bd-status p{margin:12px 0 0;font-size:15.5px;line-height:1.6;color:rgba(237,240,244,.7)}
+
+/* one quote instead of two, and a tighter one inside a copy column */
+.vo-quotes.one{grid-template-columns:1fr;align-self:start}
+.vo-q.tight{margin-top:clamp(20px,2.4vw,28px);padding:18px 22px}
+.vo-q.tight p{font-size:clamp(17px,1.7vw,21px)}
+@media(max-width:640px){
+  .sv-bar,.sv-stage,.bd-bar,.bd-stage{padding-left:20px;padding-right:20px}
+  .sv-note{display:none}}
+
+/* ---- title left, description right, on the cream ---- */
+.pr-intro{display:grid;grid-template-columns:minmax(0,1.78fr) minmax(0,.68fr);
+  column-gap:clamp(28px,4vw,72px);row-gap:0;align-items:center;background:var(--paper);
+  padding:clamp(40px,4.6vw,72px) clamp(34px,3.6vw,56px)}
+.pr-ititle{font-family:var(--fdisplay);font-weight:600;font-size:clamp(32px,4.9vw,66px);
+  line-height:1.02;letter-spacing:-.03em;color:var(--ink);margin:0;max-width:21ch}
+.pr-iart{margin-top:clamp(28px,3.4vw,44px);display:flex;justify-content:flex-start}
+.pr-iart svg{width:100%;max-width:232px;height:auto;color:var(--panel);overflow:visible}
+.pr-iright{padding-top:0}
+.pr-iright p{margin:0;font-family:var(--fbody);font-size:15px;line-height:1.72;
+  color:var(--muted);max-width:34ch}
+@media(max-width:820px){.pr-intro{grid-template-columns:1fr;gap:22px}
+  .pr-iright{padding-top:0}}
+
+
+/* the six themes */
+.th-wrap{margin-top:clamp(38px,4.4vw,60px);padding-top:clamp(32px,3.6vw,48px);
+  border-top:1px solid rgba(255,255,255,.1)}
+.th-h{font-family:var(--fdisplay);font-weight:600;font-size:clamp(21px,2.2vw,28px);
+  letter-spacing:-.02em;color:#fff;margin:0 0 clamp(24px,2.8vw,34px)}
+.th-list{list-style:none;counter-reset:t;margin:0;padding:0;display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(22px,2.8vw,38px)}
+.th-list li{counter-increment:t;padding-left:44px;position:relative}
+.th-list li::before{content:counter(t);position:absolute;left:0;top:0;
+  width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
+  font:700 12px/1 var(--fbody);color:var(--lit,#C79BE0);
+  border:1px solid rgba(199,155,224,.4)}
+.th-list h6{font-family:var(--fdisplay);font-weight:600;font-size:17px;line-height:1.24;
+  color:#fff;margin:0 0 7px}
+.th-list p{font-size:14.5px;line-height:1.6;color:rgba(237,240,244,.6);margin:0}
+@media(max-width:760px){.th-list{grid-template-columns:1fr}}
+
+
+.pr-stats{grid-column:1 / -1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  margin-top:clamp(28px,3vw,42px);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.pr-stat{padding:clamp(20px,2.2vw,28px) clamp(18px,2vw,30px);border-left:1px solid var(--border)}
+.pr-stat:first-child{border-left:0;padding-left:0}
+.pr-stat span{display:block;font-family:var(--fbody);font-weight:700;font-size:11px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.pr-stat b{display:block;margin-top:clamp(20px,2.4vw,34px);font-family:var(--fbody);
+  font-weight:700;font-size:15.5px;line-height:1.35;color:var(--ink)}
+.pr-iart{display:flex;justify-content:center;align-items:flex-start}
+.pr-iart svg{width:100%;max-width:300px;height:auto;color:var(--panel);overflow:visible}
+@media(max-width:900px){.pr-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pr-stat:nth-child(3){border-left:0;padding-left:0}}
+@media(max-width:520px){.pr-stats{grid-template-columns:1fr}
+  .pr-stat{border-left:0;padding-left:0}}
+
+/* the description column of the opening */
+.pr-intro.haslead{align-items:start}
+.pr-ilead{margin:0;font-family:var(--fbody);font-size:15.5px;line-height:1.72;
+  color:var(--muted);max-width:40ch}
+
+/* an instrument with its drawing alongside */
+.pr-row{display:grid;grid-template-columns:minmax(0,1.62fr) minmax(0,.72fr);
+  align-items:center;gap:clamp(24px,3.4vw,56px);
+  background:var(--paper-2);padding:clamp(30px,3.4vw,52px) clamp(34px,3.6vw,56px)}
+.pr-rowmain{min-width:0}
+.pr-rowart{display:flex;justify-content:center;min-width:0}
+.pr-rowart svg{width:100%;max-width:280px;height:auto;color:var(--panel);overflow:visible}
+@media(max-width:900px){.pr-row{grid-template-columns:1fr}
+  .pr-rowart{order:-1;justify-content:flex-start}}
+
 </style>
 
 <nav class="nav" id="nav">
@@ -1769,11 +1989,14 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       {k:"",t:"What makes learning stick in high-risk work",
        lead:"How people actually learn on the job in mining, where getting it wrong can kill someone, and what separates a supervisor people learn from.",
        stats:[],links:[],
-       tone:{accent:"#8A5230",hover:"#A96A42",panel:"#5E3720",soft:"#F2E5DA"},
+       heroFig:"mine",
+       tone:{accent:"#6A3D7C",hover:"#8A5299",panel:"#1B1024",soft:"#EFE4F5",lit:"#C79BE0",
+             glow:"199,155,224",surf:"#251A2E",surf2:"#1B1222",rule:"#C79BE0"},
+       tabs:true,
        layout:"pair",
        pair:[
-         {short:"How workers learn",railLabel:"How they learn",icon:"think",art:"handover",
-          question:"How do frontline workers actually learn, where a mistake can be fatal?",
+         {short:"How workers learn",custom:"chain",railLabel:"How they learn",icon:"think",art:"handover",
+          question:"What does quality learning actually look like to the people doing the work?",
           link:{label:"Read the paper",href:"https://doi.org/10.1007/s12186-024-09353-2"},
           sections:[
             {k:"Problem",v:"High-risk industries invest heavily in formal training and assume that is where competence comes from. Yet most of what a worker knows was picked up standing next to someone else, and that learning is largely unmanaged and unexamined."},
@@ -1783,7 +2006,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
             {k:"Why it matters",v:"If most learning is informal, then quality depends on who happens to be standing next to you. That makes the supervisor, not the training package, the real unit of intervention."}
           ]},
 
-         {short:"What good supervisors do",railLabel:"Good supervisors",icon:"grid",art:"competency",
+         {short:"What good supervisors do",custom:"super",railLabel:"Good supervisors",icon:"grid",art:"competency",
           question:"What actually makes a supervisor effective, beyond technical know-how?",
           link:{label:"Read the paper",href:"https://doi.org/10.1108/JWL-03-2025-0052"},
           sections:[
@@ -1794,7 +2017,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
             {k:"Why it matters",v:"It gives industry something concrete to select, develop and appraise supervisors against, drawn from the workforce rather than from a competency catalogue."}
           ]},
 
-         {short:"Learning across boundaries",railLabel:"Workforce agility",icon:"grid",art:"agility",
+         {short:"Learning across boundaries",custom:"bound",railLabel:"Workforce agility",icon:"grid",art:"agility",
           question:"Where does workforce agility actually get built?",
           sections:[
             {k:"Problem",v:"As high-risk work changes, people are constantly crossing boundaries: between roles, disciplines, teams and organisations, and between people and unfamiliar technology. Crossing stretches capability and creates friction, which is usually treated as a problem to smooth away."},
@@ -2278,12 +2501,41 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
     }
     function heroArt(kind){
       if(kind==="rain")return binaryRain();
+      if(kind==="mine")return mineArt();
       return '<div class="fb"><div class="fb-head"><span>FORENSIC PATTERN FIELD</span><span>VISUAL ANALYSIS</span></div><div class="fb-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="fb-print" aria-hidden="true"><div class="fb-whorl"></div><div class="fb-breaks"><i></i><i></i><i></i><i></i></div></div><div class="fb-scan" aria-hidden="true"><span>SCANNING</span></div><div class="fb-target" aria-hidden="true"><i></i></div><div class="fb-foot"><span>SEARCH / RECOGNISE / DECIDE</span><span>RESEARCH SERIES</span></div></div>';}
 
     /* The uploaded binary rain, scoped to the banner panel. Her columns fall a
        viewport height, which means nothing inside a fixed panel, so each column
        carries three copies of its stream and travels exactly one copy: the loop
        closes on itself instead of resetting visibly. */
+
+    /* The uploaded open-cut mine: contours, haul road and the truck on it.
+       Paths and timing as supplied; the sand and copper swapped for the
+       project's aubergine. */
+    function mineArt(){
+      var C=["M58 143 C166 61 326 45 463 75 C602 105 731 81 868 43 C1014 3 1162 42 1258 117 C1329 173 1376 250 1370 332 C1364 422 1296 485 1198 517 C1086 553 989 523 881 489 C771 454 676 468 574 509 C456 557 327 565 219 519 C108 472 40 380 41 286 C42 228 51 181 58 143","M118 169 C216 98 342 84 464 110 C590 137 717 118 847 80 C976 42 1098 66 1190 124 C1278 179 1322 252 1308 326 C1292 405 1227 452 1144 474 C1049 499 961 470 871 442 C768 410 678 426 583 466 C477 511 369 517 275 481 C178 444 111 370 102 293 C96 245 103 201 118 169","M185 196 C267 140 365 125 468 148 C576 172 689 157 805 121 C920 85 1028 99 1116 146 C1204 193 1252 258 1239 321 C1225 388 1167 426 1096 441 C1011 459 936 430 858 407 C766 379 686 392 603 429 C513 469 425 476 346 449 C261 420 203 361 185 299 C173 258 174 224 185 196","M259 221 C326 179 397 166 475 184 C565 205 655 192 752 159 C847 127 937 134 1015 170 C1097 208 1144 263 1134 316 C1123 370 1072 399 1015 409 C946 422 884 397 819 380 C740 359 675 367 613 397 C537 433 472 440 411 422 C343 402 294 357 273 311 C255 274 250 244 259 221","M339 246 C390 216 437 207 491 219 C561 235 629 224 700 198 C773 171 838 173 901 199 C971 228 1012 269 1006 308 C999 348 962 371 918 377 C866 385 819 367 771 356 C714 343 669 348 625 370 C565 399 517 405 471 394 C418 381 379 349 357 317 C337 287 330 261 339 246","M421 270 C454 252 483 249 518 257 C566 268 608 260 653 243 C698 226 738 226 778 240 C825 257 856 282 853 306 C849 331 824 345 795 348 C761 351 732 340 701 334 C666 328 641 331 614 345 C575 365 543 369 511 362 C475 354 448 335 431 315 C415 296 411 279 421 270"];
+      var ROAD="M185 196 C267 140 365 125 468 148 C576 172 689 157 805 121 C920 85 1028 99 1116 146 C1204 193 1252 258 1239 321 C1225 388 1167 426 1096 441 C1011 459 936 430 858 407 C766 379 686 392 603 429 C513 469 425 476 346 449 C261 420 203 361 185 299 C173 258 174 224 185 196";
+      var h='<div class="mn">'
+        +'<svg viewBox="0 0 1420 600" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">'
+        +'<defs><linearGradient id="mnLine" x1="0" y1="0" x2="1" y2="1">'
+        +'<stop offset="0" stop-color="#E8D4F5" stop-opacity=".2"/>'
+        +'<stop offset=".48" stop-color="#E8D4F5" stop-opacity=".92"/>'
+        +'<stop offset="1" stop-color="#8A5A9E" stop-opacity=".45"/></linearGradient>'
+        +'<filter id="mnGlow" x="-50%" y="-50%" width="200%" height="200%">'
+        +'<feGaussianBlur stdDeviation="4" result="b"/>'
+        +'<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g>';
+      C.forEach(function(d){h+='<path class="mn-c" d="'+d+'"/>';});
+      h+='</g>'
+        +'<path class="mn-road mn-roadsh" d="'+ROAD+'"/>'
+        +'<path class="mn-road" d="'+ROAD+'"/>'
+        +'<g class="mn-truck"><rect x="-10" y="-5" width="20" height="10" rx="2"/>'
+        +'<circle cx="-5" cy="7" r="2.4"/><circle cx="6" cy="7" r="2.4"/>'
+        +'<circle class="mn-light" cx="12" cy="0" r="2.2"/>'
+        +'<animateMotion dur="36s" repeatCount="indefinite" rotate="auto" path="'+ROAD+'"/></g>'
+        +'</svg></div>';
+      return h;
+    }
+
     function binaryRain(){
       var STREAMS=["01101001100101101010","10110100101100110101","00101101011010010110",
         "11001010010110100101","01011010100101101001","10100110101101001011",
@@ -2893,6 +3145,308 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Mean student rating of each of the eight AI tools" style="width:100%;height:auto">'+g+'</svg>';
     }
 
+    /* ---------- study 1: how workers learn ----------
+       MacMahon, Corbett, Hassall, Carroll & De Boer (2024), Vocations and
+       Learning 17(3), 509-536. The six themes and the quotes are the paper's
+       own, with its participant codes. */
+    var CHAIN={
+      stats:[
+        {l:"Interviews",n:"83 frontline workers"},
+        {l:"Sites",n:"3, open cut and underground"},
+        {l:"Experience",n:"Months to 40+ years"},
+        {l:"Roles",n:"Nippers to mine management"}
+      ],
+      quotes:[
+        {t:"I've been to some training courses, and I've not used it for another two years, and I might as well not have gone on the training course.",w:"Participant WGLL201"},
+        {t:"You do your theory and then you get mentored by someone who might only be doing the job for six months longer than you.",w:"Participant WGLL115"}
+      ],
+      resH:"Training is a noun. Learning is a verb.",
+      resP:["Workers drew that line themselves. Training was the formal thing done to them, a process where you make sure the boxes are ticked. Learning was what they did with it afterwards, on the job, every day.",
+            "They were unanimous that both matter, and equally clear that it was learning, not the activity of training, that built their capability. The industry counts the first and leaves the second to whoever happens to be standing next to you."],
+      quote:{t:"So then we ended up with fruit from a contaminated tree. Johnny hasn't learnt properly, now Johnny's teaching someone else, Johnny's teaching this person the best he can, but he's only got 80% of the knowledge. So, this guy's only getting 80%.",w:"Participant WGLL202"},
+      themes:[
+        {h:"Shift the focus from training to learning",
+         p:"Industry focuses on formal training to improve safe production. Workers called that training essential for protocols, safety and orientation, and were clear that the real learning began once they put it into practice."},
+        {h:"Treat social, on-the-job learning as the main channel",
+         p:"Learning was inherently social and situated. Across every role it ran through observation and mentoring, held up by good interpersonal relationships and a sense of psychological safety."},
+        {h:"Set benchmarks beyond competence",
+         p:"Workers wanted benchmarks past competence: clear markers of what good looks like, and the structured, feedback-rich practice that builds toward it."},
+        {h:"Support the crossings people already make",
+         p:"Quality learning means crossing boundaries, from classroom to worksite and then within the work itself: new equipment, new roles, and moving in and out of the industry."},
+        {h:"Design learning on the evidence",
+         p:"Participants described active practice, timely feedback, reflective questioning and revisiting material. The principles were already there. Their application was sporadic and unstructured."},
+        {h:"Back the systems and culture that carry it",
+         p:"Scattered training is compounded by reactive habits, production pressure and no designated time. Supervisors and trainers carry the learning culture, and need backing to do it."}
+      ]
+    };
+    /* title on the left; the right column takes either the drawing or the
+       description. the strip runs the full width under both. */
+    function prIntro(title,o){
+      o=o||{};
+      var band=el("div","pr-intro"+(o.lead?" haslead":""));
+      var l=el("div","pr-ileft");
+      l.appendChild(el("h4","pr-ititle",esc(title)));
+      var rgt=el("div","pr-iright");
+      if(o.lead)rgt.appendChild(el("p","pr-ilead",esc(o.lead)));
+      else if(o.art){var art=el("div","pr-iart");art.innerHTML=studyArt(o.art);rgt.appendChild(art);}
+      band.appendChild(l);band.appendChild(rgt);
+      if(o.stats){
+        var box=el("div","pr-stats");
+        o.stats.forEach(function(c){
+          var cell=el("div","pr-stat");
+          cell.appendChild(el("span",null,esc(c.l)));
+          cell.appendChild(el("b",null,esc(c.n)));
+          box.appendChild(cell);
+        });
+        band.appendChild(box);
+      }
+      return band;
+    }
+    function buildChain(s){
+      var wrap=el("div","pr");
+      wrap.appendChild(prIntro(s.question,{art:s.art,stats:CHAIN.stats}));
+
+      var div=el("div","pr-div");
+      var qs=el("div","vo-quotes");
+      CHAIN.quotes.forEach(function(q){
+        var bq=el("blockquote","vo-q");
+        bq.appendChild(el("p",null,esc(q.t)));
+        bq.appendChild(el("cite",null,esc(q.w)));
+        qs.appendChild(bq);
+      });
+      div.appendChild(qs);
+
+      var th=el("div","th-wrap");
+      th.appendChild(el("h5","th-h","Six things the industry could do"));
+      var ol=el("ol","th-list");
+      CHAIN.themes.forEach(function(t){
+        var li=el("li");
+        li.appendChild(el("h6",null,esc(t.h)));
+        li.appendChild(el("p",null,esc(t.p)));
+        ol.appendChild(li);
+      });
+      th.appendChild(ol);
+      div.appendChild(th);
+      wrap.appendChild(div);
+
+      var foot=el("div","pr-foot");
+      if(s.link){var aa=el("a","pr-link",esc(s.link.label)+" &#8599;");
+        aa.setAttribute("href",s.link.href);aa.target="_blank";aa.rel="noopener";foot.appendChild(aa);}
+      wrap.appendChild(foot);
+      return wrap;
+    }
+
+    /* ---------- study 2: what good supervisors do ---------- */
+    var SUPER={
+      lead:"Supervisors get promoted for being good operators, then made responsible for other people's learning and safety. Across the same three sites we asked the workforce to describe the best supervisor they had ever worked under, and the worst, and to rank what actually marks one out.",
+      resH:"Behaviour, not credentials",
+      resP:["Asked to rank six indicators of supervisory expertise, participants put behavioural characteristics first and certification last. Years of experience came second, with knowledge tests, performance measures and peer endorsement filling the middle.",
+            "What they described was not a technical profile. It was six dimensions, weighted toward how a supervisor treats people and reads the system around them."],
+      comps:[
+        {n:"Comprehensive knowledge and skills",d:"Technical expertise, safety knowledge, the tacit reading of a site that only comes with time, and situational awareness."},
+        {n:"Embodied and accountable leadership",d:"Visible, values-driven modelling of the standard. Hands on the work, and stress carried without passing it down."},
+        {n:"Empathetic, reflective and ethical conduct",d:"Emotion regulation, real relationships, trust, professional humility, and the habit of reflecting on their own practice."},
+        {n:"Facilitator of collective growth",d:"Collaborative by default. Feedback that lands, mistakes treated as material, knowledge deliberately shared."},
+        {n:"Adaptive and approachable communicator",d:"Active listening, a clear message, dialogue that runs both ways, and being someone people will actually approach."},
+        {n:"Systems, processes and culture",d:"Working inside the structures that support or undercut them: shortages, production pressure, and training that does not cover the job."}
+      ],
+      quote:{t:"Best operator's not your best supervisor.",w:"Study participant"},
+      cards:[
+        {h:"Something concrete to hire against",p:"Six dimensions drawn from the workforce rather than a competency catalogue, usable for selection, development and appraisal."},
+        {h:"Training misses the hard part",p:"Supervisors said current programs barely touch emotion regulation, difficult conversations and leading a diverse crew, which is most of the daily job."},
+        {h:"Promotion is where it leaks",p:"Technical excellence is what gets someone the role and the least of what the role turns out to need."}
+      ]
+    };
+    function buildSuperStage(){
+      /* all six indicators the survey ranked, in the order it put them */
+      var IND=[
+        {n:"Behavioural characteristics",r:1,note:"ranked first"},
+        {n:"Years of experience",r:2,note:"second"},
+        {n:"Knowledge tests",r:3,note:"third"},
+        {n:"Performance measures",r:4,note:"fourth"},
+        {n:"Social consensus, or peer endorsement",r:5,note:"fifth"},
+        {n:"Certification",r:6,note:"last"}
+      ];
+      var panel=el("div","sv"), stage=el("div","sv-stage");
+      stage.setAttribute("aria-live","polite");
+      panel.addEventListener("click",function(e){e.stopPropagation();});
+      var bar=el("div","sv-bar");
+      bar.appendChild(el("span",null,"Rank it yourself"));
+      bar.appendChild(el("span","sv-count","28 respondents, ranked 1 to 6"));
+      panel.appendChild(bar);panel.appendChild(stage);
+
+      function ask(){
+        stage.innerHTML="";
+        stage.appendChild(el("h4","sv-h","Which marks a supervisor out as expert?"));
+        stage.appendChild(el("p","sv-lede","Pick the one you would weigh most heavily."));
+        var box=el("div","sv-opts");
+        var shown=IND.slice();
+        for(var k=shown.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1));
+          var tmp=shown[k];shown[k]=shown[j];shown[j]=tmp;}
+        shown.forEach(function(t){
+          var b=el("button","sv-opt",esc(t.n));
+          b.addEventListener("click",function(){reveal(t.n);});
+          box.appendChild(b);
+        });
+        stage.appendChild(box);
+      }
+      function reveal(pick){
+        stage.innerHTML="";
+        var right=pick===IND[0].n;
+        stage.appendChild(el("p","sv-kick"+(right?" is-on":""),right?"That is where they put it too":"Not where the workforce put it"));
+        stage.appendChild(el("p","sv-verdict",
+          "Behavioural characteristics came first and certification came last. What a supervisor does outranked every proxy for it."));
+        var rows=el("div","sv-rows");
+        IND.forEach(function(t){
+          var mine=t.n===pick;
+          var row=el("div","sv-row"+(t.r===1?" is-top":"")+(mine?" is-mine":""));
+          row.appendChild(el("span","sv-rank",String(t.r)));
+          row.appendChild(el("span","sv-nm",esc(t.n)+(mine?" &middot; your pick":"")));
+          row.appendChild(el("span","sv-note",esc(t.note)));
+          rows.appendChild(row);
+        });
+        stage.appendChild(rows);
+        var again=el("button","sv-again","Pick another &#8635;");
+        again.addEventListener("click",ask);
+        stage.appendChild(again);
+      }
+      ask();
+      return panel;
+    }
+    function buildSuper(s){
+      var wrap=el("div","pr");
+      wrap.appendChild(prIntro(s.question,{lead:SUPER.lead}));
+      var row=el("div","pr-row");
+      var rl=el("div","pr-rowmain");rl.appendChild(buildSuperStage());
+      var rr=el("div","pr-rowart");rr.innerHTML=studyArt(s.art);
+      row.appendChild(rl);row.appendChild(rr);wrap.appendChild(row);
+
+      var div=el("div","pr-div"), gap=el("div","mem-gap");
+      var gl=el("div","mem-gapcopy");
+      gl.appendChild(el("h5","pr-divh",esc(SUPER.resH)));
+      SUPER.resP.forEach(function(t){gl.appendChild(el("p","mem-p",esc(t)));});
+      var bq=el("blockquote","vo-q tight");
+      bq.appendChild(el("p",null,esc(SUPER.quote.t)));
+      bq.appendChild(el("cite",null,esc(SUPER.quote.w)));
+      gl.appendChild(bq);
+      var gr=el("ol","sv-comps");
+      SUPER.comps.forEach(function(c){
+        var li=el("li");
+        li.appendChild(el("h6",null,esc(c.n)));
+        li.appendChild(el("p",null,esc(c.d)));
+        gr.appendChild(li);
+      });
+      gap.appendChild(gl);gap.appendChild(gr);div.appendChild(gap);
+      var cards=el("div","mem-cards");
+      SUPER.cards.forEach(function(c){var cell=el("div","mem-card");
+        cell.appendChild(el("h6",null,esc(c.h)));cell.appendChild(el("p",null,esc(c.p)));
+        cards.appendChild(cell);});
+      div.appendChild(cards);wrap.appendChild(div);
+      var foot=el("div","pr-foot");
+      if(s.link){var aa=el("a","pr-link",esc(s.link.label)+" &#8599;");
+        aa.setAttribute("href",s.link.href);aa.target="_blank";aa.rel="noopener";foot.appendChild(aa);}
+      wrap.appendChild(foot);
+      return wrap;
+    }
+
+    /* ---------- study 3: learning across boundaries ---------- */
+    var BOUND={
+      lead:"As high-risk work changes, people are constantly crossing boundaries: between roles, between disciplines, between organisations, and between themselves and unfamiliar technology. Crossing stretches capability and creates friction, and friction is usually treated as a problem to smooth away.",
+      cross:[
+        {n:"Between roles",
+         f:"An operator moves to maintenance and finds the same plant described in a language they do not speak yet.",
+         o:"Shared procedures and permits, which force both sides to name the same thing the same way.",
+         b:"The trainer who has done both roles and can translate one into the other."},
+        {n:"Between disciplines",
+         f:"Engineering, geology and production hold different pictures of the same pit and each assumes theirs is the picture.",
+         o:"Controls, standards and a shared dashboard: objects concrete enough to argue over.",
+         b:"The superintendent who sits in all three meetings and carries the argument between them."},
+        {n:"Between people and technology",
+         f:"Automation arrives and the expertise that made someone valuable is suddenly held by the system instead.",
+         o:"Interfaces and alarm philosophies that make the machine's reasoning legible to the person watching it.",
+         b:"The early adopter on the crew who works out what it is actually for, and shows the others."},
+        {n:"Between organisations",
+         f:"A contractor crew arrives with its own way of working and a week to absorb the site's.",
+         o:"Inductions, standards and the site's own record of what has gone wrong before.",
+         b:"The supervisor who decides which of the site's unwritten rules gets said out loud on day one."}
+      ],
+      resH:"Friction is the curriculum",
+      resP:["Boundaries are where agility is demanded, and they are also where it is built. Carrying knowledge into an unfamiliar context produces learning that untroubled practice never will.",
+            "Most of that crossing goes unrecognised, so nothing is designed to support it. The project maps where the boundaries actually fall, and what carries people over them."],
+      cards:[
+        {h:"Stop training for a fixed role",p:"Identify the crossings your workforce already makes, and build for those instead of for a job description that keeps moving."},
+        {h:"Resource the objects",p:"Procedures, controls, standards and dashboards are not paperwork. They are what lets knowledge travel between groups with no common background."},
+        {h:"Back the brokers",p:"Somebody is already translating between those groups, usually without recognition. Find them and give them the time."}
+      ],
+      status:"In progress through 2026, across mining, defence and advanced manufacturing. An EAIT and HASS SEED project, and the strand I now lead."
+    };
+    function buildBoundStage(){
+      var panel=el("div","bd"), stage=el("div","bd-stage");
+      stage.setAttribute("aria-live","polite");
+      panel.addEventListener("click",function(e){e.stopPropagation();});
+      var bar=el("div","bd-bar");
+      bar.appendChild(el("span",null,"Pick a crossing"));
+      bar.appendChild(el("span","bd-count","Four of the ones we are mapping"));
+      panel.appendChild(bar);panel.appendChild(stage);
+      var at=-1;
+
+      function render(){
+        stage.innerHTML="";
+        var chips=el("div","bd-chips");
+        BOUND.cross.forEach(function(c,i){
+          var b=el("button","bd-chip"+(i===at?" is-on":""),esc(c.n));
+          b.addEventListener("click",function(){at=i;render();});
+          chips.appendChild(b);
+        });
+        stage.appendChild(chips);
+        if(at<0){
+          stage.appendChild(el("p","bd-idle",
+            "Every one of these is a place where somebody has to carry what they know into a context that does not share it. Choose one."));
+          return;
+        }
+        var c=BOUND.cross[at];
+        var body=el("div","bd-body");
+        var f=el("div","bd-fric");
+        f.appendChild(el("span",null,"The friction"));
+        f.appendChild(el("p",null,esc(c.f)));
+        body.appendChild(f);
+        [["Boundary object",c.o],["Boundary broker",c.b]].forEach(function(pair){
+          var row=el("div","bd-item");
+          row.appendChild(el("span",null,esc(pair[0])));
+          row.appendChild(el("p",null,esc(pair[1])));
+          body.appendChild(row);
+        });
+        stage.appendChild(body);
+      }
+      render();
+      return panel;
+    }
+    function buildBound(s){
+      var wrap=el("div","pr");
+      var top=el("div","pr-top"), read=el("div","pr-read"), stage=el("div","mem-stage");
+      read.appendChild(el("h4","pr-title",esc(s.question)));
+      read.appendChild(el("p","pr-lead",esc(BOUND.lead)));
+      var art=el("div","pr-art");art.innerHTML=studyArt(s.art);read.appendChild(art);
+      stage.appendChild(buildBoundStage());
+      top.appendChild(read);top.appendChild(stage);wrap.appendChild(top);
+
+      var div=el("div","pr-div"), gap=el("div","mem-gap");
+      var gl=el("div","mem-gapcopy");
+      gl.appendChild(el("h5","pr-divh",esc(BOUND.resH)));
+      BOUND.resP.forEach(function(t){gl.appendChild(el("p","mem-p",esc(t)));});
+      var gr=el("div","bd-status");
+      gr.appendChild(el("span",null,"Where it is up to"));
+      gr.appendChild(el("p",null,esc(BOUND.status)));
+      gap.appendChild(gl);gap.appendChild(gr);div.appendChild(gap);
+      var cards=el("div","mem-cards");
+      BOUND.cards.forEach(function(c){var cell=el("div","mem-card");
+        cell.appendChild(el("h6",null,esc(c.h)));cell.appendChild(el("p",null,esc(c.p)));
+        cards.appendChild(cell);});
+      div.appendChild(cards);wrap.appendChild(div);
+      wrap.appendChild(el("div","pr-foot"));
+      return wrap;
+    }
+
     function buildQuiz(){
       var panel=el("div","qz"), stage=el("div","qz-stage");
       stage.setAttribute("aria-live","polite");
@@ -3122,16 +3676,22 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       var current=-1;
       function scrollToPanel(){
         var sc=modal.querySelector(".pmodal-scroll");if(!sc)return;
-        /* the panel has only just been inserted; let the container settle on its
-           new scroll height first, or the target gets clamped to zero. a timer
-           rather than rAF, which some embedded views throttle to a standstill. */
+        /* land the tab bar flush against the top of the scroller. measuring the
+           panel instead overshoots, because the study lays out after the scroll
+           is computed and the bar ends up clipped. a timer rather than rAF,
+           which some embedded views throttle to a standstill. */
+        function delta(){
+          return bar.getBoundingClientRect().top-sc.getBoundingClientRect().top;
+        }
+        function clamp(t){return Math.max(0,Math.min(t,sc.scrollHeight-sc.clientHeight));}
         setTimeout(function(){
-          var barH=bar.getBoundingClientRect().height;
-          var top=sc.scrollTop+(panel.getBoundingClientRect().top-sc.getBoundingClientRect().top)-barH;
-          top=Math.max(0,Math.min(top,sc.scrollHeight-sc.clientHeight));
-          try{sc.scrollTo({top:top,behavior:"smooth"});}catch(e){}
-          /* if smooth scrolling is unavailable or stalls, land it anyway */
-          setTimeout(function(){if(Math.abs(sc.scrollTop-top)>4)sc.scrollTop=top;},420);
+          var t=clamp(sc.scrollTop+delta());
+          try{sc.scrollTo({top:t,behavior:"smooth"});}catch(e){sc.scrollTop=t;}
+          /* re-measure once it has settled: the panel changes height on the way */
+          setTimeout(function(){
+            var d=delta();
+            if(Math.abs(d)>2)sc.scrollTop=clamp(sc.scrollTop+d);
+          },460);
         },40);
       }
       function paint(idx){
@@ -3144,11 +3704,26 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
         modal.classList.toggle("tabsclosed",idx<0);
         if(idx<0)return;
         var s=studies[idx];
-        if(s.custom==="protocol"){panel.appendChild(buildProtocol(s));return;}
-        if(s.custom==="memory"){panel.appendChild(buildMemory(s));return;}
-      if(s.custom==="traits"){panel.appendChild(buildTraits(s));return;}
-      if(s.custom==="myth"){panel.appendChild(buildMyth(s));return;}
-      if(s.custom==="voices"){panel.appendChild(buildVoices(s));return;}
+        /* the reader finishes at the bottom of the panel, so the way on has to
+           be there and not only back up in the bar */
+        function addNext(){
+          if(studies.length<2)return;
+          var nx=(idx+1)%studies.length;
+          var b=el("button","sctab-next");
+          b.appendChild(el("span","sctab-nlab",nx===0?"Back to the start":"Next study"));
+          b.appendChild(el("span","sctab-nt","Study "+(nx+1)+" &middot; "+esc(studies[nx].short)));
+          b.appendChild(el("span","sctab-nchev","&rsaquo;"));
+          b.addEventListener("click",function(){paint(nx);scrollToPanel();});
+          panel.appendChild(b);
+        }
+        if(s.custom==="protocol"){panel.appendChild(buildProtocol(s));addNext();return;}
+        if(s.custom==="memory"){panel.appendChild(buildMemory(s));addNext();return;}
+      if(s.custom==="traits"){panel.appendChild(buildTraits(s));addNext();return;}
+      if(s.custom==="myth"){panel.appendChild(buildMyth(s));addNext();return;}
+      if(s.custom==="voices"){panel.appendChild(buildVoices(s));addNext();return;}
+      if(s.custom==="chain"){panel.appendChild(buildChain(s));addNext();return;}
+      if(s.custom==="super"){panel.appendChild(buildSuper(s));addNext();return;}
+      if(s.custom==="bound"){panel.appendChild(buildBound(s));addNext();return;}
         var head=el("div","tp-head");
         head.appendChild(el("h4","sctab-q",esc(s.question)));
         var art=el("div","tp-art");art.innerHTML=studyArt(s.art);
@@ -3175,6 +3750,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           row.appendChild(body);secs.appendChild(row);
         });
         panel.appendChild(secs);
+        addNext();
         if(s.link){var a=el("a","sc-readlink",esc(s.link.label)+" &rarr;");
           a.setAttribute("href",s.link.href);a.target="_blank";a.rel="noopener";panel.appendChild(a);}
       }
@@ -3231,6 +3807,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           row.appendChild(body);secs.appendChild(row);
         });
         fl.appendChild(secs);
+        addNext();
         if(s.link){var a=el("a","sc-readlink",esc(s.link.label)+" &rarr;");a.setAttribute("href",s.link.href);a.target="_blank";a.rel="noopener";fl.appendChild(a);}
         col.appendChild(fl);
         var rl=el("div","sc-rail");
@@ -3266,6 +3843,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       var hd=modal.querySelector(".pmodal-head");
       hd.classList.toggle("wide",!!p.heroFig);
       hd.classList.toggle("bleed",p.heroFig==="rain");
+      hd.classList.toggle("mineart",p.heroFig==="mine");
       var oldFig=hd.querySelector(".hero-figwrap");if(oldFig)oldFig.remove();
       var oldBleed=hd.querySelector(".hero-bleed");if(oldBleed)oldBleed.remove();
       var copy=hd.querySelector(".hero-copy");
