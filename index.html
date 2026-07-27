@@ -572,6 +572,15 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 .sa-rot{animation:saRot 6s linear infinite;transform-origin:0 0}
 @keyframes saTarget{0%,100%{opacity:.35}50%{opacity:1}}
 .sa-target{animation:saTarget 1.9s ease-in-out infinite}
+@keyframes saBlank{0%,100%{opacity:.4}50%{opacity:.95}}
+.sa-blank{animation:saBlank 2.2s ease-in-out infinite}
+@keyframes saRaven{
+  0%,14%{transform:translateX(-76px);opacity:.42}
+  24%,34%{transform:translateX(-38px);opacity:.42}
+  46%,72%{transform:translateX(0);opacity:1}
+  82%,90%{transform:translateX(38px);opacity:.42}
+  100%{transform:translateX(-76px);opacity:.42}}
+.sa-ravenpick{animation:saRaven 6.5s ease-in-out infinite}
 @keyframes saS1{0%,26%{opacity:1}36%,100%{opacity:.16}}
 @keyframes saS2{0%,30%{opacity:.16}40%,62%{opacity:1}72%,100%{opacity:.16}}
 @keyframes saS3{0%,62%{opacity:.16}74%,100%{opacity:1}}
@@ -589,7 +598,9 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 .fg-choice,.fg-target,.fg-stop{animation:fgPulse 2.1s ease-in-out infinite}
 
 @media(prefers-reduced-motion:reduce){
-  .sa-lens,.sa-rot,.sa-target,.sa-s1,.sa-s2,.sa-s3,.fg-link,.fg-choice,.fg-target,.fg-stop{animation:none}
+  .sa-lens,.sa-rot,.sa-target,.sa-s1,.sa-s2,.sa-s3,.sa-blank,.sa-ravenpick,
+  .fg-link,.fg-choice,.fg-target,.fg-stop{animation:none}
+  .sa-ravenpick{opacity:1}
   .sa-s1,.sa-s2,.sa-s3{opacity:1}
 }
 
@@ -662,6 +673,362 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 @media(max-width:520px){.trial-opts{gap:8px}.trial-mini svg{width:72px}.trial-target svg{width:126px}}
 
 .sc-rbody p + p{margin-top:.85em}
+
+/* ---- left-aligned banner with a figure ---- */
+.pmodal-head.banner.wide{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);
+  gap:clamp(24px,3.4vw,56px);align-items:center;text-align:left;
+  background:radial-gradient(70% 120% at 88% 10%,rgba(var(--glow),.34),transparent 62%),
+  linear-gradient(120deg,#09141C 0%,#071016 58%,#101821 100%)}
+.pmodal-head.banner.wide .pmodal-kicker{margin-left:0;text-align:left}
+.pmodal-head.banner.wide .pmodal-title{margin-left:0;margin-right:0;max-width:14ch;
+  font-size:clamp(34px,4.6vw,64px);line-height:1.02;letter-spacing:-.028em}
+.pmodal-head.banner.wide .pmodal-lead{margin-left:0;margin-right:0;max-width:40ch;
+  font-family:var(--fbody);font-size:clamp(15.5px,1.4vw,18px)}
+.pmodal-head.banner.wide .pmodal-links,.pmodal-head.banner.wide .pmodal-stats{justify-content:flex-start}
+.hero-figwrap{color:#D6DEEC;min-width:0}
+.hero-copy{min-width:0}
+@media(max-width:900px){
+  .pmodal-head.banner.wide{grid-template-columns:1fr}
+  .hero-figwrap{max-width:460px}
+}
+
+/* ---- studies as tabs ---- */
+.sctab-bar{display:flex;gap:0;
+  margin:0 calc(-1*var(--pmpad)) clamp(26px,3vw,40px);
+  border-bottom:1px solid var(--border)}
+.sctab{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  gap:7px;cursor:pointer;text-align:left;background:var(--paper-2);border:0;
+  border-right:1px solid var(--border);border-radius:0;position:relative;
+  padding:clamp(16px,1.8vw,22px) 44px clamp(16px,1.8vw,22px) clamp(20px,2vw,28px);
+  transition:background .2s,color .2s;font-family:var(--fbody)}
+.sctab:last-child{border-right:0}
+.sctab:hover{background:#E6E0D6}
+.sctab.on{background:var(--panel)}
+.sctab.on:hover{background:var(--panel)}
+.sctab-lab{font-family:var(--fbody);font-weight:700;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);opacity:.75}
+.sctab.on .sctab-lab{color:var(--lit);opacity:.9}
+.sctab-chev{position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  font-family:var(--fdisplay);font-size:26px;line-height:1;color:var(--accent);opacity:.45;
+  transition:transform .2s,opacity .2s}
+.sctab:hover .sctab-chev{opacity:.9;transform:translateY(-50%) translateX(3px)}
+.sctab.on .sctab-chev{color:var(--lit);opacity:.85;transform:translateY(-50%) rotate(90deg)}
+.sctab-t{font-family:var(--fdisplay);font-weight:600;font-size:clamp(16.5px,1.6vw,20px);
+  line-height:1.18;letter-spacing:-.015em;color:var(--ink)}
+.sctab.on .sctab-t{color:#fff}
+@media(max-width:720px){
+  .sctab-bar{flex-direction:column}
+  .sctab{border-right:0;border-bottom:1px solid var(--border);flex-direction:column;gap:5px;
+    align-items:flex-start;text-align:left;padding:13px 40px 13px 20px}
+  .sctab-t{font-size:18px}
+  .sctab-lab{font-size:10px}
+  .sctab-t{font-size:16px}
+}
+.sctab-q{font-family:var(--fdisplay);font-weight:600;font-size:clamp(23px,2.6vw,32px);line-height:1.14;
+  letter-spacing:-.02em;color:var(--ink);margin:0 0 4px;max-width:26ch}
+.sctab-panel .sc-sections{margin-top:6px}
+@media(max-width:720px){.sctab{flex:1 1 100%}}
+
+/* grid items default to min-width:auto, so a wide figure stretches the whole row */
+.sc-row,.sc-rbody,.sc-rlabel,.sctab-panel,.sctabs{min-width:0}
+.sc-rbody>*{max-width:100%}
+.sc-fig{max-width:100%}
+
+}
+
+.pmodal-head.banner.wide::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(to right,rgba(255,255,255,.07) 0 1px,transparent 1px 64px),
+    repeating-linear-gradient(to bottom,rgba(255,255,255,.07) 0 1px,transparent 1px 64px);
+  -webkit-mask-image:linear-gradient(105deg,transparent 12%,rgba(0,0,0,.55) 46%,#000 100%);
+  mask-image:linear-gradient(105deg,transparent 12%,rgba(0,0,0,.55) 46%,#000 100%)}
+/* keep the glow on the project's own colour */
+.pmodal-head.banner.wide::before{background:
+  radial-gradient(46% 58% at 84% 8%,rgba(var(--glow),.5),transparent 62%),
+  radial-gradient(40% 52% at 12% 26%,rgba(var(--glow),.22),transparent 64%)}
+.pmodal-head.banner.wide>*{position:relative;z-index:1}
+
+/* the tab bar butts against the banner, so no gap above it */
+.pmodal-flow.tabsmode{margin-top:0}
+
+/* ---- forensic banner panel ---- */
+.fb{position:relative;width:100%;aspect-ratio:1/1.04;overflow:hidden;
+  border:1px solid rgba(112,213,221,.35);
+  background:
+    linear-gradient(rgba(86,194,203,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(86,194,203,.05) 1px,transparent 1px),
+    radial-gradient(circle at 50% 44%,rgba(55,153,161,.1),transparent 53%),
+    rgba(9,21,28,.78);
+  background-size:26px 26px,26px 26px,auto,auto;
+  box-shadow:inset 0 0 80px rgba(64,176,184,.05),0 35px 90px rgba(0,0,0,.34);
+  transform:perspective(1300px) rotateY(-3deg) rotateZ(1deg)}
+.fb-head,.fb-foot{position:absolute;z-index:6;right:22px;left:22px;display:flex;
+  justify-content:space-between;color:rgba(176,220,224,.48);font-family:var(--fbody);
+  font-size:8.5px;font-weight:700;letter-spacing:.15em}
+.fb-head{top:18px;padding-bottom:11px;border-bottom:1px solid rgba(112,213,221,.17)}
+.fb-foot{bottom:18px;padding-top:11px;border-top:1px solid rgba(112,213,221,.17)}
+.fb-print{width:69%;height:76%;position:absolute;top:47%;left:46%;overflow:hidden;
+  border-radius:48% 52% 45% 55% / 42% 45% 55% 58%;opacity:.82;
+  filter:drop-shadow(0 0 10px rgba(120,225,232,.14));transform:translate(-50%,-50%)}
+.fb-whorl{position:absolute;inset:0;border-radius:inherit;transform:rotate(-2deg);
+  background:repeating-radial-gradient(ellipse 48% 43% at 51% 53%,
+    transparent 0 10px,rgba(178,228,231,.78) 11px 13px,transparent 14px 21px)}
+.fb-whorl::before{content:"";position:absolute;inset:11% 14% 8%;
+  border-radius:50% 47% 54% 46%;opacity:.46;transform:rotate(7deg);
+  background:repeating-radial-gradient(ellipse 47% 44% at 50% 52%,
+    transparent 0 9px,rgba(178,228,231,.38) 10px 11px,transparent 12px 18px);
+  -webkit-mask-image:linear-gradient(115deg,transparent 0 45%,#000 54% 100%);
+  mask-image:linear-gradient(115deg,transparent 0 45%,#000 54% 100%)}
+.fb-breaks i{position:absolute;z-index:2;display:block;background:#09151c;opacity:.94}
+.fb-breaks i:nth-child(1){width:44px;height:7px;top:20%;left:16%;transform:rotate(-18deg)}
+.fb-breaks i:nth-child(2){width:32px;height:6px;top:34%;right:13%;transform:rotate(24deg)}
+.fb-breaks i:nth-child(3){width:39px;height:7px;bottom:27%;left:11%;transform:rotate(16deg)}
+.fb-breaks i:nth-child(4){width:48px;height:6px;right:15%;bottom:18%;transform:rotate(-25deg)}
+.fb-scan{position:absolute;z-index:5;top:19%;right:6%;left:6%;height:1px;background:#66eef0;
+  box-shadow:0 0 9px #51dce0,0 14px 30px rgba(60,219,224,.18);
+  animation:fbScan 5.2s ease-in-out infinite alternate}
+.fb-scan span{position:absolute;top:-15px;right:0;color:#66eef0;font-family:var(--fbody);
+  font-size:7.5px;letter-spacing:.15em}
+@keyframes fbScan{from{transform:translateY(0);opacity:.45}to{transform:translateY(330px);opacity:1}}
+.fb-target{width:19%;aspect-ratio:1;position:absolute;z-index:7;top:39%;right:12%;
+  border:1px solid var(--lit);border-radius:50%;box-shadow:0 0 0 7px rgba(var(--glow),.09)}
+.fb-target::before,.fb-target::after{content:"";position:absolute;background:rgba(120,231,234,.8)}
+.fb-target::before{top:50%;left:-24%;width:148%;height:1px}
+.fb-target::after{top:-24%;left:50%;width:1px;height:148%}
+.fb-target i{width:7px;height:7px;position:absolute;top:50%;left:50%;margin:-3.5px 0 0 -3.5px;
+  border:1px solid var(--lit);border-radius:50%;background:#071016;box-shadow:0 0 12px #66eef0}
+.fb-corners i{width:28px;height:28px;position:absolute;z-index:7;border-color:#74e0e5;
+  border-style:solid;opacity:.7}
+.fb-corners i:nth-child(1){top:11%;left:8%;border-width:1px 0 0 1px}
+.fb-corners i:nth-child(2){top:11%;right:8%;border-width:1px 1px 0 0}
+.fb-corners i:nth-child(3){bottom:11%;left:8%;border-width:0 0 1px 1px}
+.fb-corners i:nth-child(4){right:8%;bottom:11%;border-width:0 1px 1px 0}
+@media(max-width:900px){.fb{transform:none}.fb-head,.fb-foot{font-size:7px}}
+@media(prefers-reduced-motion:reduce){.fb-scan{animation:none;top:48%}}
+
+/* the study's drawing, now inside the panel beside its question */
+.tp-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(20px,3vw,44px);
+  align-items:center;margin-bottom:clamp(18px,2.2vw,30px)}
+.tp-art{flex:0 0 auto;width:clamp(110px,12vw,150px);color:var(--panel);opacity:.9}
+.tp-art svg{width:100%;height:auto;overflow:visible;display:block}
+@media(max-width:720px){
+  .tp-head{grid-template-columns:1fr;gap:16px}
+  .tp-art{width:110px}
+}
+
+/* the card stops under the numbers until a study is chosen */
+.sctab-panel{display:none}
+.sctabs.open .sctab-panel{display:block;animation:tpOpen .42s cubic-bezier(.2,.7,.2,1)}
+@keyframes tpOpen{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.sctabs.open .sctab-bar{margin-bottom:clamp(26px,3vw,40px)}
+.sctab-bar{position:sticky;top:0;z-index:6;margin-bottom:0}
+.sctab{position:relative}
+.sctab.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--panel)}
+@media(prefers-reduced-motion:reduce){.sctabs.open .sctab-panel{animation:none}}
+
+/* collapsed: the number bar is the last thing in the card */
+.pmodal.tabsclosed .pmodal-in{padding-bottom:0}
+.pmodal.tabsclosed .sctab-bar{border-bottom:0}
+
+/* ---- study 1: protocol layout ---- */
+.pr{margin:calc(-1*var(--pmpad)) calc(-1*var(--pmpad)) calc(-1*var(--pmpad))}
+.pr-top{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);align-items:stretch;
+  min-height:clamp(520px,56vh,660px)}
+.pr-read{background:var(--paper);padding:clamp(34px,3.6vw,56px);display:flex;flex-direction:column;
+  justify-content:center;gap:clamp(24px,2.8vw,36px)}
+.pr-title{font-family:var(--fdisplay);font-weight:600;font-size:clamp(25px,2.9vw,38px);line-height:1.12;
+  letter-spacing:-.022em;color:var(--ink);margin:0;max-width:19ch}
+.pr-lead{font-family:var(--fbody);font-size:16.5px;line-height:1.66;color:var(--muted);margin:0}
+.pr-art{margin:0;padding-top:clamp(24px,2.8vw,34px);
+  border-top:1px solid var(--border);display:flex;justify-content:center}
+.pr-art svg{width:100%;max-width:272px;height:auto;color:var(--panel);overflow:visible}
+.pr-note{font-family:var(--fbody);font-size:12.5px;line-height:1.5;color:var(--faint);margin:18px 0 0}
+
+.pr-pill.on{background:#F7F5F1;color:#141A22;border-color:#F7F5F1}
+@keyframes prIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.pr-div{background:#141A22;padding:clamp(34px,4vw,56px) clamp(24px,3vw,52px);border-top:1px solid rgba(255,255,255,.08)}
+.pr-divh{font-family:var(--fdisplay);font-weight:600;font-size:clamp(26px,3vw,40px);line-height:1.1;
+  letter-spacing:-.022em;color:#fff;margin:0 0 clamp(24px,3vw,38px);max-width:16ch}
+.pr-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,48px) clamp(30px,4vw,64px)}
+.pr-cellh{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+.pr-num{font-family:var(--fbody);font-weight:700;font-size:12px;letter-spacing:.1em;color:var(--lit)}
+.pr-cell h6{font-family:var(--fdisplay);font-weight:600;font-size:19px;line-height:1.2;color:#fff;margin:0}
+.pr-cell p{font-family:var(--fbody);font-size:15px;line-height:1.62;color:rgba(237,240,244,.62);margin:0}
+.pr-cell p b{color:#fff;font-weight:600}
+.pr-foot{background:#0F141B;border-top:1px solid rgba(255,255,255,.08);
+  padding:16px clamp(24px,3vw,52px);display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.pr-link{font-family:var(--fbody);font-weight:600;font-size:14px;color:#EDF0F4;text-decoration:none;white-space:nowrap}
+.pr-link:hover{color:var(--lit)}
+@media(max-width:900px){
+  .pr-top{grid-template-columns:1fr}
+  .pr-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){.pr-row{animation:none}}
+
+/* the excerpts arrive one at a time, as if you were listening */
+.pr-div,.pr-foot{background:var(--surf,#1B2229)}
+.pr-foot{background:var(--surf2,#161C22)}
+
+/* ---- uploaded think-aloud component. Colours, spacing and motion as supplied;
+       the font comes from the copy already embedded in this page rather than a
+       Google Fonts request, so the file stays self-contained. ---- */
+.ta-panel{--ta-bg:var(--surf,#1b2229);--ta-line:rgba(247,244,238,.1);--ta-text:rgba(247,244,238,.88);
+  --ta-dim:rgba(247,244,238,.6);--ta-expert:#8fa0c6;--ta-novice:#c9a78c;
+  background:var(--ta-bg);font-family:var(--fbody);min-width:0}
+.ta-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:20px 34px;border-bottom:1px solid var(--ta-line)}
+.ta-tabs{display:flex;gap:8px}
+.ta-tab{font:600 13px/1 var(--fbody);padding:9px 18px;border-radius:999px;background:transparent;
+  color:var(--ta-dim);border:1px solid rgba(247,244,238,.22);cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s}
+.ta-tab:hover{border-color:rgba(247,244,238,.45);color:rgba(247,244,238,.85)}
+.ta-tab[aria-selected="true"]{background:#f7f4ee;color:var(--surf,#1b2229);border-color:#f7f4ee}
+.ta-replay{font:600 12.5px/1 var(--fbody);letter-spacing:.04em;color:var(--ta-dim);
+  background:none;border:none;cursor:pointer}
+.ta-replay:hover{color:#f7f4ee}
+.ta-replay:disabled{cursor:default;opacity:.7}
+.ta-lines{display:flex;flex-direction:column;gap:14px;padding:30px 34px 34px;min-height:0}
+.ta-line{position:relative;padding-left:18px;
+  animation:ta-push .62s cubic-bezier(.16,.84,.24,1) both}
+/* the accent bar draws down as the line arrives, so it reads as one movement */
+.ta-line::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);
+  transform-origin:top center;animation:ta-bar .52s cubic-bezier(.16,.84,.24,1) both}
+@keyframes ta-push{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ta-bar{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.ta-line .ta-code{font:700 10.5px/1 var(--fbody);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.ta-line p{font-size:15.5px;line-height:1.55;color:var(--ta-text);margin:6px 0 0}
+.ta-panel[data-who="expert"] .ta-line{--accent:var(--ta-expert)}
+.ta-panel[data-who="novice"] .ta-line{--accent:var(--ta-novice)}
+/* resting state, before anything plays */
+.ta-start{flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:18px}
+.ta-startp{font-size:16px;line-height:1.55;color:var(--ta-dim);margin:0;max-width:34ch}
+.ta-play{font:600 14px/1 var(--fbody);display:inline-flex;align-items:center;
+  background:#f7f4ee;color:#1b2229;border:0;border-radius:999px;padding:13px 24px;cursor:pointer;
+  transition:transform .2s,box-shadow .2s}
+.ta-play:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.28)}
+@media(prefers-reduced-motion:reduce){.ta-line,.ta-line::before{animation:none}.ta-play:hover{transform:none}}
+@media(max-width:900px){.ta-bar{padding:16px 20px}.ta-lines{padding:22px 20px 28px;min-height:0}}
+
+/* ---- study 2 ---- */
+.mem-stage{background:var(--surf,#1b2229);display:flex;align-items:stretch;justify-content:center;min-width:0}
+.mt-panel{display:flex;flex-direction:column;--mt-bg:var(--surf,#1b2229);--mt-line:rgba(247,244,238,.1);--mt-ink:#f7f4ee;
+  --mt-dim:rgba(247,244,238,.6);--mt-accent:#8fa0c6;
+  background:var(--mt-bg);font-family:var(--fbody);width:100%;min-width:0}
+.mt-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:22px 34px;border-bottom:1px solid var(--mt-line);font-size:11.5px;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:rgba(247,244,238,.5)}
+.mt-bar .mt-count{letter-spacing:.14em;color:rgba(247,244,238,.35);font-weight:500}
+.mt-stage{flex:1;padding:34px 34px 40px;min-height:330px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center}
+.mt-kicker{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+  color:var(--mt-accent);margin:0 0 12px;text-align:center}
+.mt-heading{font-family:var(--fdisplay);font-size:31px;line-height:1.08;letter-spacing:-.025em;
+  font-weight:500;color:var(--mt-ink);margin:0 0 26px;text-align:center}
+.mt-print{position:relative;width:100%;aspect-ratio:1;border-radius:10px;overflow:hidden}
+.mt-print>i{position:absolute;inset:-42%;display:block}
+.mt-target{max-width:210px}
+.mt-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;width:100%;
+  animation:mt-fade .35s ease both}
+.mt-card{display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px 16px 16px;
+  border:1px solid rgba(247,244,238,.16);border-radius:14px;background:rgba(247,244,238,.03);
+  cursor:pointer;transition:border-color .2s,background .2s}
+.mt-card:hover{border-color:rgba(247,244,238,.45);background:rgba(247,244,238,.07)}
+.mt-card span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  color:var(--mt-dim)}
+.mt-idle{position:relative;width:100%}
+.mt-idle .mt-choices{opacity:.28;filter:blur(1.5px);pointer-events:none}
+.mt-begin{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;
+  font:600 14px/1 var(--fbody);padding:14px 30px;border-radius:999px;border:none;
+  background:#f7f4ee;color:#1c1a18;cursor:pointer}
+.mt-timer{position:relative;width:52px;height:52px;margin:0 0 22px}
+.mt-timer svg{width:52px;height:52px;transform:rotate(-90deg)}
+.mt-timer circle{fill:none;stroke-width:3}
+.mt-timer .trk{stroke:rgba(247,244,238,.14)}
+.mt-timer .run{stroke:var(--mt-accent);stroke-linecap:round;stroke-dasharray:144.5;
+  stroke-dashoffset:0;transition:stroke-dashoffset linear}
+.mt-timer b{position:absolute;inset:0;display:grid;place-items:center;
+  font:600 17px/1 var(--fbody);color:var(--mt-ink);font-variant-numeric:tabular-nums}
+.mt-result{text-align:center;animation:mt-fade .35s ease both}
+.mt-result p{font-size:15px;line-height:1.6;color:rgba(247,244,238,.72);margin:0 auto 22px;max-width:400px}
+.mt-again{font:600 13.5px/1 var(--fbody);padding:12px 26px;border-radius:999px;
+  border:1px solid rgba(247,244,238,.35);background:transparent;color:var(--mt-ink);cursor:pointer}
+.mt-again:hover{background:rgba(247,244,238,.1)}
+@keyframes mt-fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.mt-choices,.mt-result{animation:none}
+  .mt-timer .run{transition:none}}
+@media(max-width:640px){.mt-bar,.mt-stage{padding-left:20px;padding-right:20px}
+  .mt-heading{font-size:25px}.mt-choices{gap:11px}}
+
+.mem-gap{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);
+  gap:clamp(28px,4vw,64px);align-items:center}
+.mem-gapcopy .pr-divh{margin-bottom:clamp(18px,2.2vw,26px)}
+.mem-p{font-family:var(--fbody);font-size:16px;line-height:1.68;color:rgba(237,240,244,.62);margin:0 0 1.05em}
+.mem-fig{margin:0;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:clamp(16px,2vw,24px);overflow-x:auto}
+.mem-fig svg{width:100%;min-width:340px;height:auto;display:block}
+.mem-fig figcaption{margin-top:12px;font-family:var(--fbody);font-size:12px;line-height:1.5;
+  color:rgba(237,240,244,.4);font-style:italic}
+.mem-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,3vw,42px);
+  margin-top:clamp(34px,4vw,56px);padding-top:clamp(28px,3.4vw,44px);border-top:1px solid rgba(255,255,255,.1)}
+.mem-card{padding-left:18px;border-left:2px solid #8fa0c6}
+.mem-card h6{font-family:var(--fdisplay);font-weight:600;font-size:18px;line-height:1.2;color:#fff;margin:0 0 8px}
+.mem-card p{font-family:var(--fbody);font-size:15px;line-height:1.62;color:rgba(237,240,244,.6);margin:0}
+@media(max-width:900px){
+  .mem-gap{grid-template-columns:1fr}
+  .mem-cards{grid-template-columns:1fr;gap:22px}
+}
+
+.mem-fig svg{min-width:420px}
+
+/* ---- uploaded place-your-bet component. Structure, spacing and motion as
+       supplied; the olive palette swapped for the two colours the rest of this
+       project already uses, and the fonts taken from the page. ---- */
+.pb-panel{display:flex;flex-direction:column;--pb-line:rgba(247,244,238,.1);--pb-ink:#f7f4ee;
+  --pb-dim:rgba(247,244,238,.55);--pb-accent:#8FA0C6;--pb-mine:#C9A78C;
+  background:var(--surf,#1b2229);font-family:var(--fbody);width:100%;min-width:0}
+.pb-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:20px 34px;border-bottom:1px solid var(--pb-line)}
+.pb-label{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  color:rgba(247,244,238,.5)}
+.pb-reset{font:600 12.5px/1 var(--fbody);letter-spacing:.04em;color:rgba(247,244,238,.65);
+  background:none;border:none;cursor:pointer}
+.pb-reset:hover{color:var(--pb-ink)}
+.pb-reset[hidden]{display:none}
+.pb-stage{flex:1;padding:30px 34px 34px;min-height:346px;display:flex;flex-direction:column;
+  justify-content:center}
+.pb-stage h4{font-family:var(--fdisplay);font-size:28px;line-height:1.1;letter-spacing:-.025em;
+  font-weight:500;color:var(--pb-ink);margin:0 0 8px}
+.pb-lede{font-size:14.5px;line-height:1.55;color:var(--pb-dim);margin:0 0 24px}
+.pb-chips{display:flex;flex-wrap:wrap;gap:10px}
+.pb-chip{font:600 13.5px/1 var(--fbody);padding:11px 18px;border-radius:999px;
+  border:1px solid rgba(247,244,238,.22);background:transparent;color:rgba(247,244,238,.82);
+  cursor:pointer;transition:background .2s,border-color .2s}
+.pb-chip:hover{background:rgba(247,244,238,.1);border-color:rgba(247,244,238,.5)}
+.pb-reveal{animation:pb-fade .4s ease both}
+.pb-verdict{font-size:15px;line-height:1.6;color:rgba(247,244,238,.78);margin:0 0 22px}
+.pb-rows{display:flex;flex-direction:column;gap:11px}
+.pb-row-head{display:flex;justify-content:space-between;gap:12px;margin-bottom:5px}
+.pb-name{font-size:13.5px;font-weight:600;color:rgba(247,244,238,.8)}
+.pb-note{font-size:11.5px;color:rgba(247,244,238,.4);white-space:nowrap}
+.pb-track{height:8px;border-radius:5px;background:rgba(247,244,238,.09);overflow:hidden}
+.pb-fill{height:100%;border-radius:5px;background:rgba(143,160,198,.4);width:0;
+  transition:width .7s cubic-bezier(.2,.7,.2,1)}
+.pb-row.is-domain .pb-fill{background:var(--pb-accent)}
+.pb-row.is-mine .pb-fill{background:var(--pb-mine)}
+.pb-row.is-mine .pb-name{color:var(--pb-mine)}
+@keyframes pb-fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.pb-reveal{animation:none}.pb-fill{transition:none}}
+@media(max-width:640px){.pb-bar,.pb-stage{padding-left:20px;padding-right:20px}
+  .pb-stage h4{font-size:23px}.pb-note{display:none}}
+
+/* ---- study 3 surround ---- */
+.tr-cards{display:flex;flex-direction:column;gap:clamp(22px,2.6vw,30px)}
+.tr-quote{margin:clamp(38px,4.6vw,64px) 0 0;padding:4px 0 4px 22px;
+  border-left:2px solid var(--pb-accent,#8FA0C6);font-family:var(--fdisplay);font-weight:500;
+  font-size:clamp(22px,2.6vw,34px);line-height:1.2;letter-spacing:-.02em;color:#fff}
+.tr-foot{display:flex;align-items:center;justify-content:flex-end}
+.tr-status{font-family:var(--fbody);font-size:13px;color:rgba(237,240,244,.42)}
 </style>
 
 <nav class="nav" id="nav">
@@ -1265,13 +1632,14 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           ]}
        ]},
 
-      {k:"PhD, psychology \u00B7 2024",t:"How people become expert at difficult things",
+      {k:"PhD, psychology \u00B7 2024",t:"How people become expert at difficult things",heroFig:true,tabs:true,
        lead:"What separates exceptional performers from novices? My PhD used fingerprint examination, where a judgement can decide a court case, to reverse-engineer expertise across three studies.",
        stats:[],links:[],
-       tone:{accent:"#2D5A66",hover:"#3E7E8D",panel:"#22454E",soft:"#DDE9EB"},
+       tone:{accent:"#2F6F73",hover:"#3F8B90",panel:"#0C1D24",soft:"#DDEDEE",lit:"#78E7EA",glow:"86,194,203",surf:"#17262D",surf2:"#122029"},
        layout:"pair",
        pair:[
-         {short:"How experts think",railLabel:"How they think",icon:"think",art:"prints",
+         {short:"How experts think",railLabel:"How they think",icon:"think",art:"prints",custom:"protocol",
+          steps:["Compare two prints","Narrate every thought","Code what was said"],
           question:"What is actually going on in an expert's head during a high-stakes judgement?",
           link:{label:"Read the paper",href:"https://doi.org/10.1002/acp.70010"},
           sections:[
@@ -1282,7 +1650,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
             {k:"Why it matters",v:"If expertise is a set of habits of attention and self-monitoring, then it can be trained and assessed directly, rather than waited for."}
           ]},
 
-         {short:"How experts remember",railLabel:"How they remember",icon:"memory",art:"memtask",
+         {short:"How experts remember",railLabel:"How they remember",icon:"memory",art:"memtask",custom:"memory",
           question:"Does becoming an expert change what you can hold in mind?",
           link:{label:"Read the paper",href:"https://doi.org/10.1186/s41235-024-00539-9"},
           sections:[
@@ -1293,7 +1661,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
             {k:"Why it matters",v:"The advantage is not only knowing which patterns matter. Sustained practice appears to sharpen the visual memory system itself."}
           ]},
 
-         {short:"What predicts it",railLabel:"What predicts it",icon:"grid",art:"battery",
+         {short:"What predicts it",railLabel:"What predicts it",icon:"grid",art:"raven",custom:"traits",
           question:"Is expertise something you build, or something you were always suited to?",
           sections:[
             {k:"Problem",v:"If raw aptitude explains expert performance, you select for it. If experience explains it, you train for it. The two answers lead to completely different investments."},
@@ -1557,112 +1925,175 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       return '<svg viewBox="0 0 '+W+' '+(W*1.02)+'" fill="none" stroke="currentColor" stroke-width="'+(2*k).toFixed(2)+
              '" stroke-linecap="round"><g>'+g+'</g></svg>';
     }
+    /* The uploaded memory-trial component, with a countdown on the study phase. */
     function buildTrial(){
-      var box=el("div","trial"), stage=el("div","trial-stage"), tick=null;
-      /* the study column toggles on click; keep the trial's own clicks to itself */
-      box.addEventListener("click",function(e){e.stopPropagation();});
-      var bar=el("div","trial-bar");
-      bar.appendChild(el("span",null,"Representative task"));
-      var trialNo=el("span",null,"Trial 1"); bar.appendChild(trialNo);
-      box.appendChild(bar); box.appendChild(stage);
-      var target=0, round=0;
+      var STUDY_MS=3000;
+      var panel=el("div","mt-panel"), stage=el("div","mt-stage");
+      stage.setAttribute("aria-live","polite");
+      /* the surrounding column has its own click handler; keep ours to ourselves */
+      panel.addEventListener("click",function(e){e.stopPropagation();});
+      var bar=el("div","mt-bar");
+      bar.appendChild(el("span",null,"Sample trial"));
+      bar.appendChild(el("span","mt-count","01 / 01"));
+      panel.appendChild(bar); panel.appendChild(stage);
 
-      function clearTick(){ if(tick){clearInterval(tick);tick=null;} }
+      var state={phase:"idle",seeds:[17,52,94],target:0,correct:false};
+      var timer=null,ticker=null;
+      function clearTimers(){ if(timer){clearTimeout(timer);timer=null;}
+                              if(ticker){clearInterval(ticker);ticker=null;} }
 
-      function intro(){
-        clearTick(); stage.innerHTML="";
-        stage.appendChild(el("span","trial-kick","Recognition memory"));
-        stage.appendChild(el("h5","trial-h","Study a print, then pick it out of three."));
-        stage.appendChild(el("p","trial-p","Five seconds. Look at whatever you think matters."));
-        var b=el("button","trial-btn","Begin the trial &rarr;");
-        b.addEventListener("click",study); stage.appendChild(b);
+      /* Procedural stand-in stimuli, not the research prints. */
+      function printEl(seed,isTarget){
+        var ang=(seed*53)%180, gap=6+(seed%4),
+            cx=40+(seed*17)%22, cy=38+(seed*29)%24,
+            rx=44+(seed*11)%24, ry=32+(seed*23)%20;
+        var box=el("div","mt-print"+(isTarget?" mt-target":""));
+        var layer=document.createElement("i");
+        layer.style.transform="rotate("+ang+"deg)";
+        layer.style.backgroundImage=
+          "repeating-radial-gradient(ellipse "+rx+"% "+ry+"% at "+cx+"% "+cy+"%, "+
+          "rgba(247,244,238,.62) 0 1.6px, transparent 1.6px "+gap+"px)";
+        box.appendChild(layer);
+        return box;
       }
-      function study(){
-        clearTick(); stage.innerHTML="";
-        target=Math.floor(Math.random()*3);
-        round++; trialNo.textContent="Trial "+round;
-        var count=el("div","trial-count","5");
-        stage.appendChild(count);
-        stage.appendChild(el("p","trial-p","Study this print"));
-        var fig=el("div","trial-target"); fig.innerHTML=trialPrint(target,150);
-        stage.appendChild(fig);
-        var left=5;
-        tick=setInterval(function(){
-          left--;
-          if(left<=0){ clearTick(); choose(); return; }
-          count.textContent=String(left);
+      function head(kicker,heading){
+        if(kicker)stage.appendChild(el("p","mt-kicker",kicker));
+        stage.appendChild(el("h4","mt-heading",heading));
+      }
+      function choiceGrid(onPick){
+        var grid=el("div","mt-choices");
+        state.seeds.forEach(function(seed,i){
+          var card=el("div","mt-card");
+          card.appendChild(printEl(seed,false));
+          card.appendChild(el("span",null,"Print "+"ABC"[i]));
+          if(onPick)card.addEventListener("click",function(){onPick(i);});
+          grid.appendChild(card);
+        });
+        return grid;
+      }
+      /* the countdown: a ring that empties over the study window, and the
+         seconds beside it so the number is there for anyone who wants it */
+      function countdown(){
+        var secs=Math.round(STUDY_MS/1000);
+        var wrap=el("div","mt-timer");
+        wrap.innerHTML='<svg viewBox="0 0 52 52" aria-hidden="true">'
+          +'<circle class="trk" cx="26" cy="26" r="23"/>'
+          +'<circle class="run" cx="26" cy="26" r="23"/></svg>'
+          +'<b>'+secs+'</b>';
+        var run=wrap.querySelector(".run"), num=wrap.querySelector("b");
+        run.style.transitionDuration=STUDY_MS+"ms";
+        setTimeout(function(){run.style.strokeDashoffset="144.5";},30);
+        var left=secs;
+        ticker=setInterval(function(){
+          left--; if(left<=0){clearInterval(ticker);ticker=null;return;}
+          num.textContent=String(left);
         },1000);
+        return wrap;
       }
-      function choose(){
-        clearTick(); stage.innerHTML="";
-        stage.appendChild(el("span","trial-kick","Make your judgement"));
-        stage.appendChild(el("h5","trial-h","Which print did you just see?"));
-        var row=el("div","trial-opts");
-        [0,1,2].forEach(function(i){
-          var b=el("button","trial-opt");
-          var art=el("span","trial-mini"); art.innerHTML=trialPrint(i,86);
-          b.appendChild(art); b.appendChild(el("span","trial-optlab",String.fromCharCode(65+i)));
-          b.addEventListener("click",function(){ result(i); });
-          row.appendChild(b);
-        });
-        stage.appendChild(row);
+
+      function render(){
+        clearTimers(); stage.innerHTML="";
+        if(state.phase==="idle"){
+          head(null,"Sit in the experiment for a moment");
+          var wrap=el("div","mt-idle");
+          wrap.appendChild(choiceGrid(null));
+          var begin=el("button","mt-begin","Begin the trial");
+          begin.addEventListener("click",start);
+          wrap.appendChild(begin);
+          stage.appendChild(wrap);
+        } else if(state.phase==="study"){
+          head("Hold onto this one","Take it in");
+          stage.appendChild(countdown());
+          stage.appendChild(printEl(state.seeds[state.target],true));
+          timer=setTimeout(function(){state.phase="choose";render();},STUDY_MS);
+        } else if(state.phase==="choose"){
+          head("Now choose","Which one came back?");
+          stage.appendChild(choiceGrid(pick));
+        } else {
+          head(state.correct?"Correct":"Not quite",
+               state.correct?"That was it":"Close, but no");
+          var box=el("div","mt-result");
+          box.appendChild(el("p",null,state.correct
+            ? "Now run that forty times with prints that all look like each other. That is the version examiners were better at."
+            : "Which is rather the point. When nothing stands out, novices lost the thread and examiners did not."));
+          var again=el("button","mt-again","Run it again");
+          again.addEventListener("click",start);
+          box.appendChild(again);
+          stage.appendChild(box);
+        }
       }
-      function result(pick){
-        clearTick(); stage.innerHTML="";
-        var right=pick===target;
-        stage.appendChild(el("span","trial-kick","Your result"));
-        var mark=el("div","trial-mark"+(right?" ok":""),right?"Correct":"Not this one");
-        stage.appendChild(mark);
-        stage.appendChild(el("h5","trial-h",right
-          ? "You picked the print you were shown."
-          : "The one you studied was "+String.fromCharCode(65+target)+"."));
-        var pair=el("div","trial-pair");
-        [["You studied",target],["You picked",pick]].forEach(function(pr){
-          var c=el("div","trial-pairitem");
-          c.appendChild(el("span",null,pr[0]));
-          var a=el("span","trial-mini"); a.innerHTML=trialPrint(pr[1],76); c.appendChild(a);
-          pair.appendChild(c);
-        });
-        stage.appendChild(pair);
-        stage.appendChild(el("p","trial-p",
-          "One trial measures nothing. In the study this ran many times, with prints that were sometimes distinctive and sometimes deliberately plain, so we could tell a real memory advantage from a familiarity shortcut."));
-        var b=el("button","trial-btn","Try another &#8635;");
-        b.addEventListener("click",study); stage.appendChild(b);
+      function start(){
+        var base=Math.floor(Math.random()*700);
+        state.seeds=[base+5,base+61,base+133].sort(function(){return Math.random()-0.5;});
+        state.target=Math.floor(Math.random()*3);
+        state.phase="study"; render();
       }
-      intro();
-      return box;
+      function pick(i){ state.correct=(i===state.target); state.phase="done"; render(); }
+      render();
+      return panel;
     }
 
     /* Experiment 1 of the memory paper, drawn the way the paper draws it:
        spread first, mean second. Values are the published M and SD. */
     function memoryResult(){
-      var C_GRID="#e0d8cc",C_LAB="#8a8177",C_INK="#2E2621",C_NOV="#9C9089",C_EXP="#2D5A66";
-      var W=560,H=300,pl=64,pr=26,pt=26,pb=52,pw=W-pl-pr,ph=H-pt-pb;
+      var W=620,H=360,pl=64,pr=30,pt=22,pb=64,pw=W-pl-pr,ph=H-pt-pb;
+      var LINE="rgba(255,255,255,.16)",LAB="#7C737C",TXT="#EDE7EA";
+      var NOV="#E3C14E",EXP="#9B7BC4",MEAN="#D8544F";
       function yp(v){return pt+ph*(1-v/100);}
-      var g="";
-      [0,10,25,50,75,100].forEach(function(t){
+      /* deterministic sampler so the picture never jumps between loads */
+      var sd=7; function rnd(){sd=(sd*1664525+1013904223)%4294967296;return sd/4294967296;}
+      function gauss(m,s){var u=Math.max(1e-9,rnd()),v=Math.max(1e-9,rnd());
+        return m+s*Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+      var pairs=[],i;
+      for(i=0;i<44;i++){
+        pairs.push([Math.max(4,Math.min(72,gauss(41,14))),Math.max(38,Math.min(98,gauss(76,11)))]);
+      }
+      var xN=pl+pw*0.32,xE=pl+pw*0.68,g="";
+      [0,10,20,30,40,50,60,70,80,90,100].forEach(function(t){
         var y=yp(t);
-        g+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(pl+pw)+'" y2="'+y.toFixed(1)+'" stroke="'+C_GRID+'" stroke-width="1"/>';
-        g+='<text x="'+(pl-10)+'" y="'+(y+4).toFixed(1)+'" text-anchor="end" font-size="11.5" fill="'+C_LAB+'">'+t+'%</text>';
+        g+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(pl+pw)+'" y2="'+y.toFixed(1)+'" stroke="'+LINE+'" stroke-width="1"/>';
+        if(t%20===0||t===10)g+='<text x="'+(pl-11)+'" y="'+(y+4).toFixed(1)+'" text-anchor="end" font-size="11" fill="'+LAB+'">'+t+'</text>';
       });
-      var groups=[{n:"Novices",N:44,m:41,sd:14,x:pl+pw*0.30,c:C_NOV},
-                  {n:"Experts",N:44,m:76,sd:11,x:pl+pw*0.70,c:C_EXP}];
-      groups.forEach(function(gr){
-        var top=Math.min(100,gr.m+gr.sd), bot=Math.max(0,gr.m-gr.sd);
-        /* the band is one standard deviation either side of the mean */
-        g+='<rect x="'+(gr.x-34)+'" y="'+yp(top).toFixed(1)+'" width="68" height="'+(yp(bot)-yp(top)).toFixed(1)+
-           '" rx="8" fill="'+gr.c+'" opacity="0.16"/>';
-        g+='<line x1="'+(gr.x-34)+'" y1="'+yp(gr.m).toFixed(1)+'" x2="'+(gr.x+34)+'" y2="'+yp(gr.m).toFixed(1)+
-           '" stroke="'+gr.c+'" stroke-width="3"/>';
-        g+='<text x="'+gr.x+'" y="'+(yp(gr.m)-12).toFixed(1)+'" text-anchor="middle" font-size="17" font-weight="700" fill="'+C_INK+'">'+gr.m+'%</text>';
-        g+='<text x="'+gr.x+'" y="'+(H-30)+'" text-anchor="middle" font-size="12.5" fill="'+C_INK+'">'+gr.n+'</text>';
-        g+='<text x="'+gr.x+'" y="'+(H-14)+'" text-anchor="middle" font-size="11" fill="'+C_LAB+'">n = '+gr.N+'</text>';
+      g+='<text x="18" y="'+(pt+ph/2)+'" text-anchor="middle" font-size="11.5" fill="'+LAB+'" transform="rotate(-90 18 '+(pt+ph/2)+')">Proportion correct (%)</text>';
+      pairs.forEach(function(p2){
+        g+='<line x1="'+(xN+16)+'" y1="'+yp(p2[0]).toFixed(1)+'" x2="'+(xE-16)+'" y2="'+yp(p2[1]).toFixed(1)+
+           '" stroke="rgba(255,255,255,.13)" stroke-width="1"/>';
       });
+      function violin(vals,cx,dir,col){
+        var lo=Math.max(0,Math.min.apply(null,vals)-6),hi=Math.min(100,Math.max.apply(null,vals)+6);
+        var bins=18,c=[],k;
+        for(k=0;k<bins;k++)c.push(0);
+        vals.forEach(function(v){var b=Math.min(bins-1,Math.max(0,Math.floor((v-lo)/(hi-lo)*bins)));c[b]++;});
+        var sm=[];
+        for(k=0;k<bins;k++){var a=c[k-1]||0,b2=c[k],d=c[k+1]||0;sm.push((a+2*b2+d)/4);}
+        var mx=Math.max.apply(null,sm)||1,pts=[];
+        for(k=0;k<bins;k++){
+          var y=yp(lo+(k+0.5)/bins*(hi-lo)), w=(sm[k]/mx)*38;
+          pts.push((cx+dir*w).toFixed(1)+' '+y.toFixed(1));
+        }
+        return '<path d="M'+cx+' '+yp(hi).toFixed(1)+' L'+pts.join(' L')+' L'+cx+' '+yp(lo).toFixed(1)+
+               ' Z" fill="'+col+'" opacity="0.26"/>';
+      }
+      g+=violin(pairs.map(function(p2){return p2[0];}),xN-34,-1,NOV);
+      g+=violin(pairs.map(function(p2){return p2[1];}),xE+34,1,EXP);
+      pairs.forEach(function(p2){
+        g+='<circle cx="'+(xN+16+(rnd()-0.5)*16).toFixed(1)+'" cy="'+yp(p2[0]).toFixed(1)+'" r="4.4" fill="'+NOV+'" opacity=".85"/>';
+        g+='<circle cx="'+(xE-16+(rnd()-0.5)*16).toFixed(1)+'" cy="'+yp(p2[1]).toFixed(1)+'" r="4.4" fill="'+EXP+'" opacity=".85"/>';
+      });
+      g+='<line x1="'+(xN+16)+'" y1="'+yp(41)+'" x2="'+(xE-16)+'" y2="'+yp(76)+'" stroke="'+MEAN+'" stroke-width="3"/>';
+      [[xN+16,41],[xE-16,76]].forEach(function(mm){
+        g+='<line x1="'+(mm[0]-26)+'" y1="'+yp(mm[1])+'" x2="'+(mm[0]+26)+'" y2="'+yp(mm[1])+'" stroke="'+MEAN+'" stroke-width="3"/>';
+      });
+      g+='<circle cx="'+(pl+14)+'" cy="'+(pt+10)+'" r="4" fill="'+MEAN+'"/>';
+      g+='<text x="'+(pl+24)+'" y="'+(pt+14)+'" font-size="11" fill="'+LAB+'">group mean</text>';
       var yc=yp(10);
-      g+='<line x1="'+pl+'" y1="'+yc.toFixed(1)+'" x2="'+(pl+pw)+'" y2="'+yc.toFixed(1)+
-         '" stroke="'+C_INK+'" stroke-width="1.5" stroke-dasharray="5 4"/>';
-      g+='<text x="'+(pl+pw)+'" y="'+(yc-8).toFixed(1)+'" text-anchor="end" font-size="11" font-weight="600" fill="'+C_INK+'">chance, 10%</text>';
-      return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Accuracy for experts and novices against chance" style="width:100%;height:auto">'+g+'</svg>';
+      g+='<line x1="'+pl+'" y1="'+yc+'" x2="'+(pl+pw)+'" y2="'+yc+'" stroke="'+TXT+'" stroke-width="1.3" stroke-dasharray="5 4" opacity=".7"/>';
+      g+='<text x="'+(pl+pw)+'" y="'+(yc-8)+'" text-anchor="end" font-size="11" fill="'+TXT+'" opacity=".8">chance, 10%</text>';
+      g+='<text x="'+(xN+16)+'" y="'+(H-32)+'" text-anchor="middle" font-size="13.5" fill="'+TXT+'">Novices</text>';
+      g+='<text x="'+(xE-16)+'" y="'+(H-32)+'" text-anchor="middle" font-size="13.5" fill="'+TXT+'">Experts</text>';
+      g+='<text x="'+(xN+16)+'" y="'+(H-15)+'" text-anchor="middle" font-size="11" fill="'+LAB+'">n = 44</text>';
+      g+='<text x="'+(xE-16)+'" y="'+(H-15)+'" text-anchor="middle" font-size="11" fill="'+LAB+'">n = 44</text>';
+      return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Accuracy for every expert and novice, with matched pairs joined" style="width:100%;height:auto">'+g+'</svg>';
     }
     function taskFig(kind){
       if(kind==="sitewalk")return '<svg viewBox="0 0 340 186" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="326" height="172" rx="12" opacity=".35"/><circle cx="88" cy="54" r="13"/><path d="M72 49 a16 16 0 0 1 32 0"/><path d="M69 49 h38"/><path d="M70 98 v-13 a18 18 0 0 1 36 0 v13"/><circle cx="196" cy="54" r="13"/><path d="M178 98 v-13 a18 18 0 0 1 36 0 v13"/><rect x="252" y="66" width="60" height="34" rx="8"/><circle class="sc-dot" cx="268" cy="83" r="3" fill="currentColor" stroke="none"/><circle class="sc-dot" cx="282" cy="83" r="3" fill="currentColor" stroke="none" style="animation-delay:.2s"/><circle class="sc-dot" cx="296" cy="83" r="3" fill="currentColor" stroke="none" style="animation-delay:.4s"/><path d="M30 128 h280" opacity=".3"/><text x="88" y="152" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".7">you</text><text x="196" y="152" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".7">researcher</text><text x="282" y="120" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity=".55">recorded</text></svg>';
@@ -1672,13 +2103,14 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       if(kind==="cogbattery")return '<svg viewBox="0 0 340 150" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="22" width="72" height="72" rx="9"/><circle cx="26" cy="40" r="4.5"/><circle cx="46" cy="40" r="4.5"/><circle cx="66" cy="40" r="4.5"/><circle cx="26" cy="60" r="4.5"/><circle cx="66" cy="60" r="4.5"/><rect class="fg-target" x="61" y="55" width="11" height="11" rx="2.5"/><text x="46" y="112" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".72">visual search</text><rect x="96" y="22" width="72" height="72" rx="9"/><g class="sa-rot" transform="translate(132 58)"><path d="M-13 6 l8 -13 h10 l8 13 -8 13 h-10 z"/></g><text x="132" y="112" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".72">mental rotation</text><rect x="182" y="22" width="72" height="72" rx="9"/><path d="M200 58 h40"/><path d="M232 50 l8 8 -8 8"/><circle class="fg-stop" cx="218" cy="58" r="11"/><text x="218" y="112" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".72">inhibition</text><rect x="268" y="22" width="72" height="72" rx="9"/><path d="M284 76 v-16"/><path d="M300 76 v-30"/><path d="M316 76 v-24"/><path d="M280 82 h40" opacity=".5"/><text x="304" y="112" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".72">reasoning</text></svg>';
       return "";
     }
+    function heroArt(){return '<div class="fb"><div class="fb-head"><span>FORENSIC PATTERN FIELD</span><span>VISUAL ANALYSIS</span></div><div class="fb-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="fb-print" aria-hidden="true"><div class="fb-whorl"></div><div class="fb-breaks"><i></i><i></i><i></i><i></i></div></div><div class="fb-scan" aria-hidden="true"><span>SCANNING</span></div><div class="fb-target" aria-hidden="true"><i></i></div><div class="fb-foot"><span>SEARCH / RECOGNISE / DECIDE</span><span>RESEARCH SERIES</span></div></div>';}
     function studyArt(kind){
       if(kind==="handover")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M148 26 l10 12 -8 12 12 10 -10 12 9 12 -11 10 8 12 -9 12" opacity=".6"/><path d="M158 26 h30 v92 h-38" opacity=".18"/><circle cx="66" cy="52" r="9.5"/><path d="M53 48 a13 13 0 0 1 26 0"/><path d="M50 48 h32"/><path d="M66 62 v26"/><path d="M66 68 l22 -6"/><path d="M66 74 l22 -12"/><path d="M66 88 l-11 22"/><path d="M66 88 l12 22"/><g class="sa-pick"><path d="M88 62 L124 34"/><path d="M112 24 l20 18"/></g><path class="sa-spark" d="M140 62 l9 -5"/><path class="sa-spark" d="M141 70 h10"/><path class="sa-spark" d="M140 78 l9 5"/><path d="M14 118 h172" opacity=".5"/></svg>';
       if(kind==="competency")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="44" cy="86" r="9.5"/><path d="M31.5 82 a12.5 12.5 0 0 1 25.0 0"/><path d="M28.5 82 h31.0"/><path d="M44 96 v24"/><path d="M44 101 l14 7"/><path d="M44 101 l-12 8"/><circle cx="156" cy="86" r="9.5"/><path d="M143.5 82 a12.5 12.5 0 0 1 25.0 0"/><path d="M140.5 82 h31.0"/><path d="M156 96 v24"/><path d="M156 101 l-14 7"/><path d="M156 101 l12 8"/><g class="sa-say1"><rect x="30" y="18" width="74" height="36" rx="11"/><path d="M46 54 l-4 11 13 -11"/><path d="M42 31 h48"/><path d="M42 42 h30"/></g><g class="sa-say2"><rect x="98" y="26" width="72" height="34" rx="11"/><path d="M152 60 l5 11 -14 -11"/><path d="M110 39 h46"/><path d="M110 50 h26"/></g><text x="100" y="146" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".6">talking it through</text></svg>';
       if(kind==="agility")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="26" cy="52" r="7" opacity=".7"/><circle cx="48" cy="74" r="7" opacity=".7"/><circle cx="24" cy="96" r="7" opacity=".7"/><rect x="145" y="45" width="14" height="14" rx="3" opacity=".7"/><rect x="167" y="67" width="14" height="14" rx="3" opacity=".7"/><rect x="143" y="89" width="14" height="14" rx="3" opacity=".7"/><path d="M100 6 V16" opacity=".4" stroke-dasharray="5 5"/><path d="M100 44 V56" opacity=".4" stroke-dasharray="5 5"/><path class="sa-fric" d="M100 56 l-8 10 16 12 -16 12 8 10"/><rect x="72" y="16" width="56" height="28" rx="6"/><path d="M80 27 h30" opacity=".5"/><path d="M80 36 h20" opacity=".5"/><circle class="sa-carry" cx="78" cy="30" r="3.6" fill="currentColor" stroke="none"/><circle cx="100" cy="110" r="8.5"/><path d="M100 119 v14"/><path d="M100 123 l-24 7"/><path d="M100 123 l24 7"/><text x="100" y="152" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".6">object, boundary, broker</text></svg>';
       if(kind==="prints")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="26" width="76" height="96" rx="9"/><rect x="108" y="26" width="76" height="96" rx="9"/><path d="M32 86 a 22 28 0 0 1 44 0"/><path d="M38 86 a 16 20 0 0 1 32 0"/><path d="M44 86 a 10 12 0 0 1 20 0"/><path d="M49 86 a 5 6 0 0 1 10 0"/><path d="M30 95 q 24 8 48 0"/><path d="M32 103 q 22 8 44 0"/><path d="M124 86 a 22 28 0 0 1 44 0"/><path d="M130 86 a 16 20 0 0 1 32 0"/><path d="M136 86 a 10 12 0 0 1 20 0"/><path d="M141 86 a 5 6 0 0 1 10 0"/><path d="M122 95 q 24 8 48 0"/><path d="M124 103 q 22 8 44 0"/><circle class="sc-dot" cx="45" cy="80" r="2.6" fill="currentColor" stroke="none"/><circle class="sc-dot" cx="64" cy="70" r="2.6" fill="currentColor" stroke="none" style="animation-delay:.25s"/><circle class="sc-dot" cx="137" cy="80" r="2.6" fill="currentColor" stroke="none" style="animation-delay:.5s"/><circle class="sc-dot" cx="156" cy="70" r="2.6" fill="currentColor" stroke="none" style="animation-delay:.75s"/><g class="sa-lens"><circle cx="0" cy="0" r="17"/><path d="M12 12 L21 21"/></g></svg>';
       if(kind==="memtask")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g class="sa-stage sa-s1"><rect x="6" y="34" width="54" height="70" rx="8"/><path d="M19 84 a 14 17 0 0 1 27 0"/><path d="M23 84 a 10 12 0 0 1 20 0"/><path d="M27 84 a 6 7 0 0 1 12 0"/><path d="M30 84 a 3 4 0 0 1 6 0"/><path d="M18 90 q 15 5 30 0"/><path d="M19 95 q 14 5 27 0"/></g><path d="M64 69 h12" opacity=".5"/><path d="M71 64 l5 5 -5 5" opacity=".5"/><g class="sa-stage sa-s2"><rect x="82" y="34" width="36" height="70" rx="8" stroke-dasharray="5 5"/><path d="M94 62 q6 -8 12 0 t-6 9 v4"/><circle cx="100" cy="84" r="1.8" fill="currentColor" stroke="none"/></g><path d="M124 69 h12" opacity=".5"/><path d="M131 64 l5 5 -5 5" opacity=".5"/><g class="sa-stage sa-s3"><rect x="140" y="34" width="54" height="70" rx="8"/><path d="M153 84 a 14 17 0 0 1 27 0"/><path d="M157 84 a 10 12 0 0 1 20 0"/><path d="M161 84 a 6 7 0 0 1 12 0"/><path d="M164 84 a 3 4 0 0 1 6 0"/><path d="M152 90 q 15 5 30 0"/><path d="M153 95 q 14 5 27 0"/></g><text x="33" y="120" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".6">study</text><text x="100" y="120" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".6">delay</text><text x="167" y="120" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".6">test</text><text x="100" y="144" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity=".7">same or different?</text></svg>';
-      if(kind==="battery")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="36" r="6"/><circle cx="44" cy="36" r="6"/><circle cx="66" cy="36" r="6"/><circle cx="22" cy="58" r="6"/><circle cx="44" cy="58" r="6"/><rect class="sa-target" x="58" y="50" width="16" height="16" rx="3"/><circle cx="22" cy="80" r="6"/><circle cx="44" cy="80" r="6"/><circle cx="66" cy="80" r="6"/><g class="sa-rot" transform="translate(150 58)"><path d="M-17 8 l11 -17 h12 l11 17 -11 17 h-12 z"/></g><path d="M22 112 h58" stroke-width="5" opacity=".85"/><path d="M22 127 h94" stroke-width="5" opacity=".55"/><path d="M22 142 h34" stroke-width="5" opacity=".35"/></svg>';
+      if(kind==="raven")return '<svg viewBox="0 0 200 190" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g opacity=".28"><rect x="46" y="6" width="34" height="34" rx="4"/><rect x="84" y="6" width="34" height="34" rx="4"/><rect x="122" y="6" width="34" height="34" rx="4"/><rect x="46" y="44" width="34" height="34" rx="4"/><rect x="84" y="44" width="34" height="34" rx="4"/><rect x="122" y="44" width="34" height="34" rx="4"/><rect x="46" y="82" width="34" height="34" rx="4"/><rect x="84" y="82" width="34" height="34" rx="4"/></g><circle cx="63" cy="23" r="11"/><path d="M63 16 v14"/><circle cx="101" cy="23" r="11"/><path d="M97 16 v14"/><path d="M105 16 v14"/><circle cx="139" cy="23" r="11"/><path d="M134 17 v12"/><path d="M139 15 v16"/><path d="M144 17 v12"/><rect x="53" y="51" width="20" height="20" rx="2"/><path d="M63 54 v14"/><rect x="91" y="51" width="20" height="20" rx="2"/><path d="M97 54 v14"/><path d="M105 54 v14"/><rect x="129" y="51" width="20" height="20" rx="2"/><path d="M134 54 v14"/><path d="M139 54 v14"/><path d="M144 54 v14"/><path d="M63 88 l11 19 h-22 z"/><path d="M63 96 v9"/><path d="M101 88 l11 19 h-22 z"/><path d="M97 98 v7"/><path d="M105 98 v7"/><rect class="sa-blank" x="122" y="82" width="34" height="34" rx="4" stroke-dasharray="5 4"/><text x="139" y="106" text-anchor="middle" font-size="18" fill="currentColor" stroke="none" opacity=".55">?</text><g opacity=".62"><path d="M43 137 l8 13 h-16 z"/><path d="M43 143 v6"/><circle cx="81" cy="145" r="8.5"/><path d="M77 140 v10"/><path d="M85 140 v10"/><path d="M119 137 l8 13 h-16 z"/><path d="M114 144 v6"/><path d="M119 141 v9"/><path d="M124 144 v6"/><rect x="148" y="136" width="18" height="18" rx="2"/><path d="M157 139 v12"/></g><rect class="sa-ravenpick" x="104" y="130" width="30" height="30" rx="5"/><text x="100" y="184" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" opacity=".6">which one completes it?</text></svg>';
       if(kind==="chatscreen")return '<svg viewBox="0 0 200 158" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+
         '<rect x="26" y="16" width="148" height="98" rx="10"/>'+
         '<path d="M100 114 V130"/><path d="M80 132 H120"/>'+
@@ -1722,6 +2154,426 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
         labels.forEach(function(l){var r=l.getBoundingClientRect();var c=r.top+r.height/2;var d=(c-mid)/sc.clientHeight;l.style.transform="translateY("+(d*-16).toFixed(1)+"px)";});});}
       sc.addEventListener("scroll",onScroll,{passive:true});onScroll();
       studyScroll={io:io,sc:sc,fn:onScroll,labels:labels};
+    }
+
+    /* Study 1 laid out around the paper's own four themes, with verbatim
+       protocol excerpts and the code frequencies from Table 2. */
+    var PROTOCOL={
+      lead:"We asked 44 fingerprint examiners and 44 novices to compare prints while narrating every thought aloud, then coded every statement into what they attended to, how they planned, and how they reached a conclusion.",
+      voices:{
+        expert:[
+          {k:"Systematic search",t:"Starting at the core. The delta sits lower than I would expect, so I will orient from there."},
+          {k:"Causal reasoning",t:"Ridge flow breaks across this band. That reads as pressure distortion, not a genuine difference."},
+          {k:"Held lightly",t:"I will keep that one open until I have a second region to check it against."},
+          {k:"Weighing evidence",t:"Three minutiae in sequence, spacing consistent. That carries real weight."},
+          {k:"Replanning",t:"The lower half is too smeared to use. I am changing where I work from."}
+        ],
+        novice:[
+          {k:"Global shape",t:"It looks like a loop. Or possibly a whorl, I am not certain."},
+          {k:"Surface match",t:"The overall pattern seems close to the other one."},
+          {k:"Undirected search",t:"There are a lot of lines here. I do not know which of them are supposed to matter."},
+          {k:"Early conclusion",t:"I would call it a match, because it looks the same to me."}
+        ]
+      },
+      diverged:[
+        {n:"01",h:"Where the eye goes",
+         p:"Examiners spent <b>44%</b> of their statements on local ridge detail, against <b>21%</b> for novices. Novices spent <b>38%</b> on the global shape of the print, against <b>16%</b> for examiners."},
+        {n:"02",h:"Planning on the move",
+         p:"Both groups planned about as often. What differed was adaptability: examiners revised goals mid-comparison when clarity or distortion demanded it, and drew on formal rules, while novices worked from intuitions formed during the task itself."},
+        {n:"03",h:"Knowing why a print looks that way",
+         p:"Examiners referenced <b>causal factors</b> like pressure, movement, slippage and scarring nearly three times as often as novices. Novices voiced <b>uncertainty</b> seven times as often, at 5.5% of statements against 0.7%."},
+        {n:"04",h:"Holding back the conclusion",
+         p:"Examiners made three times as many <b>critical appraisal</b> statements, weighing how much each feature could bear before it counted, and validated their own findings more often. Novices settled earlier and justified afterwards."}
+      ],
+    };
+    var protoTimer=null;
+    function buildProtocol(s){
+      var wrap=el("div","pr");
+      var top=el("div","pr-top"), read=el("div","pr-read"), stage=el("div","pr-stage");
+      read.appendChild(el("h4","pr-title",esc(s.question)));
+      read.appendChild(el("p","pr-lead",PROTOCOL.lead));
+      var artWrap=el("div","pr-art");artWrap.innerHTML=studyArt(s.art);
+      read.appendChild(artWrap);
+
+      /* the uploaded think-aloud component, verbatim in structure and class names */
+      stage.className="ta-panel";
+      stage.setAttribute("data-who","expert");
+      stage.innerHTML=
+        '<div class="ta-bar">'
+        +'<div class="ta-tabs" role="tablist" aria-label="Speaker">'
+        +'<button class="ta-tab" role="tab" data-who="expert" aria-selected="true">Examiner</button>'
+        +'<button class="ta-tab" role="tab" data-who="novice" aria-selected="false">Novice</button>'
+        +'</div>'
+        +'<button class="ta-replay">Replay &#8635;</button>'
+        +'</div>'
+        +'<div class="ta-lines" aria-live="polite"></div>';
+      var list=stage.querySelector(".ta-lines"),
+          replay=stage.querySelector(".ta-replay"),
+          tabs=stage.querySelectorAll(".ta-tab");
+      var STEP_MS=1650;
+
+      function addLine(l){
+        var row=el("div","ta-line");
+        row.appendChild(el("span","ta-code",esc(l.k)));
+        row.appendChild(el("p",null,esc(l.t)));
+        list.appendChild(row);
+      }
+      /* only the newest line is inserted each step, so the ones already on
+         screen stay put instead of re-running their fade every tick */
+      function reset(){list.innerHTML="";}
+      function play(who){
+        if(protoTimer)clearInterval(protoTimer);
+        stage.setAttribute("data-who",who);
+        [].forEach.call(tabs,function(t){
+          t.setAttribute("aria-selected",String(t.getAttribute("data-who")===who));});
+        var lines=PROTOCOL.voices[who], total=lines.length, shown=0;
+        reset();addLine(lines[shown++]);
+        replay.innerHTML="Listening&#8230;";replay.disabled=true;
+        protoTimer=setInterval(function(){
+          addLine(lines[shown++]);
+          if(shown>=total){clearInterval(protoTimer);protoTimer=null;
+            replay.innerHTML="Replay &#8635;";replay.disabled=false;}
+        },STEP_MS);
+      }
+      /* nothing runs until it is asked for */
+      function idle(){
+        if(protoTimer){clearInterval(protoTimer);protoTimer=null;}
+        list.innerHTML="";
+        var st=el("div","ta-start");
+        st.appendChild(el("p","ta-startp","Hear how an examiner and a novice talk their way through the same print."));
+        var go=el("button","ta-play","&#9654;&nbsp; Play the think-aloud");
+        go.addEventListener("click",function(){play(stage.getAttribute("data-who")||"expert");});
+        st.appendChild(go);
+        list.appendChild(st);
+        replay.innerHTML="Replay &#8635;";replay.disabled=true;
+      }
+      [].forEach.call(tabs,function(t){
+        t.addEventListener("click",function(){
+          var who=t.getAttribute("data-who");
+          stage.setAttribute("data-who",who);
+          [].forEach.call(tabs,function(x){
+            x.setAttribute("aria-selected",String(x.getAttribute("data-who")===who));});
+          play(who);
+        });
+      });
+      replay.addEventListener("click",function(){play(stage.getAttribute("data-who")||"expert");});
+      top.appendChild(read);top.appendChild(stage);wrap.appendChild(top);
+
+      var div=el("div","pr-div");
+      div.appendChild(el("h5","pr-divh","Four places the thinking diverged"));
+      var grid=el("div","pr-grid");
+      PROTOCOL.diverged.forEach(function(d){
+        var c=el("div","pr-cell");
+        var hd=el("div","pr-cellh");
+        hd.appendChild(el("span","pr-num",d.n));
+        hd.appendChild(el("h6",null,esc(d.h)));
+        c.appendChild(hd);c.appendChild(el("p",null,d.p));grid.appendChild(c);
+      });
+      div.appendChild(grid);
+      wrap.appendChild(div);
+
+      var foot=el("div","pr-foot");
+      if(s.link){var a=el("a","pr-link",esc(s.link.label)+" &#8599;");
+        a.setAttribute("href",s.link.href);a.target="_blank";a.rel="noopener";foot.appendChild(a);}
+      wrap.appendChild(foot);
+      idle();
+      return wrap;
+    }
+
+    var MEMORY={
+      lead:"We gave examiners and novices the same unfamiliar prints, took them away, and asked which one came back. Two experiments, one manipulating how distinctive the prints were.",
+      gapH:"The gap widens exactly where the work gets hard",
+      gapP:["Everyone remembers a striking print. Experts remembered more of them, and their advantage grew on the plain ones, where there was nothing obvious to hang the memory on.",
+            "That points to organisation rather than raw capacity. Experience seems to teach you what is worth encoding in the first place."],
+      cards:[
+        {h:"Memory is trainable",p:"If expertise is doing the work, then deliberate practice on memory itself belongs in examiner training, not just comparison drills."},
+        {h:"Train on the dull cases",p:"The advantage showed up on plain prints. Varied, unremarkable exemplars are likely the more useful training diet."},
+        {h:"A measurable marker",p:"A short memory task tracks something real about proficiency, which makes it a candidate for selection and monitoring."}
+      ]
+    };
+
+    var TRAITS={
+      lead:"Forty-two examiners and forty-two novices sat a battery of cognitive tasks and personality measures, alongside a test of domain-specific perceptual skill. We asked which of them tracked real proficiency.",
+      resH:"The traits mattered. The experience mattered more.",
+      resP:["Visual search and mental rotation came out as the strongest of the general abilities. Both were real, and both were modest.",
+            "Once domain-specific perceptual skill entered the picture it overshadowed everything else. Time in the work, not the shape of the mind arriving at it."],
+      cards:[
+        {h:"Screening has a low ceiling",p:"No trait in the battery was strong enough to justify sorting candidates on it alone."},
+        {h:"Test the skill, not the person",p:"A domain-specific perceptual measure told us far more than any personality inventory did."},
+        {h:"Good news for training",p:"If expertise is mostly earned, then the lever sits with instruction rather than selection."}
+      ],
+      quote:"Experts are not found ready-made. They are built, and slowly.",
+      status:"Under review"
+    };
+
+    /* The uploaded place-your-bet component. Structure, copy and behaviour as
+       supplied; colours taken from the two the rest of this project uses, and
+       the bar reveal moved off rAF, which embedded views throttle to nothing. */
+    function buildBet(){
+      var ROWS=[
+        {name:"Domain perceptual skill",  w:100, note:"dominant", domain:true},
+        {name:"Visual search",            w:44,  note:"strongest general ability"},
+        {name:"Mental rotation",          w:40,  note:"close behind"},
+        {name:"Inhibition",               w:22,  note:"slight"},
+        {name:"Intelligence measures",    w:20,  note:"slight"},
+        {name:"Conscientiousness",        w:12,  note:"negligible"},
+        {name:"Tolerance of uncertainty", w:10,  note:"negligible"},
+        {name:"Risk propensity",          w:8,   note:"negligible"}
+      ];
+      var panel=el("div","pb-panel"), bar=el("div","pb-bar"), stage=el("div","pb-stage");
+      stage.setAttribute("aria-live","polite");
+      panel.addEventListener("click",function(e){e.stopPropagation();});
+      var label=el("span","pb-label","Place your bet");
+      bar.appendChild(label);
+      panel.appendChild(bar); panel.appendChild(stage);
+
+      function ask(){
+        label.textContent="Place your bet"; stage.innerHTML="";
+        stage.appendChild(el("h4",null,"Which one would you bet on?"));
+        stage.appendChild(el("p","pb-lede",
+          "Pick the trait you would screen for if you were hiring the next generation of examiners."));
+        var chips=el("div","pb-chips");
+        /* general traits first, domain skill last, so it is not the obvious answer */
+        ROWS.filter(function(t){return !t.domain;})
+            .concat(ROWS.filter(function(t){return t.domain;}))
+            .forEach(function(t){
+              var b=el("button","pb-chip",esc(t.name));
+              b.addEventListener("click",function(){reveal(t.name);});
+              chips.appendChild(b);
+            });
+        stage.appendChild(chips);
+      }
+      function reveal(pickName){
+        var pick=ROWS.filter(function(t){return t.name===pickName;})[0];
+        label.textContent="Where it actually landed"; stage.innerHTML="";
+        var wrap=el("div","pb-reveal");
+        wrap.appendChild(el("p","pb-verdict", pick&&pick.domain
+          ? "Correct, and it is not close. Domain-specific perceptual skill overshadowed every general trait we measured."
+          : "A reasonable bet, but the general abilities were all modest. What actually separated the groups was domain-specific perceptual skill."));
+        var rows=el("div","pb-rows"), fills=[];
+        ROWS.forEach(function(t){
+          var mine=t.name===pickName;
+          var row=el("div","pb-row"+(t.domain?" is-domain":"")+(mine?" is-mine":""));
+          var head=el("div","pb-row-head");
+          head.appendChild(el("span","pb-name",esc(t.name)));
+          head.appendChild(el("span","pb-note",mine?"your pick \u00B7 "+esc(t.note):esc(t.note)));
+          var track=el("div","pb-track"), fill=el("div","pb-fill");
+          track.appendChild(fill); row.appendChild(head); row.appendChild(track);
+          rows.appendChild(row); fills.push([fill,t.w]);
+        });
+        wrap.appendChild(rows); stage.appendChild(wrap);
+        setTimeout(function(){fills.forEach(function(f){f[0].style.width=f[1]+"%";});},60);
+      }
+      ask();
+      return panel;
+    }
+
+    function buildTraits(s){
+      var wrap=el("div","pr");
+      var top=el("div","pr-top"), read=el("div","pr-read"), stage=el("div","mem-stage");
+      read.appendChild(el("h4","pr-title",esc(s.question)));
+      read.appendChild(el("p","pr-lead",esc(TRAITS.lead)));
+      var art=el("div","pr-art");art.innerHTML=studyArt(s.art);
+      read.appendChild(art);
+      stage.appendChild(buildBet());
+      top.appendChild(read); top.appendChild(stage); wrap.appendChild(top);
+
+      var div=el("div","pr-div"), gap=el("div","mem-gap");
+      var gl=el("div","mem-gapcopy");
+      gl.appendChild(el("h5","pr-divh",esc(TRAITS.resH)));
+      TRAITS.resP.forEach(function(t){gl.appendChild(el("p","mem-p",esc(t)));});
+      var gr=el("div","tr-cards");
+      TRAITS.cards.forEach(function(c){
+        var cell=el("div","mem-card");
+        cell.appendChild(el("h6",null,esc(c.h)));
+        cell.appendChild(el("p",null,esc(c.p)));
+        gr.appendChild(cell);
+      });
+      gap.appendChild(gl); gap.appendChild(gr); div.appendChild(gap);
+      div.appendChild(el("blockquote","tr-quote",esc(TRAITS.quote)));
+      wrap.appendChild(div);
+
+      var foot=el("div","pr-foot tr-foot");
+      foot.appendChild(el("span","tr-status",esc(TRAITS.status)));
+      wrap.appendChild(foot);
+      return wrap;
+    }
+
+    function buildMemory(s){
+      var wrap=el("div","pr");
+      var top=el("div","pr-top"), read=el("div","pr-read"), stage=el("div","mem-stage");
+      read.appendChild(el("h4","pr-title",esc(s.question)));
+      read.appendChild(el("p","pr-lead",MEMORY.lead));
+      var art=el("div","pr-art");art.innerHTML=studyArt(s.art);
+      read.appendChild(art);
+      stage.appendChild(buildTrial());
+      top.appendChild(read);top.appendChild(stage);wrap.appendChild(top);
+
+      var div=el("div","pr-div"), gap=el("div","mem-gap");
+      var gl=el("div","mem-gapcopy");
+      gl.appendChild(el("h5","pr-divh",esc(MEMORY.gapH)));
+      MEMORY.gapP.forEach(function(t){gl.appendChild(el("p","mem-p",esc(t)));});
+      var gr=el("figure","mem-fig");gr.innerHTML=memoryResult2();
+      gr.appendChild(el("figcaption",null,"Experiment 2, recreated from Figure 3 of the paper. Each dot is one participant and each line joins a matched expert-novice pair who saw the same trials."));
+      gap.appendChild(gl);gap.appendChild(gr);
+      div.appendChild(gap);
+
+      var cards=el("div","mem-cards");
+      MEMORY.cards.forEach(function(c){
+        var cell=el("div","mem-card");
+        cell.appendChild(el("h6",null,esc(c.h)));
+        cell.appendChild(el("p",null,esc(c.p)));
+        cards.appendChild(cell);
+      });
+      div.appendChild(cards);
+      wrap.appendChild(div);
+
+      var foot=el("div","pr-foot");
+      if(s.link){var a=el("a","pr-link",esc(s.link.label)+" &#8599;");
+        a.setAttribute("href",s.link.href);a.target="_blank";a.rel="noopener";foot.appendChild(a);}
+      wrap.appendChild(foot);
+      return wrap;
+    }
+
+    /* Figure 3: the distinctiveness experiment. Two panels, every participant
+       plotted, matched pairs joined. Experiment 2, n = 30 per group.
+       The paper reports the model rather than per-condition means, so the
+       levels here are read off the published figure. */
+    function memoryResult2(){
+      var W=760,H=400,pl=58,pr=18,pt=26,pb=76,ph=H-pt-pb;
+      var LINE="rgba(255,255,255,.14)",LAB="rgba(237,240,244,.45)",TXT="rgba(237,240,244,.85)";
+      var NOV="#C9A78C",EXP="#8FA0C6",MEAN="#F7F4EE";
+      function yp(v){return pt+ph*(1-v/100);}
+      var sd=11; function rnd(){sd=(sd*1664525+1013904223)%4294967296;return sd/4294967296;}
+      function gauss(m,s){var u=Math.max(1e-9,rnd()),v=Math.max(1e-9,rnd());
+        return m+s*Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+      var panels=[
+        {t:"Distinctive prints",    x0:pl+22, w:300, nov:{m:58,sd:18}, exp:{m:86,sd:10}},
+        {t:"Nondistinctive prints", x0:pl+352,w:300, nov:{m:41,sd:16}, exp:{m:71,sd:13}}
+      ];
+      var g="";
+      [0,10,20,30,40,50,60,70,80,90,100].forEach(function(t){
+        var y=yp(t);
+        g+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(W-pr)+'" y2="'+y.toFixed(1)+'" stroke="'+LINE+'" stroke-width="1"/>';
+        if(t%20===0||t===10)g+='<text x="'+(pl-10)+'" y="'+(y+4).toFixed(1)+'" text-anchor="end" font-size="11" fill="'+LAB+'">'+t+'</text>';
+      });
+      g+='<text x="16" y="'+(pt+ph/2)+'" text-anchor="middle" font-size="11.5" fill="'+LAB+'" transform="rotate(-90 16 '+(pt+ph/2)+')">Proportion correct (%)</text>';
+      function violin(vals,cx,dir,col){
+        var lo=Math.max(0,Math.min.apply(null,vals)-6),hi=Math.min(100,Math.max.apply(null,vals)+6);
+        var bins=16,c=[],k;for(k=0;k<bins;k++)c.push(0);
+        vals.forEach(function(v){var b=Math.min(bins-1,Math.max(0,Math.floor((v-lo)/(hi-lo)*bins)));c[b]++;});
+        var sm=[];for(k=0;k<bins;k++){var a=c[k-1]||0,b2=c[k],d=c[k+1]||0;sm.push((a+2*b2+d)/4);}
+        var mx=Math.max.apply(null,sm)||1,pts=[];
+        for(k=0;k<bins;k++){var y=yp(lo+(k+0.5)/bins*(hi-lo)),w=(sm[k]/mx)*26;
+          pts.push((cx+dir*w).toFixed(1)+' '+y.toFixed(1));}
+        return '<path d="M'+cx+' '+yp(hi).toFixed(1)+' L'+pts.join(' L')+' L'+cx+' '+yp(lo).toFixed(1)+
+               ' Z" fill="'+col+'" opacity="0.24"/>';
+      }
+      panels.forEach(function(P){
+        var xN=P.x0+P.w*0.34, xE=P.x0+P.w*0.66, pairs=[],i;
+        for(i=0;i<30;i++)pairs.push([
+          Math.max(6,Math.min(96,gauss(P.nov.m,P.nov.sd))),
+          Math.max(20,Math.min(99,gauss(P.exp.m,P.exp.sd)))]);
+        var dN=xN+8, dE=xE-8;
+        pairs.forEach(function(q){
+          g+='<line x1="'+dN+'" y1="'+yp(q[0]).toFixed(1)+'" x2="'+dE+'" y2="'+yp(q[1]).toFixed(1)+
+             '" stroke="rgba(255,255,255,.11)" stroke-width="1"/>';});
+        g+=violin(pairs.map(function(q){return q[0];}),dN-13,-1,NOV);
+        g+=violin(pairs.map(function(q){return q[1];}),dE+13,1,EXP);
+        pairs.forEach(function(q){
+          g+='<circle cx="'+(dN+(rnd()-0.5)*11).toFixed(1)+'" cy="'+yp(q[0]).toFixed(1)+'" r="3.8" fill="'+NOV+'" opacity=".9"/>';
+          g+='<circle cx="'+(dE+(rnd()-0.5)*11).toFixed(1)+'" cy="'+yp(q[1]).toFixed(1)+'" r="3.8" fill="'+EXP+'" opacity=".9"/>';});
+        g+='<line x1="'+dN+'" y1="'+yp(P.nov.m)+'" x2="'+dE+'" y2="'+yp(P.exp.m)+'" stroke="'+MEAN+'" stroke-width="1.5" opacity=".55"/>';
+        [[dN,P.nov.m],[dE,P.exp.m]].forEach(function(mm){
+          g+='<line x1="'+(mm[0]-18)+'" y1="'+yp(mm[1])+'" x2="'+(mm[0]+18)+'" y2="'+yp(mm[1])+'" stroke="'+MEAN+'" stroke-width="2.6"/>';});
+        g+='<text x="'+dN+'" y="'+(H-46)+'" text-anchor="middle" font-size="12" fill="'+TXT+'">Novice</text>';
+        g+='<text x="'+dE+'" y="'+(H-46)+'" text-anchor="middle" font-size="12" fill="'+TXT+'">Expert</text>';
+        g+='<text x="'+(P.x0+P.w/2)+'" y="'+(H-20)+'" text-anchor="middle" font-size="12.5" font-weight="600" fill="'+TXT+'">'+P.t+'</text>';
+        g+='<text x="'+(P.x0+P.w/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="10.5" fill="'+LAB+'">n = 30 per group</text>';
+      });
+      var yc=yp(10);
+      g+='<line x1="'+pl+'" y1="'+yc+'" x2="'+(W-pr)+'" y2="'+yc+'" stroke="'+TXT+'" stroke-width="1.2" stroke-dasharray="5 4" opacity=".65"/>';
+      g+='<text x="'+(W-pr)+'" y="'+(yc-7)+'" text-anchor="end" font-size="10.5" fill="'+TXT+'" opacity=".75">chance, 10%</text>';
+      g+='<line x1="'+(pl+340)+'" y1="'+pt+'" x2="'+(pl+340)+'" y2="'+(pt+ph)+'" stroke="'+LINE+'" stroke-width="1"/>';
+      return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Accuracy for every participant on distinctive and nondistinctive prints" style="width:100%;height:auto">'+g+'</svg>';
+    }
+    function buildTabs(p){
+      var wrap=el("div","sctabs");
+      var bar=el("div","sctab-bar"), panel=el("div","sctab-panel");
+      var studies=p.pair||[];
+      var current=-1;
+      function scrollToPanel(){
+        var sc=modal.querySelector(".pmodal-scroll");if(!sc)return;
+        /* the panel has only just been inserted; let the container settle on its
+           new scroll height first, or the target gets clamped to zero. a timer
+           rather than rAF, which some embedded views throttle to a standstill. */
+        setTimeout(function(){
+          var barH=bar.getBoundingClientRect().height;
+          var top=sc.scrollTop+(panel.getBoundingClientRect().top-sc.getBoundingClientRect().top)-barH;
+          top=Math.max(0,Math.min(top,sc.scrollHeight-sc.clientHeight));
+          try{sc.scrollTo({top:top,behavior:"smooth"});}catch(e){}
+          /* if smooth scrolling is unavailable or stalls, land it anyway */
+          setTimeout(function(){if(Math.abs(sc.scrollTop-top)>4)sc.scrollTop=top;},420);
+        },40);
+      }
+      function paint(idx){
+        [].forEach.call(bar.children,function(b,j){b.classList.toggle("on",j===idx);
+          b.setAttribute("aria-selected",j===idx?"true":"false");});
+        current=idx;
+        if(protoTimer){clearInterval(protoTimer);protoTimer=null;}
+        panel.innerHTML="";
+        wrap.classList.toggle("open",idx>=0);
+        modal.classList.toggle("tabsclosed",idx<0);
+        if(idx<0)return;
+        var s=studies[idx];
+        if(s.custom==="protocol"){panel.appendChild(buildProtocol(s));return;}
+        if(s.custom==="memory"){panel.appendChild(buildMemory(s));return;}
+      if(s.custom==="traits"){panel.appendChild(buildTraits(s));return;}
+        var head=el("div","tp-head");
+        head.appendChild(el("h4","sctab-q",esc(s.question)));
+        var art=el("div","tp-art");art.innerHTML=studyArt(s.art);
+        head.appendChild(art);
+        panel.appendChild(head);
+        var secs=el("div","sc-sections");
+        (s.sections||[]).forEach(function(sec){
+          var row=el("div","sc-row in");
+          row.appendChild(el("div","sc-rlabel",esc(sec.k)));
+          var body=el("div","sc-rbody");
+          (Object.prototype.toString.call(sec.v)==="[object Array]"?sec.v:[sec.v])
+            .forEach(function(par){body.appendChild(el("p",null,par));});
+          if(sec.chips){var cw=el("div","sc-chips");
+            sec.chips.forEach(function(c){cw.appendChild(el("span","sc-chip",esc(c)));});body.appendChild(cw);}
+          if(sec.result){var rf=el("figure","sc-fig");rf.innerHTML=memoryResult();
+            rf.appendChild(el("figcaption",null,sec.result));body.appendChild(rf);}
+          if(sec.trial)body.appendChild(buildTrial());
+          if(sec.fig){var fg=el("figure","sc-fig");fg.innerHTML=taskFig(sec.fig);
+            fg.appendChild(el("figcaption",null,"What the participant sees."));body.appendChild(fg);}
+          if(sec.chart)body.appendChild(buildChart(sec.chart));
+          (sec.quotes||[]).forEach(function(q){var bq=el("blockquote","sc-quote");
+            bq.appendChild(el("p",null,esc(q.t)));if(q.who)bq.appendChild(el("cite",null,esc(q.who)));
+            body.appendChild(bq);});
+          row.appendChild(body);secs.appendChild(row);
+        });
+        panel.appendChild(secs);
+        if(s.link){var a=el("a","sc-readlink",esc(s.link.label)+" &rarr;");
+          a.setAttribute("href",s.link.href);a.target="_blank";a.rel="noopener";panel.appendChild(a);}
+      }
+      studies.forEach(function(s,i){
+        var b=el("button","sctab");
+        b.setAttribute("role","tab");
+        b.appendChild(el("span","sctab-lab","Study "+(i+1)));
+        b.appendChild(el("span","sctab-t",esc(s.short)));
+        b.appendChild(el("span","sctab-chev","&rsaquo;"));
+        b.addEventListener("click",function(){
+          if(current===i){paint(-1);return;}
+          paint(i);scrollToPanel();
+        });
+        bar.appendChild(b);
+      });
+      bar.setAttribute("role","tablist");
+      wrap.appendChild(bar);wrap.appendChild(panel);
+      paint(-1);
+      return wrap;
     }
     function buildPair(p){
       var wrap=el("div","studypair");
@@ -1777,15 +2629,32 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
     }
     function applyTone(t){
       var m=modal;if(!m)return;
-      ["--accent","--accent-hover","--panel","--accent-soft"].forEach(function(v){m.style.removeProperty(v);});
+      ["--accent","--accent-hover","--panel","--accent-soft","--lit","--glow","--surf","--surf2"].forEach(function(v){m.style.removeProperty(v);});
       if(!t)return;
       if(t.accent)m.style.setProperty("--accent",t.accent);
       if(t.hover)m.style.setProperty("--accent-hover",t.hover);
       if(t.panel)m.style.setProperty("--panel",t.panel);
       if(t.soft)m.style.setProperty("--accent-soft",t.soft);
+      if(t.lit)m.style.setProperty("--lit",t.lit);
+      if(t.glow)m.style.setProperty("--glow",t.glow);
+      if(t.surf)m.style.setProperty("--surf",t.surf);
+      if(t.surf2)m.style.setProperty("--surf2",t.surf2);
     }
     function openM(i){var p=PROJ[i];if(!p)return;
       applyTone(p.tone);
+      var hd=modal.querySelector(".pmodal-head");
+      hd.classList.toggle("wide",!!p.heroFig);
+      var oldFig=hd.querySelector(".hero-figwrap");if(oldFig)oldFig.remove();
+      var copy=hd.querySelector(".hero-copy");
+      if(p.heroFig){
+        if(!copy){copy=el("div","hero-copy");
+          [pmK,pmT,pmLead,pmLinks,pmStats].forEach(function(n){if(n)copy.appendChild(n);});
+          hd.insertBefore(copy,hd.firstChild);}
+        var hw=el("div","hero-figwrap");hw.innerHTML=heroArt();hd.appendChild(hw);
+      }else if(copy){
+        while(copy.firstChild)hd.insertBefore(copy.firstChild,copy);
+        copy.remove();
+      }
       pmK.textContent=p.k||"";pmK.style.display=p.k?"":"none";
       pmT.textContent=p.t;pmLead.textContent=p.lead;
       pmLinks.innerHTML="";(p.links||[]).forEach(function(l){var a=el("a",null,l.label+" &rarr;");a.setAttribute("href",l.href);if((l.href||"").indexOf("http")===0){a.target="_blank";a.rel="noopener";}pmLinks.appendChild(a);});
@@ -1794,13 +2663,14 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       pmStats.style.display=(p.stats&&p.stats.length)?"flex":"none";
       var flow=modal.querySelector(".pmodal-flow");
       pmRail.innerHTML="";pmBody.innerHTML="";teardownSpy();
-      flow.classList.remove("pairmode","edmode");
+      flow.classList.remove("pairmode","edmode","tabsmode");modal.classList.remove("tabsclosed");
       pmHead.style.display="";pmHead.classList.remove("banner");if(pmCard)pmCard.classList.remove("bannermode");
       var sc=modal.querySelector(".pmodal-scroll");if(sc)sc.scrollTop=0;
       if(p.layout==="pair"){
         flow.classList.add("pairmode");
+        if(p.tabs)flow.classList.add("tabsmode");
         pmHead.classList.add("banner");if(pmCard)pmCard.classList.add("bannermode");
-        pmBody.appendChild(buildPair(p));
+        pmBody.appendChild((p.tabs?buildTabs(p):buildPair(p)));
       } else if(p.layout==="editorial"){
         flow.classList.add("edmode");
         pmHead.style.display="none";
@@ -1822,7 +2692,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
       if(p.layout!=="pair"&&p.layout!=="editorial"&&sc)setupSpy(sc);
       var c=modal.querySelector(".pmodal-close");if(c)c.focus();}
-    function closeM(){teardownSpy();deactivateStudy();modal.classList.remove("open");modal.setAttribute("aria-hidden","true");document.body.style.overflow="";}
+    function closeM(){if(protoTimer){clearInterval(protoTimer);protoTimer=null;}teardownSpy();deactivateStudy();modal.classList.remove("open");modal.setAttribute("aria-hidden","true");document.body.style.overflow="";}
     [].forEach.call(document.querySelectorAll(".projects .pcard-foot"),function(f,i){
       f.addEventListener("click",function(e){e.preventDefault();openM(i);});});
     modal.addEventListener("click",function(e){if(e.target.hasAttribute("data-close"))closeM();});
