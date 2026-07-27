@@ -47,8 +47,13 @@ body{font-family:var(--fbody);background:var(--paper);color:var(--ink);-webkit-f
   will-change:opacity,transform}
 .hname h1{font-family:var(--fdisplay);color:#FBFAF7;font-weight:600;letter-spacing:-.02em;line-height:.95;
   font-size:clamp(32px,5.5vw,80px);white-space:nowrap;text-shadow:0 2px 34px rgba(15,17,26,.6)}
+/* the credential sits on the name's baseline, in the same face, just smaller */
+.hname h1 .hphd{font-weight:600;letter-spacing:-.01em;
+  font-size:.34em;vertical-align:baseline;margin-left:.3em;opacity:.72}
+.hname .roles .rplus{opacity:.5;margin:0 .35em;font-weight:400}
 .hname .roles{font-family:var(--fbody);margin-top:20px;color:#E7EBF2;font-weight:600;text-transform:uppercase;
   letter-spacing:.26em;line-height:1.95;font-size:clamp(10px,1.2vw,14px);text-shadow:0 1px 16px rgba(15,17,26,.75)}
+@media(max-width:760px){.hname .roles{letter-spacing:.18em}}
 
 .bridge{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;
   padding:24px;z-index:6;pointer-events:none;opacity:0;will-change:opacity}
@@ -1551,8 +1556,8 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 
     <div class="hbrand rise dl0">BC<i>.</i></div>
     <div class="hname">
-      <h1 class="rise dl1">Brooklyn Corbett</h1>
-      <div class="roles rise dl2">Postdoctoral Research Fellow<br>Principal Coordinator, Student Success</div>
+      <h1 class="rise dl1">Brooklyn Corbett<span class="hphd">PhD</span></h1>
+      <div class="roles rise dl2">Postdoctoral Research Fellow <span class="rplus">+</span> Principal Coordinator, Student Success</div>
     </div>
 
     <div class="bridge"><h2>Turning research into <span>practice.</span></h2></div>
@@ -1824,8 +1829,9 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
     glstage.style.left="0px";glstage.style.top="0px";glstage.style.width=VW+"px";glstage.style.height=gh+"px";
     glstage.style.borderRadius="0px";glstage.style.webkitMaskImage="none";glstage.style.maskImage="none";
     cvs.style.left="0px";cvs.style.top="0px";
-    /* Phase 2: name travels up -90px and fades (linear, 0.12 -> 0.52vh), overlapping the wipe */
-    var tp=clamp((sv-0.40)/0.34,0,1);
+    /* Phase 2: the name clears on exactly the photo's timing, so the two leave
+       together and the shader is left bare before it lifts to the banner */
+    var tp=wipe;
     hname.style.opacity=(1-tp).toFixed(3);
     hname.style.transform="translateY("+(-90*tp).toFixed(1)+"px)";
     /* scroll cue stays until the shader lifts to the banner */
