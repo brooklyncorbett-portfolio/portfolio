@@ -662,199 +662,6 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 @media(max-width:520px){.trial-opts{gap:8px}.trial-mini svg{width:72px}.trial-target svg{width:126px}}
 
 .sc-rbody p + p{margin-top:.85em}
-
-/* ============ dark editorial pop-out ============ */
-.pmodal{--ink-d:#EDE7EA;--mut-d:#A79EA6;--faint-d:#7C737C;--bg-d:#15101A;--surf-d:#1E1822;
-        --line-d:rgba(255,255,255,.13);--lit:#8FA9C4;--glow:108,124,153;
-        --fserif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif}
-.pmodal-card{background:var(--bg-d);color:var(--ink-d);box-shadow:0 50px 120px rgba(0,0,0,.6)}
-
-/* header: a wash of the project colour over near-black */
-.pmodal-head.banner{background:linear-gradient(180deg,#241C2A 0%,var(--bg-d) 100%);
-  border-bottom:1px solid var(--line-d)}
-.pmodal-head.banner::before{background:
-   radial-gradient(46% 58% at 76% 6%,rgba(var(--glow),.75),transparent 62%),
-   radial-gradient(40% 52% at 14% 22%,rgba(var(--glow),.4),transparent 64%),
-   radial-gradient(52% 60% at 52% 96%,rgba(0,0,0,.55),transparent 60%)}
-.pmodal-head.banner .pmodal-kicker{color:var(--lit);letter-spacing:.2em}
-.pmodal-head.banner .pmodal-lead{color:rgba(237,231,234,.8);font-family:var(--fserif)}
-.pmodal-title{color:#fff}
-.pmodal-lead{color:var(--mut-d);font-family:var(--fserif);font-size:clamp(16px,1.5vw,19px);line-height:1.6}
-.pmodal-links a{background:rgba(255,255,255,.07);border:1px solid var(--line-d);color:var(--ink-d)}
-.pmodal-links a:hover{background:rgba(255,255,255,.13)}
-.pmodal-flow,.pmodal-scroll{background:var(--bg-d)}
-
-/* the three study cards */
-.studycol{background:var(--surf-d);border:1px solid var(--line-d)}
-.studycol:hover{border-color:var(--lit)}
-.studycol.open{background:var(--surf-d)}
-.studycol.mini{background:#120D16;border-color:var(--line-d)}
-.sc-num{color:var(--lit)}
-.sc-shorttitle{color:#fff}
-.sc-q{color:var(--mut-d);font-family:var(--fserif);font-size:15.5px;line-height:1.55}
-.sc-open{color:var(--lit)}
-.sc-art svg{color:var(--ink-d);opacity:.92}
-.sc-rlabel{color:var(--lit)}
-.sc-fulltitle{color:#fff;font-size:clamp(22px,2.4vw,30px)}
-.sc-fh{border-bottom:1px solid var(--line-d)}
-.sc-collapse{color:var(--faint-d)}
-.sc-fh:hover .sc-collapse{color:var(--lit)}
-.sc-row{border-top:1px solid var(--line-d)}
-.sc-rbody p{color:var(--mut-d);font-family:var(--fserif);font-size:16.5px;line-height:1.68}
-.sc-rbody p b,.sc-rbody p strong{color:var(--ink-d);font-weight:600}
-.sc-quote{background:rgba(255,255,255,.05);border-left:3px solid var(--lit)}
-.sc-quote p{color:var(--ink-d);font-family:var(--fserif);font-style:italic}
-.sc-quote cite{color:var(--faint-d)}
-.sc-readlink{background:var(--lit);color:#15101A}
-.sc-readlink:hover{background:#fff;color:#15101A}
-.sc-railicon{color:var(--mut-d)}
-.sc-chip{background:rgba(255,255,255,.07);color:var(--ink-d);border:1px solid var(--line-d)}
-.sc-fig{background:rgba(255,255,255,.04);border:1px solid var(--line-d)}
-.sc-fig svg{color:var(--lit)}
-.sc-fig figcaption{color:var(--faint-d)}
-.pmodal-stats .st{background:rgba(255,255,255,.06);border:1px solid var(--line-d)}
-.pmodal-stats .st b{color:#fff}
-.pmodal-stats .st span{color:var(--mut-d)}
-.pmodal-close{background:rgba(255,255,255,.12);color:#fff;border:1px solid var(--line-d)}
-.pmodal-close:hover{background:rgba(255,255,255,.22)}
-
-/* the trial, on dark */
-.trial{background:#120D16;border-color:var(--line-d)}
-.trial-bar{background:rgba(255,255,255,.06);color:var(--mut-d);border-bottom:1px solid var(--line-d)}
-.trial-kick{color:var(--lit)}
-.trial-h{color:#fff;font-family:var(--fdisplay)}
-.trial-p{color:var(--mut-d);font-family:var(--fserif);font-size:15px}
-.trial-btn{background:var(--lit);color:#15101A}
-.trial-btn:hover{background:#fff}
-.trial-count{color:var(--lit)}
-.trial-target{color:var(--ink-d)}
-.trial-opt{background:rgba(255,255,255,.05);border:1px solid var(--line-d)}
-.trial-opt:hover{border-color:var(--lit);background:rgba(255,255,255,.09)}
-.trial-mini{color:var(--ink-d)}
-.trial-optlab{color:var(--mut-d);letter-spacing:.12em}
-.trial-mark{background:rgba(255,255,255,.07);color:var(--mut-d)}
-.trial-mark.ok{background:rgba(var(--glow),.4);color:#fff}
-.trial-pairitem span:first-child{color:var(--faint-d)}
-
-/* editorial numerals for anything stat-like */
-.bignum{font-family:var(--fserif);font-weight:400}
-
-/* the editorial layout (attendance) on dark */
-.pmodal .ed-title,.pmodal .ed-h,.pmodal .pmodal-flow h3,.pmodal .ed-mname{color:#fff}
-.pmodal .ed-standfirst{color:var(--ink-d);font-family:var(--fserif)}
-.pmodal .ed-p,.pmodal .pmodal-flow p{color:var(--mut-d);font-family:var(--fserif);font-size:16.5px;line-height:1.68}
-.pmodal .ed-p b,.pmodal .ed-p strong{color:var(--ink-d)}
-.pmodal .ed-kicker,.pmodal .ed-seckicker{color:var(--lit)}
-.pmodal .ed-masthead,.pmodal .ed-sec{border-color:var(--line-d)}
-.pmodal .ed-stat{background:rgba(255,255,255,.06);border:1px solid var(--line-d)}
-.pmodal .ed-stat b{color:#fff}
-.pmodal .ed-stat span,.pmodal .ed-cap,.pmodal .ed-mrole,.pmodal .ed-teamnote{color:var(--faint-d)}
-.pmodal .ed-fig{background:rgba(255,255,255,.04);border:1px solid var(--line-d)}
-.pmodal .ed-phase{background:rgba(255,255,255,.05);border:1px solid var(--line-d);color:var(--ink-d)}
-.pmodal .ed-phasenum{color:var(--lit)}
-.pmodal .ed-phase h5,.pmodal .ed-phase b{color:#fff}
-.pmodal .ed-phasetx{color:var(--mut-d);font-family:var(--fserif)}
-.pmodal .ed-pull{border-left:3px solid var(--lit)}
-.pmodal .ed-pulltx{color:#fff;font-family:var(--fserif);font-style:italic}
-.pmodal .ed-pullwho{color:var(--faint-d)}
-.pmodal .ed-team{background:rgba(255,255,255,.05);border:1px solid var(--line-d)}
-.pmodal .ed-member{border-color:var(--line-d)}
-
-/* ---- split stage study view ---- */
-.sc-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:stretch}
-.sc-read{background:var(--cream,#F7F3EE);color:#241C29;padding:clamp(30px,3.4vw,54px)}
-.sc-stage{background:#100C14}
-.st-inner{position:sticky;top:0;padding:clamp(28px,3vw,44px) clamp(24px,2.8vw,40px);display:flex;
-  flex-direction:column;gap:clamp(22px,2.6vw,32px);justify-content:center;
-  max-height:86vh;overflow-y:auto;overscroll-behavior:contain}
-.rs-kick{font-family:var(--fbody);font-weight:700;font-size:11px;letter-spacing:.2em;
-  text-transform:uppercase;color:#8A6A55;margin-bottom:14px}
-.rs-title{font-family:var(--fdisplay);font-weight:600;font-size:clamp(24px,2.8vw,38px);line-height:1.12;
-  letter-spacing:-.02em;color:#241C29;margin:0 0 20px;max-width:20ch}
-.rs-p{font-family:var(--fserif);font-size:17px;line-height:1.68;color:#4E4453;margin:0 0 1.05em}
-.rs-p b,.rs-p strong{color:#241C29;font-weight:600}
-.rs-quote{margin:22px 0;padding:2px 0 2px 20px;border-left:3px solid #B98A6A}
-.rs-quote p{font-family:var(--fserif);font-style:italic;font-size:17px;line-height:1.6;color:#241C29;margin:0}
-.rs-quote cite{display:block;margin-top:8px;font-family:var(--fbody);font-style:normal;font-size:12.5px;color:#8A8090}
-.rs-chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 4px}
-.rs-chip{font-family:var(--fbody);font-size:12.5px;font-weight:600;color:#5A4630;
-  background:rgba(138,106,85,.14);border-radius:999px;padding:7px 13px}
-.rs-nums{display:flex;gap:clamp(20px,3vw,40px);margin-top:30px;padding-top:24px;border-top:1px solid rgba(0,0,0,.14);flex-wrap:wrap}
-.rs-nums b{display:block;font-family:var(--fserif);font-weight:400;font-size:clamp(32px,3.6vw,46px);
-  line-height:1;color:#241C29}
-.rs-nums span{font-family:var(--fbody);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8A8090}
-.sc-read .sc-readlink{margin-top:26px;background:#241C29;color:#F7F3EE}
-.sc-read .sc-readlink:hover{background:#3E3247;color:#fff}
-.st-block{display:flex;flex-direction:column;gap:10px}
-.st-kick{font-family:var(--fbody);font-weight:700;font-size:10.5px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--lit)}
-.st-fig{margin:0;background:rgba(255,255,255,.04);border:1px solid var(--line-d);border-radius:14px;
-  padding:16px;overflow-x:auto}
-.st-fig svg{width:100%;min-width:318px;height:auto;color:var(--lit);display:block}
-.st-fig figcaption{margin-top:10px;font-family:var(--fbody);font-size:12px;color:var(--faint-d);
-  font-style:italic;line-height:1.5}
-.st-art{display:flex;justify-content:center;padding:20px 0}
-.st-art svg{width:100%;max-width:240px;height:auto;color:var(--ink-d)}
-.sc-fh{padding-left:clamp(30px,3.4vw,54px);padding-right:clamp(24px,2.8vw,40px)}
-@media(max-width:900px){
-  .sc-split{grid-template-columns:1fr}
-  .st-inner{gap:20px;position:static;max-height:none;overflow:visible}
-}
-
-/* clip keeps the rounded corner without becoming a scroll container, so the stage can stick */
-.studycol.open{overflow:clip}
-
-/* ---- study hero band ---- */
-.sc-hero{position:relative;background:
-  radial-gradient(70% 130% at 88% 0%,rgba(var(--glow),.6),transparent 62%),
-  linear-gradient(180deg,#241C2A 0%,#181220 100%);
-  padding:clamp(28px,3.4vw,46px) clamp(28px,3.2vw,50px) clamp(26px,3vw,40px);border-bottom:1px solid var(--line-d)}
-.sh-kick{font-family:var(--fbody);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--lit);display:flex;gap:10px;align-items:center;margin-bottom:16px}
-.sh-dot{opacity:.55}
-.sh-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(20px,3vw,52px);align-items:start}
-.sh-title{font-family:var(--fdisplay);font-weight:600;font-size:clamp(30px,4.2vw,58px);line-height:1.02;
-  letter-spacing:-.025em;color:#fff;margin:0;max-width:15ch}
-.sh-lead{font-family:var(--fserif);font-size:clamp(15.5px,1.4vw,18.5px);line-height:1.6;
-  color:rgba(237,231,234,.8);margin:6px 0 0;max-width:44ch}
-.sc-hero .sc-collapse{position:absolute;top:clamp(28px,3.4vw,46px);right:clamp(28px,3.2vw,50px);
-  font-family:var(--fbody);font-size:12.5px;color:var(--faint-d);cursor:pointer}
-.sc-hero:hover .sc-collapse{color:var(--lit)}
-
-/* ---- results band beneath the split ---- */
-.sc-results{background:#181220;border-top:1px solid var(--line-d);
-  padding:clamp(30px,3.6vw,52px) clamp(28px,3.2vw,50px)}
-.res-in{max-width:1000px;margin:0 auto}
-.res-kick{font-family:var(--fbody);font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--lit);margin-bottom:16px}
-.res-p{font-family:var(--fserif);font-size:17.5px;line-height:1.7;color:var(--mut-d);margin:0 0 1.05em;max-width:76ch}
-.res-p b,.res-p strong{color:var(--ink-d)}
-.res-fig{margin:24px 0 0;background:rgba(255,255,255,.04);border:1px solid var(--line-d);
-  border-radius:16px;padding:20px;overflow-x:auto}
-.res-fig svg{width:100%;min-width:340px;height:auto;display:block}
-.res-fig figcaption{margin-top:12px;font-family:var(--fbody);font-size:12.5px;color:var(--faint-d);
-  font-style:italic;line-height:1.55}
-.res-quote{margin:20px 0;padding-left:20px;border-left:3px solid var(--lit)}
-.res-quote p{font-family:var(--fserif);font-style:italic;color:var(--ink-d);margin:0}
-.res-quote cite{display:block;margin-top:8px;font-family:var(--fbody);font-style:normal;font-size:12.5px;color:var(--faint-d)}
-
-/* ---- what the participant did ---- */
-.sc-foot{background:#100C14;border-top:1px solid var(--line-d);
-  padding:18px clamp(28px,3.2vw,50px);display:flex;justify-content:space-between;align-items:center;
-  gap:20px;flex-wrap:wrap}
-.sf-steps{display:flex;align-items:center;gap:clamp(14px,2vw,30px);flex-wrap:wrap}
-.sf-lab{font-family:var(--fbody);font-weight:600;font-size:10.5px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--faint-d)}
-.sf-step{display:inline-flex;align-items:baseline;gap:9px;font-family:var(--fbody);font-size:14px;color:var(--ink-d)}
-.sf-step i{font-style:normal;font-weight:700;font-size:11.5px;color:var(--lit);letter-spacing:.06em}
-.sf-link{font-family:var(--fbody);font-weight:600;font-size:14px;color:var(--ink-d);text-decoration:none;
-  display:inline-flex;gap:8px;align-items:center;white-space:nowrap}
-.sf-link:hover{color:var(--lit)}
-@media(max-width:900px){
-  .sh-grid{grid-template-columns:1fr;gap:14px}
-  .sc-hero .sc-collapse{position:static;display:block;margin-top:18px}
-  .sc-foot{flex-direction:column;align-items:flex-start}
-}
 </style>
 
 <nav class="nav" id="nav">
@@ -1334,7 +1141,6 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
        stats:[],links:[],layout:"pair",
        pair:[
          {short:"AI vs. stubborn myths",railLabel:"AI vs. myths",icon:"chat",art:"chatscreen",
-          heroTitle:"Can a conversation change your mind?",lead:"Psychology myths feel intuitively right and shrug off the corrections that work on ordinary errors.",steps:["State a belief you hold","Argue it out with an AI","Say what you believe now"],
           question:"Can a personalised AI conversation change a stubborn belief?",
           link:{label:"Read the paper",href:"https://doi.org/10.1016/j.chb.2025.108828"},
           sections:[
@@ -1346,7 +1152,6 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
             {k:"Why it matters",v:"Personalised AI dialogue is a powerful accelerator for shifting stubborn beliefs, but it is not one-and-done. Lasting change needs spaced reinforcement to hold."}
           ]},
          {short:"Student voices on AI in education",railLabel:"Student voices",icon:"grid",art:"students",
-          heroTitle:"Which AI tools are worth a student\u2019s time?",lead:"Research has fixated on text chatbots while students are already meeting a far wider range of tools.",steps:["Use eight AI tools","Rate each one","Talk it through in a group"],
           question:"How students see AI's role in their education, and the tools they value.",
           link:{label:"Read the preprint",href:"https://osf.io/t8afq/overview?view_only=5aebcecf01264253b949858323044ebe"},
           sections:[
@@ -1375,7 +1180,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 
       {k:"Student engagement \u00B7 2022-2025",t:"What actually keeps students showing up",
        lead:"How the community around a school shapes whether students turn up, across 264 Queensland schools and three years on an ARC Discovery project.",
-       tone:{accent:"#4F6B3F",hover:"#6B8A57",panel:"#374A2B",soft:"#E5EBDF",lit:"#9DC486",glow:"79,107,63"},
+       tone:{accent:"#4F6B3F",hover:"#6B8A57",panel:"#374A2B",soft:"#E5EBDF"},
        stats:[{n:"264",l:"schools analysed"},{n:"44%",l:"missed 10%+ of days, 2024"},{n:"16",l:"leaders interviewed"}],
        links:[],
        layout:"editorial",
@@ -1424,12 +1229,10 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       {k:"",t:"What makes learning stick in high-risk work",
        lead:"How people actually learn on the job in mining, where getting it wrong can kill someone, and what separates a supervisor people learn from.",
        stats:[],links:[],
-       tone:{accent:"#8A5230",hover:"#A96A42",panel:"#5E3720",soft:"#F2E5DA",lit:"#D89B6A",glow:"138,82,48"},
+       tone:{accent:"#8A5230",hover:"#A96A42",panel:"#5E3720",soft:"#F2E5DA"},
        layout:"pair",
        pair:[
          {short:"How workers learn",railLabel:"How they learn",icon:"think",art:"handover",
-          heroTitle:"Where does the knowledge actually come from?",lead:"Most of what a worker knows was picked up standing next to someone else, and that learning goes largely unexamined.",steps:["Meet on site","Trace how you learned","Name where training missed"],
-          nums:[{v:"83",l:"Interviews"},{v:"28",l:"Surveys"},{v:"3",l:"Mine sites"}],
           question:"How do frontline workers actually learn, where a mistake can be fatal?",
           link:{label:"Read the paper",href:"https://doi.org/10.1007/s12186-024-09353-2"},
           sections:[
@@ -1441,7 +1244,6 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           ]},
 
          {short:"What good supervisors do",railLabel:"Good supervisors",icon:"grid",art:"competency",
-          heroTitle:"What makes a supervisor worth learning from?",lead:"Supervisors are promoted for technical skill, then made responsible for other people\u2019s learning and safety.",steps:["Recall best and worst","Weigh the qualities","Justify the order"],
           question:"What actually makes a supervisor effective, beyond technical know-how?",
           link:{label:"Read the paper",href:"https://doi.org/10.1108/JWL-03-2025-0052"},
           sections:[
@@ -1453,7 +1255,6 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           ]},
 
          {short:"Learning across boundaries",railLabel:"Workforce agility",icon:"grid",art:"agility",
-          heroTitle:"Where does agility get built?",lead:"Boundaries are where agility is demanded, and they are also where it is made.",steps:["Map the crossings","Resource the objects","Back the brokers"],
           question:"Where does workforce agility actually get built?",
           sections:[
             {k:"Problem",v:"As high-risk work changes, people are constantly crossing boundaries: between roles, disciplines, teams and organisations, and between people and unfamiliar technology. Crossing stretches capability and creates friction, which is usually treated as a problem to smooth away."},
@@ -1467,12 +1268,10 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       {k:"PhD, psychology \u00B7 2024",t:"How people become expert at difficult things",
        lead:"What separates exceptional performers from novices? My PhD used fingerprint examination, where a judgement can decide a court case, to reverse-engineer expertise across three studies.",
        stats:[],links:[],
-       tone:{accent:"#2D5A66",hover:"#3E7E8D",panel:"#22454E",soft:"#DDE9EB",lit:"#7FBCC9",glow:"45,90,102"},
+       tone:{accent:"#2D5A66",hover:"#3E7E8D",panel:"#22454E",soft:"#DDE9EB"},
        layout:"pair",
        pair:[
          {short:"How experts think",railLabel:"How they think",icon:"think",art:"prints",
-          heroTitle:"What is an expert actually doing?",lead:"Expertise is not only what you know. It is what you attend to, and how you keep checking yourself.",steps:["Compare two prints","Say every thought aloud","Reach a decision"],
-          nums:[{v:"44",l:"Examiners"},{v:"44",l:"Novices"}],
           question:"What is actually going on in an expert's head during a high-stakes judgement?",
           link:{label:"Read the paper",href:"https://doi.org/10.1002/acp.70010"},
           sections:[
@@ -1484,20 +1283,17 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           ]},
 
          {short:"How experts remember",railLabel:"How they remember",icon:"memory",art:"memtask",
-          heroTitle:"What does an expert remember?",lead:"Experts do not simply remember more. They become sensitive to the visual information that distinguishes one pattern from another.",steps:["Study a print","Hold it in memory","Recognise the target"],
-          nums:[{v:"76%",l:"Experts"},{v:"41%",l:"Novices"},{v:"10%",l:"Chance"}],
           question:"Does becoming an expert change what you can hold in mind?",
           link:{label:"Read the paper",href:"https://doi.org/10.1186/s41235-024-00539-9"},
           sections:[
             {k:"Problem",v:"Experts are often said to have better memory for their own material. The usual explanation is familiarity with distinctive patterns, which would make the advantage a filing trick rather than a change in the memory system."},
             {k:"What we did",v:["Visual short-term memory experiments using domain-specific prints, comparing examiners with novices across distinctive and nondistinctive stimuli.","A print appears for a moment, the screen clears, and then you have to pick it out again. Some prints are distinctive and some are deliberately plain, so familiarity alone will not carry you. Try a trial yourself."],trial:true},
             {k:"What we found",v:["Experts identified the print they had studied 76% of the time. Novices managed 41%. Chance was 10%, so both groups were doing something, but the gap between them is the size of the expertise effect.","A second experiment split the prints into the hundred most distinctive and the hundred least distinctive. Both groups did better on distinctive prints, as you would expect. The expert advantage did not change between them, which is the part that matters: if expertise were just familiarity with striking patterns, it should have shrunk when the patterns stopped being striking."],
-             result:"Experiment 1, recreated from Figure 2 of the paper. Each dot is one participant and each grey line joins a matched expert-novice pair who saw the identical 24 sequences. The red line joins the two group means. Means, standard deviations and n are as published; the individual points are reconstructed to that distribution rather than the original per-participant file."},
+             result:"Experiment 1 accuracy. The bar is the group mean and the band is one standard deviation either side, as published. The paper plots every participant individually."},
             {k:"Why it matters",v:"The advantage is not only knowing which patterns matter. Sustained practice appears to sharpen the visual memory system itself."}
           ]},
 
          {short:"What predicts it",railLabel:"What predicts it",icon:"grid",art:"battery",
-          heroTitle:"Built, or born?",lead:"If aptitude explains expert performance you select for it. If experience explains it you train for it.",steps:["Search, rotate, inhibit","Answer trait measures","Weigh against experience"],
           question:"Is expertise something you build, or something you were always suited to?",
           sections:[
             {k:"Problem",v:"If raw aptitude explains expert performance, you select for it. If experience explains it, you train for it. The two answers lead to completely different investments."},
@@ -1840,69 +1636,33 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
     /* Experiment 1 of the memory paper, drawn the way the paper draws it:
        spread first, mean second. Values are the published M and SD. */
     function memoryResult(){
-      var W=620,H=360,pl=64,pr=30,pt=22,pb=64,pw=W-pl-pr,ph=H-pt-pb;
-      var LINE="rgba(255,255,255,.16)",LAB="#7C737C",TXT="#EDE7EA";
-      var NOV="#E3C14E",EXP="#9B7BC4",MEAN="#D8544F";
+      var C_GRID="#e0d8cc",C_LAB="#8a8177",C_INK="#2E2621",C_NOV="#9C9089",C_EXP="#2D5A66";
+      var W=560,H=300,pl=64,pr=26,pt=26,pb=52,pw=W-pl-pr,ph=H-pt-pb;
       function yp(v){return pt+ph*(1-v/100);}
-      /* deterministic sampler so the picture never jumps around between loads */
-      var sd=7; function rnd(){sd=(sd*1664525+1013904223)%4294967296;return sd/4294967296;}
-      function gauss(m,s){var u=Math.max(1e-9,rnd()),v=Math.max(1e-9,rnd());
-        return m+s*Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
-      var pairs=[],i;
-      for(i=0;i<44;i++){
-        pairs.push([Math.max(4,Math.min(72,gauss(41,14))),Math.max(38,Math.min(98,gauss(76,11)))]);
-      }
-      var xN=pl+pw*0.32,xE=pl+pw*0.68,g="";
-      [0,10,20,30,40,50,60,70,80,90,100].forEach(function(t){
+      var g="";
+      [0,10,25,50,75,100].forEach(function(t){
         var y=yp(t);
-        g+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(pl+pw)+'" y2="'+y.toFixed(1)+'" stroke="'+LINE+'" stroke-width="1"/>';
-        if(t%20===0||t===10)g+='<text x="'+(pl-11)+'" y="'+(y+4).toFixed(1)+'" text-anchor="end" font-size="11" fill="'+LAB+'">'+t+'</text>';
+        g+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(pl+pw)+'" y2="'+y.toFixed(1)+'" stroke="'+C_GRID+'" stroke-width="1"/>';
+        g+='<text x="'+(pl-10)+'" y="'+(y+4).toFixed(1)+'" text-anchor="end" font-size="11.5" fill="'+C_LAB+'">'+t+'%</text>';
       });
-      g+='<text x="18" y="'+(pt+ph/2)+'" text-anchor="middle" font-size="11.5" fill="'+LAB+'" transform="rotate(-90 18 '+(pt+ph/2)+')">Proportion correct (%)</text>';
-      /* one grey line per matched expert-novice pair */
-      pairs.forEach(function(pr){
-        g+='<line x1="'+(xN+16)+'" y1="'+yp(pr[0]).toFixed(1)+'" x2="'+(xE-16)+'" y2="'+yp(pr[1]).toFixed(1)+
-           '" stroke="rgba(255,255,255,.13)" stroke-width="1"/>';
+      var groups=[{n:"Novices",N:44,m:41,sd:14,x:pl+pw*0.30,c:C_NOV},
+                  {n:"Experts",N:44,m:76,sd:11,x:pl+pw*0.70,c:C_EXP}];
+      groups.forEach(function(gr){
+        var top=Math.min(100,gr.m+gr.sd), bot=Math.max(0,gr.m-gr.sd);
+        /* the band is one standard deviation either side of the mean */
+        g+='<rect x="'+(gr.x-34)+'" y="'+yp(top).toFixed(1)+'" width="68" height="'+(yp(bot)-yp(top)).toFixed(1)+
+           '" rx="8" fill="'+gr.c+'" opacity="0.16"/>';
+        g+='<line x1="'+(gr.x-34)+'" y1="'+yp(gr.m).toFixed(1)+'" x2="'+(gr.x+34)+'" y2="'+yp(gr.m).toFixed(1)+
+           '" stroke="'+gr.c+'" stroke-width="3"/>';
+        g+='<text x="'+gr.x+'" y="'+(yp(gr.m)-12).toFixed(1)+'" text-anchor="middle" font-size="17" font-weight="700" fill="'+C_INK+'">'+gr.m+'%</text>';
+        g+='<text x="'+gr.x+'" y="'+(H-30)+'" text-anchor="middle" font-size="12.5" fill="'+C_INK+'">'+gr.n+'</text>';
+        g+='<text x="'+gr.x+'" y="'+(H-14)+'" text-anchor="middle" font-size="11" fill="'+C_LAB+'">n = '+gr.N+'</text>';
       });
-      /* violins, drawn from the sample */
-      function violin(vals,cx,dir,col){
-        var lo=Math.max(0,Math.min.apply(null,vals)-6),hi=Math.min(100,Math.max.apply(null,vals)+6);
-        var bins=18,c=[],k;
-        for(k=0;k<bins;k++)c.push(0);
-        vals.forEach(function(v){var b=Math.min(bins-1,Math.max(0,Math.floor((v-lo)/(hi-lo)*bins)));c[b]++;});
-        /* smooth so the outline reads as a density, not a histogram */
-        var sm=[];
-        for(k=0;k<bins;k++){var a=c[k-1]||0,b=c[k],d=c[k+1]||0;sm.push((a+2*b+d)/4);}
-        var mx=Math.max.apply(null,sm)||1,pts=[];
-        for(k=0;k<bins;k++){
-          var y=yp(lo+(k+0.5)/bins*(hi-lo)), w=(sm[k]/mx)*38;
-          pts.push((cx+dir*w).toFixed(1)+' '+y.toFixed(1));
-        }
-        return '<path d="M'+cx+' '+yp(hi).toFixed(1)+' L'+pts.join(' L')+' L'+cx+' '+yp(lo).toFixed(1)+
-               ' Z" fill="'+col+'" opacity="0.26"/>';
-      }
-      g+=violin(pairs.map(function(p){return p[0];}),xN-34,-1,NOV);
-      g+=violin(pairs.map(function(p){return p[1];}),xE+34,1,EXP);
-      /* every participant */
-      pairs.forEach(function(pr){
-        g+='<circle cx="'+(xN+16+(rnd()-0.5)*16).toFixed(1)+'" cy="'+yp(pr[0]).toFixed(1)+'" r="4.4" fill="'+NOV+'" opacity=".85"/>';
-        g+='<circle cx="'+(xE-16+(rnd()-0.5)*16).toFixed(1)+'" cy="'+yp(pr[1]).toFixed(1)+'" r="4.4" fill="'+EXP+'" opacity=".85"/>';
-      });
-      /* the two group means, joined */
-      g+='<line x1="'+(xN+16)+'" y1="'+yp(41)+'" x2="'+(xE-16)+'" y2="'+yp(76)+'" stroke="'+MEAN+'" stroke-width="3"/>';
-      [[xN+16,41],[xE-16,76]].forEach(function(m){
-        g+='<line x1="'+(m[0]-26)+'" y1="'+yp(m[1])+'" x2="'+(m[0]+26)+'" y2="'+yp(m[1])+'" stroke="'+MEAN+'" stroke-width="3"/>';
-      });
-      g+='<circle cx="'+(pl+14)+'" cy="'+(pt+10)+'" r="4" fill="'+MEAN+'"/>';
-      g+='<text x="'+(pl+24)+'" y="'+(pt+14)+'" font-size="11" fill="'+LAB+'">group mean</text>';
       var yc=yp(10);
-      g+='<line x1="'+pl+'" y1="'+yc+'" x2="'+(pl+pw)+'" y2="'+yc+'" stroke="'+TXT+'" stroke-width="1.3" stroke-dasharray="5 4" opacity=".7"/>';
-      g+='<text x="'+(pl+pw)+'" y="'+(yc-8)+'" text-anchor="end" font-size="11" fill="'+TXT+'" opacity=".8">chance, 10%</text>';
-      g+='<text x="'+(xN+16)+'" y="'+(H-32)+'" text-anchor="middle" font-size="13.5" fill="'+TXT+'">Novices</text>';
-      g+='<text x="'+(xE-16)+'" y="'+(H-32)+'" text-anchor="middle" font-size="13.5" fill="'+TXT+'">Experts</text>';
-      g+='<text x="'+(xN+16)+'" y="'+(H-15)+'" text-anchor="middle" font-size="11" fill="'+LAB+'">n = 44</text>';
-      g+='<text x="'+(xE-16)+'" y="'+(H-15)+'" text-anchor="middle" font-size="11" fill="'+LAB+'">n = 44</text>';
-      return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Accuracy for every expert and novice, with matched pairs joined" style="width:100%;min-width:340px;height:auto">'+g+'</svg>';
+      g+='<line x1="'+pl+'" y1="'+yc.toFixed(1)+'" x2="'+(pl+pw)+'" y2="'+yc.toFixed(1)+
+         '" stroke="'+C_INK+'" stroke-width="1.5" stroke-dasharray="5 4"/>';
+      g+='<text x="'+(pl+pw)+'" y="'+(yc-8).toFixed(1)+'" text-anchor="end" font-size="11" font-weight="600" fill="'+C_INK+'">chance, 10%</text>';
+      return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Accuracy for experts and novices against chance" style="width:100%;height:auto">'+g+'</svg>';
     }
     function taskFig(kind){
       if(kind==="sitewalk")return '<svg viewBox="0 0 340 186" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="326" height="172" rx="12" opacity=".35"/><circle cx="88" cy="54" r="13"/><path d="M72 49 a16 16 0 0 1 32 0"/><path d="M69 49 h38"/><path d="M70 98 v-13 a18 18 0 0 1 36 0 v13"/><circle cx="196" cy="54" r="13"/><path d="M178 98 v-13 a18 18 0 0 1 36 0 v13"/><rect x="252" y="66" width="60" height="34" rx="8"/><circle class="sc-dot" cx="268" cy="83" r="3" fill="currentColor" stroke="none"/><circle class="sc-dot" cx="282" cy="83" r="3" fill="currentColor" stroke="none" style="animation-delay:.2s"/><circle class="sc-dot" cx="296" cy="83" r="3" fill="currentColor" stroke="none" style="animation-delay:.4s"/><path d="M30 128 h280" opacity=".3"/><text x="88" y="152" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".7">you</text><text x="196" y="152" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".7">researcher</text><text x="282" y="120" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity=".55">recorded</text></svg>';
@@ -1979,88 +1739,27 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
         pv.appendChild(el("span","sc-open","Open &rarr;"));
         col.appendChild(pv);
         var fl=el("div","sc-full");
-
-        /* study header band */
-        var hero=el("div","sc-hero");
-        var hk=el("div","sh-kick");
-        hk.appendChild(el("span",null,esc(p.k||"")));
-        hk.appendChild(el("span","sh-dot","&middot;"));
-        hk.appendChild(el("span",null,esc(s.railLabel||s.short)));
-        hero.appendChild(hk);
-        var hg=el("div","sh-grid");
-        hg.appendChild(el("h4","sh-title",esc(s.heroTitle||s.short)));
-        if(s.lead)hg.appendChild(el("p","sh-lead",s.lead));
-        hero.appendChild(hg);
-        hero.appendChild(el("span","sc-collapse","&#8596; Show all three"));
-        fl.appendChild(hero);
-
-        /* reading left, doing right */
-        var split=el("div","sc-split"), read=el("div","sc-read"),
-            stageCell=el("div","sc-stage"), stage=el("div","st-inner");
-        read.appendChild(el("div","rs-kick","The question"));
-        read.appendChild(el("h4","rs-title",esc(s.question)));
-
-        var results=el("div","sc-results"), resInner=el("div","res-in"), intoResults=false;
-        function stageBlock(label,node){
-          var b=el("div","st-block");
-          if(label)b.appendChild(el("div","st-kick",esc(label)));
-          b.appendChild(node);return b;
-        }
+        var fh=el("div","sc-fh");fh.appendChild(el("span","sc-num",String(idx+1)));fh.appendChild(el("span","sc-collapse","&#8596; Show both"));
+        fl.appendChild(fh);
+        fl.appendChild(el("h4","sc-fulltitle",esc(s.question)));
+        var secs=el("div","sc-sections");
         (s.sections||[]).forEach(function(sec){
-          if(sec.result||sec.chart)intoResults=true;
-          var target=intoResults?resInner:read;
+          var row=el("div","sc-row");
+          row.appendChild(el("div","sc-rlabel",esc(sec.k)));
+          var body=el("div","sc-rbody");
           (Object.prototype.toString.call(sec.v)==="[object Array]"?sec.v:[sec.v])
-            .forEach(function(par){target.appendChild(el("p",intoResults?"res-p":"rs-p",par));});
-          (sec.quotes||[]).forEach(function(q){
-            var bq=el("blockquote",intoResults?"res-quote":"rs-quote");
-            bq.appendChild(el("p",null,esc(q.t)));
-            if(q.who)bq.appendChild(el("cite",null,esc(q.who)));target.appendChild(bq);});
-          if(sec.chips){var cw=el("div","rs-chips");
-            sec.chips.forEach(function(c){cw.appendChild(el("span","rs-chip",esc(c)));});
-            target.appendChild(cw);}
-          if(sec.fig){var fg=el("figure","st-fig");fg.innerHTML=taskFig(sec.fig);
-            fg.appendChild(el("figcaption",null,"What the participant sees."));
-            stage.appendChild(stageBlock("The task",fg));}
-          if(sec.trial)stage.appendChild(stageBlock("Try a representative trial",buildTrial()));
-          if(sec.result){var rf=el("figure","res-fig");rf.innerHTML=memoryResult();
-            rf.appendChild(el("figcaption",null,sec.result));resInner.appendChild(rf);}
-          if(sec.chart)resInner.appendChild(buildChart(sec.chart));
+            .forEach(function(par){body.appendChild(el("p",null,par));});
+          if(sec.result){var rf=el("figure","sc-fig");rf.innerHTML=memoryResult();
+            rf.appendChild(el("figcaption",null,sec.result));body.appendChild(rf);}
+          if(sec.trial)body.appendChild(buildTrial());
+          if(sec.chips){var cw=el("div","sc-chips");sec.chips.forEach(function(c){cw.appendChild(el("span","sc-chip",esc(c)));});body.appendChild(cw);}
+          if(sec.fig){var fg=el("figure","sc-fig");fg.innerHTML=taskFig(sec.fig);fg.appendChild(el("figcaption",null,"What the participant sees."));body.appendChild(fg);}
+          if(sec.chart)body.appendChild(buildChart(sec.chart));
+          (sec.quotes||[]).forEach(function(q){var bq=el("blockquote","sc-quote");bq.appendChild(el("p",null,esc(q.t)));if(q.who)bq.appendChild(el("cite",null,esc(q.who)));body.appendChild(bq);});
+          row.appendChild(body);secs.appendChild(row);
         });
-        if(s.nums&&s.nums.length){
-          var nw=el("div","rs-nums");
-          s.nums.forEach(function(n){var d=el("div");d.appendChild(el("b",null,esc(n.v)));
-            d.appendChild(el("span",null,esc(n.l)));nw.appendChild(d);});
-          read.appendChild(nw);
-        }
-        if(!stage.children.length){
-          var big=el("div","st-art");big.innerHTML=studyArt(s.art);
-          stage.appendChild(stageBlock(null,big));
-        }
-        stageCell.appendChild(stage);split.appendChild(read);split.appendChild(stageCell);
-        fl.appendChild(split);
-
-        /* the graph and what it showed, full width beneath */
-        if(resInner.children.length){
-          resInner.insertBefore(el("div","res-kick","What we found"),resInner.firstChild);
-          results.appendChild(resInner);fl.appendChild(results);
-        }
-
-        /* what the participant actually did, and the paper */
-        var foot=el("div","sc-foot");
-        if(s.steps&&s.steps.length){
-          var sw=el("div","sf-steps");
-          sw.appendChild(el("span","sf-lab","What participants did"));
-          s.steps.forEach(function(t,n){
-            var it=el("span","sf-step");
-            it.appendChild(el("i",null,"0"+(n+1)));
-            it.appendChild(el("span",null,esc(t)));
-            sw.appendChild(it);
-          });
-          foot.appendChild(sw);
-        }
-        if(s.link){var a=el("a","sf-link",esc(s.link.label)+" &#8599;");
-          a.setAttribute("href",s.link.href);a.target="_blank";a.rel="noopener";foot.appendChild(a);}
-        if(foot.children.length)fl.appendChild(foot);
+        fl.appendChild(secs);
+        if(s.link){var a=el("a","sc-readlink",esc(s.link.label)+" &rarr;");a.setAttribute("href",s.link.href);a.target="_blank";a.rel="noopener";fl.appendChild(a);}
         col.appendChild(fl);
         var rl=el("div","sc-rail");
         rl.insertAdjacentHTML("beforeend",'<span class="sc-railicon">'+studyIcon(s.icon)+'</span>');
@@ -2078,11 +1777,9 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
     }
     function applyTone(t){
       var m=modal;if(!m)return;
-      ["--accent","--accent-hover","--panel","--accent-soft","--lit","--glow"].forEach(function(v){m.style.removeProperty(v);});
+      ["--accent","--accent-hover","--panel","--accent-soft"].forEach(function(v){m.style.removeProperty(v);});
       if(!t)return;
       if(t.accent)m.style.setProperty("--accent",t.accent);
-      if(t.lit)m.style.setProperty("--lit",t.lit);
-      if(t.glow)m.style.setProperty("--glow",t.glow);
       if(t.hover)m.style.setProperty("--accent-hover",t.hover);
       if(t.panel)m.style.setProperty("--panel",t.panel);
       if(t.soft)m.style.setProperty("--accent-soft",t.soft);
