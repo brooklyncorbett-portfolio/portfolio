@@ -759,6 +759,50 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 .pmodal .ed-pullwho{color:var(--faint-d)}
 .pmodal .ed-team{background:rgba(255,255,255,.05);border:1px solid var(--line-d)}
 .pmodal .ed-member{border-color:var(--line-d)}
+
+/* ---- split stage study view ---- */
+.sc-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:stretch}
+.sc-read{background:var(--cream,#F7F3EE);color:#241C29;padding:clamp(30px,3.4vw,54px)}
+.sc-stage{background:#100C14}
+.st-inner{position:sticky;top:0;padding:clamp(28px,3vw,44px) clamp(24px,2.8vw,40px);display:flex;
+  flex-direction:column;gap:clamp(22px,2.6vw,32px);justify-content:center;
+  max-height:86vh;overflow-y:auto;overscroll-behavior:contain}
+.rs-kick{font-family:var(--fbody);font-weight:700;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:#8A6A55;margin-bottom:14px}
+.rs-title{font-family:var(--fdisplay);font-weight:600;font-size:clamp(24px,2.8vw,38px);line-height:1.12;
+  letter-spacing:-.02em;color:#241C29;margin:0 0 20px;max-width:20ch}
+.rs-p{font-family:var(--fserif);font-size:17px;line-height:1.68;color:#4E4453;margin:0 0 1.05em}
+.rs-p b,.rs-p strong{color:#241C29;font-weight:600}
+.rs-quote{margin:22px 0;padding:2px 0 2px 20px;border-left:3px solid #B98A6A}
+.rs-quote p{font-family:var(--fserif);font-style:italic;font-size:17px;line-height:1.6;color:#241C29;margin:0}
+.rs-quote cite{display:block;margin-top:8px;font-family:var(--fbody);font-style:normal;font-size:12.5px;color:#8A8090}
+.rs-chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 4px}
+.rs-chip{font-family:var(--fbody);font-size:12.5px;font-weight:600;color:#5A4630;
+  background:rgba(138,106,85,.14);border-radius:999px;padding:7px 13px}
+.rs-nums{display:flex;gap:clamp(20px,3vw,40px);margin-top:30px;padding-top:24px;border-top:1px solid rgba(0,0,0,.14);flex-wrap:wrap}
+.rs-nums b{display:block;font-family:var(--fserif);font-weight:400;font-size:clamp(32px,3.6vw,46px);
+  line-height:1;color:#241C29}
+.rs-nums span{font-family:var(--fbody);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8A8090}
+.sc-read .sc-readlink{margin-top:26px;background:#241C29;color:#F7F3EE}
+.sc-read .sc-readlink:hover{background:#3E3247;color:#fff}
+.st-block{display:flex;flex-direction:column;gap:10px}
+.st-kick{font-family:var(--fbody);font-weight:700;font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--lit)}
+.st-fig{margin:0;background:rgba(255,255,255,.04);border:1px solid var(--line-d);border-radius:14px;
+  padding:16px;overflow-x:auto}
+.st-fig svg{width:100%;min-width:318px;height:auto;color:var(--lit);display:block}
+.st-fig figcaption{margin-top:10px;font-family:var(--fbody);font-size:12px;color:var(--faint-d);
+  font-style:italic;line-height:1.5}
+.st-art{display:flex;justify-content:center;padding:20px 0}
+.st-art svg{width:100%;max-width:240px;height:auto;color:var(--ink-d)}
+.sc-fh{padding-left:clamp(30px,3.4vw,54px);padding-right:clamp(24px,2.8vw,40px)}
+@media(max-width:900px){
+  .sc-split{grid-template-columns:1fr}
+  .st-inner{gap:20px;position:static;max-height:none;overflow:visible}
+}
+
+/* clip keeps the rounded corner without becoming a scroll container, so the stage can stick */
+.studycol.open{overflow:clip}
 </style>
 
 <nav class="nav" id="nav">
@@ -1330,6 +1374,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
        layout:"pair",
        pair:[
          {short:"How workers learn",railLabel:"How they learn",icon:"think",art:"handover",
+          nums:[{v:"83",l:"Interviews"},{v:"28",l:"Surveys"},{v:"3",l:"Mine sites"}],
           question:"How do frontline workers actually learn, where a mistake can be fatal?",
           link:{label:"Read the paper",href:"https://doi.org/10.1007/s12186-024-09353-2"},
           sections:[
@@ -1369,6 +1414,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
        layout:"pair",
        pair:[
          {short:"How experts think",railLabel:"How they think",icon:"think",art:"prints",
+          nums:[{v:"44",l:"Examiners"},{v:"44",l:"Novices"}],
           question:"What is actually going on in an expert's head during a high-stakes judgement?",
           link:{label:"Read the paper",href:"https://doi.org/10.1002/acp.70010"},
           sections:[
@@ -1380,6 +1426,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           ]},
 
          {short:"How experts remember",railLabel:"How they remember",icon:"memory",art:"memtask",
+          nums:[{v:"76%",l:"Experts"},{v:"41%",l:"Novices"},{v:"10%",l:"Chance"}],
           question:"Does becoming an expert change what you can hold in mind?",
           link:{label:"Read the paper",href:"https://doi.org/10.1186/s41235-024-00539-9"},
           sections:[
@@ -1872,27 +1919,53 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
         pv.appendChild(el("span","sc-open","Open &rarr;"));
         col.appendChild(pv);
         var fl=el("div","sc-full");
-        var fh=el("div","sc-fh");fh.appendChild(el("span","sc-num",String(idx+1)));fh.appendChild(el("span","sc-collapse","&#8596; Show both"));
+        var fh=el("div","sc-fh");fh.appendChild(el("span","sc-num",String(idx+1)));
+        fh.appendChild(el("span","sc-collapse","&#8596; Show both"));
         fl.appendChild(fh);
-        fl.appendChild(el("h4","sc-fulltitle",esc(s.question)));
-        var secs=el("div","sc-sections");
+
+        /* reading on the left, everything you do or look at on the right */
+        var split=el("div","sc-split"), read=el("div","sc-read"), stageCell=el("div","sc-stage"), stage=el("div","st-inner");
+        read.appendChild(el("div","rs-kick",esc(s.railLabel||("Study "+(idx+1)))));
+        read.appendChild(el("h4","rs-title",esc(s.question)));
+
+        function stageBlock(label,node){
+          var b=el("div","st-block");
+          if(label)b.appendChild(el("div","st-kick",esc(label)));
+          b.appendChild(node);return b;
+        }
         (s.sections||[]).forEach(function(sec){
-          var row=el("div","sc-row");
-          row.appendChild(el("div","sc-rlabel",esc(sec.k)));
-          var body=el("div","sc-rbody");
           (Object.prototype.toString.call(sec.v)==="[object Array]"?sec.v:[sec.v])
-            .forEach(function(par){body.appendChild(el("p",null,par));});
-          if(sec.result){var rf=el("figure","sc-fig");rf.innerHTML=memoryResult();
-            rf.appendChild(el("figcaption",null,sec.result));body.appendChild(rf);}
-          if(sec.trial)body.appendChild(buildTrial());
-          if(sec.chips){var cw=el("div","sc-chips");sec.chips.forEach(function(c){cw.appendChild(el("span","sc-chip",esc(c)));});body.appendChild(cw);}
-          if(sec.fig){var fg=el("figure","sc-fig");fg.innerHTML=taskFig(sec.fig);fg.appendChild(el("figcaption",null,"What the participant sees."));body.appendChild(fg);}
-          if(sec.chart)body.appendChild(buildChart(sec.chart));
-          (sec.quotes||[]).forEach(function(q){var bq=el("blockquote","sc-quote");bq.appendChild(el("p",null,esc(q.t)));if(q.who)bq.appendChild(el("cite",null,esc(q.who)));body.appendChild(bq);});
-          row.appendChild(body);secs.appendChild(row);
+            .forEach(function(par){read.appendChild(el("p","rs-p",par));});
+          (sec.quotes||[]).forEach(function(q){
+            var bq=el("blockquote","rs-quote");bq.appendChild(el("p",null,esc(q.t)));
+            if(q.who)bq.appendChild(el("cite",null,esc(q.who)));read.appendChild(bq);});
+          if(sec.chips){var cw=el("div","rs-chips");
+            sec.chips.forEach(function(c){cw.appendChild(el("span","rs-chip",esc(c)));});
+            read.appendChild(cw);}
+          if(sec.fig){var fg=el("figure","st-fig");fg.innerHTML=taskFig(sec.fig);
+            fg.appendChild(el("figcaption",null,"What the participant sees."));
+            stage.appendChild(stageBlock("The task",fg));}
+          if(sec.trial)stage.appendChild(stageBlock("Try a trial",buildTrial()));
+          if(sec.result){var rf=el("figure","st-fig");rf.innerHTML=memoryResult();
+            rf.appendChild(el("figcaption",null,sec.result));
+            stage.appendChild(stageBlock("Every participant",rf));}
+          if(sec.chart)stage.appendChild(stageBlock(null,buildChart(sec.chart)));
         });
-        fl.appendChild(secs);
-        if(s.link){var a=el("a","sc-readlink",esc(s.link.label)+" &rarr;");a.setAttribute("href",s.link.href);a.target="_blank";a.rel="noopener";fl.appendChild(a);}
+        if(s.nums&&s.nums.length){
+          var nw=el("div","rs-nums");
+          s.nums.forEach(function(n){var d=el("div");d.appendChild(el("b",null,esc(n.v)));
+            d.appendChild(el("span",null,esc(n.l)));nw.appendChild(d);});
+          read.appendChild(nw);
+        }
+        if(s.link){var a=el("a","sc-readlink",esc(s.link.label)+" &rarr;");
+          a.setAttribute("href",s.link.href);a.target="_blank";a.rel="noopener";read.appendChild(a);}
+        /* a study with nothing interactive still gets its drawing, held large */
+        if(!stage.children.length){
+          var big=el("div","st-art");big.innerHTML=studyArt(s.art);
+          stage.appendChild(stageBlock(null,big));
+        }
+        stageCell.appendChild(stage);split.appendChild(read);split.appendChild(stageCell);
+        fl.appendChild(split);
         col.appendChild(fl);
         var rl=el("div","sc-rail");
         rl.insertAdjacentHTML("beforeend",'<span class="sc-railicon">'+studyIcon(s.icon)+'</span>');
