@@ -803,6 +803,58 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 
 /* clip keeps the rounded corner without becoming a scroll container, so the stage can stick */
 .studycol.open{overflow:clip}
+
+/* ---- study hero band ---- */
+.sc-hero{position:relative;background:
+  radial-gradient(70% 130% at 88% 0%,rgba(var(--glow),.6),transparent 62%),
+  linear-gradient(180deg,#241C2A 0%,#181220 100%);
+  padding:clamp(28px,3.4vw,46px) clamp(28px,3.2vw,50px) clamp(26px,3vw,40px);border-bottom:1px solid var(--line-d)}
+.sh-kick{font-family:var(--fbody);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--lit);display:flex;gap:10px;align-items:center;margin-bottom:16px}
+.sh-dot{opacity:.55}
+.sh-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(20px,3vw,52px);align-items:start}
+.sh-title{font-family:var(--fdisplay);font-weight:600;font-size:clamp(30px,4.2vw,58px);line-height:1.02;
+  letter-spacing:-.025em;color:#fff;margin:0;max-width:15ch}
+.sh-lead{font-family:var(--fserif);font-size:clamp(15.5px,1.4vw,18.5px);line-height:1.6;
+  color:rgba(237,231,234,.8);margin:6px 0 0;max-width:44ch}
+.sc-hero .sc-collapse{position:absolute;top:clamp(28px,3.4vw,46px);right:clamp(28px,3.2vw,50px);
+  font-family:var(--fbody);font-size:12.5px;color:var(--faint-d);cursor:pointer}
+.sc-hero:hover .sc-collapse{color:var(--lit)}
+
+/* ---- results band beneath the split ---- */
+.sc-results{background:#181220;border-top:1px solid var(--line-d);
+  padding:clamp(30px,3.6vw,52px) clamp(28px,3.2vw,50px)}
+.res-in{max-width:1000px;margin:0 auto}
+.res-kick{font-family:var(--fbody);font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--lit);margin-bottom:16px}
+.res-p{font-family:var(--fserif);font-size:17.5px;line-height:1.7;color:var(--mut-d);margin:0 0 1.05em;max-width:76ch}
+.res-p b,.res-p strong{color:var(--ink-d)}
+.res-fig{margin:24px 0 0;background:rgba(255,255,255,.04);border:1px solid var(--line-d);
+  border-radius:16px;padding:20px;overflow-x:auto}
+.res-fig svg{width:100%;min-width:340px;height:auto;display:block}
+.res-fig figcaption{margin-top:12px;font-family:var(--fbody);font-size:12.5px;color:var(--faint-d);
+  font-style:italic;line-height:1.55}
+.res-quote{margin:20px 0;padding-left:20px;border-left:3px solid var(--lit)}
+.res-quote p{font-family:var(--fserif);font-style:italic;color:var(--ink-d);margin:0}
+.res-quote cite{display:block;margin-top:8px;font-family:var(--fbody);font-style:normal;font-size:12.5px;color:var(--faint-d)}
+
+/* ---- what the participant did ---- */
+.sc-foot{background:#100C14;border-top:1px solid var(--line-d);
+  padding:18px clamp(28px,3.2vw,50px);display:flex;justify-content:space-between;align-items:center;
+  gap:20px;flex-wrap:wrap}
+.sf-steps{display:flex;align-items:center;gap:clamp(14px,2vw,30px);flex-wrap:wrap}
+.sf-lab{font-family:var(--fbody);font-weight:600;font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--faint-d)}
+.sf-step{display:inline-flex;align-items:baseline;gap:9px;font-family:var(--fbody);font-size:14px;color:var(--ink-d)}
+.sf-step i{font-style:normal;font-weight:700;font-size:11.5px;color:var(--lit);letter-spacing:.06em}
+.sf-link{font-family:var(--fbody);font-weight:600;font-size:14px;color:var(--ink-d);text-decoration:none;
+  display:inline-flex;gap:8px;align-items:center;white-space:nowrap}
+.sf-link:hover{color:var(--lit)}
+@media(max-width:900px){
+  .sh-grid{grid-template-columns:1fr;gap:14px}
+  .sc-hero .sc-collapse{position:static;display:block;margin-top:18px}
+  .sc-foot{flex-direction:column;align-items:flex-start}
+}
 </style>
 
 <nav class="nav" id="nav">
@@ -1282,6 +1334,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
        stats:[],links:[],layout:"pair",
        pair:[
          {short:"AI vs. stubborn myths",railLabel:"AI vs. myths",icon:"chat",art:"chatscreen",
+          heroTitle:"Can a conversation change your mind?",lead:"Psychology myths feel intuitively right and shrug off the corrections that work on ordinary errors.",steps:["State a belief you hold","Argue it out with an AI","Say what you believe now"],
           question:"Can a personalised AI conversation change a stubborn belief?",
           link:{label:"Read the paper",href:"https://doi.org/10.1016/j.chb.2025.108828"},
           sections:[
@@ -1293,6 +1346,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
             {k:"Why it matters",v:"Personalised AI dialogue is a powerful accelerator for shifting stubborn beliefs, but it is not one-and-done. Lasting change needs spaced reinforcement to hold."}
           ]},
          {short:"Student voices on AI in education",railLabel:"Student voices",icon:"grid",art:"students",
+          heroTitle:"Which AI tools are worth a student\u2019s time?",lead:"Research has fixated on text chatbots while students are already meeting a far wider range of tools.",steps:["Use eight AI tools","Rate each one","Talk it through in a group"],
           question:"How students see AI's role in their education, and the tools they value.",
           link:{label:"Read the preprint",href:"https://osf.io/t8afq/overview?view_only=5aebcecf01264253b949858323044ebe"},
           sections:[
@@ -1374,6 +1428,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
        layout:"pair",
        pair:[
          {short:"How workers learn",railLabel:"How they learn",icon:"think",art:"handover",
+          heroTitle:"Where does the knowledge actually come from?",lead:"Most of what a worker knows was picked up standing next to someone else, and that learning goes largely unexamined.",steps:["Meet on site","Trace how you learned","Name where training missed"],
           nums:[{v:"83",l:"Interviews"},{v:"28",l:"Surveys"},{v:"3",l:"Mine sites"}],
           question:"How do frontline workers actually learn, where a mistake can be fatal?",
           link:{label:"Read the paper",href:"https://doi.org/10.1007/s12186-024-09353-2"},
@@ -1386,6 +1441,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           ]},
 
          {short:"What good supervisors do",railLabel:"Good supervisors",icon:"grid",art:"competency",
+          heroTitle:"What makes a supervisor worth learning from?",lead:"Supervisors are promoted for technical skill, then made responsible for other people\u2019s learning and safety.",steps:["Recall best and worst","Weigh the qualities","Justify the order"],
           question:"What actually makes a supervisor effective, beyond technical know-how?",
           link:{label:"Read the paper",href:"https://doi.org/10.1108/JWL-03-2025-0052"},
           sections:[
@@ -1397,6 +1453,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           ]},
 
          {short:"Learning across boundaries",railLabel:"Workforce agility",icon:"grid",art:"agility",
+          heroTitle:"Where does agility get built?",lead:"Boundaries are where agility is demanded, and they are also where it is made.",steps:["Map the crossings","Resource the objects","Back the brokers"],
           question:"Where does workforce agility actually get built?",
           sections:[
             {k:"Problem",v:"As high-risk work changes, people are constantly crossing boundaries: between roles, disciplines, teams and organisations, and between people and unfamiliar technology. Crossing stretches capability and creates friction, which is usually treated as a problem to smooth away."},
@@ -1414,6 +1471,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
        layout:"pair",
        pair:[
          {short:"How experts think",railLabel:"How they think",icon:"think",art:"prints",
+          heroTitle:"What is an expert actually doing?",lead:"Expertise is not only what you know. It is what you attend to, and how you keep checking yourself.",steps:["Compare two prints","Say every thought aloud","Reach a decision"],
           nums:[{v:"44",l:"Examiners"},{v:"44",l:"Novices"}],
           question:"What is actually going on in an expert's head during a high-stakes judgement?",
           link:{label:"Read the paper",href:"https://doi.org/10.1002/acp.70010"},
@@ -1426,6 +1484,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           ]},
 
          {short:"How experts remember",railLabel:"How they remember",icon:"memory",art:"memtask",
+          heroTitle:"What does an expert remember?",lead:"Experts do not simply remember more. They become sensitive to the visual information that distinguishes one pattern from another.",steps:["Study a print","Hold it in memory","Recognise the target"],
           nums:[{v:"76%",l:"Experts"},{v:"41%",l:"Novices"},{v:"10%",l:"Chance"}],
           question:"Does becoming an expert change what you can hold in mind?",
           link:{label:"Read the paper",href:"https://doi.org/10.1186/s41235-024-00539-9"},
@@ -1438,6 +1497,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           ]},
 
          {short:"What predicts it",railLabel:"What predicts it",icon:"grid",art:"battery",
+          heroTitle:"Built, or born?",lead:"If aptitude explains expert performance you select for it. If experience explains it you train for it.",steps:["Search, rotate, inhibit","Answer trait measures","Weigh against experience"],
           question:"Is expertise something you build, or something you were always suited to?",
           sections:[
             {k:"Problem",v:"If raw aptitude explains expert performance, you select for it. If experience explains it, you train for it. The two answers lead to completely different investments."},
@@ -1919,37 +1979,52 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
         pv.appendChild(el("span","sc-open","Open &rarr;"));
         col.appendChild(pv);
         var fl=el("div","sc-full");
-        var fh=el("div","sc-fh");fh.appendChild(el("span","sc-num",String(idx+1)));
-        fh.appendChild(el("span","sc-collapse","&#8596; Show both"));
-        fl.appendChild(fh);
 
-        /* reading on the left, everything you do or look at on the right */
-        var split=el("div","sc-split"), read=el("div","sc-read"), stageCell=el("div","sc-stage"), stage=el("div","st-inner");
-        read.appendChild(el("div","rs-kick",esc(s.railLabel||("Study "+(idx+1)))));
+        /* study header band */
+        var hero=el("div","sc-hero");
+        var hk=el("div","sh-kick");
+        hk.appendChild(el("span",null,esc(p.k||"")));
+        hk.appendChild(el("span","sh-dot","&middot;"));
+        hk.appendChild(el("span",null,esc(s.railLabel||s.short)));
+        hero.appendChild(hk);
+        var hg=el("div","sh-grid");
+        hg.appendChild(el("h4","sh-title",esc(s.heroTitle||s.short)));
+        if(s.lead)hg.appendChild(el("p","sh-lead",s.lead));
+        hero.appendChild(hg);
+        hero.appendChild(el("span","sc-collapse","&#8596; Show all three"));
+        fl.appendChild(hero);
+
+        /* reading left, doing right */
+        var split=el("div","sc-split"), read=el("div","sc-read"),
+            stageCell=el("div","sc-stage"), stage=el("div","st-inner");
+        read.appendChild(el("div","rs-kick","The question"));
         read.appendChild(el("h4","rs-title",esc(s.question)));
 
+        var results=el("div","sc-results"), resInner=el("div","res-in"), intoResults=false;
         function stageBlock(label,node){
           var b=el("div","st-block");
           if(label)b.appendChild(el("div","st-kick",esc(label)));
           b.appendChild(node);return b;
         }
         (s.sections||[]).forEach(function(sec){
+          if(sec.result||sec.chart)intoResults=true;
+          var target=intoResults?resInner:read;
           (Object.prototype.toString.call(sec.v)==="[object Array]"?sec.v:[sec.v])
-            .forEach(function(par){read.appendChild(el("p","rs-p",par));});
+            .forEach(function(par){target.appendChild(el("p",intoResults?"res-p":"rs-p",par));});
           (sec.quotes||[]).forEach(function(q){
-            var bq=el("blockquote","rs-quote");bq.appendChild(el("p",null,esc(q.t)));
-            if(q.who)bq.appendChild(el("cite",null,esc(q.who)));read.appendChild(bq);});
+            var bq=el("blockquote",intoResults?"res-quote":"rs-quote");
+            bq.appendChild(el("p",null,esc(q.t)));
+            if(q.who)bq.appendChild(el("cite",null,esc(q.who)));target.appendChild(bq);});
           if(sec.chips){var cw=el("div","rs-chips");
             sec.chips.forEach(function(c){cw.appendChild(el("span","rs-chip",esc(c)));});
-            read.appendChild(cw);}
+            target.appendChild(cw);}
           if(sec.fig){var fg=el("figure","st-fig");fg.innerHTML=taskFig(sec.fig);
             fg.appendChild(el("figcaption",null,"What the participant sees."));
             stage.appendChild(stageBlock("The task",fg));}
-          if(sec.trial)stage.appendChild(stageBlock("Try a trial",buildTrial()));
-          if(sec.result){var rf=el("figure","st-fig");rf.innerHTML=memoryResult();
-            rf.appendChild(el("figcaption",null,sec.result));
-            stage.appendChild(stageBlock("Every participant",rf));}
-          if(sec.chart)stage.appendChild(stageBlock(null,buildChart(sec.chart)));
+          if(sec.trial)stage.appendChild(stageBlock("Try a representative trial",buildTrial()));
+          if(sec.result){var rf=el("figure","res-fig");rf.innerHTML=memoryResult();
+            rf.appendChild(el("figcaption",null,sec.result));resInner.appendChild(rf);}
+          if(sec.chart)resInner.appendChild(buildChart(sec.chart));
         });
         if(s.nums&&s.nums.length){
           var nw=el("div","rs-nums");
@@ -1957,15 +2032,35 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
             d.appendChild(el("span",null,esc(n.l)));nw.appendChild(d);});
           read.appendChild(nw);
         }
-        if(s.link){var a=el("a","sc-readlink",esc(s.link.label)+" &rarr;");
-          a.setAttribute("href",s.link.href);a.target="_blank";a.rel="noopener";read.appendChild(a);}
-        /* a study with nothing interactive still gets its drawing, held large */
         if(!stage.children.length){
           var big=el("div","st-art");big.innerHTML=studyArt(s.art);
           stage.appendChild(stageBlock(null,big));
         }
         stageCell.appendChild(stage);split.appendChild(read);split.appendChild(stageCell);
         fl.appendChild(split);
+
+        /* the graph and what it showed, full width beneath */
+        if(resInner.children.length){
+          resInner.insertBefore(el("div","res-kick","What we found"),resInner.firstChild);
+          results.appendChild(resInner);fl.appendChild(results);
+        }
+
+        /* what the participant actually did, and the paper */
+        var foot=el("div","sc-foot");
+        if(s.steps&&s.steps.length){
+          var sw=el("div","sf-steps");
+          sw.appendChild(el("span","sf-lab","What participants did"));
+          s.steps.forEach(function(t,n){
+            var it=el("span","sf-step");
+            it.appendChild(el("i",null,"0"+(n+1)));
+            it.appendChild(el("span",null,esc(t)));
+            sw.appendChild(it);
+          });
+          foot.appendChild(sw);
+        }
+        if(s.link){var a=el("a","sf-link",esc(s.link.label)+" &#8599;");
+          a.setAttribute("href",s.link.href);a.target="_blank";a.rel="noopener";foot.appendChild(a);}
+        if(foot.children.length)fl.appendChild(foot);
         col.appendChild(fl);
         var rl=el("div","sc-rail");
         rl.insertAdjacentHTML("beforeend",'<span class="sc-railicon">'+studyIcon(s.icon)+'</span>');
