@@ -630,6 +630,36 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 @media(prefers-reduced-motion:reduce){
   .sa-pick,.sa-spark,.sa-say1,.sa-say2,.sa-carry,.sa-fric{animation:none}
   .sa-say1,.sa-say2,.sa-fric{opacity:.85}.sa-spark{opacity:.6}}
+
+/* ---- playable trial ---- */
+.trial{margin-top:18px;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:var(--paper)}
+.trial-bar{display:flex;justify-content:space-between;align-items:center;background:var(--panel);color:#E6EAF2;
+  font-family:var(--fbody);font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:9px 14px}
+.trial-stage{padding:24px 22px 26px;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:250px;justify-content:center}
+.trial-kick{font-family:var(--fbody);font-weight:700;font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
+.trial-h{font-family:var(--fdisplay);font-weight:600;font-size:18px;line-height:1.22;margin:10px 0 0;color:var(--ink);max-width:26em}
+.trial-p{font-family:var(--fbody);font-size:14px;color:var(--muted);margin:10px 0 0;max-width:44ch;line-height:1.6}
+.trial-btn{margin-top:18px;font-family:var(--fbody);font-weight:600;font-size:14px;background:var(--accent);color:#fff;
+  border:0;border-radius:999px;padding:11px 22px;cursor:pointer;transition:background .2s,transform .2s}
+.trial-btn:hover{background:var(--accent-hover);transform:translateY(-1px)}
+.trial-count{font-family:var(--fdisplay);font-weight:700;font-size:40px;line-height:1;color:var(--accent)}
+.trial-target{margin-top:14px;color:var(--ink)}
+.trial-target svg{width:150px;height:auto;display:block}
+.trial-opts{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;justify-content:center}
+.trial-opt{background:var(--paper-2);border:1px solid var(--border);border-radius:13px;padding:12px 12px 8px;
+  cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:border-color .2s,transform .2s}
+.trial-opt:hover{border-color:var(--accent);transform:translateY(-2px)}
+.trial-mini{color:var(--ink);display:block}
+.trial-mini svg{width:86px;height:auto;display:block}
+.trial-optlab{font-family:var(--fbody);font-weight:700;font-size:12px;color:var(--muted)}
+.trial-mark{font-family:var(--fbody);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+  margin-top:12px;padding:6px 14px;border-radius:999px;background:var(--paper-2);color:var(--muted)}
+.trial-mark.ok{background:var(--accent-soft);color:var(--accent)}
+.trial-pair{display:flex;gap:26px;margin-top:16px}
+.trial-pairitem{display:flex;flex-direction:column;align-items:center;gap:6px}
+.trial-pairitem span:first-child{font-family:var(--fbody);font-size:11.5px;color:var(--faint)}
+.trial-pairitem .trial-mini svg{width:76px}
+@media(max-width:520px){.trial-opts{gap:8px}.trial-mini svg{width:72px}.trial-target svg{width:126px}}
 </style>
 
 <nav class="nav" id="nav">
@@ -1258,7 +1288,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           link:{label:"Read the paper",href:"https://doi.org/10.1186/s41235-024-00539-9"},
           sections:[
             {k:"Problem",v:"Experts are often said to have better memory for their own material. The usual explanation is familiarity with distinctive patterns, which would make the advantage a filing trick rather than a change in the memory system."},
-            {k:"As a participant",v:"A print appears for a moment, the screen clears, and then a second print arrives. Same finger, or different? The prints are sometimes distinctive and sometimes deliberately plain, so familiarity alone will not carry you.",fig:"recall"},
+            {k:"As a participant",v:"A print appears for a moment, the screen clears, and then you have to pick it out again. The prints are sometimes distinctive and sometimes deliberately plain, so familiarity alone will not carry you. Try a trial yourself.",trial:true},
             {k:"Method",v:"Visual short-term memory experiments using domain-specific prints, comparing examiners with novices across distinctive and nondistinctive stimuli."},
             {k:"What we found",v:"Experts held more in mind, and their advantage survived on the hardest, least distinctive prints, where a familiarity shortcut has nothing to grip."},
             {k:"Why it matters",v:"The advantage is not only knowing which patterns matter. Sustained practice appears to sharpen the visual memory system itself."}
@@ -1504,6 +1534,106 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       sc.addEventListener("scroll",onScroll,{passive:true});
       spyEl=sc;spyFn=onScroll;onScroll();
     }
+
+    /* ---- playable recognition-memory trial (study 2 of the PhD project) ---- */
+    function trialPrint(v,size){
+      /* three prints that all read as prints but differ in ways you have to have looked for */
+      var W=size||128, cx=W/2, base=W*0.68, k=W/128;
+      var sets=[
+        [[26,32],[19,23],[12,14]],
+        [[27,29],[20,21],[13,13]],
+        [[25,34],[18,25],[11,15]]
+      ][v];
+      var coreDx=[0,3,-3][v], scar=[null,[0.62,0.30],[0.34,0.46]][v];
+      var g="";
+      sets.forEach(function(wh){
+        var w=wh[0]*k,h=wh[1]*k;
+        g+='<path d="M'+(cx-w).toFixed(1)+' '+base.toFixed(1)+' a'+w.toFixed(1)+' '+h.toFixed(1)+' 0 0 1 '+(2*w).toFixed(1)+' 0"/>';
+      });
+      g+='<path d="M'+(cx-5*k+coreDx).toFixed(1)+' '+base.toFixed(1)+' a'+(5*k).toFixed(1)+' '+(6*k).toFixed(1)+' 0 0 1 '+(10*k).toFixed(1)+' 0"/>';
+      [[28,10],[26,19],[22,27]].forEach(function(wd){
+        var w=wd[0]*k,dy=wd[1]*k;
+        g+='<path d="M'+(cx-w).toFixed(1)+' '+(base+dy).toFixed(1)+' q'+w.toFixed(1)+' '+(9*k).toFixed(1)+' '+(2*w).toFixed(1)+' 0"/>';
+      });
+      if(scar) g+='<path d="M'+(W*scar[0]).toFixed(1)+' '+(W*scar[1]).toFixed(1)+' l'+(7*k).toFixed(1)+' '+(5*k).toFixed(1)+'"/>';
+      return '<svg viewBox="0 0 '+W+' '+(W*1.02)+'" fill="none" stroke="currentColor" stroke-width="'+(2*k).toFixed(2)+
+             '" stroke-linecap="round"><g>'+g+'</g></svg>';
+    }
+    function buildTrial(){
+      var box=el("div","trial"), stage=el("div","trial-stage"), tick=null;
+      /* the study column toggles on click; keep the trial's own clicks to itself */
+      box.addEventListener("click",function(e){e.stopPropagation();});
+      var bar=el("div","trial-bar");
+      bar.appendChild(el("span",null,"Representative task"));
+      var trialNo=el("span",null,"Trial 1"); bar.appendChild(trialNo);
+      box.appendChild(bar); box.appendChild(stage);
+      var target=0, round=0;
+
+      function clearTick(){ if(tick){clearInterval(tick);tick=null;} }
+
+      function intro(){
+        clearTick(); stage.innerHTML="";
+        stage.appendChild(el("span","trial-kick","Recognition memory"));
+        stage.appendChild(el("h5","trial-h","Study a print, then pick it out of three."));
+        stage.appendChild(el("p","trial-p","Five seconds. Look at whatever you think matters."));
+        var b=el("button","trial-btn","Begin the trial &rarr;");
+        b.addEventListener("click",study); stage.appendChild(b);
+      }
+      function study(){
+        clearTick(); stage.innerHTML="";
+        target=Math.floor(Math.random()*3);
+        round++; trialNo.textContent="Trial "+round;
+        var count=el("div","trial-count","5");
+        stage.appendChild(count);
+        stage.appendChild(el("p","trial-p","Study this print"));
+        var fig=el("div","trial-target"); fig.innerHTML=trialPrint(target,150);
+        stage.appendChild(fig);
+        var left=5;
+        tick=setInterval(function(){
+          left--;
+          if(left<=0){ clearTick(); choose(); return; }
+          count.textContent=String(left);
+        },1000);
+      }
+      function choose(){
+        clearTick(); stage.innerHTML="";
+        stage.appendChild(el("span","trial-kick","Make your judgement"));
+        stage.appendChild(el("h5","trial-h","Which print did you just see?"));
+        var row=el("div","trial-opts");
+        [0,1,2].forEach(function(i){
+          var b=el("button","trial-opt");
+          var art=el("span","trial-mini"); art.innerHTML=trialPrint(i,86);
+          b.appendChild(art); b.appendChild(el("span","trial-optlab",String.fromCharCode(65+i)));
+          b.addEventListener("click",function(){ result(i); });
+          row.appendChild(b);
+        });
+        stage.appendChild(row);
+      }
+      function result(pick){
+        clearTick(); stage.innerHTML="";
+        var right=pick===target;
+        stage.appendChild(el("span","trial-kick","Your result"));
+        var mark=el("div","trial-mark"+(right?" ok":""),right?"Correct":"Not this one");
+        stage.appendChild(mark);
+        stage.appendChild(el("h5","trial-h",right
+          ? "You picked the print you were shown."
+          : "The one you studied was "+String.fromCharCode(65+target)+"."));
+        var pair=el("div","trial-pair");
+        [["You studied",target],["You picked",pick]].forEach(function(pr){
+          var c=el("div","trial-pairitem");
+          c.appendChild(el("span",null,pr[0]));
+          var a=el("span","trial-mini"); a.innerHTML=trialPrint(pr[1],76); c.appendChild(a);
+          pair.appendChild(c);
+        });
+        stage.appendChild(pair);
+        stage.appendChild(el("p","trial-p",
+          "One trial measures nothing. In the study this ran many times, with prints that were sometimes distinctive and sometimes deliberately plain, so we could tell a real memory advantage from a familiarity shortcut."));
+        var b=el("button","trial-btn","Try another &#8635;");
+        b.addEventListener("click",study); stage.appendChild(b);
+      }
+      intro();
+      return box;
+    }
     function taskFig(kind){
       if(kind==="sitewalk")return '<svg viewBox="0 0 340 186" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="326" height="172" rx="12" opacity=".35"/><circle cx="88" cy="54" r="13"/><path d="M72 49 a16 16 0 0 1 32 0"/><path d="M69 49 h38"/><path d="M70 98 v-13 a18 18 0 0 1 36 0 v13"/><circle cx="196" cy="54" r="13"/><path d="M178 98 v-13 a18 18 0 0 1 36 0 v13"/><rect x="252" y="66" width="60" height="34" rx="8"/><circle class="sc-dot" cx="268" cy="83" r="3" fill="currentColor" stroke="none"/><circle class="sc-dot" cx="282" cy="83" r="3" fill="currentColor" stroke="none" style="animation-delay:.2s"/><circle class="sc-dot" cx="296" cy="83" r="3" fill="currentColor" stroke="none" style="animation-delay:.4s"/><path d="M30 128 h280" opacity=".3"/><text x="88" y="152" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".7">you</text><text x="196" y="152" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".7">researcher</text><text x="282" y="120" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity=".55">recorded</text></svg>';
       if(kind==="ranking")return '<svg viewBox="0 0 340 186" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="326" height="172" rx="12" opacity=".35"/><rect x="60" y="34" width="220" height="26" rx="13" opacity=".95"/><circle cx="42" cy="47" r="11" opacity=".95"/><text x="42" y="52" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".95">1</text><text x="170" y="52" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".95">Treats people well</text><rect x="60" y="68" width="220" height="26" rx="13" opacity=".95"/><circle cx="42" cy="81" r="11" opacity=".95"/><text x="42" y="86" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".95">2</text><text x="170" y="86" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".95">Explains the why</text><rect x="60" y="102" width="220" height="26" rx="13" opacity=".5"/><circle cx="42" cy="115" r="11" opacity=".5"/><text x="42" y="120" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".5">3</text><text x="170" y="120" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".5">Knows the job</text><rect x="60" y="136" width="220" height="26" rx="13" opacity=".5"/><circle cx="42" cy="149" r="11" opacity=".5"/><text x="42" y="154" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".5">4</text><text x="170" y="154" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity=".5">Has the ticket</text><path class="fg-link" d="M300 47 v92" stroke-dasharray="5 5"/><text x="300" y="34" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".55">most</text><text x="300" y="152" text-anchor="middle" font-size="10.5" fill="currentColor" stroke="none" opacity=".55">least</text></svg>';
@@ -1588,6 +1718,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
           row.appendChild(el("div","sc-rlabel",esc(sec.k)));
           var body=el("div","sc-rbody");
           body.appendChild(el("p",null,sec.v));
+          if(sec.trial)body.appendChild(buildTrial());
           if(sec.chips){var cw=el("div","sc-chips");sec.chips.forEach(function(c){cw.appendChild(el("span","sc-chip",esc(c)));});body.appendChild(cw);}
           if(sec.fig){var fg=el("figure","sc-fig");fg.innerHTML=taskFig(sec.fig);fg.appendChild(el("figcaption",null,"What the participant sees."));body.appendChild(fg);}
           if(sec.chart)body.appendChild(buildChart(sec.chart));
