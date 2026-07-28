@@ -365,6 +365,32 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
   display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
   font-family:var(--fbody);font-size:12.5px;color:var(--faint)}
 
+/* ---- the closer arrives in order, once ---- */
+.contact h2,.contact .csub,.contact .cbtns,.contact .cicons .pfic,.contact .footer{opacity:0}
+.contact.cin h2,.contact.cin .csub,.contact.cin .cbtns,
+.contact.cin .cicons .pfic,.contact.cin .footer{
+  opacity:1;animation:ctRise .9s cubic-bezier(.16,.84,.24,1) backwards}
+/* the invitation lands a beat after the sentence that sets it up */
+.contact h2 em{display:inline-block;opacity:0}
+.contact.cin h2 em{opacity:1;animation:ctRise .9s cubic-bezier(.16,.84,.24,1) .22s backwards}
+.contact.cin .csub{animation-delay:.18s}
+.contact.cin .cbtns{animation-delay:.34s}
+.contact.cin .cicons .pfic:nth-child(1){animation-delay:.46s}
+.contact.cin .cicons .pfic:nth-child(2){animation-delay:.54s}
+.contact.cin .cicons .pfic:nth-child(3){animation-delay:.62s}
+.contact.cin .footer{animation-delay:.74s}
+/* the footer rule draws across, as the shelves do */
+.contact .footer{position:relative;border-top:0}
+.contact .footer::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:var(--border);transform:scaleX(0);transform-origin:left;
+  transition:transform .9s cubic-bezier(.16,.84,.24,1) .70s}
+.contact.cin .footer::before{transform:scaleX(1)}
+@keyframes ctRise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  .contact h2,.contact h2 em,.contact .csub,.contact .cbtns,
+  .contact .cicons .pfic,.contact .footer{opacity:1;animation:none}
+  .contact .footer::before{transform:scaleX(1);transition:none}}
+
 /* ===== PROJECT POPOUT ===== */
 .pmodal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px}
 .pmodal.open{display:flex}
@@ -1966,6 +1992,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
   if(!("IntersectionObserver" in window)){
     document.querySelectorAll(".toolshelf").forEach(function(el){el.classList.add("tsin");});
     document.querySelectorAll(".projects").forEach(function(el){el.classList.add("prin");});
+    document.querySelectorAll(".contact").forEach(function(el){el.classList.add("cin");});
     document.querySelectorAll(".proj").forEach(function(el){el.classList.add("in");
       el.querySelectorAll(".stat[data-to]").forEach(runCount);});
     return;
@@ -1985,6 +2012,9 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
   var pio=new IntersectionObserver(function(es){es.forEach(function(e){
     if(e.isIntersecting){e.target.classList.add("prin");pio.unobserve(e.target);}});},{threshold:.15});
   document.querySelectorAll(".projects").forEach(function(el){pio.observe(el);});
+  var cio=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add("cin");cio.unobserve(e.target);}});},{threshold:.15});
+  document.querySelectorAll(".contact").forEach(function(el){cio.observe(el);});
 
   /* ---- projects carousel: arrows + drag + trackpad scroll + dots ---- */
   (function(){
