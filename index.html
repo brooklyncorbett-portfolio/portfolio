@@ -1627,15 +1627,14 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
   transition:opacity 1.15s ease,transform 1.35s cubic-bezier(.16,.84,.24,1)}
 .about .abtag{transform:translateY(56px)}
 .about .txt p{transform:translateY(84px);transition-delay:.14s}
-.about #pfIconsIn{transform:translateY(-64px);transition-delay:.30s}
-.about #pfCv{transform:translateX(84px);transition-delay:.42s}
-.about.in .abtag,.about.in .txt p,.about.in #pfIconsIn,.about.in #pfCv{
-  opacity:1;transform:none}
+.about #pfIconsIn{transform:translateY(-64px);transition-delay:0s}
+.about #pfCv{transform:translateX(84px);transition-delay:.12s}
+.about.in .abtag,.about.in .txt p{opacity:1;transform:none}
+/* these two wait for the shader to clear the top of the photo */
+.about.pfin #pfIconsIn,.about.pfin #pfCv{opacity:1;transform:none}
 /* going back up, run it out in the order it came in */
 .about:not(.in) .abtag{transition-delay:.22s}
 .about:not(.in) .txt p{transition-delay:.14s}
-.about:not(.in) #pfIconsIn{transition-delay:.06s}
-.about:not(.in) #pfCv{transition-delay:0s}
 @media(prefers-reduced-motion:reduce){
   .about,.about .abtag,.about .txt p,.about #pfIconsIn,.about #pfCv{
     transition-duration:.01ms;transition-delay:0s}
@@ -1852,6 +1851,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       bridge=document.querySelector(".bridge"),
       about=document.getElementById("about"),
       portrait=document.getElementById("portrait"),
+      portrait=document.getElementById("portrait"),
       pfIcons=document.getElementById("pfIconsIn"),
       pfContact=document.getElementById("pfCv"),
       abTag=document.querySelector(".about .abtag"),
@@ -1859,7 +1859,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
       cue=document.getElementById("cue"),
       nav=document.getElementById("nav"),
       navLinks=document.querySelector(".nav-links"),
-      scrollP=0, VW=innerWidth, VH=innerHeight, bannerH=180, maxSV=1.8, aboutIn=false;
+      scrollP=0, VW=innerWidth, VH=innerHeight, bannerH=180, maxSV=1.8, aboutIn=false, pfIn=false;
 
   function onScroll(){
     var r=stage.getBoundingClientRect();
@@ -1972,6 +1972,14 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
     if(wantAbout !== aboutIn){
       aboutIn = wantAbout;
       about.classList.toggle("in", aboutIn);
+    }
+    /* The icons and the contact button hold back further still: they wait
+       until the shrinking shader has cleared the top of the portrait, so
+       they land on the photo rather than from under the panel. Measured off
+       the live geometry, not a scroll number, so it survives a resize. */
+    if(!pfIn&&sv>1.05&&portrait&&gh<=portrait.getBoundingClientRect().top){
+      pfIn=true;
+      about.classList.add("pfin");   /* one way: once they land they stay */
     }
     requestAnimationFrame(frame);
   }
