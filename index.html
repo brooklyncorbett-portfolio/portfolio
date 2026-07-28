@@ -178,7 +178,7 @@ body{font-family:var(--fbody);background:var(--paper);color:var(--ink);-webkit-f
 .tools .in{max-width:1180px;margin:0 auto;padding:clamp(70px,10vw,140px) clamp(30px,6vw,90px)}
 .toolslede{color:var(--muted);font-size:clamp(15px,1.6vw,18px);line-height:1.6;max-width:58ch;margin-top:16px}
 .carousel-wrap{position:relative;margin-top:clamp(36px,5vw,56px)}
-.carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 4px 16px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x proximity;scroll-behavior:smooth;padding:4px 4px 16px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
 .carousel::-webkit-scrollbar{height:8px}
 .carousel::-webkit-scrollbar-thumb{background:var(--border);border-radius:20px}
 .carousel::-webkit-scrollbar-track{background:transparent}
@@ -339,6 +339,11 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 .projects.prin .tcard:nth-child(4){animation-delay:.50s}
 .projects.prin .proj-dots{animation-delay:.62s}
 @keyframes prDealIn{from{opacity:0;transform:translateX(72px)}to{opacity:1;transform:none}}
+/* While the cards are travelling they widen the carousel's scroll extent every
+   frame. With mandatory snapping on, it chases that moving target and nudges
+   itself, which reads as overshooting and then correcting. Hold both off until
+   the cards have landed. */
+.projects.prin:not(.prset) .carousel{scroll-snap-type:none;overflow-x:hidden}
 @media(prefers-reduced-motion:reduce){
   .projects .proj-head,.projects .tcard,.projects .proj-dots{opacity:1}
   .projects.prin .proj-head,.projects.prin .tcard,.projects.prin .proj-dots{animation:none}}
@@ -365,31 +370,25 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
   display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
   font-family:var(--fbody);font-size:12.5px;color:var(--faint)}
 
-/* ---- the closer arrives in order, once ---- */
-.contact h2,.contact .csub,.contact .cbtns,.contact .cicons .pfic,.contact .footer{opacity:0}
-.contact.cin h2,.contact.cin .csub,.contact.cin .cbtns,
-.contact.cin .cicons .pfic,.contact.cin .footer{
-  opacity:1;animation:ctRise .9s cubic-bezier(.16,.84,.24,1) backwards}
-/* the invitation lands a beat after the sentence that sets it up */
-.contact h2 em{display:inline-block;opacity:0}
-.contact.cin h2 em{opacity:1;animation:ctRise .9s cubic-bezier(.16,.84,.24,1) .22s backwards}
-.contact.cin .csub{animation-delay:.18s}
-.contact.cin .cbtns{animation-delay:.34s}
-.contact.cin .cicons .pfic:nth-child(1){animation-delay:.46s}
-.contact.cin .cicons .pfic:nth-child(2){animation-delay:.54s}
-.contact.cin .cicons .pfic:nth-child(3){animation-delay:.62s}
-.contact.cin .footer{animation-delay:.74s}
-/* the footer rule draws across, as the shelves do */
-.contact .footer{position:relative;border-top:0}
-.contact .footer::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;
-  background:var(--border);transform:scaleX(0);transform-origin:left;
-  transition:transform .9s cubic-bezier(.16,.84,.24,1) .70s}
-.contact.cin .footer::before{transform:scaleX(1)}
-@keyframes ctRise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+/* ---- the closer sits still; only the invitation and the actions move ---- */
+/* the invitation types itself in */
+.contact h2 em{display:inline-block}
+.contact h2 em.typing::after{content:"";display:inline-block;width:.055em;height:.74em;
+  background:currentColor;vertical-align:-.04em;margin-left:.05em;
+  animation:ctBlink .85s steps(1) infinite}
+@keyframes ctBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+/* the button and the icons fade up once the line has finished typing */
+.contact .cbtns,.contact .cicons .pfic{opacity:0}
+.contact.cin .cbtns,.contact.cin .cicons .pfic{
+  opacity:1;animation:ctRise .85s cubic-bezier(.16,.84,.24,1) backwards}
+.contact.cin .cbtns{animation-delay:.78s}
+.contact.cin .cicons .pfic:nth-child(1){animation-delay:.92s}
+.contact.cin .cicons .pfic:nth-child(2){animation-delay:1s}
+.contact.cin .cicons .pfic:nth-child(3){animation-delay:1.08s}
+@keyframes ctRise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){
-  .contact h2,.contact h2 em,.contact .csub,.contact .cbtns,
-  .contact .cicons .pfic,.contact .footer{opacity:1;animation:none}
-  .contact .footer::before{transform:scaleX(1);transition:none}}
+  .contact .cbtns,.contact .cicons .pfic{opacity:1;animation:none}
+  .contact h2 em.typing::after{display:none}}
 
 /* ===== PROJECT POPOUT ===== */
 .pmodal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px}
@@ -1999,7 +1998,7 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
   }
   if(!("IntersectionObserver" in window)){
     document.querySelectorAll(".toolshelf").forEach(function(el){el.classList.add("tsin");});
-    document.querySelectorAll(".projects").forEach(function(el){el.classList.add("prin");});
+    document.querySelectorAll(".projects").forEach(function(el){el.classList.add("prin","prset");});
     document.querySelectorAll(".contact").forEach(function(el){el.classList.add("cin");});
     document.querySelectorAll(".proj").forEach(function(el){el.classList.add("in");
       el.querySelectorAll(".stat[data-to]").forEach(runCount);});
@@ -2018,10 +2017,34 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
   });},{threshold:[0.10,0.22]});
   document.querySelectorAll(".toolshelf").forEach(function(el){tio.observe(el);});
   var pio=new IntersectionObserver(function(es){es.forEach(function(e){
-    if(e.isIntersecting){e.target.classList.add("prin");pio.unobserve(e.target);}});},{threshold:.15});
+    if(e.isIntersecting){
+      var sec=e.target; sec.classList.add("prin"); pio.unobserve(sec);
+      /* last card lands at .50 delay + .9s; give it a beat, then hand the
+         carousel back its snapping from a clean scroll position */
+      setTimeout(function(){
+        var car=sec.querySelector(".carousel");
+        if(car)car.scrollLeft=0;
+        sec.classList.add("prset");
+      },1600);
+    }});},{threshold:.15});
   document.querySelectorAll(".projects").forEach(function(el){pio.observe(el);});
+  /* The closing line types itself. The width is pinned to the finished text
+     first, so the heading cannot re-wrap around a growing word. */
+  function typeIn(sec){
+    var em=sec.querySelector("h2 em"); if(!em)return;
+    var full=em.textContent;
+    em.style.minWidth=em.getBoundingClientRect().width+"px";
+    var done=function(){em.textContent=full;em.classList.remove("typing");em.style.minWidth="";};
+    if(reduce){done();return;}
+    em.textContent=""; em.classList.add("typing");
+    var i=0;
+    (function step(){
+      em.textContent=full.slice(0,++i);
+      if(i<full.length)setTimeout(step,52); else setTimeout(done,900);
+    })();
+  }
   var cio=new IntersectionObserver(function(es){es.forEach(function(e){
-    if(e.isIntersecting){e.target.classList.add("cin");cio.unobserve(e.target);}});},{threshold:.15});
+    if(e.isIntersecting){e.target.classList.add("cin");cio.unobserve(e.target);typeIn(e.target);}});},{threshold:.15});
   document.querySelectorAll(".contact").forEach(function(el){cio.observe(el);});
 
   /* ---- projects carousel: arrows + drag + trackpad scroll + dots ---- */
