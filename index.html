@@ -1618,6 +1618,10 @@ a.toolrow:hover .tstat.live{color:var(--accent-hover)}
 @media(max-width:560px){.ed-phases{grid-template-columns:1fr}
   .ed-phase{border-left:0;padding-left:0}}
 
+/* The hero furniture sits above the about block and none of it contains a link,
+   but an invisible element still swallows clicks. Without this the portrait icons
+   and the contact button cannot be clicked once the hero has wiped away. */
+.rphoto,.glstage,.hname,.scrollcue,.hbrand{pointer-events:none}
 /* ---- the about reveal: scroll starts it, then it plays itself ---- */
 .about{opacity:0;transition:opacity .8s ease}
 .about.in{opacity:1}
