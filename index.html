@@ -139,12 +139,18 @@ body{font-family:var(--fbody);background:var(--paper);color:var(--ink);-webkit-f
 @media (max-width:760px){
   .rphoto{width:70%}
   .hname{width:88%;padding-bottom:104px}
-  .about{grid-template-columns:1fr;gap:16px;align-content:start}
+  /* the photo can't shrink further, so the height comes back out of
+     spacing instead: tighter padding, gap and paragraph margin */
+  .about{grid-template-columns:1fr;gap:8px;align-content:start;
+    padding-top:calc(var(--bannerH,150px) + 4px);padding-bottom:6px}
   /* the 20ch cap was written for a wide column sitting beside the photo;
      stacked full-width on mobile it only forces extra, unnecessary line
      wraps, which is what was pushing the block too tall to fit */
   .about .abtag{max-width:30ch}
-  .pf{width:min(170px,44%)}
+  .about p{margin-top:10px}
+  /* the notches are carved into the photo with fixed pixel offsets, tuned
+     for this size: shrinking the photo further breaks that geometry */
+  .pf{width:min(230px,60%)}
 }
 @media (prefers-reduced-motion:reduce){
   .rise{animation:none;opacity:1;transform:none}
